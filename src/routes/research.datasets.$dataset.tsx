@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { DATASETS, findDataset } from "@/lib/datasets-data";
+import { DATASETS, findDataset, type Dataset } from "@/lib/datasets-data";
 import { PageHeader, SectionShell } from "@/components/section/section-bits";
 import { Breadcrumbs } from "@/components/doc/breadcrumbs";
 import { DocShell, DocBlock } from "@/components/doc/doc-shell";
@@ -44,7 +44,7 @@ export const Route = createFileRoute("/research/datasets/$dataset")({
 });
 
 function DatasetDetail() {
-  const { dataset: d } = Route.useLoaderData();
+  const { dataset: d } = Route.useLoaderData() as { dataset: Dataset };
   const sorted = [...DATASETS].sort((a, b) => b.updated.localeCompare(a.updated));
   const idx = sorted.findIndex((x) => x.slug === d.slug);
   const prev = sorted[idx + 1];
