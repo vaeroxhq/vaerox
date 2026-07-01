@@ -47,7 +47,7 @@ export const INCIDENTS: Incident[] = [
     resolvedAt: "2026-05-21T11:47:00Z",
     mtta: "4m 12s",
     mttr: "3h 35m",
-    commander: "M. Aro",
+    commander: "Maintainer",
     systemsAffected: ["helix"],
     customerImpact: "Elevated first-token latency on H100 pool; two enterprise tenants breached SLO for ~90 minutes. No data loss, no failed requests.",
     summary:
@@ -98,7 +98,7 @@ export const INCIDENTS: Incident[] = [
     resolvedAt: "2026-04-10T15:39:00Z",
     mtta: "2m 50s",
     mttr: "36m",
-    commander: "R. Halden",
+    commander: "Maintainer",
     systemsAffected: ["atlas"],
     customerImpact: "Control-plane API elevated error rate (~7%) for 22 minutes. Data plane unaffected. No workload reschedules lost.",
     summary:
@@ -144,7 +144,7 @@ export const INCIDENTS: Incident[] = [
     resolvedAt: "2026-02-14T10:01:00Z",
     mtta: "3m 40s",
     mttr: "47m",
-    commander: "R. Halden",
+    commander: "Maintainer",
     systemsAffected: ["atlas"],
     customerImpact: "Control-plane operations (workload create, quota update, placement change) unavailable in eu-west-2 for 47 minutes. Data plane and existing workloads unaffected.",
     summary:
@@ -192,7 +192,7 @@ export const INCIDENTS: Incident[] = [
     resolvedAt: "2025-11-19T23:12:00Z",
     mtta: "6m 05s",
     mttr: "31m",
-    commander: "S. Kaur",
+    commander: "Maintainer",
     systemsAffected: ["orbit"],
     customerImpact: "~0.4% of traces dropped at ingest for 27 minutes during peak. No customer-facing alerts affected; dropped traces were replayed from durable buffer post-recovery.",
     summary:
@@ -234,7 +234,7 @@ export const INCIDENTS: Incident[] = [
     resolvedAt: "2025-09-30T14:58:00Z",
     mtta: "5m 10s",
     mttr: "36m",
-    commander: "K. Ito",
+    commander: "Maintainer",
     systemsAffected: ["signal-router"],
     customerImpact: "Elevated event-fan-out latency (~14ms P99 vs 2ms baseline) for 27 minutes on a single subscriber cohort. No event loss.",
     summary:
@@ -275,7 +275,7 @@ export const INCIDENTS: Incident[] = [
     resolvedAt: "2025-07-08T19:47:00Z",
     mtta: "3m 55s",
     mttr: "1h 36m",
-    commander: "M. Aro",
+    commander: "Maintainer",
     systemsAffected: ["helix"],
     customerImpact: "Enterprise pool p95 first-token grew from 118ms → 340ms for 90 minutes. Two tenants breached SLO.",
     summary:
@@ -319,7 +319,7 @@ export const INCIDENTS: Incident[] = [
     resolvedAt: "2024-12-11T11:29:00Z",
     mtta: "2m 40s",
     mttr: "26m",
-    commander: "L. Voss",
+    commander: "Maintainer",
     systemsAffected: ["atlas"],
     customerImpact: "Quota-denied errors on a small fraction (~1.2%) of control-plane calls for 22 minutes.",
     summary:
@@ -358,7 +358,7 @@ export const INCIDENTS: Incident[] = [
     resolvedAt: "2024-06-04T14:12:00Z",
     mtta: "4m 30s",
     mttr: "43m",
-    commander: "L. Voss",
+    commander: "Maintainer",
     systemsAffected: ["marketpulse"],
     customerImpact: "Tick timestamps drifted by up to 42ms for one venue for 38 minutes. Signals downstream flagged the drift and quarantined affected bars.",
     summary:
