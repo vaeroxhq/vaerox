@@ -104,7 +104,7 @@ function SearchPage() {
       <PageHeader
         section="§ · Search"
         title="Universal search."
-        summary="Fuzzy search across every documented system, decision, incident, benchmark, person, and note. Grouped by kind, filterable, keyboard-first."
+        summary="Fuzzy search across every documented system, decision, validation record, API, dataset, person, and note. Grouped by kind, filterable, keyboard-first."
         meta={[
           { label: "Indexed",  value: entities.length.toString().padStart(3, "0") + " entities" },
           { label: "Kinds",    value: KIND_ORDER.length.toString().padStart(2, "0") },
