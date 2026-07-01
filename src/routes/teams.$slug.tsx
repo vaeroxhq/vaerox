@@ -40,9 +40,9 @@ export const Route = createFileRoute("/teams/$slug")({
 function TeamDetail() {
   const { team: t } = Route.useLoaderData();
   const lead = PEOPLE.find((p) => p.slug === t.lead);
-  const members = t.memberSlugs.map((s) => PEOPLE.find((p) => p.slug === s)).filter(Boolean) as typeof PEOPLE;
-  const systems = t.systemsOwned.map((s) => SYSTEMS.find((x) => x.slug === s)).filter(Boolean);
-  const projects = t.currentProjects.map((s) => PROJECTS.find((x) => x.slug === s)).filter(Boolean);
+  const members = t.memberSlugs.map((s) => PEOPLE.find((p) => p.slug === s)).filter((x) => Boolean(x)) as typeof PEOPLE;
+  const systems = t.systemsOwned.map((s) => SYSTEMS.find((x) => x.slug === s)).filter((x) => Boolean(x));
+  const projects = t.currentProjects.map((s) => PROJECTS.find((x) => x.slug === s)).filter((x) => Boolean(x));
 
   const idx = TEAMS.findIndex((x) => x.slug === t.slug);
   const prev = TEAMS[idx - 1];

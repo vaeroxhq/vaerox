@@ -65,7 +65,7 @@ function PersonDetail() {
   }
   events.sort((a, b) => b.date.localeCompare(a.date));
 
-  const projects = p.projectsContributed.map((s) => PROJECTS.find((x) => x.slug === s)).filter(Boolean);
+  const projects = p.projectsContributed.map((s) => PROJECTS.find((x) => x.slug === s)).filter((x) => Boolean(x));
 
   const idx = PEOPLE.findIndex((x) => x.slug === p.slug);
   const prev = PEOPLE[idx - 1];
