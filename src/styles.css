@@ -2,143 +2,321 @@
 @source "../src";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:is(.dark *), &:where(.dark, .dark *));
 
-/*
- * Design system definition.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
- */
+/* ─────────────────────────────────────────────────────────────
+ * VÆRØX Design System — Phase 1: Token & Type Foundation
+ * Layer order: PRIMITIVE → SEMANTIC → COMPONENT.
+ * Components never read primitives directly.
+ * Dark is canonical. Light is exact parity.
+ * ───────────────────────────────────────────────────────────── */
 
-@theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --radius-2xl: calc(var(--radius) + 8px);
-  --radius-3xl: calc(var(--radius) + 12px);
-  --radius-4xl: calc(var(--radius) + 16px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-ring-offset-background: var(--background);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-}
-
+/* ── PRIMITIVE ────────────────────────────────────────────── */
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
+  /* Neutrals — dark palette (canonical) */
+  --vx-black-0: #000000;
+  --vx-black-1: #0B0B0B;
+  --vx-black-2: #121212;
+  --vx-black-3: #1A1A1A;
+  --vx-gray-1:  #232323;
+  --vx-gray-2:  #2E2E2E;
+  --vx-gray-3:  #3A3A3A;
+  --vx-gray-4:  #7A7A7A;
+  --vx-gray-5:  #B0B0B0;
+  --vx-white-0: #FFFFFF;
+
+  /* Neutrals — light palette (parity) */
+  --vx-paper-0: #FFFFFF;
+  --vx-paper-1: #FAFAFA;
+  --vx-paper-2: #F2F2F2;
+  --vx-paper-3: #E8E8E8;
+  --vx-line-l1: #E5E5E5;
+  --vx-line-l2: #D9D9D9;
+  --vx-ink-l1: #000000;
+  --vx-ink-l2: #4A4A4A;
+  --vx-ink-l3: #7A7A7A;
+
+  /* States (identical across modes) */
+  --vx-state-success: #22C55E;
+  --vx-state-warning: #F59E0B;
+  --vx-state-danger:  #EF4444;
+  --vx-state-info:    #3B82F6;
+
+  /* Space (4px baseline) */
+  --vx-space-0: 0;
+  --vx-space-1: 2px;
+  --vx-space-2: 4px;
+  --vx-space-3: 6px;
+  --vx-space-4: 8px;
+  --vx-space-5: 12px;
+  --vx-space-6: 16px;
+  --vx-space-7: 24px;
+  --vx-space-8: 32px;
+  --vx-space-9: 48px;
+  --vx-space-10: 64px;
+  --vx-space-11: 96px;
+  --vx-space-12: 128px;
+
+  /* Radius */
+  --vx-radius-0: 0;
+  --vx-radius-1: 2px;
+  --vx-radius-2: 4px;
+  --vx-radius-pill: 999px;
+
+  /* Motion */
+  --vx-dur-micro: 80ms;
+  --vx-dur-ui:    160ms;
+  --vx-dur-layout: 240ms;
+  --vx-dur-route: 400ms;
+  --vx-ease-standard: cubic-bezier(0.2, 0.6, 0.2, 1);
+
+  /* Type */
+  --vx-font-sans:
+    "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --vx-font-mono:
+    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --vx-text-xs:  11px;
+  --vx-text-sm:  13px;
+  --vx-text-md:  15px;
+  --vx-text-lg:  17px;
+  --vx-text-xl:  20px;
+  --vx-text-2xl: 24px;
+  --vx-text-3xl: 32px;
+  --vx-text-4xl: 44px;
+  --vx-text-display: 64px;
+
+  --vx-leading-tight: 1.1;
+  --vx-leading-ui:    1.45;
+  --vx-leading-prose: 1.65;
+
+  --vx-tracking-tight: -0.015em;
+  --vx-tracking-display: -0.025em;
+  --vx-tracking-wide:  0.02em;
+
+  /* Widths */
+  --vx-width-prose: 720px;
+  --vx-width-docs:  960px;
+  --vx-width-shell: 1280px;
 }
 
+/* ── SEMANTIC — DARK (canonical) ──────────────────────────── */
+:root,
 .dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+  --bg-canvas:  var(--vx-black-0);
+  --bg-surface: var(--vx-black-1);
+  --bg-raised:  var(--vx-black-2);
+  --bg-hover:   var(--vx-black-3);
+
+  --line-1: var(--vx-gray-1);
+  --line-2: var(--vx-gray-2);
+  --line-3: var(--vx-gray-3);
+
+  --text-1: var(--vx-white-0);
+  --text-2: var(--vx-gray-5);
+  --text-3: var(--vx-gray-4);
+
+  --state-success: var(--vx-state-success);
+  --state-warning: var(--vx-state-warning);
+  --state-danger:  var(--vx-state-danger);
+  --state-info:    var(--vx-state-info);
+
+  --focus-ring: var(--vx-white-0);
 }
 
+/* ── SEMANTIC — LIGHT (parity) ────────────────────────────── */
+.light {
+  --bg-canvas:  var(--vx-paper-0);
+  --bg-surface: var(--vx-paper-1);
+  --bg-raised:  var(--vx-paper-2);
+  --bg-hover:   var(--vx-paper-3);
+
+  --line-1: var(--vx-line-l1);
+  --line-2: var(--vx-line-l2);
+  --line-3: var(--vx-ink-l3);
+
+  --text-1: var(--vx-ink-l1);
+  --text-2: var(--vx-ink-l2);
+  --text-3: var(--vx-ink-l3);
+
+  --focus-ring: var(--vx-ink-l1);
+}
+
+/* ── @theme inline — exposes semantic tokens as Tailwind utilities ── */
+@theme inline {
+  --color-canvas:  var(--bg-canvas);
+  --color-surface: var(--bg-surface);
+  --color-raised:  var(--bg-raised);
+  --color-hover:   var(--bg-hover);
+
+  --color-line-1: var(--line-1);
+  --color-line-2: var(--line-2);
+  --color-line-3: var(--line-3);
+
+  --color-text-1: var(--text-1);
+  --color-text-2: var(--text-2);
+  --color-text-3: var(--text-3);
+
+  --color-success: var(--state-success);
+  --color-warning: var(--state-warning);
+  --color-danger:  var(--state-danger);
+  --color-info:    var(--state-info);
+
+  /* Shadcn compatibility (all mapped to VÆRØX semantics — no shadows, hairlines only) */
+  --color-background: var(--bg-canvas);
+  --color-foreground: var(--text-1);
+  --color-card: var(--bg-surface);
+  --color-card-foreground: var(--text-1);
+  --color-popover: var(--bg-raised);
+  --color-popover-foreground: var(--text-1);
+  --color-primary: var(--text-1);
+  --color-primary-foreground: var(--bg-canvas);
+  --color-secondary: var(--bg-raised);
+  --color-secondary-foreground: var(--text-1);
+  --color-muted: var(--bg-surface);
+  --color-muted-foreground: var(--text-3);
+  --color-accent: var(--bg-raised);
+  --color-accent-foreground: var(--text-1);
+  --color-destructive: var(--state-danger);
+  --color-destructive-foreground: var(--text-1);
+  --color-border: var(--line-1);
+  --color-input: var(--line-2);
+  --color-ring: var(--focus-ring);
+
+  --font-sans: var(--vx-font-sans);
+  --font-mono: var(--vx-font-mono);
+
+  --radius-sm: var(--vx-radius-1);
+  --radius-md: var(--vx-radius-2);
+  --radius-lg: var(--vx-radius-2);
+  --radius-xl: var(--vx-radius-2);
+}
+
+/* ── Base ────────────────────────────────────────────────── */
 @layer base {
   * {
-    border-color: var(--color-border);
+    border-color: var(--line-1);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  html {
+    background-color: var(--bg-canvas);
+    color: var(--text-1);
+    font-family: var(--vx-font-sans);
+    font-size: var(--vx-text-md);
+    line-height: var(--vx-leading-ui);
+    font-feature-settings: "ss01", "cv11";
   }
 
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    background-color: var(--bg-canvas);
+    color: var(--text-1);
+    min-height: 100dvh;
+  }
+
+  ::selection {
+    background: var(--text-1);
+    color: var(--bg-canvas);
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  code, kbd, samp, pre {
+    font-family: var(--vx-font-mono);
+    font-feature-settings: "zero", "ss01";
+  }
+}
+
+/* ── Utilities ───────────────────────────────────────────── */
+
+/* Type: sans, mono; tabular-nums default on mono */
+@utility font-display {
+  font-family: var(--vx-font-sans);
+  letter-spacing: var(--vx-tracking-display);
+  font-weight: 500;
+}
+@utility font-mono {
+  font-family: var(--vx-font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "zero", "ss01";
+}
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Prose width */
+@utility w-prose { max-width: var(--vx-width-prose); }
+@utility w-docs  { max-width: var(--vx-width-docs); }
+@utility w-shell { max-width: var(--vx-width-shell); }
+
+/* Hairlines — the only structural device */
+@utility hairline-t { border-top: 1px solid var(--line-1); }
+@utility hairline-b { border-bottom: 1px solid var(--line-1); }
+@utility hairline-l { border-left: 1px solid var(--line-1); }
+@utility hairline-r { border-right: 1px solid var(--line-1); }
+@utility hairline   { border: 1px solid var(--line-1); }
+@utility hairline-strong { border: 1px solid var(--line-2); }
+
+/* 45° geometry — inherited from the mark */
+@utility diagonal-45 {
+  background-image: linear-gradient(
+    45deg,
+    transparent calc(50% - 0.5px),
+    var(--line-2) calc(50% - 0.5px),
+    var(--line-2) calc(50% + 0.5px),
+    transparent calc(50% + 0.5px)
+  );
+}
+@utility corner-cut-tr {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 12px) 0,
+    100% 12px,
+    100% 100%,
+    0 100%
+  );
+}
+@utility corner-cut-bl {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    12px 100%,
+    0 calc(100% - 12px)
+  );
+}
+
+/* Motion — restrained */
+@utility transition-ui {
+  transition-property: background-color, border-color, color, opacity, transform;
+  transition-duration: var(--vx-dur-ui);
+  transition-timing-function: var(--vx-ease-standard);
+}
+@utility transition-micro {
+  transition-property: background-color, border-color, color, opacity;
+  transition-duration: var(--vx-dur-micro);
+  transition-timing-function: var(--vx-ease-standard);
+}
+
+/* Status dot */
+@utility dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--vx-radius-pill);
+  background: currentColor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
