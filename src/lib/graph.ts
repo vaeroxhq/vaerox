@@ -189,7 +189,7 @@ for (const t of TEAMS) {
 for (const d of DATASETS) {
   register({
     kind: "dataset", id: d.slug, slug: d.slug,
-    title: d.name, href: `/research/datasets/${d.slug}`,
+    title: d.name, href: `/research/assets/${d.slug}`,
     kicker: "DAT", summary: d.purpose,
     owner: d.domain, updated: d.updated, status: d.status,
     tags: d.tags,
