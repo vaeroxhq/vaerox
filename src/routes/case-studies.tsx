@@ -1,7 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PROJECTS } from "@/lib/projects-data";
+import { getDossier } from "@/lib/dossiers-data";
 import { PageHeader, SectionShell } from "@/components/section/section-bits";
 import { Breadcrumbs } from "@/components/doc/breadcrumbs";
+
 
 export const Route = createFileRoute("/case-studies")({
   head: () => ({
@@ -39,25 +41,35 @@ function CaseStudiesIndex() {
       />
 
       <ol className="hairline bg-canvas">
-        {PROJECTS.map((p, i, arr) => (
-          <li key={p.slug} className={i < arr.length - 1 ? "hairline-b" : ""}>
-            <Link
-              to="/projects/$slug"
-              params={{ slug: p.slug }}
-              className="group card-hover hover:card-hover-on grid grid-cols-[64px_1fr_140px_120px] gap-4 px-5 py-5 items-baseline"
-            >
-              <span className="font-mono text-[11px] text-text-3 tabular">CS-{String(i + 1).padStart(2, "0")}</span>
-              <div className="min-w-0">
-                <div className="font-display text-[18px] text-text-1 tracking-[-0.01em]">{p.name}</div>
-                <div className="mt-1.5 text-[13.5px] text-text-2 leading-[1.55]">{p.description}</div>
-                <div className="mt-3 font-mono text-[11px] text-text-3 tabular truncate">{p.architecture}</div>
-              </div>
-              <span className="font-mono text-[11px] text-text-3 uppercase tracking-[0.14em]">{p.stage}</span>
-              <span className="text-right font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] group-hover:text-text-1 transition-micro">Read →</span>
-            </Link>
-          </li>
-        ))}
+        {PROJECTS.map((p, i, arr) => {
+          const d = getDossier(p.slug);
+          const phase = d?.timeline.currentPhase ?? p.stage;
+          const badges = d?.badges.slice(0, 6) ?? p.stack.slice(0, 6);
+          return (
+            <li key={p.slug} className={i < arr.length - 1 ? "hairline-b" : ""}>
+              <Link
+                to="/projects/$slug"
+                params={{ slug: p.slug }}
+                className="group card-hover hover:card-hover-on grid grid-cols-[64px_1fr_140px_120px] gap-4 px-5 py-5 items-baseline"
+              >
+                <span className="font-mono text-[11px] text-text-3 tabular">CS-{String(i + 1).padStart(2, "0")}</span>
+                <div className="min-w-0">
+                  <div className="font-display text-[18px] text-text-1 tracking-[-0.01em]">{p.name}</div>
+                  <div className="mt-1.5 text-[13.5px] text-text-2 leading-[1.55]">{p.description}</div>
+                  <div className="mt-2.5 flex flex-wrap gap-1">
+                    {badges.map((b) => (
+                      <span key={b} className="hairline px-1.5 py-0.5 font-mono text-[10px] text-text-2 uppercase tracking-[0.1em]">{b}</span>
+                    ))}
+                  </div>
+                </div>
+                <span className="font-mono text-[11px] text-text-3 uppercase tracking-[0.14em]">{phase}</span>
+                <span className="text-right font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] group-hover:text-text-1 transition-micro">Read →</span>
+              </Link>
+            </li>
+          );
+        })}
       </ol>
+
     </SectionShell>
   );
 }

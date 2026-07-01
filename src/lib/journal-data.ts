@@ -37,7 +37,7 @@ export const JOURNAL: JournalEntry[] = [
     category: "Design Decision",
     tags: ["vestra", "agents"],
     revision: "r.02",
-    author: "Mayank Sharma",
+    author: "VÆRØX",
     status: "Published",
     readingMinutes: 7,
     summary:
@@ -55,7 +55,7 @@ export const JOURNAL: JournalEntry[] = [
     category: "Architecture",
     tags: ["quantedge", "duckdb"],
     revision: "r.01",
-    author: "Mayank Sharma",
+    author: "VÆRØX",
     status: "Published",
     readingMinutes: 6,
     summary:
@@ -73,7 +73,7 @@ export const JOURNAL: JournalEntry[] = [
     category: "Evaluation",
     tags: ["marketpulse", "evaluation", "llm"],
     revision: "r.03",
-    author: "Mayank Sharma",
+    author: "VÆRØX",
     status: "Published",
     readingMinutes: 8,
     summary:
@@ -91,7 +91,7 @@ export const JOURNAL: JournalEntry[] = [
     category: "Development Log",
     tags: ["aegis-ops", "langgraph"],
     revision: "r.01",
-    author: "Mayank Sharma",
+    author: "VÆRØX",
     status: "Published",
     readingMinutes: 9,
     summary:
@@ -109,7 +109,7 @@ export const JOURNAL: JournalEntry[] = [
     category: "Design Decision",
     tags: ["leadpulse"],
     revision: "r.01",
-    author: "Mayank Sharma",
+    author: "VÆRØX",
     status: "Published",
     readingMinutes: 5,
     summary:
@@ -126,7 +126,7 @@ export const JOURNAL: JournalEntry[] = [
     category: "Design Decision",
     tags: ["cloudcostiq", "forecasting"],
     revision: "r.01",
-    author: "Mayank Sharma",
+    author: "VÆRØX",
     status: "Published",
     readingMinutes: 6,
     summary:
@@ -143,7 +143,7 @@ export const JOURNAL: JournalEntry[] = [
     category: "Engineering Notes",
     tags: ["axiom", "workflows"],
     revision: "r.01",
-    author: "Mayank Sharma",
+    author: "VÆRØX",
     status: "Published",
     readingMinutes: 7,
     summary:
@@ -160,7 +160,7 @@ export const JOURNAL: JournalEntry[] = [
     category: "Research",
     tags: ["supply-chain-twin", "simulation"],
     revision: "r.01",
-    author: "Mayank Sharma",
+    author: "VÆRØX",
     status: "Published",
     readingMinutes: 5,
     summary:
@@ -177,7 +177,7 @@ export const JOURNAL: JournalEntry[] = [
     category: "Development Log",
     tags: ["pitwall-ai"],
     revision: "r.01",
-    author: "Mayank Sharma",
+    author: "VÆRØX",
     status: "Published",
     readingMinutes: 6,
     summary:

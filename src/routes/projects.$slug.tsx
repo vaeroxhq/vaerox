@@ -1,29 +1,36 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { PROJECTS } from "@/lib/projects-data";
 import { SYSTEMS } from "@/lib/systems-data";
-import { getProjectEvidence } from "@/lib/evidence-data";
+import { getDossier } from "@/lib/dossiers-data";
+import { ADRS, DIAGRAMS } from "@/lib/architecture-data";
+import { JOURNAL } from "@/lib/journal-data";
+import { RESEARCH } from "@/lib/research-data";
+import { APIS } from "@/lib/apis-data";
+import { BENCHMARKS } from "@/lib/benchmarks-data";
 import { PageHeader, SectionShell, StageDot } from "@/components/section/section-bits";
 import { Breadcrumbs } from "@/components/doc/breadcrumbs";
 import { RelatedRail } from "@/components/doc/related-rail";
-import { DocShell, DocBlock } from "@/components/doc/doc-shell";
+import { DocShell } from "@/components/doc/doc-shell";
 import { PrevNext } from "@/components/doc/prev-next";
 import {
-  AdrRefsBlock,
-  BenchmarkRefsBlock,
-  EvolutionBlock,
-  FailuresBlock,
-  IncidentRefsBlock,
-  LanguageBreakdown,
-  LimitationsBlock,
-  MetricsGrid,
-  TradeoffsBlock,
-} from "@/components/doc/evidence-blocks";
+  ExecutiveSummary,
+  ProblemStatement,
+  SystemArchitecture,
+  TechnicalStack,
+  EngineeringDecisions,
+  DevelopmentTimeline,
+  ValidationSection,
+  DocumentationSection,
+  FutureWorkSection,
+  PhaseChecklist,
+  ProjectLinksStrip,
+} from "@/components/doc/dossier-blocks";
 
 export const Route = createFileRoute("/projects/$slug")({
   head: ({ params }) => {
     const p = PROJECTS.find((x) => x.slug === params.slug);
-    const title = p ? `${p.name} — Projects — VÆRØX` : "Project — VÆRØX";
-    const description = p?.description ?? "Project case study.";
+    const title = p ? `${p.name} — Engineering Dossier — VÆRØX` : "Project — VÆRØX";
+    const description = p?.description ?? "Project engineering dossier.";
     return {
       meta: [
         { title },
@@ -49,10 +56,8 @@ export const Route = createFileRoute("/projects/$slug")({
 
 function ProjectDetail() {
   const { project: p } = Route.useLoaderData();
-  const ev = getProjectEvidence(p.slug);
-  const linkedSystem = ev?.linkedSystem
-    ? SYSTEMS.find((s) => s.slug === ev.linkedSystem)
-    : undefined;
+  const dossier = getDossier(p.slug);
+  const linkedSystem = SYSTEMS.find((s) => s.slug === p.slug);
 
   const tone =
     p.stage === "Production" ? ("success" as const)
@@ -64,17 +69,22 @@ function ProjectDetail() {
   const prev = PROJECTS[idx - 1];
   const next = PROJECTS[idx + 1];
 
-  const engineeringMetrics = ev
-    ? [
-        { label: "LOC", value: ev.loc.toLocaleString() },
-        { label: "Primary language", value: ev.languages[0]?.name ?? "—" },
-        { label: "ADRs referenced", value: String(ev.adrRefs.length) },
-        { label: "Validation records", value: String(ev.benchmarkRefs.length) },
-        { label: "Open challenges", value: String(ev.incidentRefs.length) },
+  // Auto-resolve cross-links from other data sources
+  const adrs = ADRS.filter((a) => a.systems.includes(p.slug));
+  const diagrams = DIAGRAMS.filter((d) => d.systems.includes(p.slug));
+  const journal = JOURNAL.filter((j) => j.tags.includes(p.slug));
+  const research = RESEARCH.filter((r) => r.tags.includes(p.slug));
+  const apis = APIS.filter((a) => a.system === p.slug);
+  const validations = BENCHMARKS.filter((b) => b.system === p.slug);
 
-        { label: "Design revisions", value: String(ev.evolution.length) },
-      ]
-    : [];
+  const docGroups = [
+    { heading: "Architecture Decision Records", items: adrs.map((a) => ({ label: a.title, to: `/architecture/${a.slug}` })) },
+    { heading: "Architecture diagrams", items: diagrams.map((d) => ({ label: d.title, to: `/architecture/diagrams/${d.slug}` })) },
+    { heading: "Related journal entries", items: journal.map((j) => ({ label: j.title, to: `/journal/${j.slug}` })) },
+    { heading: "Related research", items: research.map((r) => ({ label: r.title, to: `/research/${r.slug}` })) },
+    { heading: "Related APIs", items: apis.map((a) => ({ label: a.name, to: `/api/${a.slug}` })) },
+    { heading: "Engineering validation", items: validations.map((b) => ({ label: b.title, to: `/benchmarks/${b.slug}` })) },
+  ];
 
   return (
     <SectionShell>
@@ -89,7 +99,7 @@ function ProjectDetail() {
         title={p.name}
         summary={p.description}
         meta={[
-          { label: "Stage",    value: p.stage },
+          { label: "Stage",    value: dossier?.timeline.currentPhase ?? p.stage },
           { label: "Started",  value: p.started },
           { label: "Updated",  value: p.updated },
           { label: "Timeline", value: p.timeline },
@@ -98,7 +108,9 @@ function ProjectDetail() {
 
       <div className="mb-6 flex items-center gap-3">
         <StageDot tone={tone} />
-        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">{p.stage}</span>
+        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
+          {dossier?.timeline.currentPhase ?? p.stage}
+        </span>
         {linkedSystem && (
           <>
             <span className="font-mono text-[10px] text-text-3 opacity-60">·</span>
@@ -107,51 +119,36 @@ function ProjectDetail() {
               params={{ slug: linkedSystem.slug }}
               className="font-mono text-[10px] text-text-2 hover:text-text-1 uppercase tracking-[0.14em] transition-micro"
             >
-              Runs as system · {linkedSystem.name}
+              System page · {linkedSystem.name}
             </Link>
           </>
         )}
       </div>
 
+      {dossier && (
+        <div className="grid grid-cols-1 gap-4 mb-8">
+          <PhaseChecklist progress={dossier.progress} />
+          <ProjectLinksStrip links={dossier.links} />
+        </div>
+      )}
+
       <DocShell rail={<RelatedRail kind="project" id={p.slug} />}>
-        <article className="max-w-[760px]">
-          <DocBlock heading="Role">
-            <p className="text-[15px] text-text-2 leading-[1.7]">{p.role}</p>
-          </DocBlock>
-
-          <DocBlock heading="Architecture">
-            <p className="text-[15px] text-text-2 leading-[1.7] font-mono text-[13px] tabular">{p.architecture}</p>
-          </DocBlock>
-
-          <DocBlock heading="Stack">
-            <ul className="grid grid-cols-2 gap-px bg-line-1 hairline">
-              {p.stack.map((s: string) => (
-                <li key={s} className="bg-canvas px-4 py-3 font-mono text-[12px] text-text-1 tabular">{s}</li>
-              ))}
-            </ul>
-          </DocBlock>
-
-          <DocBlock heading="Outcome">
-            <p className="text-[15px] text-text-2 leading-[1.7]">{p.outcome}</p>
-          </DocBlock>
-
-          {ev && <LanguageBreakdown langs={ev.languages} />}
-
-          {ev && <MetricsGrid columns={engineeringMetrics} extra={ev.additionalMetrics} />}
-
-          {ev && <EvolutionBlock items={ev.evolution} />}
-
-          {ev && <TradeoffsBlock items={ev.tradeoffs} />}
-
-          {ev && <AdrRefsBlock slugs={ev.adrRefs} />}
-
-          {ev && <BenchmarkRefsBlock slugs={ev.benchmarkRefs} />}
-
-          {ev && <IncidentRefsBlock slugs={ev.incidentRefs} />}
-
-          {ev && <FailuresBlock items={ev.failures} />}
-
-          {ev && <LimitationsBlock items={ev.limitations} />}
+        <article className="max-w-[820px]">
+          {dossier ? (
+            <>
+              <ExecutiveSummary s={dossier.summary} />
+              <ProblemStatement p={dossier.problem} />
+              <SystemArchitecture a={dossier.architecture} />
+              <TechnicalStack s={dossier.stack} />
+              <EngineeringDecisions items={dossier.decisions} />
+              <DevelopmentTimeline t={dossier.timeline} />
+              <ValidationSection v={dossier.validation} />
+              <DocumentationSection groups={docGroups} />
+              <FutureWorkSection items={dossier.future} />
+            </>
+          ) : (
+            <p className="text-text-2 text-[14px]">Engineering dossier is being drafted for this project.</p>
+          )}
         </article>
       </DocShell>
 

@@ -86,7 +86,7 @@ function SystemDetail() {
         title={s.name}
         summary={s.summary}
         meta={[
-          { label: "Maintainer", value: "Mayank Sharma" },
+          { label: "Maintainer", value: "VÆRØX" },
           { label: "Stage",      value: s.stage },
           { label: "Primary",    value: s.stack[0] ?? "—" },
           { label: "Updated",    value: s.lastDeploy },
