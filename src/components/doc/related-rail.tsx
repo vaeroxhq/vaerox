@@ -24,7 +24,7 @@ export function RelatedRail({
   }
 
   const order: EntityKind[] = [
-    "system", "adr", "incident", "benchmark", "api",
+    "system", "team", "person", "adr", "incident", "benchmark", "api",
     "project", "research", "journal", "handbook",
   ];
 
