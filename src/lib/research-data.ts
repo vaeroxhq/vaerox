@@ -29,7 +29,7 @@ export const RESEARCH: ResearchEntry[] = [
     abstract:
       "We characterize a class of degenerate router states in production mixture-of-experts serving where per-expert utilization collapses under bursty, tenant-skewed traffic. A lightweight entropy floor restores balance without retraining.",
     tags: ["MoE", "Serving", "Routing", "Load Balancing"],
-    authors: ["A. Kori", "M. Tveit"],
+    authors: ["Maintainer"],
   },
   {
     slug: "cardinality-budgets-fanout",
@@ -41,7 +41,7 @@ export const RESEARCH: ResearchEntry[] = [
     abstract:
       "A control-theoretic treatment of label cardinality growth in trace-first pipelines. We derive an admission policy that bounds write amplification while retaining anomalous spans with high probability.",
     tags: ["Tracing", "Sampling", "Storage"],
-    authors: ["S. Rennick"],
+    authors: ["Maintainer"],
   },
   {
     slug: "deterministic-agent-replay",
@@ -53,7 +53,7 @@ export const RESEARCH: ResearchEntry[] = [
     abstract:
       "Agentic pipelines resist reproducibility due to non-deterministic tools and time. We describe a replay substrate that captures tool boundaries and clock reads, enabling bit-exact re-execution across model revisions.",
     tags: ["Agents", "Evaluation", "Reproducibility"],
-    authors: ["A. Kori", "L. Osei"],
+    authors: ["Maintainer"],
   },
   {
     slug: "workload-classes-h100",
@@ -65,7 +65,7 @@ export const RESEARCH: ResearchEntry[] = [
     abstract:
       "We propose a compact taxonomy of inference workloads on H100-class accelerators, calibrated against arithmetic intensity and KV-cache pressure, and publish reference benchmarks for each class.",
     tags: ["Benchmarks", "GPU", "Inference"],
-    authors: ["M. Tveit"],
+    authors: ["Maintainer"],
   },
   {
     slug: "leaderless-metadata",
@@ -77,7 +77,7 @@ export const RESEARCH: ResearchEntry[] = [
     abstract:
       "A design study of a leaderless metadata plane targeting geo-distributed deployments. We contrast latency and staleness envelopes against Raft-based baselines under partial and asymmetric partitions.",
     tags: ["Consensus", "Metadata", "Geo-distribution"],
-    authors: ["S. Rennick", "L. Osei"],
+    authors: ["Maintainer"],
   },
   {
     slug: "tail-sampling-tradeoffs",
@@ -89,7 +89,7 @@ export const RESEARCH: ResearchEntry[] = [
     abstract:
       "We quantify the retention/recall trade-off in tail-based trace sampling under production traffic and propose a two-stage sampler that decouples anomaly detection from long-tail retention.",
     tags: ["Sampling", "Tracing"],
-    authors: ["S. Rennick"],
+    authors: ["Maintainer"],
   },
   {
     slug: "structured-batching",
@@ -101,7 +101,7 @@ export const RESEARCH: ResearchEntry[] = [
     abstract:
       "Structured batching groups requests by decode phase and tenant KV footprint. We report throughput gains of 1.6–2.3× on mixed-tenant traffic without SLO regression.",
     tags: ["Batching", "LLM", "Serving"],
-    authors: ["A. Kori"],
+    authors: ["Maintainer"],
   },
   {
     slug: "eval-suite-drift",
@@ -113,6 +113,6 @@ export const RESEARCH: ResearchEntry[] = [
     abstract:
       "Evaluation suites drift as models specialize to their contours. We introduce a drift metric and propose rotation policies that preserve comparability across model generations.",
     tags: ["Evaluation", "Drift", "Methodology"],
-    authors: ["L. Osei"],
+    authors: ["Maintainer"],
   },
 ];
