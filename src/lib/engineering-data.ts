@@ -135,26 +135,27 @@ export const HANDBOOK: HandbookSection[] = [
   },
 
   {
-    slug: "deployment-checklist",
+    slug: "release-checklist",
     index: "06",
-    title: "Deployment checklist",
-    owner: "Release Engineering",
+    title: "Release checklist (draft)",
+    owner: "Maintainer",
     updated: "2026-04-18",
-    revision: "r.11",
-    status: "Canonical",
+    revision: "r.02",
+    status: "Draft",
     summary:
-      "Every production change is preceded by this checklist. Automation runs it; humans verify.",
+      "The contract a canonical system must satisfy before its first tagged release. Written now so it applies uniformly when the first system ships.",
     body: [
       { kind: "list", items: [
-        "SLO budget is positive across all affected services.",
-        "Feature flag exists and defaults to off.",
-        "Rollback path exercised in `dev` in the last 7 days.",
-        "Dashboards for the change are linked in the release notes.",
-        "On-call is notified in `#deploys` at least 30 minutes before the promotion.",
-        "Database migrations are additive; destructive steps are separated by at least one release.",
+        "All declared tool contracts are covered by contract tests.",
+        "Held-out evaluation set has been re-run on the release candidate; results are logged.",
+        "Feature flags exist for anything not covered by the eval set.",
+        "Rollback path is documented and rehearsed locally.",
+        "The relevant ADRs are marked Accepted, not Proposed.",
+        "The release is announced as a Development Log entry linking every artifact.",
       ]},
     ],
   },
+
   {
     slug: "performance-budget",
     index: "07",
