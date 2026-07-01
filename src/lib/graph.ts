@@ -18,6 +18,8 @@ import { JOURNAL } from "./journal-data";
 import { INCIDENTS } from "./incidents-data";
 import { BENCHMARKS } from "./benchmarks-data";
 import { APIS } from "./apis-data";
+import { PEOPLE, findPersonByName } from "./people-data";
+import { TEAMS } from "./teams-data";
 
 export type EntityKind =
   | "system"
@@ -28,7 +30,9 @@ export type EntityKind =
   | "journal"
   | "incident"
   | "benchmark"
-  | "api";
+  | "api"
+  | "person"
+  | "team";
 
 export type EntityRef = { kind: EntityKind; id: string };
 
@@ -160,6 +164,25 @@ for (const a of APIS) {
   });
 }
 
+for (const p of PEOPLE) {
+  register({
+    kind: "person", id: p.slug, slug: p.slug,
+    title: p.name, href: `/people/${p.slug}`,
+    kicker: p.handle, summary: p.role,
+    owner: p.team, updated: p.joined, status: p.location,
+    tags: p.expertise,
+  });
+}
+
+for (const t of TEAMS) {
+  register({
+    kind: "team", id: t.slug, slug: t.slug,
+    title: t.name, href: `/teams/${t.slug}`,
+    kicker: "TEAM", summary: t.charter,
+    owner: t.lead, updated: t.established, status: `${t.memberSlugs.length} members`,
+  });
+}
+
 /* ── Compute edges from the underlying data ──────────────── */
 
 // ADR ↔ systems (by system slug)
@@ -233,6 +256,51 @@ for (const r of RESEARCH) {
   }
 }
 
+// People edges — resolve every declared ownership
+for (const p of PEOPLE) {
+  const self: EntityRef = { kind: "person", id: p.slug };
+  link(self, { kind: "team", id: p.team });
+  for (const s of p.systemsOwned) link(self, { kind: "system", id: s });
+  for (const n of p.adrsAuthored) {
+    const found = ADRS.find((a) => a.number === n);
+    if (found) link(self, { kind: "adr", id: found.slug });
+  }
+  for (const inc of p.incidentsCommanded) link(self, { kind: "incident", id: inc });
+  for (const pr of p.projectsContributed) link(self, { kind: "project", id: pr });
+  for (const r of p.researchAuthored) link(self, { kind: "research", id: r });
+}
+
+// Team edges
+for (const t of TEAMS) {
+  const self: EntityRef = { kind: "team", id: t.slug };
+  for (const m of t.memberSlugs) link(self, { kind: "person", id: m });
+  for (const s of t.systemsOwned) link(self, { kind: "system", id: s });
+  for (const pr of t.currentProjects) link(self, { kind: "project", id: pr });
+}
+
+// Resolve legacy owner strings → person edges across every entity
+for (const s of SYSTEMS) {
+  const person = findPersonByName(s.owner);
+  if (person) link({ kind: "system", id: s.slug }, { kind: "person", id: person.slug });
+}
+for (const a of ADRS) {
+  const person = findPersonByName(a.owner);
+  if (person) link({ kind: "adr", id: a.slug }, { kind: "person", id: person.slug });
+}
+for (const inc of INCIDENTS) {
+  const person = findPersonByName(inc.commander);
+  if (person) link({ kind: "incident", id: inc.slug }, { kind: "person", id: person.slug });
+}
+for (const b of BENCHMARKS) {
+  const person = findPersonByName(b.owner);
+  if (person) link({ kind: "benchmark", id: b.slug }, { kind: "person", id: person.slug });
+}
+for (const a of APIS) {
+  const person = findPersonByName(a.owner);
+  if (person) link({ kind: "api", id: a.slug }, { kind: "person", id: person.slug });
+}
+
+
 /* ── Public API ─────────────────────────────────────────── */
 
 export function getEntity(kind: EntityKind, id: string): Entity | undefined {
@@ -270,4 +338,6 @@ export const KIND_LABEL: Record<EntityKind, string> = {
   incident: "Incident",
   benchmark: "Benchmark",
   api: "API",
+  person: "Person",
+  team: "Team",
 };
