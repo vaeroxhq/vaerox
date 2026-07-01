@@ -52,10 +52,8 @@ function MaintainerDetail() {
     const adr = ADRS.find((a) => a.number === n);
     if (adr) events.push({ date: adr.decisionDate, kicker: `ADR·${adr.number}`, title: adr.title, href: `/architecture/${adr.slug}` });
   }
-  for (const inc of p.incidentsCommanded) {
-    const i = INCIDENTS.find((x) => x.slug === inc);
-    if (i) events.push({ date: i.openedAt.slice(0, 10), kicker: i.id, title: i.title, href: `/incidents/${i.slug}` });
-  }
+  // Incident write-ups are intentionally absent — the lab is pre-production.
+
   for (const r of p.researchAuthored) {
     const rr = RESEARCH.find((x) => x.slug === r);
     if (rr) events.push({ date: rr.published, kicker: "RES", title: rr.title, href: `/research/${rr.slug}` });
