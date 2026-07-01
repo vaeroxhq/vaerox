@@ -39,7 +39,7 @@ export const JOURNAL: JournalEntry[] = [
     category: "Observability",
     tags: ["orbit", "metrics", "cardinality"],
     revision: "r.04",
-    author: "S. Kaur",
+    author: "Maintainer",
     status: "Published",
     readingMinutes: 9,
     summary:
@@ -57,7 +57,7 @@ export const JOURNAL: JournalEntry[] = [
     category: "Research",
     tags: ["helix", "moe", "inference"],
     revision: "r.02",
-    author: "M. Aro",
+    author: "Maintainer",
     status: "Published",
     readingMinutes: 12,
     summary:
@@ -75,7 +75,7 @@ export const JOURNAL: JournalEntry[] = [
     category: "Post-Mortem",
     tags: ["atlas", "sev-1", "failover"],
     revision: "r.06",
-    author: "R. Halden",
+    author: "Maintainer",
     status: "Published",
     readingMinutes: 7,
     summary:
@@ -93,7 +93,7 @@ export const JOURNAL: JournalEntry[] = [
     category: "Architecture",
     tags: ["atlas", "control-plane", "multitenancy"],
     revision: "r.01",
-    author: "L. Voss",
+    author: "Maintainer",
     status: "Published",
     readingMinutes: 6,
     summary:
@@ -111,7 +111,7 @@ export const JOURNAL: JournalEntry[] = [
     category: "Architecture",
     tags: ["parity", "consensus", "adr"],
     revision: "r.03",
-    author: "J. Odeh",
+    author: "Maintainer",
     status: "Published",
     readingMinutes: 11,
     summary:
@@ -129,7 +129,7 @@ export const JOURNAL: JournalEntry[] = [
     category: "Performance",
     tags: ["helix", "cuda", "p99"],
     revision: "r.02",
-    author: "M. Aro",
+    author: "Maintainer",
     status: "Published",
     readingMinutes: 8,
     summary:
@@ -147,7 +147,7 @@ export const JOURNAL: JournalEntry[] = [
     category: "Observability",
     tags: ["orbit", "tracing", "sampling"],
     revision: "r.02",
-    author: "S. Kaur",
+    author: "Maintainer",
     status: "Published",
     readingMinutes: 9,
     summary: "The implementation notes behind ADR·018. Where the sampler lives, how it interacts with the collector, and what it cost.",
@@ -164,7 +164,7 @@ export const JOURNAL: JournalEntry[] = [
     category: "Benchmark",
     tags: ["meridian", "benchmarks"],
     revision: "r.01",
-    author: "N. Bercovici",
+    author: "Maintainer",
     status: "Published",
     readingMinutes: 5,
     summary:
@@ -182,7 +182,7 @@ export const JOURNAL: JournalEntry[] = [
     category: "Infrastructure",
     tags: ["signal", "io_uring", "backpressure"],
     revision: "r.03",
-    author: "K. Ito",
+    author: "Maintainer",
     status: "Published",
     readingMinutes: 10,
     summary:
@@ -200,7 +200,7 @@ export const JOURNAL: JournalEntry[] = [
     category: "Research",
     tags: ["agents", "evaluation", "methodology"],
     revision: "r.02",
-    author: "N. Bercovici",
+    author: "Maintainer",
     status: "Published",
     readingMinutes: 14,
     summary:
@@ -218,7 +218,7 @@ export const JOURNAL: JournalEntry[] = [
     category: "Incident Review",
     tags: ["atlas", "sev-2", "retries"],
     revision: "r.04",
-    author: "R. Halden",
+    author: "Maintainer",
     status: "Published",
     readingMinutes: 6,
     summary:
@@ -236,7 +236,7 @@ export const JOURNAL: JournalEntry[] = [
     category: "Architecture",
     tags: ["meridian", "evaluation", "adr"],
     revision: "r.01",
-    author: "N. Bercovici",
+    author: "Maintainer",
     status: "Draft",
     readingMinutes: 8,
     summary:

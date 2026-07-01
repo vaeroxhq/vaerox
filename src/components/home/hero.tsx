@@ -1,8 +1,8 @@
 import { DiamondGlyph, CornerFramed, MetaCell } from "./primitives";
 
 /**
- * Hero — introduction section. Copy locked. Paragraph tightened to a
- * ~640px measure for optical readability.
+ * Hero — introduction. Copy positions VÆRØX truthfully as an
+ * independent engineering laboratory maintained by one engineer.
  */
 export function Hero() {
   return (
@@ -15,15 +15,17 @@ export function Hero() {
       </div>
 
       <h1 className="font-display text-[52px] md:text-[80px] lg:text-[96px] leading-[0.98] tracking-[-0.032em] max-w-[980px]">
-        Engineering systems,
+        An independent
         <br />
-        <span className="text-text-2">documented in public.</span>
+        <span className="text-text-2">engineering laboratory.</span>
       </h1>
 
       <p className="mt-12 max-w-[640px] text-text-2 text-[15px] leading-[1.65]">
-        VÆRØX is an engineering organization building production systems across enterprise AI,
-        distributed infrastructure, developer platforms, and quantitative research. The work —
-        architecture decisions, incident reviews, benchmarks — is published here as it is written.
+        VÆRØX is a public engineering lab, written and maintained by one engineer.
+        It documents architecture exploration for enterprise AI, distributed
+        platforms, and low-latency infrastructure — the reference implementations,
+        the decisions behind them, and the write-ups that explain why. Every
+        artifact on this site is authored, dated, and signed by the same person.
       </p>
 
       <div className="mt-20 max-w-[640px]">
@@ -33,9 +35,9 @@ export function Hero() {
 
       <CornerFramed className="mt-8">
         <dl className="grid grid-cols-2 md:grid-cols-4 gap-px bg-line-1">
-          <MetaCell label="Version" value="0.1.0" />
-          <MetaCell label="Phase" value="01 / 10" />
-          <MetaCell label="Status" value="Building" />
+          <MetaCell label="Maintainer" value="Solo" />
+          <MetaCell label="License" value="Public" />
+          <MetaCell label="Cadence" value="Async" />
           <MetaCell label="Updated" value="2026-07-01" />
         </dl>
       </CornerFramed>

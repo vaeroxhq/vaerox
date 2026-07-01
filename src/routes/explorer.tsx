@@ -11,7 +11,7 @@ export const Route = createFileRoute("/explorer")({
   head: () => ({
     meta: [
       { title: "Explorer — VÆRØX" },
-      { name: "description", content: "Faceted browser across systems and projects: filter by team, runtime, stage, and criticality." },
+      { name: "description", content: "Faceted browser across systems and projects: filter by surface, runtime, stage, and criticality." },
     ],
   }),
   component: ExplorerPage,
@@ -117,7 +117,7 @@ function ExplorerPage() {
       <PageHeader
         section="§ · Explorer"
         title="Engineering explorer."
-        summary="Faceted browser across every system and project in the platform. Filter instantly by team, runtime, infrastructure, stage, criticality, and region."
+        summary="Faceted browser across every system and project maintained in the lab. Filter instantly by surface, runtime, infrastructure, stage, criticality, and region."
         meta={[
           { label: "Records", value: all.length.toString().padStart(3, "0") },
           { label: "Shown",   value: rows.length.toString().padStart(3, "0") },
@@ -129,7 +129,7 @@ function ExplorerPage() {
       <div className="hairline bg-canvas mb-6">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-px bg-line-1">
           <Facet label="Kind"       value={f.kind}     options={["All", "System", "Project"]} onChange={(v) => setF({ ...f, kind: v })} />
-          <Facet label="Team"       value={f.team}     options={teams} onChange={(v) => setF({ ...f, team: v })} />
+          <Facet label="Surface"    value={f.team}     options={teams} onChange={(v) => setF({ ...f, team: v })} />
           <Facet label="Runtime"    value={f.language} options={facet("language")} onChange={(v) => setF({ ...f, language: v })} />
           <Facet label="Infra"      value={f.infra}    options={facet("infra")} onChange={(v) => setF({ ...f, infra: v })} />
           <Facet label="Stage"      value={f.stage}    options={facet("stage")} onChange={(v) => setF({ ...f, stage: v })} />
@@ -158,7 +158,7 @@ function ExplorerPage() {
         <div className="grid grid-cols-[70px_1fr_120px_100px_90px_90px_60px] gap-4 px-4 py-2 hairline-b font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] tabular">
           <span>Kind</span>
           <span>Name</span>
-          <span>Team</span>
+          <span>Surface</span>
           <span>Runtime</span>
           <span>Stage</span>
           <span>Region</span>

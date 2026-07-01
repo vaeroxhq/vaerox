@@ -1,98 +1,53 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
 import { PEOPLE } from "@/lib/people-data";
-import { TEAMS } from "@/lib/teams-data";
-import { PageHeader, Toolbar, SectionShell } from "@/components/section/section-bits";
-
-const FILTERS = ["All", ...TEAMS.map((t) => t.name)];
+import { PageHeader, SectionShell } from "@/components/section/section-bits";
+import { SYSTEMS } from "@/lib/systems-data";
+import { ADRS } from "@/lib/architecture-data";
+import { INCIDENTS } from "@/lib/incidents-data";
 
 export const Route = createFileRoute("/people")({
   head: () => ({
     meta: [
-      { title: "People — VÆRØX" },
-      { name: "description", content: "Engineer directory — role, team, systems, contributions." },
-      { property: "og:title", content: "People — VÆRØX" },
-      { property: "og:description", content: "Engineer directory — role, team, systems, contributions." },
+      { title: "Maintainer — VÆRØX" },
+      { name: "description", content: "VÆRØX is written and maintained by one engineer. This is the maintainer." },
+      { property: "og:title", content: "Maintainer — VÆRØX" },
+      { property: "og:description", content: "One engineer. Everything on this site is signed by the same person." },
     ],
   }),
-  component: PeoplePage,
+  component: MaintainerPage,
 });
 
-function PeoplePage() {
-  const [q, setQ] = useState("");
-  const [filter, setFilter] = useState<string>("All");
-
-  const rows = useMemo(() => {
-    const needle = q.trim().toLowerCase();
-    return PEOPLE.filter((p) => {
-      if (filter !== "All") {
-        const team = TEAMS.find((t) => t.slug === p.team);
-        if (!team || team.name !== filter) return false;
-      }
-      if (!needle) return true;
-      return (
-        p.name.toLowerCase().includes(needle) ||
-        p.fullName.toLowerCase().includes(needle) ||
-        p.role.toLowerCase().includes(needle) ||
-        p.handle.toLowerCase().includes(needle) ||
-        p.expertise.join(" ").toLowerCase().includes(needle)
-      );
-    });
-  }, [q, filter]);
-
+function MaintainerPage() {
+  const p = PEOPLE[0];
   return (
     <SectionShell>
       <PageHeader
-        section="§ · People"
-        title="Engineer directory."
-        summary="Every engineer who ships and operates VÆRØX. Roles, teams, and the artifacts they own."
+        section="§ · Maintainer"
+        title="One engineer."
+        summary="VÆRØX is written, built, and operated by a single engineer. There is no team behind the byline — every artifact on this site is authored, dated, and signed by the same person."
         meta={[
-          { label: "People",     value: PEOPLE.length.toString().padStart(2, "0") },
-          { label: "Teams",      value: TEAMS.length.toString().padStart(2, "0") },
-          { label: "Locations",  value: new Set(PEOPLE.map((p) => p.location.split(",")[1]?.trim())).size.toString().padStart(2, "0") },
-          { label: "Est. avg tenure", value: "2.6y" },
+          { label: "Maintainer", value: "Solo" },
+          { label: "Systems",    value: SYSTEMS.length.toString().padStart(2, "0") },
+          { label: "ADRs",       value: ADRS.length.toString().padStart(2, "0") },
+          { label: "Incidents",  value: INCIDENTS.length.toString().padStart(2, "0") },
         ]}
       />
 
-      <Toolbar
-        query={q}
-        onQuery={setQ}
-        placeholder="Search name, role, expertise…"
-        filters={FILTERS}
-        activeFilter={filter}
-        onFilter={setFilter}
-        count={rows.length}
-      />
-
-      <div className="hairline mt-px bg-canvas">
-        <div className="grid grid-cols-[1.6fr_1.2fr_1fr_0.5fr_0.7fr] gap-6 px-4 py-3 hairline-b font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-          <span>Name</span>
-          <span>Role</span>
-          <span>Team</span>
-          <span className="text-right">Owns</span>
-          <span className="text-right">Joined</span>
-        </div>
-        {rows.map((p, i) => {
-          const team = TEAMS.find((t) => t.slug === p.team);
-          const owns = p.systemsOwned.length + p.adrsAuthored.length + p.incidentsCommanded.length;
-          return (
-            <Link
-              key={p.slug}
-              to="/people/$slug"
-              params={{ slug: p.slug }}
-              className={`grid grid-cols-[1.6fr_1.2fr_1fr_0.5fr_0.7fr] gap-6 px-4 py-3 items-baseline group card-hover hover:card-hover-on ${i < rows.length - 1 ? "hairline-b" : ""}`}
-            >
-              <div className="min-w-0">
-                <div className="font-display text-[14px] text-text-1 tracking-[-0.008em] truncate">{p.name}</div>
-                <div className="font-mono text-[10px] text-text-3 tabular mt-0.5">{p.handle}</div>
-              </div>
-              <span className="text-[12.5px] text-text-2 truncate">{p.role}</span>
-              <span className="font-mono text-[11px] text-text-2 uppercase tracking-[0.1em] truncate">{team?.name ?? p.team}</span>
-              <span className="text-right font-mono text-[12px] text-text-1 tabular">{owns.toString().padStart(2, "0")}</span>
-              <span className="text-right font-mono text-[11px] text-text-3 tabular">{p.joined.slice(0, 7)}</span>
-            </Link>
-          );
-        })}
+      <div className="hairline bg-canvas">
+        <Link
+          to="/people/$slug"
+          params={{ slug: p.slug }}
+          className="grid grid-cols-[1.6fr_1.4fr_0.8fr] gap-6 px-5 py-5 items-baseline group card-hover hover:card-hover-on"
+        >
+          <div className="min-w-0">
+            <div className="font-display text-[18px] text-text-1 tracking-[-0.01em]">{p.name}</div>
+            <div className="font-mono text-[11px] text-text-3 tabular mt-1">{p.handle}</div>
+          </div>
+          <span className="text-[13px] text-text-2 truncate">{p.role}</span>
+          <span className="text-right font-mono text-[10px] text-text-2 uppercase tracking-[0.14em] transition-micro group-hover:text-text-1">
+            VIEW PROFILE →
+          </span>
+        </Link>
       </div>
     </SectionShell>
   );

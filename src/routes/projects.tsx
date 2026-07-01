@@ -54,8 +54,8 @@ function ProjectsPage() {
     <SectionShell>
       <PageHeader
         section="§ · Projects"
-        title="Engineering projects."
-        summary="Case studies of production systems, prototypes, and research builds. Each card links to a detailed write-up."
+        title="Engineering builds."
+        summary="Case studies of the lab's reference implementations, prototypes, and research builds. Each card links to a long-form write-up: the problem, the architecture, the measurements, and what changed."
         meta={[
           { label: "Projects", value: PROJECTS.length.toString().padStart(2, "0") },
           {

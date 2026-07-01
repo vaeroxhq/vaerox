@@ -1,6 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { PEOPLE } from "@/lib/people-data";
-import { TEAMS } from "@/lib/teams-data";
 import { SYSTEMS } from "@/lib/systems-data";
 import { ADRS } from "@/lib/architecture-data";
 import { INCIDENTS } from "@/lib/incidents-data";
@@ -10,13 +9,12 @@ import { PageHeader, SectionShell } from "@/components/section/section-bits";
 import { Breadcrumbs } from "@/components/doc/breadcrumbs";
 import { RelatedRail } from "@/components/doc/related-rail";
 import { DocShell, DocBlock } from "@/components/doc/doc-shell";
-import { PrevNext } from "@/components/doc/prev-next";
 
 export const Route = createFileRoute("/people/$slug")({
   head: ({ params }) => {
     const p = PEOPLE.find((x) => x.slug === params.slug);
-    const title = p ? `${p.fullName} — People — VÆRØX` : "Person — VÆRØX";
-    const description = p ? `${p.role}. ${p.bio}` : "Engineer profile.";
+    const title = p ? `${p.fullName} — Maintainer — VÆRØX` : "Maintainer — VÆRØX";
+    const description = p ? p.bio : "Maintainer profile.";
     return {
       meta: [
         { title },
@@ -31,61 +29,56 @@ export const Route = createFileRoute("/people/$slug")({
     if (!person) throw notFound();
     return { person };
   },
-  component: PersonDetail,
+  component: MaintainerDetail,
   notFoundComponent: () => (
     <SectionShell>
-      <PageHeader section="§ · People" title="Person not found." summary="No profile matches that identifier." />
-      <Link to="/people" className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1">← Back to directory</Link>
+      <PageHeader section="§ · Maintainer" title="Profile not found." summary="No profile matches that identifier." />
+      <Link to="/people" className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1">← Back</Link>
     </SectionShell>
   ),
 });
 
-type Event = { date: string; kind: string; title: string; href: string; kicker: string };
+type Event = { date: string; kicker: string; title: string; href: string };
 
-function PersonDetail() {
+function MaintainerDetail() {
   const { person: p } = Route.useLoaderData() as { person: (typeof PEOPLE)[number] };
-  const team = TEAMS.find((t) => t.slug === p.team);
 
   const events: Event[] = [];
   for (const s of p.systemsOwned) {
     const sys = SYSTEMS.find((x) => x.slug === s);
-    if (sys) events.push({ date: sys.lastDeploy, kind: "System deploy", title: sys.name, href: `/systems/${sys.slug}`, kicker: "SYS" });
+    if (sys) events.push({ date: sys.lastDeploy, kicker: "SYS", title: `${sys.name} · last update`, href: `/systems/${sys.slug}` });
   }
   for (const n of p.adrsAuthored) {
     const adr = ADRS.find((a) => a.number === n);
-    if (adr) events.push({ date: adr.decisionDate, kind: `ADR·${adr.number}`, title: adr.title, href: `/architecture/${adr.slug}`, kicker: `ADR·${adr.number}` });
+    if (adr) events.push({ date: adr.decisionDate, kicker: `ADR·${adr.number}`, title: adr.title, href: `/architecture/${adr.slug}` });
   }
   for (const inc of p.incidentsCommanded) {
     const i = INCIDENTS.find((x) => x.slug === inc);
-    if (i) events.push({ date: i.openedAt.slice(0, 10), kind: `Incident ${i.id}`, title: i.title, href: `/incidents/${i.slug}`, kicker: i.id });
+    if (i) events.push({ date: i.openedAt.slice(0, 10), kicker: i.id, title: i.title, href: `/incidents/${i.slug}` });
   }
   for (const r of p.researchAuthored) {
     const rr = RESEARCH.find((x) => x.slug === r);
-    if (rr) events.push({ date: rr.published, kind: "Research", title: rr.title, href: `/research/${rr.slug}`, kicker: "RES" });
+    if (rr) events.push({ date: rr.published, kicker: "RES", title: rr.title, href: `/research/${rr.slug}` });
   }
-  events.sort((a: Event, b: Event) => b.date.localeCompare(a.date));
+  events.sort((a, b) => b.date.localeCompare(a.date));
 
   const projects = p.projectsContributed.map((s: string) => PROJECTS.find((x) => x.slug === s)).filter((x): x is (typeof PROJECTS)[number] => Boolean(x));
-
-  const idx = PEOPLE.findIndex((x) => x.slug === p.slug);
-  const prev = PEOPLE[idx - 1];
-  const next = PEOPLE[idx + 1];
 
   return (
     <SectionShell>
       <Breadcrumbs items={[
         { label: "VÆRØX", to: "/" },
-        { label: "People", to: "/people" },
+        { label: "Maintainer", to: "/people" },
         { label: p.name },
       ]} />
 
       <PageHeader
-        section={`§ · People / ${p.slug}`}
+        section={`§ · Maintainer`}
         title={p.fullName}
         summary={p.bio}
         meta={[
           { label: "Role",     value: p.role },
-          { label: "Team",     value: team?.name ?? p.team },
+          { label: "Model",    value: "Independent lab" },
           { label: "Joined",   value: p.joined },
           { label: "Location", value: p.location },
         ]}
@@ -99,6 +92,16 @@ function PersonDetail() {
                 <span key={e} className="bg-canvas px-3 py-2 font-mono text-[11px] text-text-1 tabular">{e}</span>
               ))}
             </div>
+          </DocBlock>
+
+          <DocBlock heading="How to read attribution">
+            <p className="text-[13.5px] text-text-2 leading-[1.7]">
+              Anywhere on the site — in ADRs, incident reports, benchmarks, or APIs —
+              an <span className="font-mono text-[12.5px] text-text-1">owner</span> or{" "}
+              <span className="font-mono text-[12.5px] text-text-1">commander</span> field
+              refers to the same maintainer. Surface names (Platform, Inference,
+              Observability, etc.) refer to areas of practice, not teams of humans.
+            </p>
           </DocBlock>
 
           {projects.length > 0 && (
@@ -123,11 +126,11 @@ function PersonDetail() {
           )}
 
           {events.length > 0 && (
-            <DocBlock heading="Contribution timeline">
+            <DocBlock heading="Recent activity">
               <ul className="hairline bg-canvas">
-                {events.map((e, i) => (
-                  <li key={`${e.href}-${i}`} className={i < events.length - 1 ? "hairline-b" : ""}>
-                    <Link to={e.href} className="grid grid-cols-[90px_70px_1fr] items-baseline gap-4 px-4 py-3 group card-hover hover:card-hover-on">
+                {events.slice(0, 30).map((e, i, arr) => (
+                  <li key={`${e.href}-${i}`} className={i < arr.length - 1 ? "hairline-b" : ""}>
+                    <Link to={e.href} className="grid grid-cols-[90px_90px_1fr] items-baseline gap-4 px-4 py-3 group card-hover hover:card-hover-on">
                       <span className="font-mono text-[11px] text-text-3 tabular">{e.date}</span>
                       <span className="font-mono text-[10px] text-text-2 uppercase tracking-[0.14em]">{e.kicker}</span>
                       <span className="font-display text-[13.5px] text-text-1 tracking-[-0.006em] truncate">{e.title}</span>
@@ -137,29 +140,8 @@ function PersonDetail() {
               </ul>
             </DocBlock>
           )}
-
-          {team && (
-            <DocBlock heading="Team">
-              <Link
-                to="/teams/$slug"
-                params={{ slug: team.slug }}
-                className="hairline bg-canvas block group card-hover hover:card-hover-on p-4"
-              >
-                <div className="flex items-baseline justify-between">
-                  <span className="font-display text-[15px] text-text-1 tracking-[-0.008em]">{team.name}</span>
-                  <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">Established {team.established.slice(0, 7)}</span>
-                </div>
-                <p className="mt-2 text-[13px] text-text-2 leading-[1.55]">{team.charter}</p>
-              </Link>
-            </DocBlock>
-          )}
         </article>
       </DocShell>
-
-      <PrevNext
-        prev={prev ? { title: prev.name, href: `/people/${prev.slug}`, kicker: "PERSON" } : null}
-        next={next ? { title: next.name, href: `/people/${next.slug}`, kicker: "PERSON" } : null}
-      />
     </SectionShell>
   );
 }

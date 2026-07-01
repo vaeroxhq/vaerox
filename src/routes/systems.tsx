@@ -64,8 +64,8 @@ function SystemsPage() {
     <SectionShell>
       <PageHeader
         section="§ · Systems"
-        title="Production systems registry."
-        summary="Every system VÆRØX operates — owner, maturity stage, health, and last deploy. Rows link to system docs."
+        title="Systems maintained in the lab."
+        summary="Reference implementations built and operated inside the VÆRØX lab. Each row links to the system's docs, ADRs, and measurements. No external SLA — systems run to exercise the architecture they describe."
         meta={[
           { label: "Systems", value: SYSTEMS.length.toString().padStart(2, "0") },
           {

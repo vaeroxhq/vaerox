@@ -18,7 +18,7 @@ export const SYSTEMS: SystemEntry[] = [
   {
     slug: "marketpulse",
     name: "MarketPulse",
-    owner: "Quant Platform",
+    owner: "Market Data",
     stage: "Production",
     health: "Healthy",
     lastDeploy: "2026-06-28",
@@ -31,7 +31,7 @@ export const SYSTEMS: SystemEntry[] = [
   {
     slug: "axiom",
     name: "Axiom",
-    owner: "AI Systems",
+    owner: "Inference",
     stage: "Prototype",
     health: "Nominal",
     lastDeploy: "2026-06-22",
@@ -44,7 +44,7 @@ export const SYSTEMS: SystemEntry[] = [
   {
     slug: "vigil",
     name: "Vigil",
-    owner: "Infrastructure",
+    owner: "Security",
     stage: "Research",
     health: "Degraded",
     lastDeploy: "2026-06-14",
@@ -57,7 +57,7 @@ export const SYSTEMS: SystemEntry[] = [
   {
     slug: "helix",
     name: "Helix Inference",
-    owner: "AI Systems",
+    owner: "Inference",
     stage: "Production",
     health: "Healthy",
     lastDeploy: "2026-06-30",
@@ -83,7 +83,7 @@ export const SYSTEMS: SystemEntry[] = [
   {
     slug: "orbit",
     name: "Orbit Observability",
-    owner: "Infrastructure",
+    owner: "Observability",
     stage: "Production",
     health: "Nominal",
     lastDeploy: "2026-06-19",
@@ -109,7 +109,7 @@ export const SYSTEMS: SystemEntry[] = [
   {
     slug: "ledger-01",
     name: "Ledger·01",
-    owner: "Infrastructure",
+    owner: "Distributed",
     stage: "Archived",
     health: "Nominal",
     lastDeploy: "2025-11-02",

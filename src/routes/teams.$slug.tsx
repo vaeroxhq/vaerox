@@ -1,6 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { TEAMS, getTeam } from "@/lib/teams-data";
-import { PEOPLE } from "@/lib/people-data";
 import { SYSTEMS } from "@/lib/systems-data";
 import { PROJECTS } from "@/lib/projects-data";
 import { PageHeader, SectionShell } from "@/components/section/section-bits";
@@ -12,8 +11,8 @@ import { PrevNext } from "@/components/doc/prev-next";
 export const Route = createFileRoute("/teams/$slug")({
   head: ({ params }) => {
     const t = getTeam(params.slug);
-    const title = t ? `${t.name} — Teams — VÆRØX` : "Team — VÆRØX";
-    const description = t?.charter ?? "Team charter.";
+    const title = t ? `${t.name} — Surfaces — VÆRØX` : "Surface — VÆRØX";
+    const description = t?.charter ?? "Surface of the lab.";
     return {
       meta: [
         { title },
@@ -28,19 +27,17 @@ export const Route = createFileRoute("/teams/$slug")({
     if (!team) throw notFound();
     return { team };
   },
-  component: TeamDetail,
+  component: SurfaceDetail,
   notFoundComponent: () => (
     <SectionShell>
-      <PageHeader section="§ · Teams" title="Team not found." summary="No team matches that identifier." />
-      <Link to="/teams" className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1">← Back to teams</Link>
+      <PageHeader section="§ · Surfaces" title="Surface not found." summary="No surface matches that identifier." />
+      <Link to="/teams" className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1">← Back to surfaces</Link>
     </SectionShell>
   ),
 });
 
-function TeamDetail() {
+function SurfaceDetail() {
   const { team: t } = Route.useLoaderData() as { team: (typeof TEAMS)[number] };
-  const lead = PEOPLE.find((p) => p.slug === t.lead);
-  const members = t.memberSlugs.map((s: string) => PEOPLE.find((p) => p.slug === s)).filter((x): x is (typeof PEOPLE)[number] => Boolean(x));
   const systems = t.systemsOwned.map((s: string) => SYSTEMS.find((x) => x.slug === s)).filter((x): x is (typeof SYSTEMS)[number] => Boolean(x));
   const projects = t.currentProjects.map((s: string) => PROJECTS.find((x) => x.slug === s)).filter((x): x is (typeof PROJECTS)[number] => Boolean(x));
 
@@ -52,25 +49,25 @@ function TeamDetail() {
     <SectionShell>
       <Breadcrumbs items={[
         { label: "VÆRØX", to: "/" },
-        { label: "Teams", to: "/teams" },
+        { label: "Surfaces", to: "/teams" },
         { label: t.name },
       ]} />
 
       <PageHeader
-        section={`§ · Teams / ${t.slug}`}
+        section={`§ · Surfaces / ${t.slug}`}
         title={t.name}
         summary={t.charter}
         meta={[
-          { label: "Lead",        value: lead?.name ?? t.lead },
-          { label: "Members",     value: t.memberSlugs.length.toString().padStart(2, "0") },
+          { label: "Maintainer",  value: "Solo" },
           { label: "Systems",     value: t.systemsOwned.length.toString().padStart(2, "0") },
+          { label: "Projects",    value: t.currentProjects.length.toString().padStart(2, "0") },
           { label: "Established", value: t.established },
         ]}
       />
 
       <DocShell rail={<RelatedRail kind="team" id={t.slug} />}>
         <article className="max-w-[760px]">
-          <DocBlock heading="Responsibilities">
+          <DocBlock heading="Focus">
             <ul className="hairline bg-canvas">
               {t.responsibilities.map((r: string, i: number) => (
                 <li key={r} className={`px-4 py-3 flex items-baseline gap-4 ${i < t.responsibilities.length - 1 ? "hairline-b" : ""}`}>
@@ -81,27 +78,8 @@ function TeamDetail() {
             </ul>
           </DocBlock>
 
-          <DocBlock heading="Members">
-            <div className="hairline bg-canvas">
-              {members.map((m, i: number) => (
-                <Link
-                  key={m.slug}
-                  to="/people/$slug"
-                  params={{ slug: m.slug }}
-                  className={`grid grid-cols-[1fr_auto] items-baseline gap-6 px-4 py-3 group card-hover hover:card-hover-on ${i < members.length - 1 ? "hairline-b" : ""}`}
-                >
-                  <div className="min-w-0">
-                    <div className="font-display text-[14px] text-text-1 tracking-[-0.008em]">{m.name}</div>
-                    <div className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] mt-1">{m.role}</div>
-                  </div>
-                  <span className="font-mono text-[10px] text-text-3 tabular">{m.handle}</span>
-                </Link>
-              ))}
-            </div>
-          </DocBlock>
-
           {systems.length > 0 && (
-            <DocBlock heading="Systems owned">
+            <DocBlock heading="Systems exercised">
               <div className="hairline bg-canvas">
                 {systems.map((s, i: number) => (
                   <Link
@@ -122,7 +100,7 @@ function TeamDetail() {
           )}
 
           {projects.length > 0 && (
-            <DocBlock heading="Current projects">
+            <DocBlock heading="Current build">
               <div className="hairline bg-canvas">
                 {projects.map((p, i: number) => (
                   <Link
@@ -142,15 +120,27 @@ function TeamDetail() {
             </DocBlock>
           )}
 
-          <DocBlock heading="On-call">
+          <DocBlock heading="Maintenance cadence">
             <p className="font-mono text-[12.5px] text-text-2 tabular leading-[1.7]">{t.onCall}</p>
+          </DocBlock>
+
+          <DocBlock heading="Maintainer">
+            <Link to="/people/$slug" params={{ slug: "maintainer" }} className="hairline bg-canvas block group card-hover hover:card-hover-on p-4">
+              <div className="flex items-baseline justify-between">
+                <span className="font-display text-[15px] text-text-1 tracking-[-0.008em]">Maintainer</span>
+                <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">Solo · independent lab</span>
+              </div>
+              <p className="mt-2 text-[13px] text-text-2 leading-[1.55]">
+                This surface — like every other surface at VÆRØX — is maintained by one engineer.
+              </p>
+            </Link>
           </DocBlock>
         </article>
       </DocShell>
 
       <PrevNext
-        prev={prev ? { title: prev.name, href: `/teams/${prev.slug}`, kicker: "TEAM" } : null}
-        next={next ? { title: next.name, href: `/teams/${next.slug}`, kicker: "TEAM" } : null}
+        prev={prev ? { title: prev.name, href: `/teams/${prev.slug}`, kicker: "SURFACE" } : null}
+        next={next ? { title: next.name, href: `/teams/${next.slug}`, kicker: "SURFACE" } : null}
       />
     </SectionShell>
   );

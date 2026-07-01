@@ -5,26 +5,26 @@ import { PageHeader, SectionShell } from "@/components/section/section-bits";
 export const Route = createFileRoute("/teams")({
   head: () => ({
     meta: [
-      { title: "Teams — VÆRØX" },
-      { name: "description", content: "Engineering teams — charters, leads, systems owned." },
-      { property: "og:title", content: "Teams — VÆRØX" },
-      { property: "og:description", content: "Engineering teams — charters, leads, systems owned." },
+      { title: "Surfaces — VÆRØX" },
+      { name: "description", content: "Surfaces of the lab — the areas of practice VÆRØX explores, documents, and exercises through reference implementations." },
+      { property: "og:title", content: "Surfaces — VÆRØX" },
+      { property: "og:description", content: "Areas of practice, not teams of humans. Each surface is maintained by one engineer." },
     ],
   }),
-  component: TeamsPage,
+  component: SurfacesPage,
 });
 
-function TeamsPage() {
+function SurfacesPage() {
   return (
     <SectionShell>
       <PageHeader
-        section="§ · Teams"
-        title="How VÆRØX is organized."
-        summary="Each team owns a substrate of the platform. Charters are narrow, membership is small, and ownership is unambiguous."
+        section="§ · Surfaces"
+        title="Areas of the lab."
+        summary="VÆRØX is not organized into teams — a single maintainer runs everything. Surfaces are the areas of practice the lab explores and documents. Each links to the systems, projects, and ADRs that exercise it."
         meta={[
-          { label: "Teams",  value: TEAMS.length.toString().padStart(2, "0") },
-          { label: "People", value: TEAMS.reduce((n, t) => n + t.memberSlugs.length, 0).toString().padStart(2, "0") },
-          { label: "Systems", value: TEAMS.reduce((n, t) => n + t.systemsOwned.length, 0).toString().padStart(2, "0") },
+          { label: "Surfaces",    value: TEAMS.length.toString().padStart(2, "0") },
+          { label: "Maintainer",  value: "Solo" },
+          { label: "Systems",     value: TEAMS.reduce((n, t) => n + t.systemsOwned.length, 0).toString().padStart(2, "0") },
           { label: "Established", value: "2021" },
         ]}
       />
@@ -38,15 +38,15 @@ function TeamsPage() {
             className="group card-hover hover:card-hover-on bg-canvas p-6 flex flex-col gap-4"
           >
             <div className="flex items-baseline justify-between">
-              <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">TEAM · {t.slug}</span>
-              <span className="font-mono text-[10px] text-text-3 tabular">{t.memberSlugs.length.toString().padStart(2, "0")} · {t.systemsOwned.length.toString().padStart(2, "0")} sys</span>
+              <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">SURFACE · {t.slug}</span>
+              <span className="font-mono text-[10px] text-text-3 tabular">{t.systemsOwned.length.toString().padStart(2, "0")} sys · {t.currentProjects.length.toString().padStart(2, "0")} proj</span>
             </div>
             <h2 className="font-display text-[22px] tracking-[-0.012em] text-text-1 group-hover:text-text-1">
               {t.name}
             </h2>
             <p className="text-[13.5px] text-text-2 leading-[1.6]">{t.charter}</p>
             <div className="mt-auto pt-4 hairline-t flex items-baseline justify-between">
-              <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">Est. {t.established.slice(0, 7)}</span>
+              <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">Est. {t.established}</span>
               <span className="font-mono text-[10px] text-text-2 tabular group-hover:text-text-1 transition-micro">VIEW →</span>
             </div>
           </Link>
