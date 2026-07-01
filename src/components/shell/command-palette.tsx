@@ -65,11 +65,7 @@ export function CommandPaletteProvider({ children }: { children: ReactNode }) {
             {NAV.filter((n) => n.section === "Meta").map((n) => (
               <PaletteItem key={n.to} label={n.label} hint={n.hint} onSelect={() => go(n.to)} />
             ))}
-            <PaletteItem
-              label="Home"
-              hint="Return to the index"
-              onSelect={() => go("/")}
-            />
+            <PaletteItem label="Home" hint="Return to the index" onSelect={() => go("/")} />
           </CommandGroup>
 
           <CommandGroup heading="Actions">

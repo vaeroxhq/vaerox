@@ -5,7 +5,10 @@ export const Route = createFileRoute("/journal")({
   head: () => ({
     meta: [
       { title: "Journal — VÆRØX" },
-      { name: "description", content: "Long-form journal entries from the VÆRØX engineering team." },
+      {
+        name: "description",
+        content: "Long-form journal entries from the VÆRØX engineering team.",
+      },
       { property: "og:title", content: "Journal — VÆRØX" },
       {
         property: "og:description",

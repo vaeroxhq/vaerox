@@ -30,8 +30,6 @@ function Index() {
       <BlueprintOverlay />
 
       <div className="relative w-shell mx-auto px-6 md:px-10 lg:px-16">
-
-
         {/* ── Hero ── */}
         <section className="relative pt-28 md:pt-40 lg:pt-48 pb-24 md:pb-32">
           {/* Section identifier */}
@@ -91,7 +89,6 @@ function Index() {
             />
           </div>
         </section>
-
       </div>
     </div>
   );
@@ -228,9 +225,6 @@ function ModuleMeta({
     </div>
   );
 }
-
-
-
 
 /**
  * Blueprint overlay — the right side reads as an engineering drawing.

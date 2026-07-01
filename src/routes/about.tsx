@@ -5,7 +5,10 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About — VÆRØX" },
-      { name: "description", content: "The VÆRØX engineering organization, principles, and people." },
+      {
+        name: "description",
+        content: "The VÆRØX engineering organization, principles, and people.",
+      },
       { property: "og:title", content: "About — VÆRØX" },
       {
         property: "og:description",
