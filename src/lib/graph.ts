@@ -164,6 +164,25 @@ for (const a of APIS) {
   });
 }
 
+for (const p of PEOPLE) {
+  register({
+    kind: "person", id: p.slug, slug: p.slug,
+    title: p.name, href: `/people/${p.slug}`,
+    kicker: p.handle, summary: p.role,
+    owner: p.team, updated: p.joined, status: p.location,
+    tags: p.expertise,
+  });
+}
+
+for (const t of TEAMS) {
+  register({
+    kind: "team", id: t.slug, slug: t.slug,
+    title: t.name, href: `/teams/${t.slug}`,
+    kicker: "TEAM", summary: t.charter,
+    owner: t.lead, updated: t.established, status: `${t.memberSlugs.length} members`,
+  });
+}
+
 /* ── Compute edges from the underlying data ──────────────── */
 
 // ADR ↔ systems (by system slug)
