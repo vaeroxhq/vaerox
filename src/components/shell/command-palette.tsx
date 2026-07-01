@@ -60,7 +60,7 @@ export function CommandPaletteProvider({ children }: { children: ReactNode }) {
       {children}
 
       <CommandDialog open={isOpen} onOpenChange={setIsOpen}>
-        <CommandInput placeholder="Search VÆRØX — systems, ADRs, incidents, validation, APIs…" />
+        <CommandInput placeholder="Search VÆRØX — systems, ADRs, validation, APIs, journal…" />
         <CommandList className="max-h-[520px]">
           <CommandEmpty>
             <span className="font-mono text-[11px] text-text-3 uppercase tracking-[0.14em]">
