@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ADRS } from "@/lib/architecture-data";
+import { ADRS, type Adr } from "@/lib/architecture-data";
 import { PageHeader, SectionShell, StageDot } from "@/components/section/section-bits";
 import { OpsTag } from "@/components/ops/ops-tag";
 
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/architecture/$adr")({
 });
 
 function AdrPage() {
-  const { adr } = Route.useLoaderData();
+  const { adr } = Route.useLoaderData() as { adr: Adr };
   const tone =
     adr.status === "Accepted" ? "success"
     : adr.status === "Proposed" ? "info"

@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { JOURNAL } from "@/lib/journal-data";
+import { JOURNAL, type JournalEntry } from "@/lib/journal-data";
 import { PageHeader, SectionShell } from "@/components/section/section-bits";
 import { OpsTag } from "@/components/ops/ops-tag";
 
@@ -30,7 +30,7 @@ export const Route = createFileRoute("/journal/$slug")({
 });
 
 function EntryPage() {
-  const { entry } = Route.useLoaderData();
+  const { entry } = Route.useLoaderData() as { entry: JournalEntry };
   return (
     <SectionShell>
       <PageHeader
