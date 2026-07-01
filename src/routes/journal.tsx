@@ -5,25 +5,24 @@ import { PageHeader, Toolbar, SectionShell } from "@/components/section/section-
 
 const FILTERS: (JournalCategory | "All")[] = [
   "All",
-  "Incident Review",
-  "Post-Mortem",
-  "Architecture",
-  "Research",
-  "Benchmark",
-  "Performance",
-  "Observability",
-  "Infrastructure",
   "Engineering Notes",
-  "Release Notes",
+  "Architecture",
+  "Design Decision",
+  "Research",
+  "Evaluation",
+  "Development Log",
+  "Post-Mortem",
 ];
+
 
 export const Route = createFileRoute("/journal")({
   head: () => ({
     meta: [
       { title: "Journal — VÆRØX" },
-      { name: "description", content: "Chronological engineering feed — incident reviews, benchmarks, architecture notes, and research from VÆRØX." },
+      { name: "description", content: "Chronological engineering feed — architecture notes, design decisions, evaluations, and development logs from VÆRØX." },
       { property: "og:title", content: "Journal — VÆRØX" },
-      { property: "og:description", content: "Chronological engineering feed — incident reviews, benchmarks, architecture notes, and research from VÆRØX." },
+      { property: "og:description", content: "Chronological engineering feed — architecture notes, design decisions, evaluations, and development logs from VÆRØX." },
+
     ],
   }),
   component: JournalPage,
