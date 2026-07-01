@@ -18,6 +18,8 @@ import { JOURNAL } from "./journal-data";
 import { INCIDENTS } from "./incidents-data";
 import { BENCHMARKS } from "./benchmarks-data";
 import { APIS } from "./apis-data";
+import { PEOPLE, findPersonByName } from "./people-data";
+import { TEAMS } from "./teams-data";
 
 export type EntityKind =
   | "system"
@@ -28,7 +30,9 @@ export type EntityKind =
   | "journal"
   | "incident"
   | "benchmark"
-  | "api";
+  | "api"
+  | "person"
+  | "team";
 
 export type EntityRef = { kind: EntityKind; id: string };
 
