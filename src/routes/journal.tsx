@@ -56,7 +56,7 @@ function JournalPage() {
       <PageHeader
         section="§ · Journal"
         title="Engineering notebook."
-        summary="Chronological notes, incident reviews, and long-form essays from the VÆRØX maintainer. Written in the order they happened. Written to be re-read."
+        summary="Chronological notes, design decisions, and long-form essays from the VÆRØX maintainer. Written in the order they happened. Written to be re-read."
         meta={[
           { label: "Entries",   value: JOURNAL.length.toString().padStart(2, "0") },
           { label: "Published", value: published.toString().padStart(2, "0") },

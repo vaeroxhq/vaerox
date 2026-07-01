@@ -2,9 +2,9 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { PEOPLE } from "@/lib/people-data";
 import { SYSTEMS } from "@/lib/systems-data";
 import { ADRS } from "@/lib/architecture-data";
-import { INCIDENTS } from "@/lib/incidents-data";
 import { PROJECTS } from "@/lib/projects-data";
 import { RESEARCH } from "@/lib/research-data";
+
 import { PageHeader, SectionShell } from "@/components/section/section-bits";
 import { Breadcrumbs } from "@/components/doc/breadcrumbs";
 import { RelatedRail } from "@/components/doc/related-rail";
@@ -52,10 +52,8 @@ function MaintainerDetail() {
     const adr = ADRS.find((a) => a.number === n);
     if (adr) events.push({ date: adr.decisionDate, kicker: `ADR·${adr.number}`, title: adr.title, href: `/architecture/${adr.slug}` });
   }
-  for (const inc of p.incidentsCommanded) {
-    const i = INCIDENTS.find((x) => x.slug === inc);
-    if (i) events.push({ date: i.openedAt.slice(0, 10), kicker: i.id, title: i.title, href: `/incidents/${i.slug}` });
-  }
+  // Incident write-ups are intentionally absent — the lab is pre-production.
+
   for (const r of p.researchAuthored) {
     const rr = RESEARCH.find((x) => x.slug === r);
     if (rr) events.push({ date: rr.published, kicker: "RES", title: rr.title, href: `/research/${rr.slug}` });
@@ -96,13 +94,14 @@ function MaintainerDetail() {
 
           <DocBlock heading="How to read attribution">
             <p className="text-[13.5px] text-text-2 leading-[1.7]">
-              Anywhere on the site — in ADRs, incident reports, benchmarks, or APIs —
-              an <span className="font-mono text-[12.5px] text-text-1">owner</span> or{" "}
-              <span className="font-mono text-[12.5px] text-text-1">commander</span> field
-              refers to the same maintainer. Surface names (Platform, Inference,
-              Observability, etc.) refer to areas of practice, not teams of humans.
+              Anywhere on the site — in ADRs, validation records, APIs, or journal
+              entries — an <span className="font-mono text-[12.5px] text-text-1">owner</span> or{" "}
+              <span className="font-mono text-[12.5px] text-text-1">author</span> field
+              refers to the same maintainer. Surface names (Agent Systems, Market Data,
+              FinOps, etc.) refer to areas of practice, not teams of humans.
             </p>
           </DocBlock>
+
 
           {projects.length > 0 && (
             <DocBlock heading="Projects">

@@ -104,7 +104,7 @@ function SearchPage() {
       <PageHeader
         section="§ · Search"
         title="Universal search."
-        summary="Fuzzy search across every documented system, decision, incident, benchmark, person, and note. Grouped by kind, filterable, keyboard-first."
+        summary="Fuzzy search across every documented system, decision, validation record, API, dataset, person, and note. Grouped by kind, filterable, keyboard-first."
         meta={[
           { label: "Indexed",  value: entities.length.toString().padStart(3, "0") + " entities" },
           { label: "Kinds",    value: KIND_ORDER.length.toString().padStart(2, "0") },
@@ -124,7 +124,7 @@ function SearchPage() {
             type="search"
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Search systems, ADRs, incidents, benchmarks, APIs, people…"
+            placeholder="Search systems, ADRs, validation, APIs, datasets, people…"
             className="flex-1 bg-transparent border-0 outline-none font-mono text-[14px] text-text-1 placeholder:text-text-3 tabular"
           />
           <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] tabular">

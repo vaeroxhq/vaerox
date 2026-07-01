@@ -69,8 +69,9 @@ function ProjectDetail() {
         { label: "LOC", value: ev.loc.toLocaleString() },
         { label: "Primary language", value: ev.languages[0]?.name ?? "—" },
         { label: "ADRs referenced", value: String(ev.adrRefs.length) },
-        { label: "Benchmarks", value: String(ev.benchmarkRefs.length) },
-        { label: "Incidents linked", value: String(ev.incidentRefs.length) },
+        { label: "Validation records", value: String(ev.benchmarkRefs.length) },
+        { label: "Open challenges", value: String(ev.incidentRefs.length) },
+
         { label: "Design revisions", value: String(ev.evolution.length) },
       ]
     : [];
