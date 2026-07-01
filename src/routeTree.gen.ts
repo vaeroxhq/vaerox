@@ -20,6 +20,7 @@ import { Route as JournalRouteImport } from './routes/journal'
 import { Route as IncidentsRouteImport } from './routes/incidents'
 import { Route as GraphRouteImport } from './routes/graph'
 import { Route as EngineeringRouteImport } from './routes/engineering'
+import { Route as DashboardsRouteImport } from './routes/dashboards'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BenchmarksRouteImport } from './routes/benchmarks'
 import { Route as ArchitectureRouteImport } from './routes/architecture'
@@ -91,6 +92,11 @@ const GraphRoute = GraphRouteImport.update({
 const EngineeringRoute = EngineeringRouteImport.update({
   id: '/engineering',
   path: '/engineering',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardsRoute = DashboardsRouteImport.update({
+  id: '/dashboards',
+  path: '/dashboards',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -186,6 +192,7 @@ export interface FileRoutesByFullPath {
   '/architecture': typeof ArchitectureRouteWithChildren
   '/benchmarks': typeof BenchmarksRouteWithChildren
   '/contact': typeof ContactRoute
+  '/dashboards': typeof DashboardsRoute
   '/engineering': typeof EngineeringRoute
   '/graph': typeof GraphRoute
   '/incidents': typeof IncidentsRouteWithChildren
@@ -216,6 +223,7 @@ export interface FileRoutesByTo {
   '/architecture': typeof ArchitectureRouteWithChildren
   '/benchmarks': typeof BenchmarksRouteWithChildren
   '/contact': typeof ContactRoute
+  '/dashboards': typeof DashboardsRoute
   '/engineering': typeof EngineeringRoute
   '/graph': typeof GraphRoute
   '/incidents': typeof IncidentsRouteWithChildren
@@ -247,6 +255,7 @@ export interface FileRoutesById {
   '/architecture': typeof ArchitectureRouteWithChildren
   '/benchmarks': typeof BenchmarksRouteWithChildren
   '/contact': typeof ContactRoute
+  '/dashboards': typeof DashboardsRoute
   '/engineering': typeof EngineeringRoute
   '/graph': typeof GraphRoute
   '/incidents': typeof IncidentsRouteWithChildren
@@ -279,6 +288,7 @@ export interface FileRouteTypes {
     | '/architecture'
     | '/benchmarks'
     | '/contact'
+    | '/dashboards'
     | '/engineering'
     | '/graph'
     | '/incidents'
@@ -309,6 +319,7 @@ export interface FileRouteTypes {
     | '/architecture'
     | '/benchmarks'
     | '/contact'
+    | '/dashboards'
     | '/engineering'
     | '/graph'
     | '/incidents'
@@ -339,6 +350,7 @@ export interface FileRouteTypes {
     | '/architecture'
     | '/benchmarks'
     | '/contact'
+    | '/dashboards'
     | '/engineering'
     | '/graph'
     | '/incidents'
@@ -370,6 +382,7 @@ export interface RootRouteChildren {
   ArchitectureRoute: typeof ArchitectureRouteWithChildren
   BenchmarksRoute: typeof BenchmarksRouteWithChildren
   ContactRoute: typeof ContactRoute
+  DashboardsRoute: typeof DashboardsRoute
   EngineeringRoute: typeof EngineeringRoute
   GraphRoute: typeof GraphRoute
   IncidentsRoute: typeof IncidentsRouteWithChildren
@@ -462,6 +475,13 @@ declare module '@tanstack/react-router' {
       path: '/engineering'
       fullPath: '/engineering'
       preLoaderRoute: typeof EngineeringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboards': {
+      id: '/dashboards'
+      path: '/dashboards'
+      fullPath: '/dashboards'
+      preLoaderRoute: typeof DashboardsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -697,6 +717,7 @@ const rootRouteChildren: RootRouteChildren = {
   ArchitectureRoute: ArchitectureRouteWithChildren,
   BenchmarksRoute: BenchmarksRouteWithChildren,
   ContactRoute: ContactRoute,
+  DashboardsRoute: DashboardsRoute,
   EngineeringRoute: EngineeringRoute,
   GraphRoute: GraphRoute,
   IncidentsRoute: IncidentsRouteWithChildren,
