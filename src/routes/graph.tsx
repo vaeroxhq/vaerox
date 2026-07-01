@@ -329,10 +329,13 @@ function GraphPage() {
                       ) : n.kind === "person" ? (
                         <circle r={r} fill="var(--bg-canvas)" stroke={KIND_COLOR[n.kind]} />
                       ) : n.kind === "system" || n.kind === "project" ? (
-                        <rect x={-r} y={-r} width={r*2} height={r*2} fill="var(--bg-canvas)" stroke={KIND_COLOR[n.kind]} />
+                        <rect x={-r} y={-r} width={r*2} height={r*2} fill="var(--bg-canvas)" stroke={KIND_COLOR[n.kind]} strokeWidth={1.25} />
+                      ) : n.kind === "future" ? (
+                        <rect x={-r} y={-r} width={r*2} height={r*2} fill="var(--bg-canvas)" stroke={KIND_COLOR[n.kind]} strokeWidth={0.9} strokeDasharray="2 2" />
                       ) : (
                         <circle r={r * 0.9} fill={KIND_COLOR[n.kind]} opacity={0.85} />
                       )}
+
                       {(hover === key || focus === key || (neighbors?.has(key) && neighbors.size < 14)) && (
                         <text
                           x={r + 4} y={3}
