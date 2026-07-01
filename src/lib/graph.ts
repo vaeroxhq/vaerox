@@ -293,4 +293,6 @@ export const KIND_LABEL: Record<EntityKind, string> = {
   incident: "Incident",
   benchmark: "Benchmark",
   api: "API",
+  person: "Person",
+  team: "Team",
 };
