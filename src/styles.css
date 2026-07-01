@@ -291,6 +291,27 @@
     0 calc(100% - 12px)
   );
 }
+/* Notched frame — 45° cut on TR + BL corners; echoes the diamond mark */
+@utility notch-frame {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 10px) 0,
+    100% 10px,
+    100% 100%,
+    10px 100%,
+    0 calc(100% - 10px)
+  );
+}
+/* Corner ticks — 45° L-brackets at the four corners of a container */
+@utility corner-ticks {
+  position: relative;
+}
+@utility corner-ticks-inner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: var(--line-2);
+}
 
 /* Motion — restrained */
 @utility transition-ui {
