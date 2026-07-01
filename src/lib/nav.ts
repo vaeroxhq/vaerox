@@ -10,7 +10,8 @@ export type NavItem = {
 };
 
 export const NAV: NavItem[] = [
-  { label: "Systems",      to: "/systems",      hint: "Systems maintained in the lab",  section: "Primary" },
+  { label: "Systems",         to: "/systems",         hint: "Systems maintained in the lab",  section: "Primary" },
+  { label: "Future Systems",  to: "/systems/future",  hint: "Long-term engineering roadmap",  section: "Primary" },
   { label: "Projects",     to: "/projects",     hint: "Build write-ups & case studies", section: "Primary" },
   { label: "Architecture", to: "/architecture", hint: "Decision records & diagrams",    section: "Primary" },
   { label: "Incidents",    to: "/incidents",    hint: "Post-mortems & action items",    section: "Primary" },
