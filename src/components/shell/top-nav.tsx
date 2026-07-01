@@ -22,7 +22,7 @@ export function TopNav() {
           className="shrink-0 transition-micro hover:opacity-80"
           aria-label="VÆRØX — Home"
         >
-          <VaeroxLockup markSize={20} />
+          <VaeroxLockup markSize={25} />
         </Link>
 
         {/* Center — primary nav (hidden on small screens) */}
