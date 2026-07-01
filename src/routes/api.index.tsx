@@ -4,6 +4,7 @@ import { PageHeader, SectionShell } from "@/components/section/section-bits";
 import { Breadcrumbs } from "@/components/doc/breadcrumbs";
 
 export const Route = createFileRoute("/api/")({
+  // eslint-disable-next-line -- index route for /api collection
   head: () => ({
     meta: [
       { title: "API — VÆRØX" },

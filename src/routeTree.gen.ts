@@ -13,16 +13,22 @@ import { Route as SystemsRouteImport } from './routes/systems'
 import { Route as ResearchRouteImport } from './routes/research'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as JournalRouteImport } from './routes/journal'
+import { Route as IncidentsRouteImport } from './routes/incidents'
 import { Route as EngineeringRouteImport } from './routes/engineering'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as BenchmarksRouteImport } from './routes/benchmarks'
 import { Route as ArchitectureRouteImport } from './routes/architecture'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiIndexRouteImport } from './routes/api.index'
 import { Route as SystemsSlugRouteImport } from './routes/systems.$slug'
 import { Route as ResearchSlugRouteImport } from './routes/research.$slug'
 import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
 import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
+import { Route as IncidentsIdRouteImport } from './routes/incidents.$id'
+import { Route as BenchmarksSlugRouteImport } from './routes/benchmarks.$slug'
 import { Route as ArchitectureAdrRouteImport } from './routes/architecture.$adr'
+import { Route as ApiSlugRouteImport } from './routes/api.$slug'
 
 const SystemsRoute = SystemsRouteImport.update({
   id: '/systems',
@@ -44,6 +50,11 @@ const JournalRoute = JournalRouteImport.update({
   path: '/journal',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IncidentsRoute = IncidentsRouteImport.update({
+  id: '/incidents',
+  path: '/incidents',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EngineeringRoute = EngineeringRouteImport.update({
   id: '/engineering',
   path: '/engineering',
@@ -52,6 +63,11 @@ const EngineeringRoute = EngineeringRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BenchmarksRoute = BenchmarksRouteImport.update({
+  id: '/benchmarks',
+  path: '/benchmarks',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ArchitectureRoute = ArchitectureRouteImport.update({
@@ -67,6 +83,11 @@ const AboutRoute = AboutRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiIndexRoute = ApiIndexRouteImport.update({
+  id: '/api/',
+  path: '/api/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SystemsSlugRoute = SystemsSlugRouteImport.update({
@@ -89,60 +110,93 @@ const JournalSlugRoute = JournalSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => JournalRoute,
 } as any)
+const IncidentsIdRoute = IncidentsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => IncidentsRoute,
+} as any)
+const BenchmarksSlugRoute = BenchmarksSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BenchmarksRoute,
+} as any)
 const ArchitectureAdrRoute = ArchitectureAdrRouteImport.update({
   id: '/$adr',
   path: '/$adr',
   getParentRoute: () => ArchitectureRoute,
+} as any)
+const ApiSlugRoute = ApiSlugRouteImport.update({
+  id: '/api/$slug',
+  path: '/api/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/architecture': typeof ArchitectureRouteWithChildren
+  '/benchmarks': typeof BenchmarksRouteWithChildren
   '/contact': typeof ContactRoute
   '/engineering': typeof EngineeringRoute
+  '/incidents': typeof IncidentsRouteWithChildren
   '/journal': typeof JournalRouteWithChildren
   '/projects': typeof ProjectsRouteWithChildren
   '/research': typeof ResearchRouteWithChildren
   '/systems': typeof SystemsRouteWithChildren
+  '/api/$slug': typeof ApiSlugRoute
   '/architecture/$adr': typeof ArchitectureAdrRoute
+  '/benchmarks/$slug': typeof BenchmarksSlugRoute
+  '/incidents/$id': typeof IncidentsIdRoute
   '/journal/$slug': typeof JournalSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/research/$slug': typeof ResearchSlugRoute
   '/systems/$slug': typeof SystemsSlugRoute
+  '/api/': typeof ApiIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/architecture': typeof ArchitectureRouteWithChildren
+  '/benchmarks': typeof BenchmarksRouteWithChildren
   '/contact': typeof ContactRoute
   '/engineering': typeof EngineeringRoute
+  '/incidents': typeof IncidentsRouteWithChildren
   '/journal': typeof JournalRouteWithChildren
   '/projects': typeof ProjectsRouteWithChildren
   '/research': typeof ResearchRouteWithChildren
   '/systems': typeof SystemsRouteWithChildren
+  '/api/$slug': typeof ApiSlugRoute
   '/architecture/$adr': typeof ArchitectureAdrRoute
+  '/benchmarks/$slug': typeof BenchmarksSlugRoute
+  '/incidents/$id': typeof IncidentsIdRoute
   '/journal/$slug': typeof JournalSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/research/$slug': typeof ResearchSlugRoute
   '/systems/$slug': typeof SystemsSlugRoute
+  '/api': typeof ApiIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/architecture': typeof ArchitectureRouteWithChildren
+  '/benchmarks': typeof BenchmarksRouteWithChildren
   '/contact': typeof ContactRoute
   '/engineering': typeof EngineeringRoute
+  '/incidents': typeof IncidentsRouteWithChildren
   '/journal': typeof JournalRouteWithChildren
   '/projects': typeof ProjectsRouteWithChildren
   '/research': typeof ResearchRouteWithChildren
   '/systems': typeof SystemsRouteWithChildren
+  '/api/$slug': typeof ApiSlugRoute
   '/architecture/$adr': typeof ArchitectureAdrRoute
+  '/benchmarks/$slug': typeof BenchmarksSlugRoute
+  '/incidents/$id': typeof IncidentsIdRoute
   '/journal/$slug': typeof JournalSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/research/$slug': typeof ResearchSlugRoute
   '/systems/$slug': typeof SystemsSlugRoute
+  '/api/': typeof ApiIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -150,61 +204,83 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/architecture'
+    | '/benchmarks'
     | '/contact'
     | '/engineering'
+    | '/incidents'
     | '/journal'
     | '/projects'
     | '/research'
     | '/systems'
+    | '/api/$slug'
     | '/architecture/$adr'
+    | '/benchmarks/$slug'
+    | '/incidents/$id'
     | '/journal/$slug'
     | '/projects/$slug'
     | '/research/$slug'
     | '/systems/$slug'
+    | '/api/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/architecture'
+    | '/benchmarks'
     | '/contact'
     | '/engineering'
+    | '/incidents'
     | '/journal'
     | '/projects'
     | '/research'
     | '/systems'
+    | '/api/$slug'
     | '/architecture/$adr'
+    | '/benchmarks/$slug'
+    | '/incidents/$id'
     | '/journal/$slug'
     | '/projects/$slug'
     | '/research/$slug'
     | '/systems/$slug'
+    | '/api'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/architecture'
+    | '/benchmarks'
     | '/contact'
     | '/engineering'
+    | '/incidents'
     | '/journal'
     | '/projects'
     | '/research'
     | '/systems'
+    | '/api/$slug'
     | '/architecture/$adr'
+    | '/benchmarks/$slug'
+    | '/incidents/$id'
     | '/journal/$slug'
     | '/projects/$slug'
     | '/research/$slug'
     | '/systems/$slug'
+    | '/api/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ArchitectureRoute: typeof ArchitectureRouteWithChildren
+  BenchmarksRoute: typeof BenchmarksRouteWithChildren
   ContactRoute: typeof ContactRoute
   EngineeringRoute: typeof EngineeringRoute
+  IncidentsRoute: typeof IncidentsRouteWithChildren
   JournalRoute: typeof JournalRouteWithChildren
   ProjectsRoute: typeof ProjectsRouteWithChildren
   ResearchRoute: typeof ResearchRouteWithChildren
   SystemsRoute: typeof SystemsRouteWithChildren
+  ApiSlugRoute: typeof ApiSlugRoute
+  ApiIndexRoute: typeof ApiIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -237,6 +313,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JournalRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/incidents': {
+      id: '/incidents'
+      path: '/incidents'
+      fullPath: '/incidents'
+      preLoaderRoute: typeof IncidentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/engineering': {
       id: '/engineering'
       path: '/engineering'
@@ -249,6 +332,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/benchmarks': {
+      id: '/benchmarks'
+      path: '/benchmarks'
+      fullPath: '/benchmarks'
+      preLoaderRoute: typeof BenchmarksRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/architecture': {
@@ -270,6 +360,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/': {
+      id: '/api/'
+      path: '/api'
+      fullPath: '/api/'
+      preLoaderRoute: typeof ApiIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/systems/$slug': {
@@ -300,12 +397,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JournalSlugRouteImport
       parentRoute: typeof JournalRoute
     }
+    '/incidents/$id': {
+      id: '/incidents/$id'
+      path: '/$id'
+      fullPath: '/incidents/$id'
+      preLoaderRoute: typeof IncidentsIdRouteImport
+      parentRoute: typeof IncidentsRoute
+    }
+    '/benchmarks/$slug': {
+      id: '/benchmarks/$slug'
+      path: '/$slug'
+      fullPath: '/benchmarks/$slug'
+      preLoaderRoute: typeof BenchmarksSlugRouteImport
+      parentRoute: typeof BenchmarksRoute
+    }
     '/architecture/$adr': {
       id: '/architecture/$adr'
       path: '/$adr'
       fullPath: '/architecture/$adr'
       preLoaderRoute: typeof ArchitectureAdrRouteImport
       parentRoute: typeof ArchitectureRoute
+    }
+    '/api/$slug': {
+      id: '/api/$slug'
+      path: '/api/$slug'
+      fullPath: '/api/$slug'
+      preLoaderRoute: typeof ApiSlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
   }
 }
@@ -320,6 +438,30 @@ const ArchitectureRouteChildren: ArchitectureRouteChildren = {
 
 const ArchitectureRouteWithChildren = ArchitectureRoute._addFileChildren(
   ArchitectureRouteChildren,
+)
+
+interface BenchmarksRouteChildren {
+  BenchmarksSlugRoute: typeof BenchmarksSlugRoute
+}
+
+const BenchmarksRouteChildren: BenchmarksRouteChildren = {
+  BenchmarksSlugRoute: BenchmarksSlugRoute,
+}
+
+const BenchmarksRouteWithChildren = BenchmarksRoute._addFileChildren(
+  BenchmarksRouteChildren,
+)
+
+interface IncidentsRouteChildren {
+  IncidentsIdRoute: typeof IncidentsIdRoute
+}
+
+const IncidentsRouteChildren: IncidentsRouteChildren = {
+  IncidentsIdRoute: IncidentsIdRoute,
+}
+
+const IncidentsRouteWithChildren = IncidentsRoute._addFileChildren(
+  IncidentsRouteChildren,
 )
 
 interface JournalRouteChildren {
@@ -372,12 +514,16 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ArchitectureRoute: ArchitectureRouteWithChildren,
+  BenchmarksRoute: BenchmarksRouteWithChildren,
   ContactRoute: ContactRoute,
   EngineeringRoute: EngineeringRoute,
+  IncidentsRoute: IncidentsRouteWithChildren,
   JournalRoute: JournalRouteWithChildren,
   ProjectsRoute: ProjectsRouteWithChildren,
   ResearchRoute: ResearchRouteWithChildren,
   SystemsRoute: SystemsRouteWithChildren,
+  ApiSlugRoute: ApiSlugRoute,
+  ApiIndexRoute: ApiIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
