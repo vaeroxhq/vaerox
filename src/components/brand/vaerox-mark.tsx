@@ -1,57 +1,39 @@
 /**
- * VÆRØX primary mark — SVG reconstruction.
- * Geometry: 45°-rotated square frame + 4-fold rotational pinwheel of
- * interlocking hooks rendered as parallel double-strokes.
- * All angles 45°/90°. Uniform stroke. Monochrome (currentColor).
+ * VÆRØX primary mark — official raster master.
+ *
+ * The uploaded PNG at src/assets/vaerox-mark.png is the immutable production
+ * asset. Do NOT reconstruct, redraw, approximate, or "improve" this mark in
+ * SVG. Every lockup, favicon, watermark, and nav instance must render the
+ * exact uploaded file. When a vector master is provided, swap the asset
+ * pointer only — do not regenerate geometry.
  */
+import markAsset from "@/assets/vaerox-mark.png.asset.json";
+
 export function VaeroxMark({
   size = 32,
-  className,
-  strokeWidth,
+  className = "",
   title = "VÆRØX",
 }: {
   size?: number;
   className?: string;
-  strokeWidth?: number;
+  strokeWidth?: number; // accepted for API compatibility; ignored (raster master)
   title?: string;
 }) {
-  const sw = strokeWidth ?? Math.max(2, Math.round(size / 16));
   return (
-    <svg
+    <img
+      src={markAsset.url}
       width={size}
       height={size}
-      viewBox="0 0 100 100"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={sw}
-      strokeLinecap="square"
-      strokeLinejoin="miter"
-      className={className}
-      role="img"
-      aria-label={title}
-    >
-      <title>{title}</title>
-      {/* Outer diamond — rotated square frame */}
-      <path d="M50 4 L96 50 L50 96 L4 50 Z" />
-
-      {/* 4-fold rotational pinwheel of interlocking hooks (double stroke) */}
-      <g>
-        {[0, 90, 180, 270].map((deg) => (
-          <g key={deg} transform={`rotate(${deg} 50 50)`}>
-            {/* Outer hook stroke */}
-            <path d="M30 22 L30 42 L50 42" />
-            {/* Inner parallel hook stroke, offset inward */}
-            <path d="M38 30 L38 50 L58 50" />
-          </g>
-        ))}
-      </g>
-    </svg>
+      alt={title}
+      draggable={false}
+      className={`block select-none ${className}`}
+      style={{ width: size, height: size }}
+    />
   );
 }
 
 /**
  * Wordmark lockup — Symbol + hairline divider + VÆRØX wordmark.
- * Proportions tuned for premium engineering identity at nav scale.
  */
 export function VaeroxLockup({
   markSize = 22,
