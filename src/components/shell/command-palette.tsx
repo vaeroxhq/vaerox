@@ -62,6 +62,36 @@ export function CommandPaletteProvider({ children }: { children: ReactNode }) {
             ))}
           </CommandGroup>
 
+          <CommandGroup heading="Projects">
+            {PROJECTS.map((p) => (
+              <PaletteItem
+                key={p.slug}
+                label={p.name}
+                hint={`${p.status} · ${p.stack.join(" · ")}`}
+                onSelect={() => go("/projects")}
+              />
+            ))}
+          </CommandGroup>
+
+          <CommandGroup heading="Research">
+            <PaletteItem label="Browse research" hint="Papers, benchmarks, notes" onSelect={() => go("/research")} />
+          </CommandGroup>
+
+          <CommandGroup heading="Architecture">
+            <PaletteItem label="Browse architecture" hint="Diagrams & decision records" onSelect={() => go("/architecture")} />
+          </CommandGroup>
+
+          <CommandGroup heading="Journal">
+            {NOTES.map((n) => (
+              <PaletteItem
+                key={n.slug}
+                label={n.title}
+                hint={`${n.date} · ${n.category} · ${n.readingMinutes}m`}
+                onSelect={() => go("/journal")}
+              />
+            ))}
+          </CommandGroup>
+
           <CommandGroup heading="Meta">
             {NAV.filter((n) => n.section === "Meta").map((n) => (
               <PaletteItem key={n.to} label={n.label} hint={n.hint} onSelect={() => go(n.to)} />
