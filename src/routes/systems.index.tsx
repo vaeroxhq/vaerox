@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { SYSTEMS, type SystemEntry, type SystemStage } from "@/lib/systems-data";
+import { FUTURE_SYSTEMS } from "@/lib/future-systems-data";
 import { PageHeader, Toolbar, SectionShell, StageDot } from "@/components/section/section-bits";
 
 const FILTERS: (SystemStage | "All")[] = ["All", "Production", "Prototype", "Research", "Archived"];
