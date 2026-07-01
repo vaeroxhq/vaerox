@@ -64,11 +64,10 @@ function Index() {
           </h1>
 
           <p className="mt-8 max-w-[560px] text-text-2 text-[15px] leading-[1.65]">
-            VÆRØX is an engineering organization building production systems
-            across enterprise AI, distributed infrastructure, developer
-            platforms, and quantitative research. The work — architecture
-            decisions, incident reviews, benchmarks — is published here as it
-            is written.
+            VÆRØX is an engineering organization building production systems across enterprise AI,
+            distributed infrastructure, developer platforms, and quantitative research. The work —
+            architecture decisions, incident reviews, benchmarks — is published here as it is
+            written.
           </p>
 
           {/* Double-hairline rail — echoes the parallel strokes of the mark */}
@@ -99,11 +98,7 @@ function Index() {
               title="Enterprise AI"
               note="Model serving, evals, agent runtimes."
             />
-            <DomainCell
-              index="02"
-              title="Platform"
-              note="Multi-tenant control planes, IaC."
-            />
+            <DomainCell index="02" title="Platform" note="Multi-tenant control planes, IaC." />
             <DomainCell
               index="03"
               title="Infrastructure"
@@ -194,25 +189,13 @@ function SectionRule({ label }: { label: string }) {
 function MetaCell({ label, value }: { label: string; value: string }) {
   return (
     <div className="bg-canvas px-4 py-3">
-      <dt className="font-mono text-[11px] text-text-3 uppercase tracking-[0.08em]">
-        {label}
-      </dt>
-      <dd className="font-mono text-[15px] text-text-1 mt-1.5 tabular">
-        {value}
-      </dd>
+      <dt className="font-mono text-[11px] text-text-3 uppercase tracking-[0.08em]">{label}</dt>
+      <dd className="font-mono text-[15px] text-text-1 mt-1.5 tabular">{value}</dd>
     </div>
   );
 }
 
-function DomainCell({
-  index,
-  title,
-  note,
-}: {
-  index: string;
-  title: string;
-  note: string;
-}) {
+function DomainCell({ index, title, note }: { index: string; title: string; note: string }) {
   return (
     <div className="group bg-canvas px-5 py-6 transition-ui hover:bg-surface relative">
       {/* Notch — 45° tick on top-right, echoing the mark */}
@@ -228,9 +211,7 @@ function DomainCell({
           Domain
         </span>
       </div>
-      <h3 className="font-display text-[20px] mt-6 tracking-[-0.02em]">
-        {title}
-      </h3>
+      <h3 className="font-display text-[20px] mt-6 tracking-[-0.02em]">{title}</h3>
       <p className="mt-2 text-[13px] text-text-2 leading-[1.55]">{note}</p>
     </div>
   );
@@ -239,9 +220,7 @@ function DomainCell({
 function FootCell({ label, value }: { label: string; value: string }) {
   return (
     <div className="bg-canvas px-4 py-3 flex items-baseline justify-between gap-4">
-      <span className="font-mono text-[11px] text-text-3 uppercase tracking-[0.08em]">
-        {label}
-      </span>
+      <span className="font-mono text-[11px] text-text-3 uppercase tracking-[0.08em]">{label}</span>
       <span className="font-mono text-[11px] text-text-2 tabular">{value}</span>
     </div>
   );
