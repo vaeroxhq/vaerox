@@ -35,20 +35,20 @@ import { RESEARCH } from "@/lib/research-data";
 
 const MAINTAINER: Person = {
   slug: "maintainer",
-  name: "Maintainer",
-  fullName: "Maintainer",
+  name: "Mayank Sharma",
+  fullName: "Mayank Sharma",
   handle: "@vaerox",
   role: "Founder · Principal Engineer",
   team: "lab",
-  joined: "2021-06-01",
+  joined: "2024-06-01",
   location: "Independent",
-  bio: "VÆRØX is written, built, and operated by one engineer. Everything on this site — the systems, the architecture decisions, the incident write-ups, the benchmarks, the research notes — is authored, maintained, and signed by the same person. There is no team behind the byline.",
+  bio: "VÆRØX is written, built, and operated by one engineer. Everything on this site — the canonical systems, the architecture decisions, the validation records, the research notes — is authored, maintained, and signed by the same person. There is no team behind the byline.",
   expertise: [
-    "distributed systems",
-    "platform engineering",
-    "LLM serving",
-    "observability",
-    "consensus & replication",
+    "LLM agent systems",
+    "quantitative research tooling",
+    "workflow orchestration",
+    "evaluation methodology",
+    "cost forecasting",
     "systems performance",
     "technical writing",
   ],
@@ -58,6 +58,7 @@ const MAINTAINER: Person = {
   projectsContributed: PROJECTS.map((p) => p.slug),
   researchAuthored: RESEARCH.map((r) => r.slug),
 };
+
 
 export const PEOPLE: Person[] = [MAINTAINER];
 
