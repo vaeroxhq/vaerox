@@ -1,6 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { DATASETS, DATASET_CATEGORIES, type Dataset, type DatasetCategory } from "@/lib/datasets-data";
+import {
+  DATASETS,
+  DATASET_CATEGORIES,
+  PLANNED_CATEGORIES,
+  type Dataset,
+  type DatasetCategory,
+} from "@/lib/datasets-data";
 import { PageHeader, Toolbar, SectionShell } from "@/components/section/section-bits";
 import { Breadcrumbs } from "@/components/doc/breadcrumbs";
 
@@ -9,24 +15,24 @@ const FILTERS: (DatasetCategory | "All")[] = ["All", ...DATASET_CATEGORIES];
 export const Route = createFileRoute("/research/assets/")({
   head: () => ({
     meta: [
-      { title: "Datasets — Research — VÆRØX" },
+      { title: "Research Assets — VÆRØX" },
       {
         name: "description",
         content:
-          "Canonical registry of datasets the lab has evaluated, prepared, or built pipelines around — medical, agricultural, industrial, remote sensing, and computer vision.",
+          "Canonical registry of research assets — datasets, evaluation corpora, annotation pipelines, and benchmark resources across medical, agricultural, industrial, remote sensing, and computer vision domains.",
       },
-      { property: "og:title", content: "Datasets — Research — VÆRØX" },
+      { property: "og:title", content: "Research Assets — VÆRØX" },
       {
         property: "og:description",
         content:
-          "Datasets and research assets across medical imaging, agriculture, industrial vision, remote sensing, and computer vision.",
+          "Datasets, evaluation corpora, annotation pipelines, and benchmark resources maintained by the VÆRØX Engineering Lab.",
       },
     ],
   }),
-  component: DatasetsIndex,
+  component: AssetsIndex,
 });
 
-function DatasetsIndex() {
+function AssetsIndex() {
   const [q, setQ] = useState("");
   const [filter, setFilter] = useState<(typeof FILTERS)[number]>("All");
 
@@ -36,6 +42,7 @@ function DatasetsIndex() {
       if (!needle) return true;
       return (
         d.name.toLowerCase().includes(needle) ||
+        d.overview.toLowerCase().includes(needle) ||
         d.purpose.toLowerCase().includes(needle) ||
         d.domain.toLowerCase().includes(needle) ||
         d.tags.join(" ").toLowerCase().includes(needle) ||
@@ -51,24 +58,19 @@ function DatasetsIndex() {
         items={[
           { label: "VÆRØX", to: "/" },
           { label: "Research", to: "/research" },
-          { label: "Datasets" },
+          { label: "Assets" },
         ]}
       />
 
       <PageHeader
-        section="§ · Research / Datasets"
-        title="Datasets & research assets."
-        summary="Datasets the lab has evaluated, prepared labels for, built challenge pipelines around, or baselined. Each entry records domain, task, source, purpose, annotation types, skills demonstrated, and cross-references to related research."
+        section="§ · Research / Assets"
+        title="Research assets."
+        summary="Datasets, evaluation corpora, annotation pipelines, and benchmark resources the lab has evaluated, prepared, or built pipelines around. Each entry records domain, task, source, purpose, annotation types, skills demonstrated, and cross-references to related research."
         meta={[
           { label: "Assets",     value: DATASETS.length.toString().padStart(2, "0") },
           { label: "Domains",    value: new Set(DATASETS.map((d) => d.domain)).size.toString().padStart(2, "0") },
           { label: "Categories", value: DATASET_CATEGORIES.length.toString().padStart(2, "0") },
-          {
-            label: "Baselined",
-            value: DATASETS.filter((d) => d.status === "Baselined" || d.status === "Instrumented")
-              .length.toString()
-              .padStart(2, "0"),
-          },
+          { label: "Planned",    value: PLANNED_CATEGORIES.length.toString().padStart(2, "0") },
         ]}
       />
 
@@ -85,24 +87,58 @@ function DatasetsIndex() {
       <ul className="mt-6 hairline bg-canvas divide-y" style={{ borderColor: "var(--line-1)" }}>
         {items.map((d) => (
           <li key={d.slug}>
-            <DatasetRow entry={d} />
+            <AssetRow entry={d} />
           </li>
         ))}
         {items.length === 0 && (
           <li className="bg-canvas px-4 py-10 text-center font-mono text-[11px] text-text-3 uppercase tracking-[0.14em]">
-            No datasets match the current filter.
+            No assets match the current filter.
           </li>
         )}
       </ul>
+
+      <section className="mt-16">
+        <div className="font-mono text-[10px] text-text-3 uppercase tracking-[0.18em] mb-3">
+          § · Planned research areas
+        </div>
+        <div className="hairline bg-canvas p-5">
+          <p className="text-[13.5px] text-text-2 leading-[1.7] max-w-[68ch]">
+            Categories reserved for future expansion. Nothing lives under
+            them yet — content is added only when real assets exist.
+          </p>
+          <ul className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-0">
+            {PLANNED_CATEGORIES.map((p, i) => (
+              <li
+                key={p.name}
+                className={`grid grid-cols-[64px_1fr] items-baseline gap-4 py-3 ${
+                  i < PLANNED_CATEGORIES.length - 1 ? "hairline-b" : ""
+                }`}
+              >
+                <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
+                  Planned
+                </span>
+                <span>
+                  <span className="font-display text-[14px] text-text-1 tracking-[-0.01em] block">
+                    {p.name}
+                  </span>
+                  <span className="mt-1 block text-[13px] text-text-2 leading-[1.55]">
+                    {p.rationale}
+                  </span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
     </SectionShell>
   );
 }
 
-function DatasetRow({ entry: d }: { entry: Dataset }) {
+function AssetRow({ entry: d }: { entry: Dataset }) {
   return (
     <Link
-      to="/research/datasets/$dataset"
-      params={{ dataset: d.slug }}
+      to="/research/assets/$asset"
+      params={{ asset: d.slug }}
       className="group block bg-canvas p-6 transition-micro hover:bg-surface"
     >
       <div className="grid grid-cols-1 md:grid-cols-[1fr_220px] gap-6">
@@ -115,11 +151,15 @@ function DatasetRow({ entry: d }: { entry: Dataset }) {
             <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
               {d.status}
             </span>
+            <span className="font-mono text-[10px] text-text-3 opacity-60">·</span>
+            <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
+              {d.difficulty}
+            </span>
           </div>
           <h2 className="font-display text-[22px] mt-3 tracking-[-0.02em] transition-ui group-hover:-translate-y-[1px]">
             {d.name}
           </h2>
-          <p className="mt-3 text-[14px] text-text-2 leading-[1.65] max-w-[68ch]">{d.purpose}</p>
+          <p className="mt-3 text-[14px] text-text-2 leading-[1.65] max-w-[68ch]">{d.overview}</p>
 
           <ul className="mt-4 flex items-center gap-2 flex-wrap">
             {d.tags.map((t) => (
