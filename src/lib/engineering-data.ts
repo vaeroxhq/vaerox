@@ -114,29 +114,26 @@ export const HANDBOOK: HandbookSection[] = [
     ],
   },
   {
-    slug: "incident-response",
+    slug: "engineering-challenges",
     index: "05",
-    title: "Incident response",
-    owner: "SRE",
+    title: "Engineering challenges",
+    owner: "Maintainer",
     updated: "2026-06-12",
-    revision: "r.26",
+    revision: "r.03",
     status: "Canonical",
     summary:
-      "One incident commander, one channel, one status page. Blameless post-mortems within 5 working days.",
+      "The lab is pre-production. There are no live incidents to run — but every open engineering challenge is tracked, scoped, and owned.",
     body: [
+      { kind: "p", text: "This handbook does not claim an incident-response rotation. Instead, unresolved problems on canonical systems are treated as first-class engineering challenges: named, dated, and linked to the design record they affect." },
       { kind: "list", items: [
-        "First responder pages IC and declares severity. Sev-1 pages leadership.",
-        "IC owns the channel, the timeline, and the customer comms cadence.",
-        "Rotate IC every 4 hours for long-running incidents.",
-        "No fix goes to production during an incident without IC signoff.",
-      ]},
-      { kind: "kv", rows: [
-        { k: "MTTA · Sev-1", v: "3m 40s" },
-        { k: "MTTR · Sev-1", v: "42m" },
-        { k: "Post-mortems shipped in 2026", v: "27" },
+        "One owner per challenge. If nobody owns it, it is not a challenge — it is a wish.",
+        "A challenge document names the affected system, the assumption that broke, and the smallest experiment that would resolve it.",
+        "Resolution ships as an ADR, a validation record, or a development log entry — never as a silent commit.",
+        "When a canonical system reaches production, this section becomes an incident-response contract; not before.",
       ]},
     ],
   },
+
   {
     slug: "deployment-checklist",
     index: "06",
