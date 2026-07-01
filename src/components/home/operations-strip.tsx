@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { INCIDENTS } from "@/lib/incidents-data";
-import { BENCHMARKS, benchmarkFormatValue } from "@/lib/benchmarks-data";
+import { BENCHMARKS } from "@/lib/benchmarks-data";
+
 import { StageDot } from "@/components/section/section-bits";
 
 /**
