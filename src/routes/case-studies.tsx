@@ -1,7 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PROJECTS } from "@/lib/projects-data";
+import { getDossier } from "@/lib/dossiers-data";
 import { PageHeader, SectionShell } from "@/components/section/section-bits";
 import { Breadcrumbs } from "@/components/doc/breadcrumbs";
+
 
 export const Route = createFileRoute("/case-studies")({
   head: () => ({
