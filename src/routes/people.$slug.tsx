@@ -43,7 +43,7 @@ export const Route = createFileRoute("/people/$slug")({
 type Event = { date: string; kind: string; title: string; href: string; kicker: string };
 
 function PersonDetail() {
-  const { person: p } = Route.useLoaderData();
+  const { person: p } = Route.useLoaderData() as { person: (typeof PEOPLE)[number] };
   const team = TEAMS.find((t) => t.slug === p.team);
 
   const events: Event[] = [];

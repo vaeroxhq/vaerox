@@ -38,9 +38,9 @@ export const Route = createFileRoute("/teams/$slug")({
 });
 
 function TeamDetail() {
-  const { team: t } = Route.useLoaderData();
+  const { team: t } = Route.useLoaderData() as { team: (typeof TEAMS)[number] };
   const lead = PEOPLE.find((p) => p.slug === t.lead);
-  const members = t.memberSlugs.map((s) => PEOPLE.find((p) => p.slug === s)).filter((x) => Boolean(x)) as typeof PEOPLE;
+  const members = t.memberSlugs.map((s: string) => PEOPLE.find((p) => p.slug === s)).filter((x): x is (typeof PEOPLE)[number] => Boolean(x));
   const systems = t.systemsOwned.map((s: string) => SYSTEMS.find((x) => x.slug === s)).filter((x): x is (typeof SYSTEMS)[number] => Boolean(x));
   const projects = t.currentProjects.map((s: string) => PROJECTS.find((x) => x.slug === s)).filter((x): x is (typeof PROJECTS)[number] => Boolean(x));
 
