@@ -2,6 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { PROJECTS } from "@/lib/projects-data";
 import { SYSTEMS } from "@/lib/systems-data";
 import { getDossier } from "@/lib/dossiers-data";
+import { getDossierExtras } from "@/lib/dossier-extras";
 import { ADRS, DIAGRAMS } from "@/lib/architecture-data";
 import { JOURNAL } from "@/lib/journal-data";
 import { RESEARCH } from "@/lib/research-data";
@@ -24,6 +25,8 @@ import {
   FutureWorkSection,
   PhaseChecklist,
   ProjectLinksStrip,
+  EngineeringMetrics,
+  ChallengesLessons,
 } from "@/components/doc/dossier-blocks";
 
 export const Route = createFileRoute("/projects/$slug")({
