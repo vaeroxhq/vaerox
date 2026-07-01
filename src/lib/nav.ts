@@ -19,6 +19,8 @@ export const NAV: NavItem[] = [
   { label: "Research",     to: "/research",     hint: "Papers, benchmarks, notes",      section: "Primary" },
   { label: "Engineering",  to: "/engineering",  hint: "Handbook & standards",           section: "Primary" },
   { label: "Journal",      to: "/journal",      hint: "Long-form entries",              section: "Primary" },
+  { label: "Teams",        to: "/teams",        hint: "Org structure & charters",       section: "Meta" },
+  { label: "People",       to: "/people",       hint: "Engineer directory",             section: "Meta" },
   { label: "About",        to: "/about",        hint: "Organization & principles",      section: "Meta" },
   { label: "Contact",      to: "/contact",      hint: "Reach the team",                 section: "Meta" },
 ];
