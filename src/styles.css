@@ -36,11 +36,13 @@
   --vx-ink-l2: #4A4A4A;
   --vx-ink-l3: #7A7A7A;
 
-  /* States (identical across modes) */
-  --vx-state-success: #22C55E;
-  --vx-state-warning: #F59E0B;
-  --vx-state-danger:  #EF4444;
-  --vx-state-info:    #3B82F6;
+  /* States — muted, engineering-appropriate; never bright */
+  --vx-state-success: #3FA66A;   /* muted green   — production, live */
+  --vx-state-warning: #B7873A;   /* muted amber   — prototype, degraded */
+  --vx-state-danger:  #C2504B;   /* muted red     — incident */
+  --vx-state-info:    #3B82F6;   /* brand blue    — research, info */
+  --vx-state-neutral: #6E6E6E;   /* muted gray    — archived */
+
 
   /* Space (4px baseline) */
   --vx-space-0: 0;
@@ -334,6 +336,42 @@
   background: currentColor;
 }
 
+/* Card hover — 1px brighter border + very slight elevation.
+ * Applied to interactive cells; kept intentionally restrained. */
+@utility card-hover {
+  transition:
+    background-color var(--vx-dur-ui) var(--vx-ease-standard),
+    box-shadow var(--vx-dur-ui) var(--vx-ease-standard),
+    transform var(--vx-dur-ui) var(--vx-ease-standard);
+}
+@utility card-hover-on {
+  background-color: var(--bg-surface);
+  box-shadow:
+    inset 0 0 0 1px var(--line-2),
+    0 1px 0 0 rgba(255, 255, 255, 0.02),
+    0 12px 32px -20px rgba(0, 0, 0, 0.6);
+}
+
+/* Reveal — brief mount fade; respects prefers-reduced-motion below */
+@utility reveal {
+  animation: vx-reveal 320ms var(--vx-ease-standard) both;
+}
+@keyframes vx-reveal {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Skeleton — 1px hairline block, subtle pulse */
+@utility skeleton {
+  background: var(--bg-surface);
+  border: 1px solid var(--line-1);
+  animation: vx-skeleton 1.4s ease-in-out infinite;
+}
+@keyframes vx-skeleton {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 0.85; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     transition-duration: 0.01ms !important;
@@ -341,3 +379,4 @@
     animation-iteration-count: 1 !important;
   }
 }
+

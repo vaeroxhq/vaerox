@@ -1,12 +1,13 @@
 import { PROJECTS, type Project, type ProjectStatus } from "@/lib/home-data";
+import { OpsTag } from "@/components/ops/ops-tag";
 
 /**
  * Featured Systems — monochrome cards, hairline borders, mono metadata.
- * Data-shape mirrors the future content pipeline; swap in a loader later.
+ * Restrained hover: 1px brighter border + faint elevation + "VIEW →" nudges.
  */
 export function ProjectGrid() {
   return (
-    <section className="mt-10 mb-24">
+    <section className="mt-10 mb-24 reveal">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-line-1 hairline">
         {PROJECTS.map((p) => (
           <ProjectCard key={p.slug} project={p} />
@@ -17,9 +18,16 @@ export function ProjectGrid() {
 }
 
 function ProjectCard({ project }: { project: Project }) {
-  const { index, name, description, status, stack, updated } = project;
+  const {
+    index, name, description, status, stack, updated,
+    owner, runtime, language, repository, adr,
+    p95, availability, nodes, commits, lastDeploy, tags,
+  } = project;
+
   return (
-    <article className="group bg-canvas px-5 pt-5 pb-4 transition-ui hover:bg-surface relative flex flex-col">
+    <article
+      className="group card-hover hover:card-hover-on bg-canvas px-5 pt-5 pb-4 relative flex flex-col"
+    >
       <span
         aria-hidden="true"
         className="absolute top-0 right-0 h-3 w-3 border-t border-r border-line-2"
@@ -34,24 +42,46 @@ function ProjectCard({ project }: { project: Project }) {
 
       <div className="hairline-t mt-4" />
 
-      <h3 className="font-display text-[22px] mt-6 tracking-[-0.022em]">{name}</h3>
+      <h3 className="font-display text-[22px] mt-6 tracking-[-0.022em] text-text-2 transition-micro group-hover:text-text-1">
+        {name}
+      </h3>
       <p className="mt-2 text-[13px] text-text-2 leading-[1.55]">{description}</p>
 
+      {/* Engineering metadata rail */}
       <dl className="mt-6 pt-4 hairline-t grid grid-cols-2 gap-y-2 gap-x-4">
-        <Meta label="Stack" value={stack.join(" · ")} className="col-span-2" />
-        <Meta label="Updated" value={updated} />
-        <Meta label="Status" value={status} />
+        <Meta label="Owner"        value={owner} />
+        <Meta label="ADR"          value={`·${adr}`} />
+        <Meta label="Runtime"      value={runtime} />
+        <Meta label="Language"     value={language} />
+        <Meta label="P95"          value={p95} />
+        <Meta label="Availability" value={availability} />
+        <Meta label="Nodes"        value={nodes.toLocaleString()} />
+        <Meta label="Commits"      value={commits.toLocaleString()} />
+        <Meta label="Repo"         value={repository} />
+        <Meta label="Last deploy"  value={lastDeploy} />
+        <Meta label="Stack"        value={stack.join(" · ")} className="col-span-2" />
+        <Meta label="Updated"      value={updated} className="col-span-2" />
       </dl>
+
+      {tags.length > 0 && (
+        <div className="mt-4 pt-4 hairline-t flex flex-wrap gap-x-4 gap-y-2">
+          {tags.map((t) => (
+            <OpsTag key={t} label={t} />
+          ))}
+        </div>
+      )}
 
       <div className="mt-6 pt-4 hairline-t flex items-center justify-between">
         <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
           Case study
         </span>
         <a
-          href={`/projects#${project.slug}`}
-          className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] transition-micro hover:text-text-1"
+          href={`/projects/${project.slug}`}
+          className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] transition-micro group-hover:text-text-1"
         >
-          View →
+          <span className="inline-block transition-transform duration-200 ease-out group-hover:translate-x-[6px]">
+            View →
+          </span>
         </a>
       </div>
     </article>
@@ -60,11 +90,10 @@ function ProjectCard({ project }: { project: Project }) {
 
 function StatusPill({ status }: { status: ProjectStatus }) {
   const tone =
-    status === "Production"
-      ? "text-success"
-      : status === "Prototype"
-        ? "text-warning"
-        : "text-info";
+    status === "Production" ? "text-success"
+    : status === "Prototype" ? "text-warning"
+    : status === "Research"  ? "text-info"
+    : "text-text-3";
   return (
     <span className="inline-flex items-center gap-2 font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
       <span className={`dot ${tone}`} aria-hidden="true" />
