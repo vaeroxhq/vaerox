@@ -36,7 +36,8 @@ export type EntityKind =
   | "benchmark"
   | "api"
   | "person"
-  | "team";
+  | "team"
+  | "future";
 
 export type EntityRef = { kind: EntityKind; id: string };
 
