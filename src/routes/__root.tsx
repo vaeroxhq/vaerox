@@ -83,18 +83,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "color-scheme", content: "dark light" },
-      { title: "VÆRØX — Independent AI Engineering Studio" },
+      { title: "VÆRØX — AI & Software Engineering Studio" },
       {
         name: "description",
         content:
-          "VÆRØX is an independent AI engineering studio designing and shipping intelligent software — AI agents, LLM applications, RAG systems, MCP servers, workflow automation, and production-grade backend platforms.",
+          "VÆRØX is an independent AI & software engineering studio. We design, build, deploy and maintain modern software systems — AI agents, SaaS products, internal tools, dashboards, backend platforms, and workflow automation — for startups, growing businesses and enterprise teams.",
       },
-      { property: "og:title", content: "VÆRØX — Independent AI Engineering Studio" },
+      { property: "og:title", content: "VÆRØX — AI & Software Engineering Studio" },
       {
         property: "og:description",
         content:
-          "AI agents, LLM applications, RAG, MCP, workflow automation, and backend platforms — designed, built, and documented under one discipline.",
+          "Modern software systems, engineered end-to-end. AI, automation, backend, and full-stack for startups, SMBs, and enterprise teams.",
       },
+
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],

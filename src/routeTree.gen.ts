@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WhyRouteImport } from './routes/why'
 import { Route as TimelineRouteImport } from './routes/timeline'
 import { Route as TeamsRouteImport } from './routes/teams'
 import { Route as SystemsRouteImport } from './routes/systems'
@@ -19,11 +20,13 @@ import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ProcessRouteImport } from './routes/process'
 import { Route as PeopleRouteImport } from './routes/people'
 import { Route as JournalRouteImport } from './routes/journal'
+import { Route as IndustriesRouteImport } from './routes/industries'
 import { Route as IncidentsRouteImport } from './routes/incidents'
 import { Route as GraphRouteImport } from './routes/graph'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ExplorerRouteImport } from './routes/explorer'
 import { Route as EngineeringRouteImport } from './routes/engineering'
+import { Route as EngagementsRouteImport } from './routes/engagements'
 import { Route as DashboardsRouteImport } from './routes/dashboards'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CaseStudiesRouteImport } from './routes/case-studies'
@@ -57,6 +60,11 @@ import { Route as SystemsFutureSlugRouteImport } from './routes/systems.future.$
 import { Route as ResearchAssetsAssetRouteImport } from './routes/research.assets.$asset'
 import { Route as ArchitectureDiagramsSlugRouteImport } from './routes/architecture.diagrams.$slug'
 
+const WhyRoute = WhyRouteImport.update({
+  id: '/why',
+  path: '/why',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TimelineRoute = TimelineRouteImport.update({
   id: '/timeline',
   path: '/timeline',
@@ -107,6 +115,11 @@ const JournalRoute = JournalRouteImport.update({
   path: '/journal',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IndustriesRoute = IndustriesRouteImport.update({
+  id: '/industries',
+  path: '/industries',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IncidentsRoute = IncidentsRouteImport.update({
   id: '/incidents',
   path: '/incidents',
@@ -130,6 +143,11 @@ const ExplorerRoute = ExplorerRouteImport.update({
 const EngineeringRoute = EngineeringRouteImport.update({
   id: '/engineering',
   path: '/engineering',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EngagementsRoute = EngagementsRouteImport.update({
+  id: '/engagements',
+  path: '/engagements',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardsRoute = DashboardsRouteImport.update({
@@ -303,11 +321,13 @@ export interface FileRoutesByFullPath {
   '/case-studies': typeof CaseStudiesRoute
   '/contact': typeof ContactRoute
   '/dashboards': typeof DashboardsRoute
+  '/engagements': typeof EngagementsRoute
   '/engineering': typeof EngineeringRoute
   '/explorer': typeof ExplorerRoute
   '/faq': typeof FaqRoute
   '/graph': typeof GraphRoute
   '/incidents': typeof IncidentsRouteWithChildren
+  '/industries': typeof IndustriesRoute
   '/journal': typeof JournalRouteWithChildren
   '/people': typeof PeopleRouteWithChildren
   '/process': typeof ProcessRoute
@@ -318,6 +338,7 @@ export interface FileRoutesByFullPath {
   '/systems': typeof SystemsRouteWithChildren
   '/teams': typeof TeamsRouteWithChildren
   '/timeline': typeof TimelineRoute
+  '/why': typeof WhyRoute
   '/api/$slug': typeof ApiSlugRoute
   '/architecture/$adr': typeof ArchitectureAdrRoute
   '/benchmarks/$slug': typeof BenchmarksSlugRoute
@@ -350,16 +371,19 @@ export interface FileRoutesByTo {
   '/case-studies': typeof CaseStudiesRoute
   '/contact': typeof ContactRoute
   '/dashboards': typeof DashboardsRoute
+  '/engagements': typeof EngagementsRoute
   '/engineering': typeof EngineeringRoute
   '/explorer': typeof ExplorerRoute
   '/faq': typeof FaqRoute
   '/graph': typeof GraphRoute
+  '/industries': typeof IndustriesRoute
   '/journal': typeof JournalRouteWithChildren
   '/people': typeof PeopleRouteWithChildren
   '/process': typeof ProcessRoute
   '/search': typeof SearchRoute
   '/teams': typeof TeamsRouteWithChildren
   '/timeline': typeof TimelineRoute
+  '/why': typeof WhyRoute
   '/api/$slug': typeof ApiSlugRoute
   '/architecture/$adr': typeof ArchitectureAdrRoute
   '/benchmarks/$slug': typeof BenchmarksSlugRoute
@@ -395,11 +419,13 @@ export interface FileRoutesById {
   '/case-studies': typeof CaseStudiesRoute
   '/contact': typeof ContactRoute
   '/dashboards': typeof DashboardsRoute
+  '/engagements': typeof EngagementsRoute
   '/engineering': typeof EngineeringRoute
   '/explorer': typeof ExplorerRoute
   '/faq': typeof FaqRoute
   '/graph': typeof GraphRoute
   '/incidents': typeof IncidentsRouteWithChildren
+  '/industries': typeof IndustriesRoute
   '/journal': typeof JournalRouteWithChildren
   '/people': typeof PeopleRouteWithChildren
   '/process': typeof ProcessRoute
@@ -410,6 +436,7 @@ export interface FileRoutesById {
   '/systems': typeof SystemsRouteWithChildren
   '/teams': typeof TeamsRouteWithChildren
   '/timeline': typeof TimelineRoute
+  '/why': typeof WhyRoute
   '/api/$slug': typeof ApiSlugRoute
   '/architecture/$adr': typeof ArchitectureAdrRoute
   '/benchmarks/$slug': typeof BenchmarksSlugRoute
@@ -446,11 +473,13 @@ export interface FileRouteTypes {
     | '/case-studies'
     | '/contact'
     | '/dashboards'
+    | '/engagements'
     | '/engineering'
     | '/explorer'
     | '/faq'
     | '/graph'
     | '/incidents'
+    | '/industries'
     | '/journal'
     | '/people'
     | '/process'
@@ -461,6 +490,7 @@ export interface FileRouteTypes {
     | '/systems'
     | '/teams'
     | '/timeline'
+    | '/why'
     | '/api/$slug'
     | '/architecture/$adr'
     | '/benchmarks/$slug'
@@ -493,16 +523,19 @@ export interface FileRouteTypes {
     | '/case-studies'
     | '/contact'
     | '/dashboards'
+    | '/engagements'
     | '/engineering'
     | '/explorer'
     | '/faq'
     | '/graph'
+    | '/industries'
     | '/journal'
     | '/people'
     | '/process'
     | '/search'
     | '/teams'
     | '/timeline'
+    | '/why'
     | '/api/$slug'
     | '/architecture/$adr'
     | '/benchmarks/$slug'
@@ -537,11 +570,13 @@ export interface FileRouteTypes {
     | '/case-studies'
     | '/contact'
     | '/dashboards'
+    | '/engagements'
     | '/engineering'
     | '/explorer'
     | '/faq'
     | '/graph'
     | '/incidents'
+    | '/industries'
     | '/journal'
     | '/people'
     | '/process'
@@ -552,6 +587,7 @@ export interface FileRouteTypes {
     | '/systems'
     | '/teams'
     | '/timeline'
+    | '/why'
     | '/api/$slug'
     | '/architecture/$adr'
     | '/benchmarks/$slug'
@@ -587,11 +623,13 @@ export interface RootRouteChildren {
   CaseStudiesRoute: typeof CaseStudiesRoute
   ContactRoute: typeof ContactRoute
   DashboardsRoute: typeof DashboardsRoute
+  EngagementsRoute: typeof EngagementsRoute
   EngineeringRoute: typeof EngineeringRoute
   ExplorerRoute: typeof ExplorerRoute
   FaqRoute: typeof FaqRoute
   GraphRoute: typeof GraphRoute
   IncidentsRoute: typeof IncidentsRouteWithChildren
+  IndustriesRoute: typeof IndustriesRoute
   JournalRoute: typeof JournalRouteWithChildren
   PeopleRoute: typeof PeopleRouteWithChildren
   ProcessRoute: typeof ProcessRoute
@@ -602,12 +640,20 @@ export interface RootRouteChildren {
   SystemsRoute: typeof SystemsRouteWithChildren
   TeamsRoute: typeof TeamsRouteWithChildren
   TimelineRoute: typeof TimelineRoute
+  WhyRoute: typeof WhyRoute
   ApiSlugRoute: typeof ApiSlugRoute
   ApiIndexRoute: typeof ApiIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/why': {
+      id: '/why'
+      path: '/why'
+      fullPath: '/why'
+      preLoaderRoute: typeof WhyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/timeline': {
       id: '/timeline'
       path: '/timeline'
@@ -678,6 +724,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JournalRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/industries': {
+      id: '/industries'
+      path: '/industries'
+      fullPath: '/industries'
+      preLoaderRoute: typeof IndustriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/incidents': {
       id: '/incidents'
       path: '/incidents'
@@ -711,6 +764,13 @@ declare module '@tanstack/react-router' {
       path: '/engineering'
       fullPath: '/engineering'
       preLoaderRoute: typeof EngineeringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/engagements': {
+      id: '/engagements'
+      path: '/engagements'
+      fullPath: '/engagements'
+      preLoaderRoute: typeof EngagementsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboards': {
@@ -1088,11 +1148,13 @@ const rootRouteChildren: RootRouteChildren = {
   CaseStudiesRoute: CaseStudiesRoute,
   ContactRoute: ContactRoute,
   DashboardsRoute: DashboardsRoute,
+  EngagementsRoute: EngagementsRoute,
   EngineeringRoute: EngineeringRoute,
   ExplorerRoute: ExplorerRoute,
   FaqRoute: FaqRoute,
   GraphRoute: GraphRoute,
   IncidentsRoute: IncidentsRouteWithChildren,
+  IndustriesRoute: IndustriesRoute,
   JournalRoute: JournalRouteWithChildren,
   PeopleRoute: PeopleRouteWithChildren,
   ProcessRoute: ProcessRoute,
@@ -1103,6 +1165,7 @@ const rootRouteChildren: RootRouteChildren = {
   SystemsRoute: SystemsRouteWithChildren,
   TeamsRoute: TeamsRouteWithChildren,
   TimelineRoute: TimelineRoute,
+  WhyRoute: WhyRoute,
   ApiSlugRoute: ApiSlugRoute,
   ApiIndexRoute: ApiIndexRoute,
 }

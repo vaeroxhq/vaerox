@@ -201,7 +201,198 @@ export const SERVICES: Service[] = [
       "News corpus ingestion pipeline (MarketPulse)",
     ],
   },
+  {
+    slug: "custom-software",
+    code: "SVC-11",
+    name: "Custom Software Development",
+    tagline: "Bespoke software engineered end-to-end for a specific business problem.",
+    overview:
+      "Full-lifecycle custom software — discovery, architecture, build, deployment, documentation, maintenance — for teams whose problem doesn't fit an off-the-shelf product.",
+    approach:
+      "Requirements are written down. Architecture is drawn before code. The riskiest surface is prototyped first. Delivery is incremental and inspectable at every step.",
+    technologies: ["TypeScript", "Python", "React", "PostgreSQL", "FastAPI", "Docker"],
+    relatedProjects: ["vestra", "aegis-ops", "leadpulse", "cloudcostiq"],
+    relatedResearch: [],
+    relatedAdrs: [],
+    examples: [
+      "Greenfield product platforms",
+      "Internal enterprise systems",
+      "Second-version rewrites of aging software",
+    ],
+  },
+  {
+    slug: "saas-product",
+    code: "SVC-12",
+    name: "SaaS Product Development",
+    tagline: "Multi-tenant products designed to scale from first customer to enterprise.",
+    overview:
+      "Full-stack SaaS engineering — auth, billing, tenancy, admin, product surfaces — with the platform work handled up front so the roadmap is about features, not firefighting.",
+    approach:
+      "Tenancy is a data-model decision, not a header. Billing is instrumented from day one. Admin and audit surfaces are first-class, not afterthoughts.",
+    technologies: ["TypeScript", "React", "TanStack Start", "Node", "PostgreSQL", "Stripe"],
+    relatedProjects: ["leadpulse", "cloudcostiq"],
+    relatedResearch: [],
+    relatedAdrs: [],
+    examples: [
+      "Vertical SaaS MVPs for founders",
+      "Product v2 rebuilds after PMF",
+      "Enterprise-tier features on existing SaaS",
+    ],
+  },
+  {
+    slug: "full-stack-web",
+    code: "SVC-13",
+    name: "Full-Stack Web Applications",
+    tagline: "Modern web applications from database schema to interaction detail.",
+    overview:
+      "TanStack Start, React, TypeScript, PostgreSQL, and the operational glue that turns a prototype into a real application — auth, forms, files, background jobs, deployment.",
+    approach:
+      "The stack is boring on purpose. Rendering strategy matches the surface. Forms and validation are shared across client and server. Nothing is magical.",
+    technologies: ["TypeScript", "React", "TanStack Start", "Tailwind", "PostgreSQL", "Node"],
+    relatedProjects: ["leadpulse", "vestra", "cloudcostiq"],
+    relatedResearch: [],
+    relatedAdrs: [],
+    examples: [
+      "Customer-facing web applications",
+      "Portal and admin surfaces",
+      "Booking, review, and workflow apps",
+    ],
+  },
+  {
+    slug: "dashboards",
+    code: "SVC-14",
+    name: "Dashboards & Analytics",
+    tagline: "Analytics surfaces built for the people who make decisions from them.",
+    overview:
+      "Executive dashboards, operational analytics, and embedded reporting powered by DuckDB, Postgres, and query engines chosen for the shape of the data — not for the shape of the demo.",
+    approach:
+      "Metrics are defined before they're rendered. Every chart has a source query. Freshness is visible. Drilldowns end at a row, not a mystery.",
+    technologies: ["TypeScript", "React", "DuckDB", "PostgreSQL", "Python", "dbt"],
+    relatedProjects: ["cloudcostiq", "marketpulse", "supply-chain-twin"],
+    relatedResearch: [],
+    relatedAdrs: [],
+    examples: [
+      "FinOps and unit-economics dashboards",
+      "Executive KPI surfaces",
+      "Operational monitoring UIs",
+    ],
+  },
+  {
+    slug: "frontend",
+    code: "SVC-15",
+    name: "Frontend Development",
+    tagline: "Design-system-grade frontends with real interaction and accessibility discipline.",
+    overview:
+      "React and TypeScript frontends built on a shared design system — tokens, primitives, accessibility, motion, and the interaction detail that separates a serious product from a template.",
+    approach:
+      "Design tokens live in code. Components are typed. Motion is restrained. Accessibility is checked, not assumed. Performance is measured on real devices.",
+    technologies: ["TypeScript", "React", "TanStack Start", "Tailwind", "Motion"],
+    relatedProjects: ["vestra", "leadpulse", "aegis-ops"],
+    relatedResearch: [],
+    relatedAdrs: [],
+    examples: [
+      "Design-system implementation",
+      "Product frontend rebuilds",
+      "Marketing sites that read as software",
+    ],
+  },
+  {
+    slug: "chatbots",
+    code: "SVC-16",
+    name: "AI Chatbots & Assistants",
+    tagline: "Grounded conversational interfaces over your data and your systems.",
+    overview:
+      "Chatbots and assistants that call your APIs, read your documents, and enforce your business rules — with evaluation, guardrails, and audit logging as first-class features.",
+    approach:
+      "Every capability is scoped and typed. Retrieval is measured. Refusals and escalations are designed, not guessed. The bot is a product surface, not a demo.",
+    technologies: ["TypeScript", "Python", "OpenAI", "Anthropic", "PostgreSQL", "pgvector"],
+    relatedProjects: ["vestra", "leadpulse", "aegis-ops"],
+    relatedResearch: [],
+    relatedAdrs: [],
+    examples: [
+      "Internal knowledge-base assistants",
+      "Customer-facing product chat",
+      "Analyst copilots with human-in-the-loop review",
+    ],
+  },
+  {
+    slug: "ml-systems",
+    code: "SVC-17",
+    name: "Machine Learning Systems",
+    tagline: "Applied ML with dataset hygiene, evaluation, and honest limits.",
+    overview:
+      "Classification, ranking, forecasting, and detection systems built with proper dataset versioning, per-slice evaluation, and deployment paths that survive contact with production traffic.",
+    approach:
+      "Datasets are versioned. Evaluation is per-slice. Baselines are honest. Every model has a fallback and a known failure gallery.",
+    technologies: ["Python", "PyTorch", "scikit-learn", "ONNX", "DuckDB"],
+    relatedProjects: ["marketpulse", "quantedge"],
+    relatedResearch: ["cataract", "paddy", "wireseg"],
+    relatedAdrs: [],
+    examples: [
+      "Ranking and classification models on structured data",
+      "Time-series and forecasting pipelines",
+      "Model deployment with evaluation harnesses",
+    ],
+  },
+  {
+    slug: "cloud-infra",
+    code: "SVC-18",
+    name: "Cloud Infrastructure",
+    tagline: "Infrastructure as code, sized to your actual traffic and team.",
+    overview:
+      "AWS, Cloudflare, and container-based infrastructure defined in code — networking, secrets, storage, background workers, and deployment — sized for the traffic that exists, not the traffic on the pitch deck.",
+    approach:
+      "Everything in IaC. Environments identical up to configuration. Secrets never in code. Bills reviewed like code.",
+    technologies: ["AWS", "Cloudflare", "Docker", "Terraform", "PostgreSQL", "Redis"],
+    relatedProjects: ["cloudcostiq", "aegis-ops"],
+    relatedResearch: [],
+    relatedAdrs: [],
+    examples: [
+      "Greenfield cloud environments",
+      "Migration from managed platforms to owned infra",
+      "Cost and reliability audits",
+    ],
+  },
+  {
+    slug: "devops",
+    code: "SVC-19",
+    name: "DevOps & Deployment",
+    tagline: "CI/CD, observability, and the boring pipes that keep software alive.",
+    overview:
+      "GitHub Actions pipelines, container deployments, health checks, logging, tracing, and the SLOs that make on-call survivable — set up so the team can ship weekly without heroics.",
+    approach:
+      "Pipelines are readable. Deployments are reversible. Every service has a health check and a runbook. Alerts point to a human action, not a graph.",
+    technologies: ["Docker", "GitHub Actions", "AWS", "Cloudflare", "PostgreSQL"],
+    relatedProjects: ["cloudcostiq", "aegis-ops", "leadpulse"],
+    relatedResearch: [],
+    relatedAdrs: [],
+    examples: [
+      "CI/CD pipeline design",
+      "Observability and SLO instrumentation",
+      "Release process modernization",
+    ],
+  },
+  {
+    slug: "business-automation",
+    code: "SVC-20",
+    name: "Business Process Automation",
+    tagline: "Automate the workflows that eat your operations team's week.",
+    overview:
+      "AI-assisted automation for repetitive knowledge work — intake, routing, extraction, drafting, approval — designed as durable workflows, not as brittle scripts.",
+    approach:
+      "Every step is idempotent and observable. Approvals are first-class. Nothing runs where a human should. The system explains what it did and why.",
+    technologies: ["TypeScript", "Python", "Temporal", "PostgreSQL", "OpenAI", "Anthropic"],
+    relatedProjects: ["axiom", "leadpulse", "aegis-ops"],
+    relatedResearch: [],
+    relatedAdrs: [],
+    examples: [
+      "Document intake and routing",
+      "Approval and review workflows",
+      "Back-office reconciliation and reporting",
+    ],
+  },
 ];
+
 
 export function findService(slug: string) {
   return SERVICES.find((s) => s.slug === slug);

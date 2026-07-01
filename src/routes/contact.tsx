@@ -7,13 +7,26 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — VÆRØX" },
-      { name: "description", content: "Reach the maintainer of VÆRØX. One inbox. Async by default." },
+      {
+        name: "description",
+        content:
+          "Start a project with VÆRØX. Book a discovery call, request a written proposal, or brief the studio on an MVP, rebuild, or AI system.",
+      },
       { property: "og:title", content: "Contact — VÆRØX" },
-      { property: "og:description", content: "Reach the maintainer of VÆRØX." },
+      { property: "og:description", content: "Book a discovery call or brief the studio on a project." },
     ],
   }),
   component: ContactPage,
 });
+
+const CTAS: [string, string][] = [
+  ["Book a discovery call", "A 30-minute async or live conversation to understand the problem, the timeline, and where the risk sits."],
+  ["Discuss your project", "Bring an early idea, a written brief, or a working system that needs to grow — we'll write back with questions."],
+  ["Request a proposal", "A short technical brief with proposed architecture, milestones, and a fixed or capped estimate. Delivered inside a week."],
+  ["Build your MVP", "Take a validated idea to a shippable v1 — architected properly from day one so it survives v2."],
+  ["Modernize existing software", "Incremental replacement of aging systems without stopping the business that depends on them."],
+  ["Automate business processes", "AI-assisted workflows for the operational work that currently eats your team's week."],
+];
 
 function ContactPage() {
   return (
@@ -22,27 +35,47 @@ function ContactPage() {
 
       <PageHeader
         section="§ · Contact"
-        title="Reach the maintainer."
-        summary="VÆRØX is maintained by one engineer. There is no support desk and no sales channel — one inbox, read on the maintainer's cadence."
+        title="Start a project."
+        summary="VÆRØX is an independent AI & software engineering studio. Reach the studio to book a discovery call, brief a project, or request a written proposal — we reply inside a week."
         meta={[
-          { label: "Channel",  value: "Email" },
-          { label: "Cadence",  value: "Async" },
-          { label: "Response", value: "Days, not hours" },
-          { label: "PGP",      value: "On request" },
+          { label: "Email",    value: "hello@vaerox.dev" },
+          { label: "Response", value: "Within a week" },
+          { label: "Proposal", value: "Written" },
+          { label: "Terms",    value: "Fixed / Capped" },
         ]}
       />
 
       <DocShell>
-        <article className="max-w-[680px]">
-          <DocBlock heading="Get in touch">
+        <article className="max-w-[820px]">
+          <DocBlock heading="What to write about">
+            <ul className="hairline bg-canvas">
+              {CTAS.map(([t, b], i, arr) => (
+                <li key={t} className={`grid grid-cols-[220px_1fr] gap-4 px-4 py-4 ${i < arr.length - 1 ? "hairline-b" : ""}`}>
+                  <a
+                    href={`mailto:hello@vaerox.dev?subject=${encodeURIComponent(t)}`}
+                    className="font-mono text-[11.5px] text-text-1 uppercase tracking-[0.12em] hover:opacity-70 transition-micro"
+                  >
+                    {t} →
+                  </a>
+                  <span className="text-[13px] text-text-2 leading-[1.6]">{b}</span>
+                </li>
+              ))}
+            </ul>
+          </DocBlock>
+
+          <DocBlock heading="Direct channels">
             <ul className="hairline bg-canvas">
               <li className="grid grid-cols-[140px_1fr] gap-4 px-4 py-4 items-baseline hairline-b">
                 <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">Email</span>
                 <a href="mailto:hello@vaerox.dev" className="font-mono text-[13px] text-text-1 hover:text-text-2">hello@vaerox.dev</a>
               </li>
               <li className="grid grid-cols-[140px_1fr] gap-4 px-4 py-4 items-baseline hairline-b">
-                <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">Corrections</span>
-                <a href="mailto:corrections@vaerox.dev" className="font-mono text-[13px] text-text-1 hover:text-text-2">corrections@vaerox.dev</a>
+                <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">LinkedIn</span>
+                <a href="https://www.linkedin.com/company/vaerox" target="_blank" rel="noopener noreferrer" className="font-mono text-[13px] text-text-1 hover:text-text-2">/company/vaerox</a>
+              </li>
+              <li className="grid grid-cols-[140px_1fr] gap-4 px-4 py-4 items-baseline hairline-b">
+                <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">Instagram</span>
+                <a href="https://instagram.com/vaeroxlabs" target="_blank" rel="noopener noreferrer" className="font-mono text-[13px] text-text-1 hover:text-text-2">@vaeroxlabs</a>
               </li>
               <li className="grid grid-cols-[140px_1fr] gap-4 px-4 py-4 items-baseline">
                 <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">Security</span>
@@ -51,28 +84,23 @@ function ContactPage() {
             </ul>
           </DocBlock>
 
-          <DocBlock heading="What is worth writing about">
-            <ul className="hairline bg-canvas">
+          <DocBlock heading="What happens next">
+            <ol className="hairline bg-canvas">
               {[
-                ["Corrections", "Errata, misattributions, or broken links in any published artifact."],
-                ["Reproduction", "You ran a benchmark on documented hardware and got different numbers."],
-                ["Collaboration", "You are working on adjacent problems and want to compare notes."],
-                ["Reading", "Pointers to papers, RFCs, or write-ups that belong in the record."],
-              ].map(([t, b], i, arr) => (
-                <li key={t} className={`grid grid-cols-[140px_1fr] gap-4 px-4 py-3 ${i < arr.length - 1 ? "hairline-b" : ""}`}>
-                  <span className="font-mono text-[11px] text-text-2 uppercase tracking-[0.12em] pt-0.5">{t}</span>
-                  <span className="text-[13px] text-text-2 leading-[1.6]">{b}</span>
+                ["01", "You send a short note", "A paragraph is fine. What you're building, who it's for, and where the timeline sits."],
+                ["02", "We reply with questions", "Within a week. The goal is to understand the actual problem before scoping anything."],
+                ["03", "We send a written proposal", "Architecture, milestones, and a fixed or capped estimate. Inside a week from the scoping conversation."],
+                ["04", "We start the work", "Weekly written updates. Everything under version control from day one."],
+              ].map(([n, t, b], i, arr) => (
+                <li key={n} className={`grid grid-cols-[64px_1fr] gap-6 px-5 py-5 ${i < arr.length - 1 ? "hairline-b" : ""}`}>
+                  <span className="font-mono text-[12px] text-text-3 tabular tracking-[0.06em]">{n}</span>
+                  <div>
+                    <div className="font-display text-[16px] text-text-1 tracking-[-0.012em]">{t}</div>
+                    <p className="mt-1.5 text-[13px] text-text-2 leading-[1.6]">{b}</p>
+                  </div>
                 </li>
               ))}
-            </ul>
-          </DocBlock>
-
-          <DocBlock heading="What this is not">
-            <p className="text-[13.5px] text-text-2 leading-[1.7]">
-              VÆRØX is not a product, not a service, and not a team. There is no
-              hiring pipeline, no support tier, and no on-call rotation. Messages are
-              read and answered when the maintainer has time to answer them properly.
-            </p>
+            </ol>
           </DocBlock>
         </article>
       </DocShell>
