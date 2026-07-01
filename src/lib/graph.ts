@@ -431,4 +431,5 @@ export const KIND_LABEL: Record<EntityKind, string> = {
   api: "API",
   person: "Person",
   team: "Team",
+  future: "Future System",
 };
