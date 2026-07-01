@@ -51,10 +51,10 @@ export function TopNav() {
             type="button"
             onClick={open}
             aria-label="Open command palette"
-            className="hidden sm:inline-flex items-center gap-3 font-mono text-[11px] text-text-3 uppercase tracking-[0.14em] transition-micro hover:text-text-1"
+            className="inline-flex items-center gap-3 font-mono text-[11px] text-text-3 uppercase tracking-[0.14em] transition-micro hover:text-text-1"
           >
             <span>Search</span>
-            <kbd className="font-mono text-[10px] text-text-3 tracking-[0.14em] hairline px-1.5 py-[1px] rounded-[2px]">
+            <kbd className="hidden sm:inline font-mono text-[10px] text-text-3 tracking-[0.14em] hairline px-1.5 py-[1px] rounded-[2px]">
               ⌘K
             </kbd>
           </button>
