@@ -11,6 +11,11 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { ThemeProvider } from "@/lib/theme";
+import { CommandPaletteProvider } from "@/components/shell/command-palette";
+import { TopNav } from "@/components/shell/top-nav";
+import { StatusBar } from "@/components/shell/status-bar";
+import { SiteFooter } from "@/components/shell/site-footer";
 
 function NotFoundComponent() {
   return (
@@ -128,8 +133,21 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <ThemeProvider>
+        <CommandPaletteProvider>
+          <div className="min-h-dvh bg-canvas text-text-1 flex flex-col">
+            <div className="sticky top-0 z-40">
+              <TopNav />
+              <StatusBar />
+            </div>
+            <main className="flex-1">
+              {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+              <Outlet />
+            </main>
+            <SiteFooter />
+          </div>
+        </CommandPaletteProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { VaeroxLockup, VaeroxMark } from "@/components/brand/vaerox-mark";
+import { VaeroxMark } from "@/components/brand/vaerox-mark";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,25 +25,11 @@ export const Route = createFileRoute("/")({
  */
 function Index() {
   return (
-    <main className="min-h-dvh bg-canvas text-text-1 relative overflow-hidden">
+    <div className="bg-canvas text-text-1 relative overflow-hidden">
       {/* ── Blueprint overlay (desktop only, decorative, aria-hidden) ── */}
       <BlueprintOverlay />
 
       <div className="relative w-shell mx-auto px-6 md:px-10 lg:px-16">
-        {/* Top rail */}
-        <div className="hairline-b flex items-center justify-between py-5">
-          <VaeroxLockup markSize={22} />
-          <div className="flex items-center gap-6">
-            <span className="hidden md:inline font-mono text-[11px] text-text-3 uppercase tracking-[0.12em]">
-              Engineering&nbsp;·&nbsp;Public
-            </span>
-            <span className="font-mono text-[11px] text-text-3 uppercase tracking-[0.12em] inline-flex items-center gap-2">
-              <span className="dot text-success" aria-hidden="true" />
-              Nominal
-            </span>
-          </div>
-        </div>
-
         {/* ── Hero ── */}
         <section className="relative pt-28 md:pt-40 lg:pt-48 pb-24 md:pb-32">
           {/* Section identifier */}
@@ -103,35 +89,8 @@ function Index() {
             />
           </div>
         </section>
-
-        {/* ── Engineering build footer ── */}
-        <footer aria-label="Build metadata" className="mt-24">
-          <div className="hairline-t grid grid-cols-2 md:grid-cols-4 gap-px bg-line-1">
-            <FootCell label="Revision" value="—" />
-            <FootCell label="Build" value="v0.1.0" />
-            <FootCell label="Region" value="EU · Global" />
-            <FootCell label="Updated" value="2026-07-01" />
-            <FootCell label="Status">
-              <span className="inline-flex items-center gap-2">
-                <span className="dot text-success" aria-hidden="true" />
-                <span className="tabular">Nominal</span>
-              </span>
-            </FootCell>
-            <FootCell label="License" value="—" />
-            <FootCell label="Source" value="GitHub" />
-            <FootCell label="Mode" value="Dark canonical" />
-          </div>
-
-          {/* Colophon */}
-          <div className="hairline-t py-6 flex items-center justify-between">
-            <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-              © VÆRØX · Engineering Journal
-            </span>
-            <VaeroxMark size={14} className="opacity-60" />
-          </div>
-        </footer>
       </div>
-    </main>
+    </div>
   );
 }
 
@@ -263,25 +222,6 @@ function ModuleMeta({
         {label}
       </dt>
       <dd className="font-mono text-[11px] text-text-2 tabular">{value}</dd>
-    </div>
-  );
-}
-
-function FootCell({
-  label,
-  value,
-  children,
-}: {
-  label: string;
-  value?: string;
-  children?: React.ReactNode;
-}) {
-  return (
-    <div className="bg-canvas px-4 py-3 flex items-baseline justify-between gap-4">
-      <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-        {label}
-      </span>
-      <span className="font-mono text-[11px] text-text-2 tabular">{children ?? value}</span>
     </div>
   );
 }

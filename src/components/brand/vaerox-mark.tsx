@@ -43,10 +43,7 @@ export function VaeroxLockup({
   className?: string;
 }) {
   return (
-    <span
-      className={`inline-flex items-center gap-3 text-text-1 ${className}`}
-      aria-label="VÆRØX"
-    >
+    <span className={`inline-flex items-center gap-3 text-text-1 ${className}`} aria-label="VÆRØX">
       <VaeroxMark size={markSize} />
       <span
         aria-hidden="true"
