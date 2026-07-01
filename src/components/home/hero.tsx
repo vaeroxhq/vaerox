@@ -1,0 +1,44 @@
+import { DiamondGlyph, CornerFramed, MetaCell } from "./primitives";
+
+/**
+ * Hero — introduction section. Copy locked. Paragraph tightened to a
+ * ~640px measure for optical readability.
+ */
+export function Hero() {
+  return (
+    <section className="relative pt-28 md:pt-40 lg:pt-48 pb-24 md:pb-32">
+      <div className="flex items-center gap-3 mb-14">
+        <DiamondGlyph />
+        <span className="font-mono text-[11px] text-text-3 uppercase tracking-[0.14em]">
+          §01 · Introduction
+        </span>
+      </div>
+
+      <h1 className="font-display text-[52px] md:text-[80px] lg:text-[96px] leading-[0.98] tracking-[-0.032em] max-w-[980px]">
+        Engineering systems,
+        <br />
+        <span className="text-text-2">documented in public.</span>
+      </h1>
+
+      <p className="mt-12 max-w-[640px] text-text-2 text-[15px] leading-[1.65]">
+        VÆRØX is an engineering organization building production systems across enterprise AI,
+        distributed infrastructure, developer platforms, and quantitative research. The work —
+        architecture decisions, incident reviews, benchmarks — is published here as it is written.
+      </p>
+
+      <div className="mt-20 max-w-[640px]">
+        <div className="hairline-t" />
+        <div className="hairline-t mt-[3px]" />
+      </div>
+
+      <CornerFramed className="mt-8">
+        <dl className="grid grid-cols-2 md:grid-cols-4 gap-px bg-line-1">
+          <MetaCell label="Version" value="0.1.0" />
+          <MetaCell label="Phase" value="01 / 10" />
+          <MetaCell label="Status" value="Building" />
+          <MetaCell label="Updated" value="2026-07-01" />
+        </dl>
+      </CornerFramed>
+    </section>
+  );
+}
