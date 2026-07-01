@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { VaeroxLockup, VaeroxMark } from "@/components/brand/vaerox-mark";
+import { VaeroxMark } from "@/components/brand/vaerox-mark";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,24 +25,12 @@ export const Route = createFileRoute("/")({
  */
 function Index() {
   return (
-    <main className="min-h-dvh bg-canvas text-text-1 relative overflow-hidden">
+    <div className="bg-canvas text-text-1 relative overflow-hidden">
       {/* ── Blueprint overlay (desktop only, decorative, aria-hidden) ── */}
       <BlueprintOverlay />
 
       <div className="relative w-shell mx-auto px-6 md:px-10 lg:px-16">
-        {/* Top rail */}
-        <div className="hairline-b flex items-center justify-between py-5">
-          <VaeroxLockup markSize={22} />
-          <div className="flex items-center gap-6">
-            <span className="hidden md:inline font-mono text-[11px] text-text-3 uppercase tracking-[0.12em]">
-              Engineering&nbsp;·&nbsp;Public
-            </span>
-            <span className="font-mono text-[11px] text-text-3 uppercase tracking-[0.12em] inline-flex items-center gap-2">
-              <span className="dot text-success" aria-hidden="true" />
-              Nominal
-            </span>
-          </div>
-        </div>
+
 
         {/* ── Hero ── */}
         <section className="relative pt-28 md:pt-40 lg:pt-48 pb-24 md:pb-32">
