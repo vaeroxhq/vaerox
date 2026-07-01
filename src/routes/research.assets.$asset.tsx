@@ -6,7 +6,7 @@ import { DocShell, DocBlock } from "@/components/doc/doc-shell";
 import { RelatedRail } from "@/components/doc/related-rail";
 import { PrevNext } from "@/components/doc/prev-next";
 
-export const Route = createFileRoute("/research/datasets/$dataset")({
+export const Route = createFileRoute("/research/assets/$asset")({
   head: ({ params }) => {
     const d = findDataset(params.dataset);
     const title = d ? `${d.name} — Datasets — VÆRØX` : "Dataset — VÆRØX";

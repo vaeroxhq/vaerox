@@ -44,8 +44,8 @@ import { Route as IncidentsIdRouteImport } from './routes/incidents.$id'
 import { Route as BenchmarksSlugRouteImport } from './routes/benchmarks.$slug'
 import { Route as ArchitectureAdrRouteImport } from './routes/architecture.$adr'
 import { Route as ApiSlugRouteImport } from './routes/api.$slug'
-import { Route as ResearchDatasetsIndexRouteImport } from './routes/research.datasets.index'
-import { Route as ResearchDatasetsDatasetRouteImport } from './routes/research.datasets.$dataset'
+import { Route as ResearchAssetsIndexRouteImport } from './routes/research.assets.index'
+import { Route as ResearchAssetsAssetRouteImport } from './routes/research.assets.$asset'
 import { Route as ArchitectureDiagramsSlugRouteImport } from './routes/architecture.diagrams.$slug'
 
 const TimelineRoute = TimelineRouteImport.update({
@@ -223,14 +223,14 @@ const ApiSlugRoute = ApiSlugRouteImport.update({
   path: '/api/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ResearchDatasetsIndexRoute = ResearchDatasetsIndexRouteImport.update({
-  id: '/datasets/',
-  path: '/datasets/',
+const ResearchAssetsIndexRoute = ResearchAssetsIndexRouteImport.update({
+  id: '/assets/',
+  path: '/assets/',
   getParentRoute: () => ResearchRoute,
 } as any)
-const ResearchDatasetsDatasetRoute = ResearchDatasetsDatasetRouteImport.update({
-  id: '/datasets/$dataset',
-  path: '/datasets/$dataset',
+const ResearchAssetsAssetRoute = ResearchAssetsAssetRouteImport.update({
+  id: '/assets/$asset',
+  path: '/assets/$asset',
   getParentRoute: () => ResearchRoute,
 } as any)
 const ArchitectureDiagramsSlugRoute =
@@ -277,8 +277,8 @@ export interface FileRoutesByFullPath {
   '/research/': typeof ResearchIndexRoute
   '/systems/': typeof SystemsIndexRoute
   '/architecture/diagrams/$slug': typeof ArchitectureDiagramsSlugRoute
-  '/research/datasets/$dataset': typeof ResearchDatasetsDatasetRoute
-  '/research/datasets/': typeof ResearchDatasetsIndexRoute
+  '/research/assets/$asset': typeof ResearchAssetsAssetRoute
+  '/research/assets/': typeof ResearchAssetsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -311,8 +311,8 @@ export interface FileRoutesByTo {
   '/research': typeof ResearchIndexRoute
   '/systems': typeof SystemsIndexRoute
   '/architecture/diagrams/$slug': typeof ArchitectureDiagramsSlugRoute
-  '/research/datasets/$dataset': typeof ResearchDatasetsDatasetRoute
-  '/research/datasets': typeof ResearchDatasetsIndexRoute
+  '/research/assets/$asset': typeof ResearchAssetsAssetRoute
+  '/research/assets': typeof ResearchAssetsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -352,8 +352,8 @@ export interface FileRoutesById {
   '/research/': typeof ResearchIndexRoute
   '/systems/': typeof SystemsIndexRoute
   '/architecture/diagrams/$slug': typeof ArchitectureDiagramsSlugRoute
-  '/research/datasets/$dataset': typeof ResearchDatasetsDatasetRoute
-  '/research/datasets/': typeof ResearchDatasetsIndexRoute
+  '/research/assets/$asset': typeof ResearchAssetsAssetRoute
+  '/research/assets/': typeof ResearchAssetsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -394,8 +394,8 @@ export interface FileRouteTypes {
     | '/research/'
     | '/systems/'
     | '/architecture/diagrams/$slug'
-    | '/research/datasets/$dataset'
-    | '/research/datasets/'
+    | '/research/assets/$asset'
+    | '/research/assets/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -428,8 +428,8 @@ export interface FileRouteTypes {
     | '/research'
     | '/systems'
     | '/architecture/diagrams/$slug'
-    | '/research/datasets/$dataset'
-    | '/research/datasets'
+    | '/research/assets/$asset'
+    | '/research/assets'
   id:
     | '__root__'
     | '/'
@@ -468,8 +468,8 @@ export interface FileRouteTypes {
     | '/research/'
     | '/systems/'
     | '/architecture/diagrams/$slug'
-    | '/research/datasets/$dataset'
-    | '/research/datasets/'
+    | '/research/assets/$asset'
+    | '/research/assets/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -742,18 +742,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/research/datasets/': {
-      id: '/research/datasets/'
-      path: '/datasets'
-      fullPath: '/research/datasets/'
-      preLoaderRoute: typeof ResearchDatasetsIndexRouteImport
+    '/research/assets/': {
+      id: '/research/assets/'
+      path: '/assets'
+      fullPath: '/research/assets/'
+      preLoaderRoute: typeof ResearchAssetsIndexRouteImport
       parentRoute: typeof ResearchRoute
     }
-    '/research/datasets/$dataset': {
-      id: '/research/datasets/$dataset'
-      path: '/datasets/$dataset'
-      fullPath: '/research/datasets/$dataset'
-      preLoaderRoute: typeof ResearchDatasetsDatasetRouteImport
+    '/research/assets/$asset': {
+      id: '/research/assets/$asset'
+      path: '/assets/$asset'
+      fullPath: '/research/assets/$asset'
+      preLoaderRoute: typeof ResearchAssetsAssetRouteImport
       parentRoute: typeof ResearchRoute
     }
     '/architecture/diagrams/$slug': {
@@ -849,15 +849,15 @@ const ProjectsRouteWithChildren = ProjectsRoute._addFileChildren(
 interface ResearchRouteChildren {
   ResearchSlugRoute: typeof ResearchSlugRoute
   ResearchIndexRoute: typeof ResearchIndexRoute
-  ResearchDatasetsDatasetRoute: typeof ResearchDatasetsDatasetRoute
-  ResearchDatasetsIndexRoute: typeof ResearchDatasetsIndexRoute
+  ResearchAssetsAssetRoute: typeof ResearchAssetsAssetRoute
+  ResearchAssetsIndexRoute: typeof ResearchAssetsIndexRoute
 }
 
 const ResearchRouteChildren: ResearchRouteChildren = {
   ResearchSlugRoute: ResearchSlugRoute,
   ResearchIndexRoute: ResearchIndexRoute,
-  ResearchDatasetsDatasetRoute: ResearchDatasetsDatasetRoute,
-  ResearchDatasetsIndexRoute: ResearchDatasetsIndexRoute,
+  ResearchAssetsAssetRoute: ResearchAssetsAssetRoute,
+  ResearchAssetsIndexRoute: ResearchAssetsIndexRoute,
 }
 
 const ResearchRouteWithChildren = ResearchRoute._addFileChildren(

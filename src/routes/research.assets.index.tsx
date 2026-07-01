@@ -6,7 +6,7 @@ import { Breadcrumbs } from "@/components/doc/breadcrumbs";
 
 const FILTERS: (DatasetCategory | "All")[] = ["All", ...DATASET_CATEGORIES];
 
-export const Route = createFileRoute("/research/datasets/")({
+export const Route = createFileRoute("/research/assets/")({
   head: () => ({
     meta: [
       { title: "Datasets — Research — VÆRØX" },
