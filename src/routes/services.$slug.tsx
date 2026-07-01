@@ -1,11 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { SERVICES, findService } from "@/lib/services-data";
+import { SERVICES, findService, type Service } from "@/lib/services-data";
 import { PROJECTS } from "@/lib/projects-data";
 import { PageHeader, SectionShell } from "@/components/section/section-bits";
 import { Breadcrumbs } from "@/components/doc/breadcrumbs";
 
 export const Route = createFileRoute("/services/$slug")({
-  loader: ({ params }) => {
+  loader: ({ params }): Service => {
     const svc = findService(params.slug);
     if (!svc) throw notFound();
     return svc;
