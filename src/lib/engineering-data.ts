@@ -141,7 +141,7 @@ export const HANDBOOK: HandbookSection[] = [
     owner: "Maintainer",
     updated: "2026-04-18",
     revision: "r.02",
-    status: "Draft",
+    status: "Working draft",
     summary:
       "The contract a canonical system must satisfy before its first tagged release. Written now so it applies uniformly when the first system ships.",
     body: [
