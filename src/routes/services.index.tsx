@@ -30,14 +30,15 @@ function ServicesIndex() {
       <PageHeader
         section="§ · Services"
         title="What VÆRØX builds."
-        summary="An independent AI engineering studio designing and shipping intelligent software: agents, automation, LLM applications, RAG systems, MCP servers, backend platforms, internal tools, and applied ML. Every service links to the projects, research, and architecture behind it."
+        summary="An independent AI & software engineering studio designing and shipping modern systems for startups, growing businesses, and enterprise teams — AI agents, SaaS products, internal tools, dashboards, backend platforms, and workflow automation. Every service links to the projects, research, and architecture behind it."
         meta={[
           { label: "Services",  value: SERVICES.length.toString().padStart(2, "0") },
+          { label: "Clients",   value: "Startup → Enterprise" },
           { label: "Model",     value: "Studio" },
-          { label: "Cadence",   value: "Async" },
           { label: "Contact",   value: "hello@vaerox.dev" },
         ]}
       />
+
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-line-1 hairline">
         {SERVICES.map((s) => (
