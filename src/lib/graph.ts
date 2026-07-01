@@ -353,10 +353,10 @@ for (const inc of INCIDENTS) {
   const person = findPersonByName(inc.commander);
   if (person) link({ kind: "incident", id: inc.slug }, { kind: "person", id: person.slug });
 }
-for (const b of BENCHMARKS) {
-  const person = findPersonByName(b.owner);
-  if (person) link({ kind: "benchmark", id: b.slug }, { kind: "person", id: person.slug });
+for (const _b of BENCHMARKS) {
+  // Validation records are owned by the lab maintainer; no per-benchmark owner.
 }
+
 for (const a of APIS) {
   const person = findPersonByName(a.owner);
   if (person) link({ kind: "api", id: a.slug }, { kind: "person", id: person.slug });
