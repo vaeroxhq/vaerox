@@ -9,8 +9,10 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WorkRouteImport } from './routes/work'
 import { Route as WhyRouteImport } from './routes/why'
 import { Route as TimelineRouteImport } from './routes/timeline'
+import { Route as TechnologiesRouteImport } from './routes/technologies'
 import { Route as TeamsRouteImport } from './routes/teams'
 import { Route as SystemsRouteImport } from './routes/systems'
 import { Route as ServicesRouteImport } from './routes/services'
@@ -60,6 +62,11 @@ import { Route as SystemsFutureSlugRouteImport } from './routes/systems.future.$
 import { Route as ResearchAssetsAssetRouteImport } from './routes/research.assets.$asset'
 import { Route as ArchitectureDiagramsSlugRouteImport } from './routes/architecture.diagrams.$slug'
 
+const WorkRoute = WorkRouteImport.update({
+  id: '/work',
+  path: '/work',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WhyRoute = WhyRouteImport.update({
   id: '/why',
   path: '/why',
@@ -68,6 +75,11 @@ const WhyRoute = WhyRouteImport.update({
 const TimelineRoute = TimelineRouteImport.update({
   id: '/timeline',
   path: '/timeline',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TechnologiesRoute = TechnologiesRouteImport.update({
+  id: '/technologies',
+  path: '/technologies',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TeamsRoute = TeamsRouteImport.update({
@@ -337,8 +349,10 @@ export interface FileRoutesByFullPath {
   '/services': typeof ServicesRouteWithChildren
   '/systems': typeof SystemsRouteWithChildren
   '/teams': typeof TeamsRouteWithChildren
+  '/technologies': typeof TechnologiesRoute
   '/timeline': typeof TimelineRoute
   '/why': typeof WhyRoute
+  '/work': typeof WorkRoute
   '/api/$slug': typeof ApiSlugRoute
   '/architecture/$adr': typeof ArchitectureAdrRoute
   '/benchmarks/$slug': typeof BenchmarksSlugRoute
@@ -382,8 +396,10 @@ export interface FileRoutesByTo {
   '/process': typeof ProcessRoute
   '/search': typeof SearchRoute
   '/teams': typeof TeamsRouteWithChildren
+  '/technologies': typeof TechnologiesRoute
   '/timeline': typeof TimelineRoute
   '/why': typeof WhyRoute
+  '/work': typeof WorkRoute
   '/api/$slug': typeof ApiSlugRoute
   '/architecture/$adr': typeof ArchitectureAdrRoute
   '/benchmarks/$slug': typeof BenchmarksSlugRoute
@@ -435,8 +451,10 @@ export interface FileRoutesById {
   '/services': typeof ServicesRouteWithChildren
   '/systems': typeof SystemsRouteWithChildren
   '/teams': typeof TeamsRouteWithChildren
+  '/technologies': typeof TechnologiesRoute
   '/timeline': typeof TimelineRoute
   '/why': typeof WhyRoute
+  '/work': typeof WorkRoute
   '/api/$slug': typeof ApiSlugRoute
   '/architecture/$adr': typeof ArchitectureAdrRoute
   '/benchmarks/$slug': typeof BenchmarksSlugRoute
@@ -489,8 +507,10 @@ export interface FileRouteTypes {
     | '/services'
     | '/systems'
     | '/teams'
+    | '/technologies'
     | '/timeline'
     | '/why'
+    | '/work'
     | '/api/$slug'
     | '/architecture/$adr'
     | '/benchmarks/$slug'
@@ -534,8 +554,10 @@ export interface FileRouteTypes {
     | '/process'
     | '/search'
     | '/teams'
+    | '/technologies'
     | '/timeline'
     | '/why'
+    | '/work'
     | '/api/$slug'
     | '/architecture/$adr'
     | '/benchmarks/$slug'
@@ -586,8 +608,10 @@ export interface FileRouteTypes {
     | '/services'
     | '/systems'
     | '/teams'
+    | '/technologies'
     | '/timeline'
     | '/why'
+    | '/work'
     | '/api/$slug'
     | '/architecture/$adr'
     | '/benchmarks/$slug'
@@ -639,14 +663,23 @@ export interface RootRouteChildren {
   ServicesRoute: typeof ServicesRouteWithChildren
   SystemsRoute: typeof SystemsRouteWithChildren
   TeamsRoute: typeof TeamsRouteWithChildren
+  TechnologiesRoute: typeof TechnologiesRoute
   TimelineRoute: typeof TimelineRoute
   WhyRoute: typeof WhyRoute
+  WorkRoute: typeof WorkRoute
   ApiSlugRoute: typeof ApiSlugRoute
   ApiIndexRoute: typeof ApiIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/work': {
+      id: '/work'
+      path: '/work'
+      fullPath: '/work'
+      preLoaderRoute: typeof WorkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/why': {
       id: '/why'
       path: '/why'
@@ -659,6 +692,13 @@ declare module '@tanstack/react-router' {
       path: '/timeline'
       fullPath: '/timeline'
       preLoaderRoute: typeof TimelineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/technologies': {
+      id: '/technologies'
+      path: '/technologies'
+      fullPath: '/technologies'
+      preLoaderRoute: typeof TechnologiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/teams': {
@@ -1164,8 +1204,10 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesRoute: ServicesRouteWithChildren,
   SystemsRoute: SystemsRouteWithChildren,
   TeamsRoute: TeamsRouteWithChildren,
+  TechnologiesRoute: TechnologiesRoute,
   TimelineRoute: TimelineRoute,
   WhyRoute: WhyRoute,
+  WorkRoute: WorkRoute,
   ApiSlugRoute: ApiSlugRoute,
   ApiIndexRoute: ApiIndexRoute,
 }

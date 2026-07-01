@@ -485,3 +485,91 @@ export function ProjectLinksStrip({ links }: { links: ProjectLink[] }) {
 
 // KVGrid re-export for reuse
 export { KVGrid };
+
+// =====================================================================
+// Engineering Metrics — derived from dossier + optional overrides
+// =====================================================================
+import type { ProjectDossier as _PD } from "@/lib/dossiers-data";
+import type { DossierExtras } from "@/lib/dossier-extras";
+
+export function EngineeringMetrics({
+  dossier,
+  extras,
+  updated,
+}: {
+  dossier: _PD;
+  extras?: DossierExtras;
+  updated?: string;
+}) {
+  const done = dossier.timeline.milestones.filter((m) => m.done).length;
+  const total = dossier.timeline.milestones.length;
+  const o = extras?.metricsOverride ?? {};
+
+  const items: { label: string; value: string }[] = [
+    { label: "Languages", value: dossier.stack.languages.length.toString().padStart(2, "0") },
+    { label: "Frameworks", value: dossier.stack.frameworks.length.toString().padStart(2, "0") },
+    { label: "Databases", value: dossier.stack.databases.length.toString().padStart(2, "0") || "—" },
+    { label: "Tech badges", value: dossier.badges.length.toString().padStart(2, "0") },
+    { label: "ADRs recorded", value: dossier.decisions.length.toString().padStart(2, "0") },
+    { label: "Milestones", value: `${done}/${total}` },
+    { label: "Validation entries", value: dossier.validation.entries.length.toString().padStart(2, "0") },
+    { label: "Known limitations", value: (o.knownLimitations ?? dossier.validation.limitations.length.toString().padStart(2, "0")) },
+    { label: "Architecture", value: o.architectureVersion ?? "v1" },
+    { label: "Documentation", value: o.documentationCoverage ?? "ADRs · dossier" },
+    { label: "Next milestone", value: o.nextMilestone ?? dossier.timeline.nextMilestone },
+    { label: "Last update", value: updated ?? "—" },
+  ];
+
+  return (
+    <div className="hairline bg-canvas">
+      <div className="px-4 py-2 hairline-b flex items-baseline justify-between">
+        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">Engineering metrics</span>
+        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">Derived · honest</span>
+      </div>
+      <dl className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-line-1">
+        {items.map((it) => (
+          <div key={it.label} className="bg-canvas px-4 py-3">
+            <dt className="font-mono text-[9.5px] text-text-3 uppercase tracking-[0.14em] opacity-70">{it.label}</dt>
+            <dd className="mt-1 font-mono text-[12px] text-text-1 tabular truncate">{it.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  );
+}
+
+// =====================================================================
+// Challenges Encountered & Lessons Learned
+// =====================================================================
+export function ChallengesLessons({ extras }: { extras?: DossierExtras }) {
+  if (!extras) return null;
+  return (
+    <DocBlock heading="10 · Challenges & lessons">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-line-1 hairline">
+        <div className="bg-canvas p-4">
+          <div className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] mb-3">Challenges encountered</div>
+          <ul className="space-y-2">
+            {extras.challenges.map((c, i) => (
+              <li key={i} className="grid grid-cols-[28px_1fr] gap-2 items-start">
+                <span className="font-mono text-[10px] text-text-3 tabular pt-0.5">CH-{String(i + 1).padStart(2, "0")}</span>
+                <span className="text-[13px] text-text-2 leading-[1.55]">{c}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="bg-canvas p-4">
+          <div className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] mb-3">Lessons learned</div>
+          <ul className="space-y-2">
+            {extras.lessons.map((l, i) => (
+              <li key={i} className="grid grid-cols-[28px_1fr] gap-2 items-start">
+                <span className="font-mono text-[10px] text-text-3 tabular pt-0.5">LE-{String(i + 1).padStart(2, "0")}</span>
+                <span className="text-[13px] text-text-2 leading-[1.55]">{l}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </DocBlock>
+  );
+}
+
