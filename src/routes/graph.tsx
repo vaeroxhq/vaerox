@@ -17,7 +17,7 @@ export const Route = createFileRoute("/graph")({
 });
 
 const ALL_KINDS: EntityKind[] = [
-  "system", "project", "adr", "incident", "benchmark",
+  "system", "future", "project", "adr", "incident", "benchmark",
   "api", "research", "dataset", "handbook", "journal", "person", "team",
 ];
 
@@ -34,6 +34,7 @@ const KIND_COLOR: Record<EntityKind, string> = {
   journal:   "var(--text-3)",
   person:    "var(--text-2)",
   team:      "var(--text-1)",
+  future:    "var(--text-3)",
 };
 
 type LaidOutNode = Entity & { x: number; y: number; degree: number };

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { SYSTEMS, type SystemEntry, type SystemStage } from "@/lib/systems-data";
+import { FUTURE_SYSTEMS } from "@/lib/future-systems-data";
 import { PageHeader, Toolbar, SectionShell, StageDot } from "@/components/section/section-bits";
 
 const FILTERS: (SystemStage | "All")[] = ["All", "Production", "Prototype", "Research", "Archived"];
@@ -82,6 +83,30 @@ function SystemsPage() {
           },
         ]}
       />
+
+      <Link
+        to="/systems/future"
+        className="group block hairline bg-canvas p-5 mb-6 transition-micro hover:bg-surface"
+      >
+        <div className="flex items-baseline justify-between gap-6 flex-wrap">
+          <div className="min-w-0">
+            <div className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
+              § · Systems / Future
+            </div>
+            <div className="mt-2 font-display text-[20px] text-text-1 tracking-[-0.015em]">
+              Future Systems
+            </div>
+            <p className="mt-2 text-[13.5px] text-text-2 leading-[1.65] max-w-[68ch]">
+              The long-term engineering roadmap of the lab — systems currently
+              being designed, researched, or actively built. Nothing on this
+              page is marked as production.
+            </p>
+          </div>
+          <div className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] group-hover:text-text-1">
+            Browse {FUTURE_SYSTEMS.length.toString().padStart(2, "0")} →
+          </div>
+        </div>
+      </Link>
 
       <Toolbar
         query={q}

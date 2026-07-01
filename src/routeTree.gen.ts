@@ -44,7 +44,9 @@ import { Route as IncidentsIdRouteImport } from './routes/incidents.$id'
 import { Route as BenchmarksSlugRouteImport } from './routes/benchmarks.$slug'
 import { Route as ArchitectureAdrRouteImport } from './routes/architecture.$adr'
 import { Route as ApiSlugRouteImport } from './routes/api.$slug'
+import { Route as SystemsFutureIndexRouteImport } from './routes/systems.future.index'
 import { Route as ResearchAssetsIndexRouteImport } from './routes/research.assets.index'
+import { Route as SystemsFutureSlugRouteImport } from './routes/systems.future.$slug'
 import { Route as ResearchAssetsAssetRouteImport } from './routes/research.assets.$asset'
 import { Route as ArchitectureDiagramsSlugRouteImport } from './routes/architecture.diagrams.$slug'
 
@@ -223,10 +225,20 @@ const ApiSlugRoute = ApiSlugRouteImport.update({
   path: '/api/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SystemsFutureIndexRoute = SystemsFutureIndexRouteImport.update({
+  id: '/future/',
+  path: '/future/',
+  getParentRoute: () => SystemsRoute,
+} as any)
 const ResearchAssetsIndexRoute = ResearchAssetsIndexRouteImport.update({
   id: '/assets/',
   path: '/assets/',
   getParentRoute: () => ResearchRoute,
+} as any)
+const SystemsFutureSlugRoute = SystemsFutureSlugRouteImport.update({
+  id: '/future/$slug',
+  path: '/future/$slug',
+  getParentRoute: () => SystemsRoute,
 } as any)
 const ResearchAssetsAssetRoute = ResearchAssetsAssetRouteImport.update({
   id: '/assets/$asset',
@@ -278,7 +290,9 @@ export interface FileRoutesByFullPath {
   '/systems/': typeof SystemsIndexRoute
   '/architecture/diagrams/$slug': typeof ArchitectureDiagramsSlugRoute
   '/research/assets/$asset': typeof ResearchAssetsAssetRoute
+  '/systems/future/$slug': typeof SystemsFutureSlugRoute
   '/research/assets/': typeof ResearchAssetsIndexRoute
+  '/systems/future/': typeof SystemsFutureIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -312,7 +326,9 @@ export interface FileRoutesByTo {
   '/systems': typeof SystemsIndexRoute
   '/architecture/diagrams/$slug': typeof ArchitectureDiagramsSlugRoute
   '/research/assets/$asset': typeof ResearchAssetsAssetRoute
+  '/systems/future/$slug': typeof SystemsFutureSlugRoute
   '/research/assets': typeof ResearchAssetsIndexRoute
+  '/systems/future': typeof SystemsFutureIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -353,7 +369,9 @@ export interface FileRoutesById {
   '/systems/': typeof SystemsIndexRoute
   '/architecture/diagrams/$slug': typeof ArchitectureDiagramsSlugRoute
   '/research/assets/$asset': typeof ResearchAssetsAssetRoute
+  '/systems/future/$slug': typeof SystemsFutureSlugRoute
   '/research/assets/': typeof ResearchAssetsIndexRoute
+  '/systems/future/': typeof SystemsFutureIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -395,7 +413,9 @@ export interface FileRouteTypes {
     | '/systems/'
     | '/architecture/diagrams/$slug'
     | '/research/assets/$asset'
+    | '/systems/future/$slug'
     | '/research/assets/'
+    | '/systems/future/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -429,7 +449,9 @@ export interface FileRouteTypes {
     | '/systems'
     | '/architecture/diagrams/$slug'
     | '/research/assets/$asset'
+    | '/systems/future/$slug'
     | '/research/assets'
+    | '/systems/future'
   id:
     | '__root__'
     | '/'
@@ -469,7 +491,9 @@ export interface FileRouteTypes {
     | '/systems/'
     | '/architecture/diagrams/$slug'
     | '/research/assets/$asset'
+    | '/systems/future/$slug'
     | '/research/assets/'
+    | '/systems/future/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -742,12 +766,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/systems/future/': {
+      id: '/systems/future/'
+      path: '/future'
+      fullPath: '/systems/future/'
+      preLoaderRoute: typeof SystemsFutureIndexRouteImport
+      parentRoute: typeof SystemsRoute
+    }
     '/research/assets/': {
       id: '/research/assets/'
       path: '/assets'
       fullPath: '/research/assets/'
       preLoaderRoute: typeof ResearchAssetsIndexRouteImport
       parentRoute: typeof ResearchRoute
+    }
+    '/systems/future/$slug': {
+      id: '/systems/future/$slug'
+      path: '/future/$slug'
+      fullPath: '/systems/future/$slug'
+      preLoaderRoute: typeof SystemsFutureSlugRouteImport
+      parentRoute: typeof SystemsRoute
     }
     '/research/assets/$asset': {
       id: '/research/assets/$asset'
@@ -867,11 +905,15 @@ const ResearchRouteWithChildren = ResearchRoute._addFileChildren(
 interface SystemsRouteChildren {
   SystemsSlugRoute: typeof SystemsSlugRoute
   SystemsIndexRoute: typeof SystemsIndexRoute
+  SystemsFutureSlugRoute: typeof SystemsFutureSlugRoute
+  SystemsFutureIndexRoute: typeof SystemsFutureIndexRoute
 }
 
 const SystemsRouteChildren: SystemsRouteChildren = {
   SystemsSlugRoute: SystemsSlugRoute,
   SystemsIndexRoute: SystemsIndexRoute,
+  SystemsFutureSlugRoute: SystemsFutureSlugRoute,
+  SystemsFutureIndexRoute: SystemsFutureIndexRoute,
 }
 
 const SystemsRouteWithChildren =

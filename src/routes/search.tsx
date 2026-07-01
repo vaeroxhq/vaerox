@@ -15,8 +15,8 @@ export const Route = createFileRoute("/search")({
 });
 
 const KIND_ORDER: EntityKind[] = [
-  "system", "project", "api", "adr", "incident",
-  "benchmark", "research", "handbook", "journal", "person", "team",
+  "system", "future", "project", "api", "adr", "incident",
+  "benchmark", "research", "dataset", "handbook", "journal", "person", "team",
 ];
 
 const RECENT_KEY = "vx.search.recent";
