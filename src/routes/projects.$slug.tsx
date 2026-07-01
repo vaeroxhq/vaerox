@@ -60,6 +60,7 @@ export const Route = createFileRoute("/projects/$slug")({
 function ProjectDetail() {
   const { project: p } = Route.useLoaderData();
   const dossier = getDossier(p.slug);
+  const extras = getDossierExtras(p.slug);
   const linkedSystem = SYSTEMS.find((s) => s.slug === p.slug);
 
   const tone =
@@ -131,6 +132,7 @@ function ProjectDetail() {
       {dossier && (
         <div className="grid grid-cols-1 gap-4 mb-8">
           <PhaseChecklist progress={dossier.progress} />
+          <EngineeringMetrics dossier={dossier} extras={extras} updated={p.updated} />
           <ProjectLinksStrip links={dossier.links} />
         </div>
       )}
@@ -148,6 +150,7 @@ function ProjectDetail() {
               <ValidationSection v={dossier.validation} />
               <DocumentationSection groups={docGroups} />
               <FutureWorkSection items={dossier.future} />
+              <ChallengesLessons extras={extras} />
             </>
           ) : (
             <p className="text-text-2 text-[14px]">Engineering dossier is being drafted for this project.</p>
