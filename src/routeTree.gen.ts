@@ -17,6 +17,7 @@ import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as PeopleRouteImport } from './routes/people'
 import { Route as JournalRouteImport } from './routes/journal'
 import { Route as IncidentsRouteImport } from './routes/incidents'
+import { Route as GraphRouteImport } from './routes/graph'
 import { Route as EngineeringRouteImport } from './routes/engineering'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BenchmarksRouteImport } from './routes/benchmarks'
@@ -74,6 +75,11 @@ const JournalRoute = JournalRouteImport.update({
 const IncidentsRoute = IncidentsRouteImport.update({
   id: '/incidents',
   path: '/incidents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GraphRoute = GraphRouteImport.update({
+  id: '/graph',
+  path: '/graph',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EngineeringRoute = EngineeringRouteImport.update({
@@ -175,6 +181,7 @@ export interface FileRoutesByFullPath {
   '/benchmarks': typeof BenchmarksRouteWithChildren
   '/contact': typeof ContactRoute
   '/engineering': typeof EngineeringRoute
+  '/graph': typeof GraphRoute
   '/incidents': typeof IncidentsRouteWithChildren
   '/journal': typeof JournalRouteWithChildren
   '/people': typeof PeopleRouteWithChildren
@@ -203,6 +210,7 @@ export interface FileRoutesByTo {
   '/benchmarks': typeof BenchmarksRouteWithChildren
   '/contact': typeof ContactRoute
   '/engineering': typeof EngineeringRoute
+  '/graph': typeof GraphRoute
   '/incidents': typeof IncidentsRouteWithChildren
   '/journal': typeof JournalRouteWithChildren
   '/people': typeof PeopleRouteWithChildren
@@ -232,6 +240,7 @@ export interface FileRoutesById {
   '/benchmarks': typeof BenchmarksRouteWithChildren
   '/contact': typeof ContactRoute
   '/engineering': typeof EngineeringRoute
+  '/graph': typeof GraphRoute
   '/incidents': typeof IncidentsRouteWithChildren
   '/journal': typeof JournalRouteWithChildren
   '/people': typeof PeopleRouteWithChildren
@@ -262,6 +271,7 @@ export interface FileRouteTypes {
     | '/benchmarks'
     | '/contact'
     | '/engineering'
+    | '/graph'
     | '/incidents'
     | '/journal'
     | '/people'
@@ -290,6 +300,7 @@ export interface FileRouteTypes {
     | '/benchmarks'
     | '/contact'
     | '/engineering'
+    | '/graph'
     | '/incidents'
     | '/journal'
     | '/people'
@@ -318,6 +329,7 @@ export interface FileRouteTypes {
     | '/benchmarks'
     | '/contact'
     | '/engineering'
+    | '/graph'
     | '/incidents'
     | '/journal'
     | '/people'
@@ -347,6 +359,7 @@ export interface RootRouteChildren {
   BenchmarksRoute: typeof BenchmarksRouteWithChildren
   ContactRoute: typeof ContactRoute
   EngineeringRoute: typeof EngineeringRoute
+  GraphRoute: typeof GraphRoute
   IncidentsRoute: typeof IncidentsRouteWithChildren
   JournalRoute: typeof JournalRouteWithChildren
   PeopleRoute: typeof PeopleRouteWithChildren
@@ -415,6 +428,13 @@ declare module '@tanstack/react-router' {
       path: '/incidents'
       fullPath: '/incidents'
       preLoaderRoute: typeof IncidentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/graph': {
+      id: '/graph'
+      path: '/graph'
+      fullPath: '/graph'
+      preLoaderRoute: typeof GraphRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/engineering': {
@@ -658,6 +678,7 @@ const rootRouteChildren: RootRouteChildren = {
   BenchmarksRoute: BenchmarksRouteWithChildren,
   ContactRoute: ContactRoute,
   EngineeringRoute: EngineeringRoute,
+  GraphRoute: GraphRoute,
   IncidentsRoute: IncidentsRouteWithChildren,
   JournalRoute: JournalRouteWithChildren,
   PeopleRoute: PeopleRouteWithChildren,
