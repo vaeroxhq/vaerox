@@ -30,7 +30,7 @@ function MaintainerPage() {
           { label: "Maintainer", value: "Solo" },
           { label: "Systems",    value: SYSTEMS.length.toString().padStart(2, "0") },
           { label: "ADRs",       value: ADRS.length.toString().padStart(2, "0") },
-          { label: "Incidents",  value: INCIDENTS.length.toString().padStart(2, "0") },
+          { label: "Projects",   value: PROJECTS.length.toString().padStart(2, "0") },
         ]}
       />
 
