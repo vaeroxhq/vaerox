@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
  * DocShell — 2-column grid (body + related rail) used by every
  * detail page. Rail collapses below the article on narrow viewports.
  */
-export function DocShell({ children, rail }: { children: ReactNode; rail: ReactNode }) {
+export function DocShell({ children, rail }: { children: ReactNode; rail?: ReactNode }) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-10">
       <div className="min-w-0">{children}</div>
