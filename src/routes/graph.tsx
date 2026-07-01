@@ -17,8 +17,9 @@ export const Route = createFileRoute("/graph")({
 });
 
 const ALL_KINDS: EntityKind[] = [
+const KIND_ORDER: EntityKind[] = [
   "system", "project", "adr", "incident", "benchmark",
-  "api", "research", "handbook", "journal", "person", "team",
+  "api", "research", "dataset", "handbook", "journal", "person", "team",
 ];
 
 const KIND_COLOR: Record<EntityKind, string> = {
@@ -29,6 +30,7 @@ const KIND_COLOR: Record<EntityKind, string> = {
   benchmark: "var(--text-2)",
   api:       "var(--text-2)",
   research:  "var(--text-2)",
+  dataset:   "var(--text-2)",
   handbook:  "var(--text-3)",
   journal:   "var(--text-3)",
   person:    "var(--text-2)",
