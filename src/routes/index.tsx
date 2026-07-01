@@ -24,12 +24,12 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <main className="min-h-dvh bg-canvas text-text-1 relative overflow-hidden">
-      {/* Structural watermark — the mark, subdued, anchored to the negative space */}
+      {/* Structural watermark — official mark, subdued, anchored to the negative space */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-24 top-24 hidden lg:block text-text-1/[0.035]"
+        className="pointer-events-none absolute -right-24 top-24 hidden lg:block opacity-[0.06]"
       >
-        <VaeroxMark size={640} strokeWidth={1.25} />
+        <VaeroxMark size={640} />
       </div>
 
       <div className="relative w-shell mx-auto px-6 md:px-10 lg:px-16">
@@ -125,7 +125,7 @@ function Index() {
           <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
             © VÆRØX · Engineering Journal
           </span>
-          <VaeroxMark size={14} strokeWidth={2} className="text-text-3" />
+          <VaeroxMark size={14} className="opacity-60" />
         </div>
       </div>
     </main>
