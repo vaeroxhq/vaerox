@@ -5,6 +5,7 @@ import { ProjectGrid } from "@/components/home/project-grid";
 import { EngineeringPrinciples } from "@/components/home/engineering-principles";
 import { KnowledgeGraphPreview } from "@/components/home/knowledge-graph-preview";
 import { RecentNotes } from "@/components/home/recent-notes";
+import { OperationsStrip } from "@/components/home/operations-strip";
 import { SectionRule } from "@/components/home/primitives";
 
 export const Route = createFileRoute("/")({
@@ -21,12 +22,6 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-/**
- * Phase 3 — Engineering Surface.
- * Homepage composed from data-driven modules. Visual language locked;
- * this pass adds functional sections (projects, principles, graph, notes)
- * and wires them to the command palette.
- */
 function Index() {
   return (
     <div className="bg-canvas text-text-1 relative overflow-hidden">
@@ -37,15 +32,19 @@ function Index() {
         <SectionRule label="§02 · Featured Systems" />
         <ProjectGrid />
 
-        <SectionRule label="§03 · Engineering Principles" />
+        <SectionRule label="§03 · Operations" />
+        <OperationsStrip />
+
+        <SectionRule label="§04 · Engineering Principles" />
         <EngineeringPrinciples />
 
-        <SectionRule label="§04 · Knowledge Graph" />
+        <SectionRule label="§05 · Knowledge Graph" />
         <KnowledgeGraphPreview />
 
-        <SectionRule label="§05 · Recent Notes" />
+        <SectionRule label="§06 · Recent Notes" />
         <RecentNotes />
       </div>
     </div>
   );
 }
+
