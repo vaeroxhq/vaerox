@@ -3,8 +3,8 @@ import { PROJECTS } from "@/lib/projects-data";
 import { SYSTEMS } from "@/lib/systems-data";
 import { getDossier } from "@/lib/dossiers-data";
 import { ADRS, DIAGRAMS } from "@/lib/architecture-data";
-import { JOURNAL_ENTRIES } from "@/lib/journal-data";
-import { RESEARCH_ENTRIES } from "@/lib/research-data";
+import { JOURNAL } from "@/lib/journal-data";
+import { RESEARCH } from "@/lib/research-data";
 import { APIS } from "@/lib/apis-data";
 import { BENCHMARKS } from "@/lib/benchmarks-data";
 import { PageHeader, SectionShell, StageDot } from "@/components/section/section-bits";
@@ -72,8 +72,8 @@ function ProjectDetail() {
   // Auto-resolve cross-links from other data sources
   const adrs = ADRS.filter((a) => a.systems.includes(p.slug));
   const diagrams = DIAGRAMS.filter((d) => d.systems.includes(p.slug));
-  const journal = JOURNAL_ENTRIES.filter((j) => j.tags.includes(p.slug));
-  const research = RESEARCH_ENTRIES.filter((r) => r.tags.includes(p.slug));
+  const journal = JOURNAL.filter((j) => j.tags.includes(p.slug));
+  const research = RESEARCH.filter((r) => r.tags.includes(p.slug));
   const apis = APIS.filter((a) => a.system === p.slug);
   const validations = BENCHMARKS.filter((b) => b.system === p.slug);
 
