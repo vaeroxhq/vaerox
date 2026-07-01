@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/command";
 import { NAV } from "@/lib/nav";
 import { useTheme } from "@/lib/theme";
+import { PROJECTS, NOTES } from "@/lib/home-data";
 
 type Ctx = { open: () => void };
 const PaletteCtx = createContext<Ctx | null>(null);
