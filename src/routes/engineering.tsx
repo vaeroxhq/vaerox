@@ -22,7 +22,7 @@ function EngineeringPage() {
       <PageHeader
         section="§ · Engineering"
         title="Engineering handbook."
-        summary="How we write, review, ship, and operate software at VÆRØX. Canonical standards, not aspirational ones. Each section is owned, dated, and versioned."
+        summary="The standards the lab itself follows — how software is written, reviewed, shipped, and operated at VÆRØX. Canonical, not aspirational. Each section is dated and versioned."
         meta={[
           { label: "Sections",  value: HANDBOOK.length.toString().padStart(2, "0") },
           { label: "Canonical", value: canonical.toString().padStart(2, "0") },
