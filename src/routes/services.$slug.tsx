@@ -29,7 +29,7 @@ export const Route = createFileRoute("/services/$slug")({
 });
 
 function ServiceDetail() {
-  const s = Route.useLoaderData();
+  const s = Route.useLoaderData() as Service;
   const projects = PROJECTS.filter((p) => s.relatedProjects.includes(p.slug));
 
   return (
