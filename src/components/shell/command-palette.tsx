@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/command";
 import { NAV } from "@/lib/nav";
 import { useTheme } from "@/lib/theme";
+import { PROJECTS, NOTES } from "@/lib/home-data";
 
 type Ctx = { open: () => void };
 const PaletteCtx = createContext<Ctx | null>(null);
@@ -58,6 +59,36 @@ export function CommandPaletteProvider({ children }: { children: ReactNode }) {
           <CommandGroup heading="Navigate">
             {NAV.filter((n) => n.section === "Primary").map((n) => (
               <PaletteItem key={n.to} label={n.label} hint={n.hint} onSelect={() => go(n.to)} />
+            ))}
+          </CommandGroup>
+
+          <CommandGroup heading="Projects">
+            {PROJECTS.map((p) => (
+              <PaletteItem
+                key={p.slug}
+                label={p.name}
+                hint={`${p.status} · ${p.stack.join(" · ")}`}
+                onSelect={() => go("/projects")}
+              />
+            ))}
+          </CommandGroup>
+
+          <CommandGroup heading="Research">
+            <PaletteItem label="Browse research" hint="Papers, benchmarks, notes" onSelect={() => go("/research")} />
+          </CommandGroup>
+
+          <CommandGroup heading="Architecture">
+            <PaletteItem label="Browse architecture" hint="Diagrams & decision records" onSelect={() => go("/architecture")} />
+          </CommandGroup>
+
+          <CommandGroup heading="Journal">
+            {NOTES.map((n) => (
+              <PaletteItem
+                key={n.slug}
+                label={n.title}
+                hint={`${n.date} · ${n.category} · ${n.readingMinutes}m`}
+                onSelect={() => go("/journal")}
+              />
             ))}
           </CommandGroup>
 
