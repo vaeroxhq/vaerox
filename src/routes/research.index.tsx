@@ -71,21 +71,22 @@ function ResearchIndex() {
       />
 
       <Link
-        to="/research/datasets"
+        to="/research/assets"
         className="group block hairline bg-canvas p-5 mb-6 transition-micro hover:bg-surface"
       >
         <div className="flex items-baseline justify-between gap-6 flex-wrap">
           <div className="min-w-0">
             <div className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-              § · Research / Datasets
+              § · Research / Assets
             </div>
             <div className="mt-2 font-display text-[20px] text-text-1 tracking-[-0.015em]">
-              Datasets &amp; Research Assets
+              Research Assets
             </div>
             <p className="mt-2 text-[13.5px] text-text-2 leading-[1.65] max-w-[68ch]">
-              Canonical registry of datasets the lab has evaluated, prepared, or
-              built pipelines around — medical imaging, agriculture, industrial
-              vision, remote sensing, and general computer vision.
+              Canonical registry of datasets, evaluation corpora, annotation
+              pipelines, and benchmark resources across medical imaging,
+              agriculture, industrial vision, remote sensing, and general
+              computer vision.
             </p>
           </div>
           <div className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] group-hover:text-text-1">
