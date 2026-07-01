@@ -236,7 +236,12 @@ function GraphPage() {
             </button>
           </div>
         </div>
-        <div className="hairline-t flex flex-wrap">
+        <div className="hairline-t flex flex-wrap items-stretch">
+          <div className="px-3 py-2 font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] border-r border-line-1 flex items-center gap-2">
+            <span className="inline-block w-2.5 h-2.5 border border-text-1" /> Current
+            <span className="mx-1 text-text-3">·</span>
+            <span className="inline-block w-2.5 h-2.5 border border-text-3" style={{ borderStyle: "dashed" }} /> Future
+          </div>
           {ALL_KINDS.map((k) => {
             const on = enabled.has(k);
             return (
@@ -253,6 +258,7 @@ function GraphPage() {
           })}
         </div>
       </div>
+
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-4">
         {/* Graph canvas */}
