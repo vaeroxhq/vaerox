@@ -1,9 +1,9 @@
 import { DiamondGlyph, CornerFramed, MetaCell } from "./primitives";
 
 /**
- * Hero — studio positioning. VÆRØX is an independent AI engineering studio
- * that designs and builds intelligent software. The maintainer's name lives
- * on the About page, not here.
+ * Hero — studio positioning. VÆRØX is an independent AI & Software
+ * Engineering Studio building modern systems for startups, SMBs, and
+ * enterprise teams. Founder attribution stays on the About page.
  */
 export function Hero() {
   return (
@@ -11,30 +11,35 @@ export function Hero() {
       <div className="flex items-center gap-3 mb-14">
         <DiamondGlyph />
         <span className="font-mono text-[11px] text-text-3 uppercase tracking-[0.14em]">
-          §01 · Studio
+          §01 · AI &amp; Software Engineering Studio
         </span>
       </div>
 
-      <h1 className="font-display text-[52px] md:text-[80px] lg:text-[96px] leading-[0.98] tracking-[-0.032em] max-w-[980px]">
-        AI systems.
+      <h1 className="font-display text-[52px] md:text-[80px] lg:text-[96px] leading-[0.98] tracking-[-0.032em] max-w-[1040px]">
+        Modern software,
         <br />
-        <span className="text-text-2">Software engineering.</span>
-        <br />
-        <span className="text-text-2">Automation.</span>
+        <span className="text-text-2">engineered end-to-end.</span>
       </h1>
 
-      <p className="mt-12 max-w-[680px] text-text-2 text-[15px] leading-[1.65]">
-        VÆRØX is an independent AI engineering studio that designs and ships
-        intelligent software — AI agents, LLM applications, RAG systems,
-        MCP servers, workflow automation, and production-grade backend
-        platforms. Every project on this site is engineered, documented, and
-        maintained under the same discipline the studio brings to client work.
+      <p className="mt-12 max-w-[700px] text-text-2 text-[15px] leading-[1.65]">
+        VÆRØX is an independent AI &amp; software engineering studio. We design,
+        build, deploy and maintain modern software systems — AI agents, SaaS
+        products, internal tools, dashboards, backend platforms, and workflow
+        automation — for startups, growing businesses and enterprise teams.
+        Every system on this site is engineered under the same discipline we
+        bring to client work.
       </p>
 
       <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
         <a
-          href="/services"
+          href="/contact"
           className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 transition-micro"
+        >
+          Book a discovery call →
+        </a>
+        <a
+          href="/services"
+          className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1 transition-micro"
         >
           Services →
         </a>
@@ -45,16 +50,16 @@ export function Hero() {
           Case studies →
         </a>
         <a
-          href="/capabilities"
+          href="/industries"
           className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1 transition-micro"
         >
-          Capabilities →
+          Industries →
         </a>
         <a
-          href="/contact"
+          href="/engagements"
           className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1 transition-micro"
         >
-          Start a conversation →
+          Engagement models →
         </a>
       </div>
 
@@ -67,8 +72,8 @@ export function Hero() {
         <dl className="grid grid-cols-2 md:grid-cols-4 gap-px bg-line-1">
           <MetaCell label="Studio" value="VÆRØX" />
           <MetaCell label="Model" value="Independent" />
-          <MetaCell label="Cadence" value="Async" />
-          <MetaCell label="Updated" value="2026-07-01" />
+          <MetaCell label="Clients" value="Startup → Enterprise" />
+          <MetaCell label="Contact" value="hello@vaerox.dev" />
         </dl>
       </CornerFramed>
     </section>
