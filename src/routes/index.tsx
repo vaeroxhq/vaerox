@@ -339,10 +339,7 @@ function BlueprintOverlay() {
       </svg>
 
       {/* Official mark — embedded in the drawing */}
-      <div
-        className="absolute"
-        style={{ top: 336, right: 144, opacity: 0.06 }}
-      >
+      <div className="absolute" style={{ top: 336, right: 144, opacity: 0.06 }}>
         <VaeroxMark size={400} />
       </div>
 
