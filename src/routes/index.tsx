@@ -91,23 +91,25 @@ function Index() {
         {/* Section rule — diamond marker centered on the hairline */}
         <SectionRule label="§02 · Structure" />
 
-        {/* Placeholder domains row — proves the geometric language extends */}
-        <section className="py-14 grid grid-cols-1 md:grid-cols-3 gap-px bg-line-1 hairline">
-          <DomainCell
-            index="01"
-            title="Enterprise AI"
-            note="Model serving, evals, agent runtimes."
-          />
-          <DomainCell
-            index="02"
-            title="Platform"
-            note="Multi-tenant control planes, IaC."
-          />
-          <DomainCell
-            index="03"
-            title="Infrastructure"
-            note="Distributed storage, observability."
-          />
+        {/* Domains row — proves the geometric language extends */}
+        <section className="mt-10 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-line-1 hairline">
+            <DomainCell
+              index="01"
+              title="Enterprise AI"
+              note="Model serving, evals, agent runtimes."
+            />
+            <DomainCell
+              index="02"
+              title="Platform"
+              note="Multi-tenant control planes, IaC."
+            />
+            <DomainCell
+              index="03"
+              title="Infrastructure"
+              note="Distributed storage, observability."
+            />
+          </div>
         </section>
 
         {/* Revision footer — structural continuation */}
