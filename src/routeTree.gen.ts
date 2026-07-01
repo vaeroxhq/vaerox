@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TeamsRouteImport } from './routes/teams'
 import { Route as SystemsRouteImport } from './routes/systems'
+import { Route as SearchRouteImport } from './routes/search'
 import { Route as ResearchRouteImport } from './routes/research'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as PeopleRouteImport } from './routes/people'
@@ -43,6 +44,11 @@ const TeamsRoute = TeamsRouteImport.update({
 const SystemsRoute = SystemsRouteImport.update({
   id: '/systems',
   path: '/systems',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResearchRoute = ResearchRouteImport.update({
@@ -174,6 +180,7 @@ export interface FileRoutesByFullPath {
   '/people': typeof PeopleRouteWithChildren
   '/projects': typeof ProjectsRouteWithChildren
   '/research': typeof ResearchRouteWithChildren
+  '/search': typeof SearchRoute
   '/systems': typeof SystemsRouteWithChildren
   '/teams': typeof TeamsRouteWithChildren
   '/api/$slug': typeof ApiSlugRoute
@@ -201,6 +208,7 @@ export interface FileRoutesByTo {
   '/people': typeof PeopleRouteWithChildren
   '/projects': typeof ProjectsRouteWithChildren
   '/research': typeof ResearchRouteWithChildren
+  '/search': typeof SearchRoute
   '/systems': typeof SystemsRouteWithChildren
   '/teams': typeof TeamsRouteWithChildren
   '/api/$slug': typeof ApiSlugRoute
@@ -229,6 +237,7 @@ export interface FileRoutesById {
   '/people': typeof PeopleRouteWithChildren
   '/projects': typeof ProjectsRouteWithChildren
   '/research': typeof ResearchRouteWithChildren
+  '/search': typeof SearchRoute
   '/systems': typeof SystemsRouteWithChildren
   '/teams': typeof TeamsRouteWithChildren
   '/api/$slug': typeof ApiSlugRoute
@@ -258,6 +267,7 @@ export interface FileRouteTypes {
     | '/people'
     | '/projects'
     | '/research'
+    | '/search'
     | '/systems'
     | '/teams'
     | '/api/$slug'
@@ -285,6 +295,7 @@ export interface FileRouteTypes {
     | '/people'
     | '/projects'
     | '/research'
+    | '/search'
     | '/systems'
     | '/teams'
     | '/api/$slug'
@@ -312,6 +323,7 @@ export interface FileRouteTypes {
     | '/people'
     | '/projects'
     | '/research'
+    | '/search'
     | '/systems'
     | '/teams'
     | '/api/$slug'
@@ -340,6 +352,7 @@ export interface RootRouteChildren {
   PeopleRoute: typeof PeopleRouteWithChildren
   ProjectsRoute: typeof ProjectsRouteWithChildren
   ResearchRoute: typeof ResearchRouteWithChildren
+  SearchRoute: typeof SearchRoute
   SystemsRoute: typeof SystemsRouteWithChildren
   TeamsRoute: typeof TeamsRouteWithChildren
   ApiSlugRoute: typeof ApiSlugRoute
@@ -360,6 +373,13 @@ declare module '@tanstack/react-router' {
       path: '/systems'
       fullPath: '/systems'
       preLoaderRoute: typeof SystemsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/research': {
@@ -643,6 +663,7 @@ const rootRouteChildren: RootRouteChildren = {
   PeopleRoute: PeopleRouteWithChildren,
   ProjectsRoute: ProjectsRouteWithChildren,
   ResearchRoute: ResearchRouteWithChildren,
+  SearchRoute: SearchRoute,
   SystemsRoute: SystemsRouteWithChildren,
   TeamsRoute: TeamsRouteWithChildren,
   ApiSlugRoute: ApiSlugRoute,
