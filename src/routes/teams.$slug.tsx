@@ -41,8 +41,8 @@ function TeamDetail() {
   const { team: t } = Route.useLoaderData();
   const lead = PEOPLE.find((p) => p.slug === t.lead);
   const members = t.memberSlugs.map((s) => PEOPLE.find((p) => p.slug === s)).filter((x) => Boolean(x)) as typeof PEOPLE;
-  const systems = t.systemsOwned.map((s) => SYSTEMS.find((x) => x.slug === s)).filter((x) => Boolean(x));
-  const projects = t.currentProjects.map((s) => PROJECTS.find((x) => x.slug === s)).filter((x) => Boolean(x));
+  const systems = t.systemsOwned.map((s: string) => SYSTEMS.find((x) => x.slug === s)).filter((x): x is (typeof SYSTEMS)[number] => Boolean(x));
+  const projects = t.currentProjects.map((s: string) => PROJECTS.find((x) => x.slug === s)).filter((x): x is (typeof PROJECTS)[number] => Boolean(x));
 
   const idx = TEAMS.findIndex((x) => x.slug === t.slug);
   const prev = TEAMS[idx - 1];
@@ -72,7 +72,7 @@ function TeamDetail() {
         <article className="max-w-[760px]">
           <DocBlock heading="Responsibilities">
             <ul className="hairline bg-canvas">
-              {t.responsibilities.map((r, i) => (
+              {t.responsibilities.map((r: string, i: number) => (
                 <li key={r} className={`px-4 py-3 flex items-baseline gap-4 ${i < t.responsibilities.length - 1 ? "hairline-b" : ""}`}>
                   <span className="font-mono text-[10px] text-text-3 tabular w-6 shrink-0">{(i + 1).toString().padStart(2, "0")}</span>
                   <span className="text-[13.5px] text-text-1 leading-[1.6]">{r}</span>
@@ -83,7 +83,7 @@ function TeamDetail() {
 
           <DocBlock heading="Members">
             <div className="hairline bg-canvas">
-              {members.map((m, i) => (
+              {members.map((m, i: number) => (
                 <Link
                   key={m.slug}
                   to="/people/$slug"
@@ -103,7 +103,7 @@ function TeamDetail() {
           {systems.length > 0 && (
             <DocBlock heading="Systems owned">
               <div className="hairline bg-canvas">
-                {systems.map((s, i) => (
+                {systems.map((s, i: number) => (
                   <Link
                     key={s!.slug}
                     to="/systems/$slug"
@@ -124,7 +124,7 @@ function TeamDetail() {
           {projects.length > 0 && (
             <DocBlock heading="Current projects">
               <div className="hairline bg-canvas">
-                {projects.map((p, i) => (
+                {projects.map((p, i: number) => (
                   <Link
                     key={p!.slug}
                     to="/projects/$slug"

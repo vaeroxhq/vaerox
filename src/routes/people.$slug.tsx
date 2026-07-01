@@ -63,9 +63,9 @@ function PersonDetail() {
     const rr = RESEARCH.find((x) => x.slug === r);
     if (rr) events.push({ date: rr.published, kind: "Research", title: rr.title, href: `/research/${rr.slug}`, kicker: "RES" });
   }
-  events.sort((a, b) => b.date.localeCompare(a.date));
+  events.sort((a: Event, b: Event) => b.date.localeCompare(a.date));
 
-  const projects = p.projectsContributed.map((s) => PROJECTS.find((x) => x.slug === s)).filter((x) => Boolean(x));
+  const projects = p.projectsContributed.map((s: string) => PROJECTS.find((x) => x.slug === s)).filter((x): x is (typeof PROJECTS)[number] => Boolean(x));
 
   const idx = PEOPLE.findIndex((x) => x.slug === p.slug);
   const prev = PEOPLE[idx - 1];
@@ -104,7 +104,7 @@ function PersonDetail() {
           {projects.length > 0 && (
             <DocBlock heading="Projects">
               <div className="hairline bg-canvas">
-                {projects.map((pr, i) => (
+                {projects.map((pr, i: number) => (
                   <Link
                     key={pr!.slug}
                     to="/projects/$slug"
