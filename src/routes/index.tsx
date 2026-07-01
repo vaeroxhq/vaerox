@@ -1,7 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { BlueprintOverlay } from "@/components/home/blueprint-overlay";
 import { Hero } from "@/components/home/hero";
-import { DomainGrid } from "@/components/home/domain-grid";
+import { ProjectGrid } from "@/components/home/project-grid";
+import { EngineeringPrinciples } from "@/components/home/engineering-principles";
+import { KnowledgeGraphPreview } from "@/components/home/knowledge-graph-preview";
+import { RecentNotes } from "@/components/home/recent-notes";
 import { SectionRule } from "@/components/home/primitives";
 
 export const Route = createFileRoute("/")({
@@ -19,10 +22,10 @@ export const Route = createFileRoute("/")({
 });
 
 /**
- * Phase 2 — Layout & Navigation Foundation.
- * Homepage composes reusable modules. No visual changes beyond:
- * (1) tightened hero measure, (2) hairline hierarchy inside domain cards.
- * Nav logo bump and shell primitives live in their own modules.
+ * Phase 3 — Engineering Surface.
+ * Homepage composed from data-driven modules. Visual language locked;
+ * this pass adds functional sections (projects, principles, graph, notes)
+ * and wires them to the command palette.
  */
 function Index() {
   return (
@@ -30,8 +33,18 @@ function Index() {
       <BlueprintOverlay />
       <div className="relative w-shell mx-auto px-6 md:px-10 lg:px-16">
         <Hero />
-        <SectionRule label="§02 · Structure" />
-        <DomainGrid />
+
+        <SectionRule label="§02 · Featured Systems" />
+        <ProjectGrid />
+
+        <SectionRule label="§03 · Engineering Principles" />
+        <EngineeringPrinciples />
+
+        <SectionRule label="§04 · Knowledge Graph" />
+        <KnowledgeGraphPreview />
+
+        <SectionRule label="§05 · Recent Notes" />
+        <RecentNotes />
       </div>
     </div>
   );
