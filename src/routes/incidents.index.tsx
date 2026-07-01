@@ -6,7 +6,7 @@ import { Breadcrumbs } from "@/components/doc/breadcrumbs";
 
 const FILTERS = ["All", "SEV-1", "SEV-2", "SEV-3", "Resolved", "Open"] as const;
 
-export const Route = createFileRoute("/incidents")({
+export const Route = createFileRoute("/incidents/")({
   head: () => ({
     meta: [
       { title: "Incidents — VÆRØX" },

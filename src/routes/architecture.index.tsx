@@ -6,7 +6,7 @@ import { OpsTag } from "@/components/ops/ops-tag";
 
 const FILTERS = ["All", "Accepted", "Proposed", "Superseded", "Deprecated", "Draft"] as const;
 
-export const Route = createFileRoute("/architecture")({
+export const Route = createFileRoute("/architecture/")({
   head: () => ({
     meta: [
       { title: "Architecture — VÆRØX" },

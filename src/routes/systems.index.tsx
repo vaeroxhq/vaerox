@@ -5,7 +5,7 @@ import { PageHeader, Toolbar, SectionShell, StageDot } from "@/components/sectio
 
 const FILTERS: (SystemStage | "All")[] = ["All", "Production", "Prototype", "Research", "Archived"];
 
-export const Route = createFileRoute("/systems")({
+export const Route = createFileRoute("/systems/")({
   head: () => ({
     meta: [
       { title: "Systems — VÆRØX" },

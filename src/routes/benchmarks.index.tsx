@@ -3,7 +3,7 @@ import { BENCHMARKS, benchmarkFormatValue } from "@/lib/benchmarks-data";
 import { PageHeader, SectionShell } from "@/components/section/section-bits";
 import { Breadcrumbs } from "@/components/doc/breadcrumbs";
 
-export const Route = createFileRoute("/benchmarks")({
+export const Route = createFileRoute("/benchmarks/")({
   head: () => ({
     meta: [
       { title: "Benchmarks — VÆRØX" },
