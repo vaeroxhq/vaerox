@@ -22,8 +22,9 @@ export function useCommandPalette() {
 }
 
 const GROUP_ORDER: EntityKind[] = [
-  "system", "adr", "incident", "benchmark", "api",
-  "project", "research", "journal", "handbook",
+  "system", "project", "team", "person",
+  "adr", "incident", "benchmark", "api",
+  "research", "journal", "handbook",
 ];
 
 export function CommandPaletteProvider({ children }: { children: ReactNode }) {

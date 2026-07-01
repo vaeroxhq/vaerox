@@ -9,14 +9,19 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TimelineRouteImport } from './routes/timeline'
 import { Route as TeamsRouteImport } from './routes/teams'
 import { Route as SystemsRouteImport } from './routes/systems'
+import { Route as SearchRouteImport } from './routes/search'
 import { Route as ResearchRouteImport } from './routes/research'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as PeopleRouteImport } from './routes/people'
 import { Route as JournalRouteImport } from './routes/journal'
 import { Route as IncidentsRouteImport } from './routes/incidents'
+import { Route as GraphRouteImport } from './routes/graph'
+import { Route as ExplorerRouteImport } from './routes/explorer'
 import { Route as EngineeringRouteImport } from './routes/engineering'
+import { Route as DashboardsRouteImport } from './routes/dashboards'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BenchmarksRouteImport } from './routes/benchmarks'
 import { Route as ArchitectureRouteImport } from './routes/architecture'
@@ -35,6 +40,11 @@ import { Route as ArchitectureAdrRouteImport } from './routes/architecture.$adr'
 import { Route as ApiSlugRouteImport } from './routes/api.$slug'
 import { Route as ArchitectureDiagramsSlugRouteImport } from './routes/architecture.diagrams.$slug'
 
+const TimelineRoute = TimelineRouteImport.update({
+  id: '/timeline',
+  path: '/timeline',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TeamsRoute = TeamsRouteImport.update({
   id: '/teams',
   path: '/teams',
@@ -43,6 +53,11 @@ const TeamsRoute = TeamsRouteImport.update({
 const SystemsRoute = SystemsRouteImport.update({
   id: '/systems',
   path: '/systems',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SearchRoute = SearchRouteImport.update({
+  id: '/search',
+  path: '/search',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ResearchRoute = ResearchRouteImport.update({
@@ -70,9 +85,24 @@ const IncidentsRoute = IncidentsRouteImport.update({
   path: '/incidents',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GraphRoute = GraphRouteImport.update({
+  id: '/graph',
+  path: '/graph',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExplorerRoute = ExplorerRouteImport.update({
+  id: '/explorer',
+  path: '/explorer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EngineeringRoute = EngineeringRouteImport.update({
   id: '/engineering',
   path: '/engineering',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardsRoute = DashboardsRouteImport.update({
+  id: '/dashboards',
+  path: '/dashboards',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -168,14 +198,19 @@ export interface FileRoutesByFullPath {
   '/architecture': typeof ArchitectureRouteWithChildren
   '/benchmarks': typeof BenchmarksRouteWithChildren
   '/contact': typeof ContactRoute
+  '/dashboards': typeof DashboardsRoute
   '/engineering': typeof EngineeringRoute
+  '/explorer': typeof ExplorerRoute
+  '/graph': typeof GraphRoute
   '/incidents': typeof IncidentsRouteWithChildren
   '/journal': typeof JournalRouteWithChildren
   '/people': typeof PeopleRouteWithChildren
   '/projects': typeof ProjectsRouteWithChildren
   '/research': typeof ResearchRouteWithChildren
+  '/search': typeof SearchRoute
   '/systems': typeof SystemsRouteWithChildren
   '/teams': typeof TeamsRouteWithChildren
+  '/timeline': typeof TimelineRoute
   '/api/$slug': typeof ApiSlugRoute
   '/architecture/$adr': typeof ArchitectureAdrRoute
   '/benchmarks/$slug': typeof BenchmarksSlugRoute
@@ -195,14 +230,19 @@ export interface FileRoutesByTo {
   '/architecture': typeof ArchitectureRouteWithChildren
   '/benchmarks': typeof BenchmarksRouteWithChildren
   '/contact': typeof ContactRoute
+  '/dashboards': typeof DashboardsRoute
   '/engineering': typeof EngineeringRoute
+  '/explorer': typeof ExplorerRoute
+  '/graph': typeof GraphRoute
   '/incidents': typeof IncidentsRouteWithChildren
   '/journal': typeof JournalRouteWithChildren
   '/people': typeof PeopleRouteWithChildren
   '/projects': typeof ProjectsRouteWithChildren
   '/research': typeof ResearchRouteWithChildren
+  '/search': typeof SearchRoute
   '/systems': typeof SystemsRouteWithChildren
   '/teams': typeof TeamsRouteWithChildren
+  '/timeline': typeof TimelineRoute
   '/api/$slug': typeof ApiSlugRoute
   '/architecture/$adr': typeof ArchitectureAdrRoute
   '/benchmarks/$slug': typeof BenchmarksSlugRoute
@@ -223,14 +263,19 @@ export interface FileRoutesById {
   '/architecture': typeof ArchitectureRouteWithChildren
   '/benchmarks': typeof BenchmarksRouteWithChildren
   '/contact': typeof ContactRoute
+  '/dashboards': typeof DashboardsRoute
   '/engineering': typeof EngineeringRoute
+  '/explorer': typeof ExplorerRoute
+  '/graph': typeof GraphRoute
   '/incidents': typeof IncidentsRouteWithChildren
   '/journal': typeof JournalRouteWithChildren
   '/people': typeof PeopleRouteWithChildren
   '/projects': typeof ProjectsRouteWithChildren
   '/research': typeof ResearchRouteWithChildren
+  '/search': typeof SearchRoute
   '/systems': typeof SystemsRouteWithChildren
   '/teams': typeof TeamsRouteWithChildren
+  '/timeline': typeof TimelineRoute
   '/api/$slug': typeof ApiSlugRoute
   '/architecture/$adr': typeof ArchitectureAdrRoute
   '/benchmarks/$slug': typeof BenchmarksSlugRoute
@@ -252,14 +297,19 @@ export interface FileRouteTypes {
     | '/architecture'
     | '/benchmarks'
     | '/contact'
+    | '/dashboards'
     | '/engineering'
+    | '/explorer'
+    | '/graph'
     | '/incidents'
     | '/journal'
     | '/people'
     | '/projects'
     | '/research'
+    | '/search'
     | '/systems'
     | '/teams'
+    | '/timeline'
     | '/api/$slug'
     | '/architecture/$adr'
     | '/benchmarks/$slug'
@@ -279,14 +329,19 @@ export interface FileRouteTypes {
     | '/architecture'
     | '/benchmarks'
     | '/contact'
+    | '/dashboards'
     | '/engineering'
+    | '/explorer'
+    | '/graph'
     | '/incidents'
     | '/journal'
     | '/people'
     | '/projects'
     | '/research'
+    | '/search'
     | '/systems'
     | '/teams'
+    | '/timeline'
     | '/api/$slug'
     | '/architecture/$adr'
     | '/benchmarks/$slug'
@@ -306,14 +361,19 @@ export interface FileRouteTypes {
     | '/architecture'
     | '/benchmarks'
     | '/contact'
+    | '/dashboards'
     | '/engineering'
+    | '/explorer'
+    | '/graph'
     | '/incidents'
     | '/journal'
     | '/people'
     | '/projects'
     | '/research'
+    | '/search'
     | '/systems'
     | '/teams'
+    | '/timeline'
     | '/api/$slug'
     | '/architecture/$adr'
     | '/benchmarks/$slug'
@@ -334,20 +394,32 @@ export interface RootRouteChildren {
   ArchitectureRoute: typeof ArchitectureRouteWithChildren
   BenchmarksRoute: typeof BenchmarksRouteWithChildren
   ContactRoute: typeof ContactRoute
+  DashboardsRoute: typeof DashboardsRoute
   EngineeringRoute: typeof EngineeringRoute
+  ExplorerRoute: typeof ExplorerRoute
+  GraphRoute: typeof GraphRoute
   IncidentsRoute: typeof IncidentsRouteWithChildren
   JournalRoute: typeof JournalRouteWithChildren
   PeopleRoute: typeof PeopleRouteWithChildren
   ProjectsRoute: typeof ProjectsRouteWithChildren
   ResearchRoute: typeof ResearchRouteWithChildren
+  SearchRoute: typeof SearchRoute
   SystemsRoute: typeof SystemsRouteWithChildren
   TeamsRoute: typeof TeamsRouteWithChildren
+  TimelineRoute: typeof TimelineRoute
   ApiSlugRoute: typeof ApiSlugRoute
   ApiIndexRoute: typeof ApiIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/timeline': {
+      id: '/timeline'
+      path: '/timeline'
+      fullPath: '/timeline'
+      preLoaderRoute: typeof TimelineRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/teams': {
       id: '/teams'
       path: '/teams'
@@ -360,6 +432,13 @@ declare module '@tanstack/react-router' {
       path: '/systems'
       fullPath: '/systems'
       preLoaderRoute: typeof SystemsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/search': {
+      id: '/search'
+      path: '/search'
+      fullPath: '/search'
+      preLoaderRoute: typeof SearchRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/research': {
@@ -397,11 +476,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IncidentsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/graph': {
+      id: '/graph'
+      path: '/graph'
+      fullPath: '/graph'
+      preLoaderRoute: typeof GraphRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/explorer': {
+      id: '/explorer'
+      path: '/explorer'
+      fullPath: '/explorer'
+      preLoaderRoute: typeof ExplorerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/engineering': {
       id: '/engineering'
       path: '/engineering'
       fullPath: '/engineering'
       preLoaderRoute: typeof EngineeringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboards': {
+      id: '/dashboards'
+      path: '/dashboards'
+      fullPath: '/dashboards'
+      preLoaderRoute: typeof DashboardsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -637,17 +737,32 @@ const rootRouteChildren: RootRouteChildren = {
   ArchitectureRoute: ArchitectureRouteWithChildren,
   BenchmarksRoute: BenchmarksRouteWithChildren,
   ContactRoute: ContactRoute,
+  DashboardsRoute: DashboardsRoute,
   EngineeringRoute: EngineeringRoute,
+  ExplorerRoute: ExplorerRoute,
+  GraphRoute: GraphRoute,
   IncidentsRoute: IncidentsRouteWithChildren,
   JournalRoute: JournalRouteWithChildren,
   PeopleRoute: PeopleRouteWithChildren,
   ProjectsRoute: ProjectsRouteWithChildren,
   ResearchRoute: ResearchRouteWithChildren,
+  SearchRoute: SearchRoute,
   SystemsRoute: SystemsRouteWithChildren,
   TeamsRoute: TeamsRouteWithChildren,
+  TimelineRoute: TimelineRoute,
   ApiSlugRoute: ApiSlugRoute,
   ApiIndexRoute: ApiIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

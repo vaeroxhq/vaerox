@@ -328,6 +328,35 @@ export function entitiesOfKind(kind: EntityKind): Entity[] {
   return allEntities().filter((e) => e.kind === kind);
 }
 
+export function allEdges(): { a: string; b: string }[] {
+  const seen = new Set<string>();
+  const out: { a: string; b: string }[] = [];
+  for (const [ka, set] of relations) {
+    for (const kb of set) {
+      const [x, y] = ka < kb ? [ka, kb] : [kb, ka];
+      const id = `${x}|${y}`;
+      if (seen.has(id)) continue;
+      seen.add(id);
+      out.push({ a: x, b: y });
+    }
+  }
+  return out;
+}
+
+export function relationCount(kind: EntityKind, id: string): number {
+  return relations.get(key(kind, id))?.size ?? 0;
+}
+
+export function parseKey(k: string): EntityRef | null {
+  const i = k.indexOf(":");
+  if (i < 0) return null;
+  return { kind: k.slice(0, i) as EntityKind, id: k.slice(i + 1) };
+}
+
+export function entityByKey(k: string): Entity | undefined {
+  return entities.get(k);
+}
+
 export const KIND_LABEL: Record<EntityKind, string> = {
   system: "System",
   project: "Project",
