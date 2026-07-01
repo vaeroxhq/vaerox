@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { DocShell } from "@/components/doc/doc-shell";
 
 export const Route = createFileRoute("/incidents/")({
   head: () => ({
@@ -13,18 +12,15 @@ export const Route = createFileRoute("/incidents/")({
 
 function IncidentsIndex() {
   return (
-    <DocShell
-      kicker="INC"
-      title="Incidents"
-      lede="No production incidents recorded."
-      updated="2026-07-01"
-      owner="Mayank Sharma"
-      breadcrumbs={[{ label: "Home", to: "/" }, { label: "Incidents" }]}
-    >
-      <div className="mt-8 border border-hairline p-6 font-mono text-[13px] leading-[1.7] text-text-3">
-        <p className="mb-3 text-text-1">Every VÆRØX system is currently in Building, Prototype, or Research stage.</p>
-        <p>Because nothing runs in production, there are no genuine incidents to publish. Engineering challenges, tradeoffs, and lessons learned are documented on the individual system pages and in Development Logs under Future Systems.</p>
+    <main className="mx-auto max-w-[960px] px-6 py-12">
+      <div className="font-mono text-[10px] text-text-3 uppercase tracking-[0.18em] mb-3">INC · Incidents</div>
+      <h1 className="text-3xl font-medium tracking-tight text-text-1 mb-3">No production incidents recorded</h1>
+      <p className="text-text-2 max-w-[640px] mb-8">
+        Every VÆRØX system is currently in Building, Prototype, or Research stage.
+      </p>
+      <div className="border border-hairline p-6 font-mono text-[13px] leading-[1.7] text-text-3">
+        Because nothing runs in production, there are no genuine incidents to publish. Engineering challenges, tradeoffs, and lessons learned are documented on the individual system pages and in Development Logs under Future Systems.
       </div>
-    </DocShell>
+    </main>
   );
 }
