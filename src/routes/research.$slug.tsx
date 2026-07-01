@@ -68,7 +68,7 @@ function ResearchDetail() {
           </DocBlock>
           <DocBlock heading="Tags">
             <ul className="flex items-center gap-2 flex-wrap">
-              {r.tags.map((t) => (
+              {r.tags.map((t: string) => (
                 <li key={t} className="hairline px-2 py-[2px] font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">{t}</li>
               ))}
             </ul>

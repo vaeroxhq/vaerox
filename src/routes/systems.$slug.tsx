@@ -83,7 +83,7 @@ function SystemDetail() {
 
           <DocBlock heading="Stack">
             <div className="hairline bg-canvas">
-              {s.stack.map((t, i) => (
+              {s.stack.map((t: string, i: number) => (
                 <div key={t} className={`px-4 py-3 flex items-baseline justify-between ${i < s.stack.length - 1 ? "hairline-b" : ""}`}>
                   <span className="font-mono text-[12px] text-text-1 tabular">{t}</span>
                   <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">runtime · {i === 0 ? "primary" : "supporting"}</span>

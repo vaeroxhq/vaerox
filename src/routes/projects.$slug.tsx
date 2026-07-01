@@ -83,7 +83,7 @@ function ProjectDetail() {
 
           <DocBlock heading="Stack">
             <ul className="grid grid-cols-2 gap-px bg-line-1 hairline">
-              {p.stack.map((s) => (
+              {p.stack.map((s: string) => (
                 <li key={s} className="bg-canvas px-4 py-3 font-mono text-[12px] text-text-1 tabular">{s}</li>
               ))}
             </ul>
