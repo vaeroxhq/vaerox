@@ -14,13 +14,13 @@ export const Route = createFileRoute("/timeline")({
   head: () => ({
     meta: [
       { title: "Timeline — VÆRØX" },
-      { name: "description", content: "Unified engineering timeline: deployments, decisions, incidents, releases." },
+      { name: "description", content: "Unified engineering timeline: architecture decisions, research, validation, projects, and journal entries." },
     ],
   }),
   component: TimelinePage,
 });
 
-type Kind = "Deploy" | "ADR" | "Incident" | "Research" | "Benchmark" | "Project" | "Journal";
+type Kind = "ADR" | "Research" | "Validation" | "Project" | "Journal";
 
 type Event = {
   date: string;   // ISO date
@@ -34,13 +34,6 @@ type Event = {
 
 function buildEvents(): Event[] {
   const events: Event[] = [];
-  for (const s of SYSTEMS) {
-    events.push({
-      date: s.lastDeploy, kind: "Deploy", title: `${s.name} deployed`,
-      href: `/systems/${s.slug}`, kicker: "DEP",
-      meta: s.stack.slice(0, 2).join(" · "), system: s.name,
-    });
-  }
   for (const a of ADRS) {
     events.push({
       date: a.decisionDate, kind: "ADR", title: a.title,
@@ -48,13 +41,7 @@ function buildEvents(): Event[] {
       meta: a.status, system: a.systems[0],
     });
   }
-  for (const i of INCIDENTS) {
-    events.push({
-      date: i.openedAt.slice(0, 10), kind: "Incident", title: i.title,
-      href: `/incidents/${i.slug}`, kicker: i.id,
-      meta: `${i.severity} · ${i.mttr}`, system: i.systemsAffected[0],
-    });
-  }
+
   for (const r of RESEARCH) {
     events.push({
       date: r.published, kind: "Research", title: r.title,
