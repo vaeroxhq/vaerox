@@ -1,23 +1,18 @@
 /**
- * Engineering Validation — architecture validation, prototype evaluation,
- * and reproducible measurements collected while building the systems inside
- * the VÆRØX Engineering Lab.
+ * Engineering Validation — architecture validation, prototype
+ * evaluation, and reproducible measurements collected while building
+ * the systems inside the VÆRØX Engineering Lab.
  *
- * Every entry is either measured on a defined workload, a stated design
- * target, or explicitly marked "Not yet measured". Nothing on this file
- * implies operating production infrastructure.
- *
- * The historical `Benchmark` / `BenchmarkRun` names are preserved so the
- * rest of the site (graph, timeline, related rail) continues to link
- * correctly — the semantics have shifted from "standing production
- * measurement" to "engineering validation record".
+ * Every entry is either measured on a defined workload, a stated
+ * design target, or explicitly marked "Not yet measured". Nothing
+ * here implies operating production infrastructure.
  */
 
 export type ValidationStatus =
-  | "Target"                // stated design goal, nothing measured yet
-  | "Prototype measured"    // measurement exists but on a prototype, not a production workload
-  | "In progress"           // methodology drafted, measurement partial
-  | "Not yet measured";     // deliberately empty — honest gap
+  | "Target"
+  | "Prototype measured"
+  | "In progress"
+  | "Not yet measured";
 
 export type ValidationPhase =
   | "Concept"
@@ -28,28 +23,26 @@ export type ValidationPhase =
   | "Experimental"
   | "Completed";
 
-// Kept for backwards compatibility with consumers that iterate `runs`.
-// A "run" here is a prototype checkpoint, not a production benchmark run.
 export type BenchmarkRun = {
   date: string;
   value: number;
-  build: string;   // e.g. "helix@proto-04"
+  build: string;
   note?: string;
 };
 
 export type Benchmark = {
   slug: string;
-  code: string;                       // VAL-01
+  code: string;
   title: string;
-  system: string;                     // system slug
-  focus: string;                      // one-line: what's being validated
+  system: string;           // canonical system slug
+  focus: string;
   phase: ValidationPhase;
   status: ValidationStatus;
-  goal: string;                       // stated design target, in words
-  updated: string;                    // ISO
-  methodology: string[];              // paragraphs — how it would/does get measured
-  findings: string[];                 // honest observations from work done so far
-  runs: BenchmarkRun[];               // prototype checkpoints; may be empty
+  goal: string;
+  updated: string;
+  methodology: string[];
+  findings: string[];
+  runs: BenchmarkRun[];
   relatedSystems: string[];
   relatedAdrs: string[];
   relatedIncidents: string[];
@@ -57,188 +50,255 @@ export type Benchmark = {
 
 export const BENCHMARKS: Benchmark[] = [
   {
-    slug: "helix-first-token",
+    slug: "vestra-agent-latency",
     code: "VAL-01",
-    title: "Helix · first-token latency",
-    system: "helix",
-    focus: "Time from request admit to first streamed token on a single-GPU prototype.",
+    title: "VESTRA · agent turn latency",
+    system: "vestra",
+    focus: "End-to-end latency of a portfolio-grounded agent turn on the local prototype.",
     phase: "Prototype",
     status: "Prototype measured",
-    goal: "Sub-150 ms first-token on a single H100 with a 2 K prompt at concurrency 8.",
-    updated: "2026-06-28",
+    goal: "Sub-2 s median for portfolio-summary turns on the local prototype with a warm context.",
+    updated: "2026-06-24",
     methodology: [
-      "Prototype runs on a single H100 workstation — not a production fleet.",
-      "Closed-loop generator holds concurrency at 8, warms up for 60 s, samples for 5 min.",
-      "First-token latency is measured from HTTP admit to the first streamed SSE token.",
+      "Runs on a single developer workstation against a synthetic 12-account portfolio.",
+      "Turn latency = user submit → last streamed token, LLM cache disabled.",
+      "Not a claim about production behaviour under real users.",
     ],
     findings: [
-      "Structured batching keeps first-token latency stable up to concurrency 8; above that the prototype scheduler starves the smallest requests.",
-      "Framing overhead was the dominant cost until the gRPC path was replaced with a length-prefixed binary frame.",
+      "Tool-call latency dominates. Batching parallel tool calls cut median turn time by ~40%.",
+      "Portfolio-summary turns comfortably under target; multi-step planning turns still above.",
     ],
     runs: [
-      { date: "2026-04-14", value: 380, build: "helix@proto-02", note: "Naïve batching baseline." },
-      { date: "2026-05-21", value: 210, build: "helix@proto-03", note: "Structured batching." },
-      { date: "2026-06-28", value: 172, build: "helix@proto-04", note: "Framing rework." },
+      { date: "2026-05-18", value: 3400, build: "vestra@0.3.1", note: "Sequential tool calls." },
+      { date: "2026-06-24", value: 1950, build: "vestra@0.4.0", note: "Parallel tool calls, streaming." },
     ],
-    relatedSystems: ["helix"],
-    relatedAdrs: ["grpc-framing"],
+    relatedSystems: ["vestra"],
+    relatedAdrs: [],
     relatedIncidents: [],
   },
   {
-    slug: "atlas-control-plane",
+    slug: "quantedge-walkforward",
     code: "VAL-02",
-    title: "Atlas · control-plane reconciliation",
-    system: "atlas",
-    focus: "Time from spec change to placement decision on a single-cluster prototype.",
-    phase: "Architecture",
-    status: "In progress",
-    goal: "Reconcile a 10 %-workload spec change in under 2 s on a single-cluster reference deployment.",
-    updated: "2026-06-25",
+    title: "QuantEdge · walk-forward runner throughput",
+    system: "quantedge",
+    focus: "Wall-clock time to walk-forward evaluate a factor model across a 10-year window.",
+    phase: "Reference implementation",
+    status: "Prototype measured",
+    goal: "Full 10-year walk-forward for a 3-factor equity model in under 90 s on the reference dataset.",
+    updated: "2026-06-18",
     methodology: [
-      "Reference deployment is a single kind cluster with a synthetic workload set of 200 pods.",
-      "Spec change applied at t=0; timer stops when every affected placement reports ready.",
-      "Multi-region behaviour is out of scope for this validation — see roadmap.",
+      "DuckDB analytics core over the local reference dataset (~4M rows).",
+      "Walk-forward window: quarterly refit, weekly evaluation.",
+      "Sharpe and drawdown methodology described alongside the code, not just the numbers.",
     ],
     findings: [
-      "Reconciliation is dominated by watch-cache warm-up on cold start; steady-state is well within target.",
-      "The retry controller flaps under contended list-watch — captured as a known limitation on the Atlas page.",
+      "Refit dominates. Caching the pre-computed factor exposures keeps refit near-linear in window count.",
+      "DuckDB out-of-core reads negligible at this dataset size; behaviour at 10× is unmeasured.",
     ],
-    runs: [],
-    relatedSystems: ["atlas"],
-    relatedAdrs: ["region-failover", "consensus-model"],
+    runs: [
+      { date: "2026-05-11", value: 145, build: "qe@0.2.4" },
+      { date: "2026-06-18", value: 71, build: "qe@0.3.0", note: "Cached factor exposures." },
+    ],
+    relatedSystems: ["quantedge"],
+    relatedAdrs: [],
     relatedIncidents: [],
   },
   {
-    slug: "orbit-ingest-throughput",
+    slug: "marketpulse-classifier-eval",
     code: "VAL-03",
-    title: "Orbit · ingest throughput",
-    system: "orbit",
-    focus: "Sustained span ingest rate per collector on commodity hardware.",
+    title: "MarketPulse · news-classifier accuracy",
+    system: "marketpulse",
+    focus: "Accuracy of the LLM classification prompt on a held-out labelled news set.",
     phase: "Prototype",
     status: "Prototype measured",
-    goal: "Sustain 100 k spans/s on a single 8-core collector with buffer high-watermark under 60 %.",
+    goal: "≥ 0.88 macro-F1 on the internal 1.2K held-out set, per-tag cost under $0.002.",
     updated: "2026-06-19",
     methodology: [
-      "Single collector on an 8-core workstation, dedicated NIC, synthetic OTel span mix at 3.2 KB average.",
-      "Open-loop generator; reported value is the highest sustained rate before buffer high-watermark exceeds 60 %.",
+      "1,200 hand-labelled headlines across 8 tags. Held-out from prompt iteration.",
+      "Cost is measured per tag using the vendor's published pricing at run time.",
+      "Prompt versions live in the repo; every eval run pins a prompt hash.",
     ],
     findings: [
-      "Batching at the wire boundary matters more than the encoding path; JSON vs protobuf is <5 % at this scale.",
-      "Sampled cardinality control has to be a first-class ingest concern — bolted on later it always leaks.",
+      "Chain-of-tags prompting beat single-shot classification by 4 F1 points at equal cost.",
+      "A cheaper model gets within 1 F1 point at half the cost on the majority classes.",
     ],
     runs: [
-      { date: "2026-05-10", value: 72_000, build: "orbit@proto-01" },
-      { date: "2026-06-19", value: 118_000, build: "orbit@proto-02", note: "Sustained above target on prototype hardware." },
+      { date: "2026-05-05", value: 84, build: "mp@0.5.2", note: "Single-shot baseline · F1×100." },
+      { date: "2026-06-19", value: 88, build: "mp@0.6.0", note: "Chain-of-tags · F1×100." },
     ],
-    relatedSystems: ["orbit"],
-    relatedAdrs: ["trace-sampling"],
+    relatedSystems: ["marketpulse"],
+    relatedAdrs: [],
     relatedIncidents: [],
   },
   {
-    slug: "orbit-query",
+    slug: "aegis-triage-workflow",
     code: "VAL-04",
-    title: "Orbit · trace query latency",
-    system: "orbit",
-    focus: "Interactive query latency against a local ClickHouse instance.",
-    phase: "Architecture",
-    status: "Not yet measured",
-    goal: "Sub-500 ms P95 for typical analyst queries on a 24 h prototype dataset.",
-    updated: "2026-06-14",
-    methodology: [
-      "Planned harness: replay a captured query mix at 20 QPS against a single-node ClickHouse; measure P95 per query class.",
-      "Dataset generation script exists; harness is not yet wired end-to-end.",
-    ],
-    findings: [
-      "Not yet measured — this record exists so the design target is on the record while the harness is being built.",
-    ],
-    runs: [],
-    relatedSystems: ["orbit"],
-    relatedAdrs: ["trace-sampling"],
-    relatedIncidents: [],
-  },
-  {
-    slug: "signal-router-fanout",
-    code: "VAL-05",
-    title: "Signal Router · fan-out throughput",
-    system: "signal-router",
-    focus: "Per-core event fan-out rate on an io_uring prototype.",
+    title: "AEGIS OPS · triage workflow completion time",
+    system: "aegis-ops",
+    focus: "End-to-end LangGraph workflow time for the standard triage playbook on synthetic alerts.",
     phase: "Prototype",
     status: "Prototype measured",
-    goal: "Design target: ≥ 500 k events/s per core at 1 KB events, 32 subscribers.",
+    goal: "Under 6 s median for the standard triage playbook against synthetic SIEM alerts.",
+    updated: "2026-06-27",
+    methodology: [
+      "Synthetic alert corpus of 500 events across 5 shapes.",
+      "Workflow latency = ingest → final analyst-facing summary.",
+      "LLM calls hit the real API; retrieval hits a local OpenSearch instance.",
+    ],
+    findings: [
+      "Retrieval calls dominate on unseen alert shapes. Prewarming the retrieval cache brings median under target.",
+      "Cold-start (fresh cache) still above target; captured as a known limitation.",
+    ],
+    runs: [
+      { date: "2026-05-30", value: 9.4, build: "aegis@0.2.1", note: "Cold cache." },
+      { date: "2026-06-27", value: 5.2, build: "aegis@0.3.0", note: "Warm cache." },
+    ],
+    relatedSystems: ["aegis-ops"],
+    relatedAdrs: [],
+    relatedIncidents: [],
+  },
+  {
+    slug: "leadpulse-scoring-precision",
+    code: "VAL-05",
+    title: "LeadPulse · scoring precision at k",
+    system: "leadpulse",
+    focus: "Precision@50 of the lead-scoring prototype against a labelled synthetic pipeline.",
+    phase: "Prototype",
+    status: "Prototype measured",
+    goal: "Precision@50 ≥ 0.70 on the synthetic pipeline, calibrated per segment.",
+    updated: "2026-06-12",
+    methodology: [
+      "Synthetic pipeline of 2,000 accounts with hand-labelled ground truth.",
+      "Precision@50 evaluated per segment (SMB / mid-market / enterprise).",
+      "Not validated on real B2B pipelines yet.",
+    ],
+    findings: [
+      "Enterprise segment above target; SMB well below — feature set is too sparse.",
+      "Adding intent signals disproportionately helped enterprise, made SMB noisier.",
+    ],
+    runs: [
+      { date: "2026-05-14", value: 62, build: "lp@0.2.0", note: "Baseline model · P@50×100." },
+      { date: "2026-06-12", value: 71, build: "lp@0.3.0", note: "Intent features · P@50×100." },
+    ],
+    relatedSystems: ["leadpulse"],
+    relatedAdrs: [],
+    relatedIncidents: [],
+  },
+  {
+    slug: "cloudcostiq-forecast-error",
+    code: "VAL-06",
+    title: "CloudCostIQ · forecast MAPE",
+    system: "cloudcostiq",
+    focus: "Mean absolute percentage error of the monthly cost forecast on synthetic billing exports.",
+    phase: "Prototype",
+    status: "Prototype measured",
+    goal: "≤ 8% MAPE on 30-day forward forecast for synthetic multi-account exports.",
+    updated: "2026-06-22",
+    methodology: [
+      "Synthetic CUR-shaped exports covering 8 accounts and 6 services over 18 months.",
+      "Rolling-origin evaluation; forecast horizon = 30 days.",
+      "Error bounds published alongside every headline number.",
+    ],
+    findings: [
+      "Aggregate MAPE within target; per-service error is much higher on bursty services.",
+      "Explainability of drivers is at least as valuable as the point estimate.",
+    ],
+    runs: [
+      { date: "2026-05-28", value: 11, build: "ccq@0.2.2", note: "Baseline seasonal." },
+      { date: "2026-06-22", value: 7, build: "ccq@0.3.0", note: "Driver-decomposed model." },
+    ],
+    relatedSystems: ["cloudcostiq"],
+    relatedAdrs: [],
+    relatedIncidents: [],
+  },
+  {
+    slug: "axiom-replay-determinism",
+    code: "VAL-07",
+    title: "Axiom · deterministic replay coverage",
+    system: "axiom",
+    focus: "Fraction of prototype workflow patterns that replay bit-identically after 100 runs.",
+    phase: "Prototype",
+    status: "In progress",
+    goal: "100% deterministic replay across the initial workflow pattern library.",
     updated: "2026-06-08",
     methodology: [
-      "Single-socket Linux 6.6 workstation; one publisher, 32 subscribers, 1 KB events.",
-      "Sustained publish rate; measurement window 10 minutes; per-core throughput reported at 90 % CPU utilisation.",
+      "Each pattern executed 100 times with recorded IO; replays diffed against the first run.",
+      "Non-determinism attributed to specific step contracts; contracts iterated.",
     ],
     findings: [
-      "The move from epoll to io_uring was the largest single step; further gains have come from batching submissions rather than any protocol change.",
-      "Submission-queue depth was under-provisioned on the first prototype — captured as an experimental note on the Signal Router page.",
+      "Time-dependent and network-dependent steps needed explicit determinism contracts.",
+      "Currently 11 of 14 patterns replay bit-identically; remaining 3 tracked as open issues.",
     ],
     runs: [
-      { date: "2025-10-11", value: 620_000, build: "signal@proto-01 (epoll)" },
-      { date: "2026-06-08", value: 940_000, build: "signal@proto-02 (io_uring)" },
+      { date: "2026-05-01", value: 6, build: "axiom@0.1.0", note: "Patterns passing (of 14)." },
+      { date: "2026-06-08", value: 11, build: "axiom@0.2.0" },
     ],
-    relatedSystems: ["signal-router"],
-    relatedAdrs: ["io-uring-router"],
+    relatedSystems: ["axiom"],
+    relatedAdrs: [],
     relatedIncidents: [],
   },
   {
-    slug: "meridian-suite-runtime",
-    code: "VAL-06",
-    title: "Meridian · evaluation suite runtime",
-    system: "meridian-eval",
-    focus: "End-to-end wall time of the canonical evaluation suite on a laptop-scale Ray cluster.",
+    slug: "supply-chain-baseline",
+    code: "VAL-08",
+    title: "Supply Chain Twin · validation against analytical baselines",
+    system: "supply-chain-twin",
+    focus: "Deviation of simulation outputs from M/M/1 and Little's-law baselines.",
+    phase: "Research",
+    status: "Prototype measured",
+    goal: "Deviation < 2% on standard queueing baselines before trusting any custom scenario.",
+    updated: "2026-05-30",
+    methodology: [
+      "Compare mean queue length and wait time from the simulator against closed-form M/M/1 solutions.",
+      "Validate throughput against Little's law across a sweep of utilization values.",
+    ],
+    findings: [
+      "Within 1.4% across the utilization sweep. Confidence intervals published.",
+      "Custom multi-tier scenarios remain unvalidated; explicitly noted on every scenario page.",
+    ],
+    runs: [
+      { date: "2026-05-30", value: 1.4, build: "sct@0.1.0", note: "Max % deviation." },
+    ],
+    relatedSystems: ["supply-chain-twin"],
+    relatedAdrs: [],
+    relatedIncidents: [],
+  },
+  {
+    slug: "pitwall-strategy-sim",
+    code: "VAL-09",
+    title: "PitWall AI · strategy simulator error",
+    system: "pitwall-ai",
+    focus: "Predicted vs. actual finishing position across a rolling window of races.",
     phase: "Research",
     status: "In progress",
-    goal: "Complete the canonical evaluation suite in under 60 minutes on a 4-worker Ray cluster.",
-    updated: "2026-06-11",
+    goal: "Median absolute position error ≤ 2 places on the rolling evaluation set.",
+    updated: "2026-06-04",
     methodology: [
-      "Cold-cache run; every task from scratch. Ray cluster is 4 local workers, DuckDB store on local disk.",
-      "Reported as wall time from suite kickoff to full results ingestion.",
+      "Simulator seeded from qualifying and historical degradation curves.",
+      "Rolling window of 12 races; evaluation is honest about missing weather and safety-car dynamics.",
     ],
     findings: [
-      "The suite is currently retrieval-bound; the agentic tasks are cheap once the retrieval cache is warm.",
-      "Cold-cache runs are dominated by dataset shuffling, not model calls.",
+      "Tire-degradation model is the biggest error source on high-deg tracks.",
+      "Adding safety-car probability shrinks tail error meaningfully.",
     ],
     runs: [
-      { date: "2026-04-14", value: 9_000_000, build: "meridian@proto-01", note: "≈ 2 h 30 m." },
-      { date: "2026-06-11", value: 4_500_000, build: "meridian@proto-02", note: "≈ 75 m." },
+      { date: "2026-05-14", value: 3.1, build: "pw@0.1.0" },
+      { date: "2026-06-04", value: 2.4, build: "pw@0.2.0", note: "Safety-car probability added." },
     ],
-    relatedSystems: ["meridian-eval"],
-    relatedAdrs: ["eval-harness"],
-    relatedIncidents: [],
-  },
-  {
-    slug: "marketpulse-tick-latency",
-    code: "VAL-07",
-    title: "MarketPulse · venue-to-consumer latency",
-    system: "marketpulse",
-    focus: "End-to-end latency from venue tap to consumer entrypoint on a replay harness.",
-    phase: "Architecture",
-    status: "Not yet measured",
-    goal: "Design target: sub-5 ms P99 on a colocated deployment; not applicable to the current replay harness.",
-    updated: "2026-06-28",
-    methodology: [
-      "Planned methodology: PTP-disciplined wall clock; timestamped at venue tap and at consumer entrypoint; P99 across full session; per-venue and aggregated.",
-      "The current work is on the replay harness — no colocated hardware is in scope for this lab.",
-    ],
-    findings: [
-      "Not yet measured. The record exists to make the design target explicit and to link to the venue-adapter dataset engineering.",
-    ],
-    runs: [],
-    relatedSystems: ["marketpulse"],
+    relatedSystems: ["pitwall-ai"],
     relatedAdrs: [],
     relatedIncidents: [],
   },
 ];
 
-/**
- * Formats a checkpoint value from a validation record's run history.
- * These are prototype numbers, not production metrics — the calling
- * component is responsible for framing them as such.
- */
-export function benchmarkFormatValue(_b: Benchmark, v: number): string {
-  if (v >= 1_000_000) return `${(v / 1_000_000).toFixed(2)}M`;
-  if (v >= 1_000) return `${(v / 1_000).toFixed(0)}k`;
-  return v.toString();
+export function benchmarkFormatValue(b: Benchmark, v: number): string {
+  const s = b.slug;
+  if (s.includes("latency") || s.includes("workflow") || s.includes("walkforward")) {
+    return v >= 1000 ? `${(v / 1000).toFixed(2)} s` : `${v} ms`;
+  }
+  if (s.includes("error") || s.includes("forecast")) return `${v}%`;
+  if (s.includes("baseline")) return `${v}%`;
+  if (s.includes("precision") || s.includes("classifier")) return `${v}`;
+  if (s.includes("replay")) return `${v}/14`;
+  if (s.includes("strategy-sim")) return `${v} pos`;
+  return `${v}`;
 }

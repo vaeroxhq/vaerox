@@ -1,85 +1,89 @@
-## VÆRØX Phase 2 — Operating Company Experience
+# Canonical Identity Migration
 
-Visual language is locked. Zero redesign. All work is **new data, new routes, and deeper interconnection** using the primitives already shipped (`SectionShell`, `PageHeader`, `MetaCell`, `StageDot`, `OpsTag`, `DocShell`, `Breadcrumbs`, `RelatedRail`, `PrevNext`, `.hairline`, `.card-hover`, mono/geist tokens).
+Design language is locked. This phase is purely IA + content.
 
-Every new entity registers into `src/lib/graph.ts` so RelatedRail and ⌘K pick it up automatically. No lorem ipsum — every string is plausible production content. No new deps.
+## Objective
+Every document on VÆRØX must belong to (a) one of 9 real systems or (b) an explicitly planned future system. No fictional production history.
 
----
+## Canonical roster (real, current)
+VESTRA · QuantEdge AI · MarketPulse · AEGIS OPS · LeadPulse · CloudCostIQ · Axiom · Supply Chain Digital Twin · PitWall AI
 
-### Batch E — Company & People (foundation)
+## Future-only roster
+Helix · Atlas · Meridian · Signal Router · Nimbus · VectorHub · DataForge · PromptLab · AgentBench · FinGraph
+(Orbit, Vigil, Ledger·01 — retire entirely; they aren't in either roster.)
 
-The org chart is the spine that makes everything else feel lived-in.
+## Steps
 
-1. **`src/lib/people-data.ts`** — 18 engineers with `slug`, name, handle, role, team, joined, location, bio (2 sentences), expertise tags, `systemsOwned[]`, `adrsAuthored[]`, `incidentsCommanded[]`, `projectsContributed[]`, `researchAuthored[]`.
-2. **`src/lib/teams-data.ts`** — 7 teams (Platform, Infrastructure, Research, Security, Performance, Reliability, Developer Experience) with charter, lead, members, `systemsOwned[]`, `currentProjects[]`, on-call rotation, established date.
-3. **Backfill** owners on existing systems/ADRs/incidents to reference `people` slugs (keep string display but resolve via helper).
-4. **Graph registration** — add `person` and `team` entity kinds to `graph.ts` with edges to systems, ADRs, incidents, projects, research.
-5. **Routes**
-   - `/teams` — hairline grid of team cards (name, charter one-liner, member count, systems count).
-   - `/teams/$slug` — team detail: charter, members table, systems owned, active projects, on-call, RelatedRail.
-   - `/people` — tabular directory (name · role · team · systems · updated), searchable.
-   - `/people/$slug` — profile: bio, expertise mono tag rail, contribution timeline (unified feed of ADR/incident/journal/research events sorted by date), RelatedRail grouped by kind.
-6. **Nav** — add `Teams` and `People` under a new `Meta` grouping alongside About/Contact. ⌘K picks them up via graph.
+### 1. Rebuild `src/lib/systems-data.ts`
+Replace the 8 current entries (marketpulse, axiom, vigil, helix, atlas, orbit, signal-router, ledger-01) with the 9 canonical systems. Every entry:
+- `stage: "Building" | "Prototype" | "Research"` (no "Production" unless truly deployed; default Building)
+- Remove `health` field usage from copy; keep field but set to "Nominal" placeholder and stop rendering it
+- `owner: "Mayank Sharma"`, `lastDeploy` → rename semantics to `updated`
+- Honest 2-sentence summary + purpose per system
 
-Verify: every existing detail page's owner string becomes a `<Link>` to `/people/$slug` when a match exists.
+### 2. Move Helix/Atlas/Meridian/Signal Router into `future-systems-data.ts` only
+Already present for most. Ensure Orbit/Vigil are removed from all future lists too (they're neither real nor planned). Add any missing (Nimbus, VectorHub, DataForge, PromptLab, AgentBench, FinGraph already exist per prior phase).
 
----
+### 3. Rewrite `src/lib/benchmarks-data.ts` (Engineering Validation)
+Point every record's `system` to a canonical slug. Rewrite records that referenced helix/atlas/orbit/signal-router to reference vestra/quantedge/marketpulse/etc. Keep validation-honest framing (Target, Prototype measured). For future systems, use "Design Target" terminology.
 
-### Batch F — Changelog, Releases, Roadmap
+### 4. Rewrite `src/lib/apis-data.ts`
+Every API `system` → canonical slug. Rename APIs for future systems to "Planned Interface" with `stability: "Planned"`.
 
-1. **`src/lib/changelog-data.ts`** — 24 entries spanning 2024-01 through 2026-06, each: `version`, date, `kind` (Feature/Architecture/Fix/Benchmark/Migration/Docs), title, body (3-5 sentences), linked systems/ADRs/benchmarks.
-2. **`src/lib/roadmap-data.ts`** — 22 initiatives across 6 stages (Completed, In Progress, Planned, Research, Prototype, Future), each linked to system/project, quarter, owner-team, confidence.
-3. **`src/lib/releases-data.ts`** — per-project version history (5-8 versions each for top 6 projects) with breaking changes, migration notes.
-4. **Routes**
-   - `/changelog` — reverse-chronological feed with month/quarter/year filter tabs (client state, no route change), kind chip, permalink `#v-x-y-z`.
-   - `/roadmap` — 6-column hairline board, cards link to system/project, footer legend.
-   - `/projects/$slug/releases` (nested tab) — versions table with prev/next between versions.
-5. Register changelog + roadmap + release entities in graph.
+### 5. Rewrite `src/lib/architecture-data.ts` (ADRs)
+Rebind each ADR's `systems` array to canonical slugs. ADRs about fictional infra get retargeted to a real system (e.g. an ADR about serving latency → VESTRA agent latency).
 
----
+### 6. Rewrite `src/lib/journal-data.ts`
+Replace fictional operational entries with authentic-sounding engineering notes tied to canonical systems (design decisions, tradeoffs, experiments — no fake incidents/deploys). Tags reference canonical slugs.
 
-### Batch G — Status Center & Engineering Metrics
+### 7. Delete Incidents entirely
+Incidents imply live production. Remove:
+- `src/lib/incidents-data.ts` (keep file but empty the array, or delete route)
+- `src/routes/incidents.*` (delete files)
+- Nav entry, command palette entry, graph registration, related-rail references
+Replace nav slot with nothing (keep count down) or with "Engineering Challenges" later — for now, remove.
 
-1. **`src/lib/status-data.ts`** — 14 components with 90-day uptime series (deterministic pseudo-random seeded so it doesn't change per render), current state, historical incidents (link to `/incidents/*`), maintenance windows.
-2. **`/status`** — dedicated route (replace any placeholder):
-   - Top strip: overall status + 90-day availability %.
-   - Components table: each row hairline bar chart (90 cells, filled = uptime tier).
-   - Active incidents (from `INCIDENTS` filtered by open).
-   - Scheduled maintenance list.
-   - Latency history (per-region SVG sparkline).
-3. **`src/lib/metrics-data.ts`** — 10 org metrics with 26-week series: deploys/wk, PR throughput, MTTA, MTTR, review time (h), incident freq, availability, P95, infra nodes, cost/req.
-4. **`/metrics`** — executive dashboard: KV meta strip + grid of hairline sparkline cards, each linking to a definition modal-less detail page `/metrics/$slug` with methodology + related benchmarks/incidents.
-5. **Homepage** — replace `OperationsStrip` blank halves with a "Platform Health" mini panel (3 metrics + link to /status) using the same primitives — no visual change to hero/sections.
+### 8. Rewrite `src/lib/evidence-data.ts`
+Rebind `PROJECT_EVIDENCE` and `SYSTEM_EVIDENCE` keys/values to canonical slugs. Remove incident refs.
 
----
+### 9. Rewrite `src/lib/projects-data.ts`
+Nine projects, one per canonical system, slugs matching systems.
 
-### Batch H — Project Lifecycle, Graph & Polish
+### 10. Rewrite `src/lib/research-data.ts` tags/links to canonical slugs.
 
-1. **Project detail expansion** (`/projects/$slug`) — add sectioned anchors: Overview · Architecture · Timeline · Roadmap · Benchmarks · Research · Deployment · Owners · Incidents · APIs · Systems · Dependencies · Docs. Populate each from the graph; hide empties silently (no empty-state prose).
-2. **`/graph`** — full-page knowledge graph. Use existing SVG force layout style from `KnowledgeGraphPreview`, scaled up: all entity kinds with kind-filter chips, hover reveals title + href, click navigates. No new lib.
-3. **Owner links** — every string ownership becomes a link via a `<PersonRef>` helper. Same for team, system, ADR references in bodies.
-4. **Global audit pass**
-   - Delete `placeholder-page.tsx` and any route still importing it; each must have real content or be removed.
-   - Remove any "Coming soon" / empty-state copy.
-   - Verify `TopNav` order and add new routes to nav manifest.
-   - Add `reveal` mount fade to new pages (existing 200ms utility).
-   - Skeletons on any lazy metric chart.
-5. **⌘K polish** — group kinds in a stable order (System, Project, Team, Person, ADR, Incident, Benchmark, API, Research, Handbook, Journal, Changelog, Roadmap, Metric), mono kind-tag right-aligned.
-6. **Smoke test** — Playwright pass: crawl every nav link + 5 random detail slugs per kind; assert 200 + Breadcrumbs + RelatedRail present.
+### 11. Future system pages — planning language
+In `systems.future.$slug.tsx` and `future-systems-data.ts`, ensure section labels are: Architecture Proposal, Design Targets, Planned Interfaces, Development Log, Open Questions, Tradeoffs, Future Milestones. No "Production", "Incident", "Release", "Benchmark", "API Version".
 
----
+### 12. Knowledge graph — two visual layers
+In `src/routes/graph.tsx`, style `kind === "future"` nodes with a distinct treatment (dashed hairline + muted fill) vs. `kind === "system"` (solid). Add legend row "Current / Future".
 
-### Non-goals
+### 13. Cleanup pass
+- `src/lib/nav.ts` — drop incidents; keep architecture, benchmarks (label "Engineering Validation"), research, journal, graph, timeline.
+- `src/components/shell/command-palette.tsx` — remove incident entries.
+- `src/lib/graph.ts` — remove `INCIDENTS` import + registration block.
+- Homepage strips referencing incidents → remove.
+- `timeline.tsx`, `explorer.tsx`, `search.tsx`, `dashboards.tsx` — filter out incident kind; use canonical systems in any sample data.
 
-- No real-time telemetry (all series are deterministic seed data).
-- No auth, no Cloud writes.
-- No new fonts, colors, radii, motion primitives, or layout systems.
-- No react-flow / charting libs — keep hairline SVG.
+### 14. Copy language sweep
+Global find/replace within touched files:
+- "Production Deployment" → "Architecture Proposal" (future context)
+- "Incident" → "Engineering Challenge" (future context) / removed elsewhere
+- "Benchmark" (future context) → "Design Target"
+- "API Version" (future) → "Planned Interface"
+- "Release Notes" (future) → "Development Log"
 
----
+## Out of scope
+- No visual/typographic/color changes.
+- No new route shells or components.
+- Not writing 60+ pages of real long-form content this phase — that's the follow-on month of work the user described. This phase produces honest scaffolding with concrete-but-brief real-topic entries (2–4 sentence bodies) tied to real systems, so the site stops claiming fake ops.
 
-### Delivery order
+## Technical notes
+- Files rewritten wholesale where >50% changes: `systems-data.ts`, `projects-data.ts`, `benchmarks-data.ts`, `apis-data.ts`, `architecture-data.ts`, `journal-data.ts`, `evidence-data.ts`.
+- Delete: `src/lib/incidents-data.ts`, `src/routes/incidents.tsx`, `src/routes/incidents.index.tsx`, `src/routes/incidents.$id.tsx`.
+- Constitution memory already lists the 9 canonical systems — matches this migration.
 
-Ship in order: **E → F → G → H**. Each batch ends with a build + Playwright smoke and a short changelog entry (dogfooding the new changelog).
-
-Approve to start Batch E, or reshape scope (e.g. drop `/graph` full page, fold Teams into People, cut Metrics detail routes).
+## Verification
+1. `bun run build` clean (no dangling incident imports).
+2. Every route under /systems/*, /projects/*, /benchmarks/*, /architecture/*, /api/*, /journal/* references a canonical or future slug.
+3. Graph legend shows two layers.
+4. `rg -n "Orbit|Vigil|Ledger·01|incident" src/` returns only intentional matches (e.g. legend "no incidents").

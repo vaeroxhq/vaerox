@@ -6,12 +6,16 @@ import { PageHeader, Toolbar, SectionShell } from "@/components/section/section-
 
 const FILTERS: (ResearchCategory | "All")[] = [
   "All",
-  "Distributed Inference",
-  "Quantitative Evaluation",
-  "Observability",
-  "Benchmarking",
+  "Medical AI",
+  "Agricultural AI",
+  "Financial AI",
+  "Computer Vision",
+  "Remote Sensing",
+  "LLM Evaluation",
   "Systems Design",
+  "Quantitative Evaluation",
 ];
+
 
 export const Route = createFileRoute("/research/")({
   head: () => ({

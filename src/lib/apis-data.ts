@@ -1,10 +1,12 @@
 /**
- * Public API surfaces. These are the canonical contracts customers
- * and internal services build against.
+ * API surfaces — the interfaces each canonical VÆRØX system exposes
+ * or plans to expose. Because every system is pre-production, most
+ * surfaces are labelled "Internal" or "Beta". No stability claims are
+ * made beyond what the prototype actually supports.
  */
 
 export type ApiMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "STREAM";
-export type ApiStability = "Stable" | "Beta" | "Internal" | "Deprecated";
+export type ApiStability = "Stable" | "Beta" | "Internal" | "Planned" | "Deprecated";
 
 export type ApiEndpoint = {
   method: ApiMethod;
@@ -12,16 +14,16 @@ export type ApiEndpoint = {
   summary: string;
   auth: string;
   rateLimit: string;
-  request?: string;   // JSON snippet
-  response?: string;  // JSON snippet
+  request?: string;
+  response?: string;
 };
 
 export type ApiSpec = {
   slug: string;
-  code: string;           // API-01
+  code: string;
   name: string;
-  system: string;         // system slug
-  version: string;        // v1.9
+  system: string;           // canonical system slug
+  version: string;
   stability: ApiStability;
   baseUrl: string;
   owner: string;
@@ -35,317 +37,212 @@ export type ApiSpec = {
 
 export const APIS: ApiSpec[] = [
   {
-    slug: "helix-inference",
+    slug: "vestra-agent",
     code: "API-01",
-    name: "Helix Inference API",
-    system: "helix",
-    version: "v1.9",
-    stability: "Stable",
-    baseUrl: "https://api.vaerox.dev/helix/v1",
-    owner: "Inference",
-    updated: "2026-06-24",
-    summary: "Streaming and batch inference against the Helix serving fleet. gRPC-first with an HTTP/2 JSON edge.",
-    authNote: "Bearer token (workload identity) or mTLS with tenant-scoped SPIFFE ID. Requests must set X-Tenant-Id.",
-    endpoints: [
-      {
-        method: "STREAM",
-        path: "/completions:stream",
-        summary: "Bidirectional stream. Tokens emitted as they are decoded.",
-        auth: "Bearer / mTLS",
-        rateLimit: "128 concurrent streams per tenant, 4 QPS burst",
-        request: `{
-  "model": "helix-large-1.9",
-  "prompt": "Explain expert-parallel serving.",
-  "max_output_tokens": 512,
-  "temperature": 0.2,
-  "stream_options": { "include_usage": true }
-}`,
-        response: `event: token
-data: {"token": "Expert", "logprob": -0.42}
-
-event: token
-data: {"token": "-parallel", "logprob": -0.11}
-
-event: usage
-data: {"input_tokens": 7, "output_tokens": 2}`,
-      },
-      {
-        method: "POST",
-        path: "/completions",
-        summary: "Synchronous completion; blocks until final token.",
-        auth: "Bearer / mTLS",
-        rateLimit: "32 QPS per tenant",
-        request: `{
-  "model": "helix-large-1.9",
-  "prompt": "Summarise ADR·014.",
-  "max_output_tokens": 256
-}`,
-        response: `{
-  "id": "cmpl_01HZ...",
-  "output": "ADR·014 adopts gRPC bidirectional streams...",
-  "usage": { "input_tokens": 5, "output_tokens": 128 }
-}`,
-      },
-      {
-        method: "POST",
-        path: "/embeddings",
-        summary: "Return embeddings for one or more inputs.",
-        auth: "Bearer / mTLS",
-        rateLimit: "64 QPS per tenant",
-        request: `{
-  "model": "helix-embed-1.2",
-  "inputs": ["expert parallelism", "structured batching"]
-}`,
-        response: `{
-  "vectors": [[0.041, -0.128, ...], [...]],
-  "usage": { "input_tokens": 4 }
-}`,
-      },
-      {
-        method: "GET",
-        path: "/models",
-        summary: "List available models with capability metadata.",
-        auth: "Bearer",
-        rateLimit: "10 QPS per tenant",
-        response: `[
-  { "id": "helix-large-1.9", "context": 128000, "modality": ["text"] },
-  { "id": "helix-embed-1.2", "dim": 1024 }
-]`,
-      },
-    ],
-    relatedSystems: ["helix"],
-    relatedAdrs: ["grpc-framing"],
-  },
-  {
-    slug: "atlas-control",
-    code: "API-02",
-    name: "Atlas Control API",
-    system: "atlas",
-    version: "v3.8",
-    stability: "Stable",
-    baseUrl: "https://api.vaerox.dev/atlas/v3",
-    owner: "Platform",
-    updated: "2026-06-25",
-    summary: "Declarative control plane: workloads, placements, tenants, quotas.",
-    authNote: "Workload identity via SPIFFE; policy enforcement via OPA at the API edge.",
-    endpoints: [
-      {
-        method: "PUT",
-        path: "/workloads/{id}",
-        summary: "Apply a workload spec. Idempotent by hash of spec.",
-        auth: "SPIFFE",
-        rateLimit: "60 spec-writes / tenant / min",
-        request: `{
-  "kind": "Workload",
-  "id": "helix-serving-eu",
-  "regions": ["eu-west-1", "eu-north-1"],
-  "replicas": 42,
-  "placement": {
-    "kv_footprint_weight": 0.7,
-    "context_length_weight": 0.3
-  }
-}`,
-        response: `{
-  "revision": "wr_01HZ...",
-  "status": "Reconciling",
-  "placements": []
-}`,
-      },
-      {
-        method: "GET",
-        path: "/workloads/{id}",
-        summary: "Fetch workload state, including current placements.",
-        auth: "SPIFFE",
-        rateLimit: "600 QPS / tenant",
-        response: `{
-  "id": "helix-serving-eu",
-  "revision": "wr_01HZ...",
-  "status": "Ready",
-  "placements": [
-    { "region": "eu-west-1", "cell": "c14", "replicas": 24 },
-    { "region": "eu-north-1", "cell": "c07", "replicas": 18 }
-  ]
-}`,
-      },
-      {
-        method: "POST",
-        path: "/tenants/{id}/quotas",
-        summary: "Update quota ceiling. Reconciled asynchronously.",
-        auth: "SPIFFE (admin scope)",
-        rateLimit: "10 / tenant / min",
-      },
-      {
-        method: "GET",
-        path: "/placements",
-        summary: "List placements matching a selector.",
-        auth: "SPIFFE",
-        rateLimit: "300 QPS / tenant",
-      },
-    ],
-    relatedSystems: ["atlas"],
-    relatedAdrs: ["region-failover", "consensus-model"],
-  },
-  {
-    slug: "orbit-query",
-    code: "API-03",
-    name: "Orbit Query API",
-    system: "orbit",
-    version: "v2.3",
-    stability: "Stable",
-    baseUrl: "https://api.vaerox.dev/orbit/v2",
-    owner: "Observability",
-    updated: "2026-06-14",
-    summary: "Trace, span, and metric queries against the Orbit store.",
-    authNote: "Bearer token, tenant-scoped. Analyst tokens carry read-only scopes.",
-    endpoints: [
-      {
-        method: "POST",
-        path: "/traces/search",
-        summary: "Search traces by service, tag, or SLO breach flag.",
-        auth: "Bearer",
-        rateLimit: "40 QPS per tenant",
-        request: `{
-  "service": "helix",
-  "since": "2026-06-24T00:00:00Z",
-  "min_duration_ms": 250,
-  "slo_breach": true,
-  "limit": 100
-}`,
-        response: `{
-  "traces": [
-    { "id": "t_01HZ...", "duration_ms": 412, "span_count": 34 }
-  ],
-  "returned": 87
-}`,
-      },
-      {
-        method: "GET",
-        path: "/traces/{id}",
-        summary: "Retrieve a trace with all spans.",
-        auth: "Bearer",
-        rateLimit: "200 QPS per tenant",
-      },
-      {
-        method: "POST",
-        path: "/metrics/query",
-        summary: "PromQL-compatible query surface over the columnar store.",
-        auth: "Bearer",
-        rateLimit: "20 QPS per tenant",
-      },
-    ],
-    relatedSystems: ["orbit"],
-    relatedAdrs: ["trace-sampling"],
-  },
-  {
-    slug: "signal-router-admin",
-    code: "API-04",
-    name: "Signal Router Admin API",
-    system: "signal-router",
-    version: "v0.8",
-    stability: "Beta",
-    baseUrl: "https://api.vaerox.dev/signal/v0",
-    owner: "Edge Infra",
-    updated: "2026-06-08",
-    summary: "Subscription topology, credit accounting, and runtime SQ tuning.",
-    authNote: "SPIFFE; the write scope is restricted to on-call and Edge Infra.",
-    endpoints: [
-      {
-        method: "GET",
-        path: "/topologies/{id}",
-        summary: "Return publisher/subscriber graph and current credit state.",
-        auth: "SPIFFE",
-        rateLimit: "60 QPS",
-      },
-      {
-        method: "PATCH",
-        path: "/tuning/sq-depth",
-        summary: "Resize submission-queue depth at runtime.",
-        auth: "SPIFFE (write)",
-        rateLimit: "6 / min",
-        request: `{ "sq_depth": 8192, "reason": "burst-of-bursts from tenant bulk-ingest" }`,
-      },
-    ],
-    relatedSystems: ["signal-router"],
-    relatedAdrs: ["io-uring-router"],
-  },
-  {
-    slug: "meridian-eval",
-    code: "API-05",
-    name: "Meridian Eval API",
-    system: "meridian-eval",
-    version: "v0.6",
+    name: "VESTRA Agent API",
+    system: "vestra",
+    version: "v0.4",
     stability: "Internal",
-    baseUrl: "https://api.internal.vaerox.dev/meridian/v0",
-    owner: "Research Infra",
-    updated: "2026-06-11",
-    summary: "Submit eval runs, query historical results, diff two runs.",
-    authNote: "Internal only. Bearer token issued via research workspace.",
+    baseUrl: "https://api.local/vestra/v0",
+    owner: "Mayank Sharma",
+    updated: "2026-06-24",
+    summary: "Prototype interface for the VESTRA portfolio agent. Not exposed publicly.",
+    authNote: "Local development only. Bearer token issued per developer workstation.",
+    endpoints: [
+      {
+        method: "POST",
+        path: "/turns",
+        summary: "Submit a user turn; returns a streamed agent response.",
+        auth: "Bearer (local)",
+        rateLimit: "Unmetered on local dev",
+        request: `{ "user_id": "u_demo", "message": "Summarise my portfolio." }`,
+        response: `{ "turn_id": "t_01HZ...", "stream_url": "/turns/t_01HZ.../stream" }`,
+      },
+      {
+        method: "GET",
+        path: "/portfolios/{id}",
+        summary: "Fetch a portfolio snapshot with derived metrics.",
+        auth: "Bearer (local)",
+        rateLimit: "Unmetered on local dev",
+      },
+    ],
+    relatedSystems: ["vestra"],
+    relatedAdrs: [],
+  },
+  {
+    slug: "quantedge-research",
+    code: "API-02",
+    name: "QuantEdge Research API",
+    system: "quantedge",
+    version: "v0.3",
+    stability: "Internal",
+    baseUrl: "https://api.local/qe/v0",
+    owner: "Mayank Sharma",
+    updated: "2026-06-18",
+    summary: "Programmatic surface for defining strategies and launching walk-forward runs.",
+    authNote: "Local development only.",
     endpoints: [
       {
         method: "POST",
         path: "/runs",
-        summary: "Submit an eval run with an explicit manifest.",
-        auth: "Bearer",
-        rateLimit: "30 / hour",
-        request: `{
-  "manifest": {
-    "suite": "canonical.q2",
-    "model": "helix-large-1.9",
-    "seed": { "env": 42, "agent": 128 },
-    "tool_budget": 24
-  }
-}`,
-        response: `{ "run_id": "run_01HZ...", "status": "Queued" }`,
+        summary: "Launch a walk-forward evaluation for a strategy spec.",
+        auth: "Bearer (local)",
+        rateLimit: "Unmetered on local dev",
+        request: `{ "strategy": "momentum_3f", "window": "2015-01-01/2025-01-01" }`,
+        response: `{ "run_id": "run_01HZ...", "status": "queued" }`,
       },
       {
         method: "GET",
-        path: "/runs/{id}/results",
-        summary: "Return results with per-task scoring.",
-        auth: "Bearer",
-        rateLimit: "60 QPS",
-      },
-      {
-        method: "GET",
-        path: "/diff",
-        summary: "Diff two runs by manifest overlap.",
-        auth: "Bearer",
-        rateLimit: "20 QPS",
+        path: "/runs/{id}/report",
+        summary: "Fetch the full walk-forward report with Sharpe / drawdown / turnover.",
+        auth: "Bearer (local)",
+        rateLimit: "Unmetered on local dev",
       },
     ],
-    relatedSystems: ["meridian-eval"],
-    relatedAdrs: ["eval-harness"],
+    relatedSystems: ["quantedge"],
+    relatedAdrs: [],
   },
   {
-    slug: "marketpulse-stream",
-    code: "API-06",
-    name: "MarketPulse Stream API",
+    slug: "marketpulse-classify",
+    code: "API-03",
+    name: "MarketPulse Classification API",
     system: "marketpulse",
-    version: "v4.5",
-    stability: "Stable",
-    baseUrl: "wss://stream.vaerox.dev/marketpulse/v4",
-    owner: "Market Data",
-    updated: "2026-06-28",
-    summary: "Normalized tick and bar streams. Kernel-bypass edge, WebSocket public edge.",
-    authNote: "Bearer token, entitlement-scoped by venue.",
+    version: "v0.6",
+    stability: "Beta",
+    baseUrl: "https://api.local/mp/v0",
+    owner: "Mayank Sharma",
+    updated: "2026-06-19",
+    summary: "Classify news headlines and short bodies against the MarketPulse tag ontology.",
+    authNote: "Beta; API surface may change without notice.",
     endpoints: [
       {
-        method: "STREAM",
-        path: "/ticks",
-        summary: "Subscribe to normalized tick stream.",
+        method: "POST",
+        path: "/classify",
+        summary: "Classify one or more items in a single call.",
         auth: "Bearer",
-        rateLimit: "n/a — session-scoped",
-        request: `{ "subscribe": ["AAPL", "MSFT", "NVDA"], "venue": ["NASDAQ", "NYSE"] }`,
-        response: `{ "sym": "NVDA", "venue": "NASDAQ", "t": 1719572400123456, "p": 1183.44, "sz": 100 }`,
-      },
-      {
-        method: "STREAM",
-        path: "/bars/{interval}",
-        summary: "Subscribe to bar stream. Interval one of 1s/5s/1m/5m.",
-        auth: "Bearer",
-        rateLimit: "n/a",
+        rateLimit: "60 items / minute (prototype)",
+        request: `{ "items": [{ "id": "n_1", "headline": "..." }] }`,
+        response: `{ "results": [{ "id": "n_1", "tags": ["earnings","tech"], "confidence": 0.91 }] }`,
       },
     ],
     relatedSystems: ["marketpulse"],
+    relatedAdrs: [],
+  },
+  {
+    slug: "aegis-triage",
+    code: "API-04",
+    name: "AEGIS OPS Triage API",
+    system: "aegis-ops",
+    version: "v0.3",
+    stability: "Internal",
+    baseUrl: "https://api.local/aegis/v0",
+    owner: "Mayank Sharma",
+    updated: "2026-06-27",
+    summary: "Submit alerts to the triage workflow and fetch analyst-facing summaries.",
+    authNote: "Internal; runs against synthetic SIEM traces.",
+    endpoints: [
+      {
+        method: "POST",
+        path: "/alerts",
+        summary: "Submit an alert for triage.",
+        auth: "Bearer",
+        rateLimit: "30 / minute (prototype)",
+      },
+      {
+        method: "GET",
+        path: "/triage/{alert_id}",
+        summary: "Fetch the current triage state and workflow trace.",
+        auth: "Bearer",
+        rateLimit: "120 / minute",
+      },
+    ],
+    relatedSystems: ["aegis-ops"],
+    relatedAdrs: [],
+  },
+  {
+    slug: "leadpulse-scoring",
+    code: "API-05",
+    name: "LeadPulse Scoring API",
+    system: "leadpulse",
+    version: "v0.3",
+    stability: "Internal",
+    baseUrl: "https://api.local/lp/v0",
+    owner: "Mayank Sharma",
+    updated: "2026-06-12",
+    summary: "Score accounts and leads with the LeadPulse prototype model.",
+    authNote: "Internal; scoring runs against synthetic pipelines.",
+    endpoints: [
+      {
+        method: "POST",
+        path: "/score",
+        summary: "Score a batch of accounts.",
+        auth: "Bearer",
+        rateLimit: "200 accounts / minute",
+      },
+    ],
+    relatedSystems: ["leadpulse"],
+    relatedAdrs: [],
+  },
+  {
+    slug: "cloudcostiq-attribution",
+    code: "API-06",
+    name: "CloudCostIQ Attribution API",
+    system: "cloudcostiq",
+    version: "v0.3",
+    stability: "Internal",
+    baseUrl: "https://api.local/ccq/v0",
+    owner: "Mayank Sharma",
+    updated: "2026-06-22",
+    summary: "Ingest billing exports, request attribution rollups, and pull forecasts.",
+    authNote: "Internal; runs against synthetic billing exports.",
+    endpoints: [
+      {
+        method: "POST",
+        path: "/exports",
+        summary: "Register a new CUR-shaped export for ingestion.",
+        auth: "Bearer",
+        rateLimit: "10 / minute",
+      },
+      {
+        method: "GET",
+        path: "/rollups",
+        summary: "Retrieve attribution rollups by tag, team, or workload.",
+        auth: "Bearer",
+        rateLimit: "60 / minute",
+      },
+    ],
+    relatedSystems: ["cloudcostiq"],
+    relatedAdrs: [],
+  },
+  {
+    slug: "axiom-workflow",
+    code: "API-07",
+    name: "Axiom Workflow API",
+    system: "axiom",
+    version: "v0.2",
+    stability: "Internal",
+    baseUrl: "https://api.local/axiom/v0",
+    owner: "Mayank Sharma",
+    updated: "2026-06-08",
+    summary: "Submit workflow definitions, launch runs, and inspect replay traces.",
+    authNote: "Internal prototype.",
+    endpoints: [
+      {
+        method: "POST",
+        path: "/workflows",
+        summary: "Register a workflow definition.",
+        auth: "Bearer",
+        rateLimit: "60 / minute",
+      },
+      {
+        method: "POST",
+        path: "/runs",
+        summary: "Launch a run of a registered workflow.",
+        auth: "Bearer",
+        rateLimit: "60 / minute",
+      },
+    ],
+    relatedSystems: ["axiom"],
     relatedAdrs: [],
   },
 ];

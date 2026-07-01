@@ -14,7 +14,7 @@ export const NAV: NavItem[] = [
   { label: "Future Systems",  to: "/systems/future",  hint: "Long-term engineering roadmap",  section: "Primary" },
   { label: "Projects",     to: "/projects",     hint: "Build write-ups & case studies", section: "Primary" },
   { label: "Architecture", to: "/architecture", hint: "Decision records & diagrams",    section: "Primary" },
-  { label: "Incidents",    to: "/incidents",    hint: "Post-mortems & action items",    section: "Primary" },
+  
   { label: "Engineering Validation", to: "/benchmarks", hint: "Architecture validation & prototype results", section: "Primary" },
   { label: "API",          to: "/api",          hint: "Interface reference",            section: "Primary" },
   { label: "Research",     to: "/research",     hint: "Papers, benchmarks, notes",      section: "Primary" },
