@@ -170,15 +170,16 @@ export const HANDBOOK: HandbookSection[] = [
       "Every user-facing surface has a budget. Regressions are treated as bugs, not deferred as tech debt.",
     body: [
       { kind: "kv", rows: [
-        { k: "Helix · first-token P95", v: "≤ 150ms" },
-        { k: "Helix · streaming P99", v: "≤ 400ms" },
-        { k: "Atlas · control-plane P95", v: "≤ 80ms" },
-        { k: "Orbit · query P95", v: "≤ 350ms" },
+        { k: "VESTRA · plan-step P95 (target)", v: "≤ 800ms" },
+        { k: "MarketPulse · classify P95 (target)", v: "≤ 600ms" },
+        { k: "QuantEdge · backtest step (target)", v: "≤ 250ms" },
+        { k: "CloudCostIQ · forecast render (target)", v: "≤ 400ms" },
         { k: "vaerox.dev · LCP", v: "≤ 1.2s" },
         { k: "vaerox.dev · JS on first paint", v: "0 KB" },
       ]},
-      { kind: "p", text: "A budget breach opens a Sev-3 automatically. The owning team either fixes it or negotiates a new budget with a written justification." },
+      { kind: "p", text: "Budgets are declared before implementation. A breach is logged as an open engineering challenge on the owning system with a written justification or a plan to close it." },
     ],
+
   },
   {
     slug: "security-checklist",
