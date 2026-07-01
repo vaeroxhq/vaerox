@@ -6,17 +6,17 @@ import { Breadcrumbs } from "@/components/doc/breadcrumbs";
 export const Route = createFileRoute("/benchmarks/")({
   head: () => ({
     meta: [
-      { title: "Engineering Validation — VÆRØX" },
+      { title: "Engineering Validation & Benchmarks — VÆRØX" },
       {
         name: "description",
         content:
-          "Experimental results, architecture validation, and implementation notes collected while building the systems inside the VÆRØX Engineering Lab. Every record is either measured, reproducible, or explicitly marked as a design target.",
+          "Architecture validation, prototype benchmarks, and implementation measurements from the VÆRØX Engineering Studio. Every record is either measured on a defined workload, reproducible, or explicitly marked as a design target.",
       },
-      { property: "og:title", content: "Engineering Validation — VÆRØX" },
+      { property: "og:title", content: "Engineering Validation & Benchmarks — VÆRØX" },
       {
         property: "og:description",
         content:
-          "Architecture validation, prototype measurements and stated design targets — no fabricated production metrics.",
+          "Prototype benchmarks and architecture validation — every record is measured, reproducible, or a stated design target.",
       },
     ],
   }),
@@ -30,11 +30,11 @@ function ValidationPage() {
 
   return (
     <SectionShell>
-      <Breadcrumbs items={[{ label: "VÆRØX", to: "/" }, { label: "Engineering Validation" }]} />
+      <Breadcrumbs items={[{ label: "VÆRØX", to: "/" }, { label: "Engineering Validation & Benchmarks" }]} />
       <PageHeader
-        section="§ · Engineering Validation"
-        title="What has actually been measured, and what is still a design target."
-        summary="Experimental results, architecture validation, implementation notes and reproducible measurements collected while building the systems inside the VÆRØX Engineering Lab. Nothing on this page implies operating production infrastructure — every record is either measured on a defined workload, a stated design target, or explicitly marked ‘not yet measured’."
+        section="§ · Engineering Validation & Benchmarks"
+        title="What has been measured, and what is still a design target."
+        summary="Prototype benchmarks, architecture validation, and reproducible measurements collected while building the systems inside the VÆRØX Engineering Studio. Every record cites its workload, hardware, and dataset — or is explicitly marked as a design target."
         meta={[
           { label: "Records",           value: BENCHMARKS.length.toString().padStart(2, "0") },
           { label: "Prototype measured", value: measured.toString() },

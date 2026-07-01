@@ -11,9 +11,9 @@ export function StatusBar() {
     <div className="hairline-b bg-canvas">
       <div className="w-shell mx-auto px-6 md:px-10 lg:px-16">
         <dl className="grid grid-cols-2 md:grid-cols-4 gap-px bg-line-1">
-          <Cell label="Maintainer" value="Mayank Sharma" />
-          <Cell label="Lab" value="Independent Engineering Lab" />
-          <Cell label="Status" value="Actively maintained" />
+          <Cell label="Studio" value="VÆRØX" />
+          <Cell label="Discipline" value="AI Engineering" />
+          <Cell label="Status" value="Available for engagements" />
           <Cell label="Updated" value="2026-07-01" />
         </dl>
       </div>

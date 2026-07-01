@@ -33,7 +33,7 @@ export function OperationsStrip() {
 
       <section className="bg-canvas">
         <header className="px-4 py-3 hairline-b flex items-baseline justify-between">
-          <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">Latest engineering validation</span>
+          <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">Latest engineering validation & benchmarks</span>
           <Link to="/benchmarks" className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] hover:text-text-1 transition-micro">All →</Link>
         </header>
         <ul>

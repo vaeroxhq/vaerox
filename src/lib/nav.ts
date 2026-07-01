@@ -10,24 +10,32 @@ export type NavItem = {
 };
 
 export const NAV: NavItem[] = [
-  { label: "Systems",         to: "/systems",         hint: "Systems maintained in the lab",  section: "Primary" },
-  { label: "Future Systems",  to: "/systems/future",  hint: "Long-term engineering roadmap",  section: "Primary" },
-  { label: "Projects",     to: "/projects",     hint: "Build write-ups & case studies", section: "Primary" },
+  // Client-facing surfaces first — this is a studio, not a documentation portal.
+  { label: "Services",     to: "/services",     hint: "What VÆRØX builds",              section: "Primary" },
+  { label: "Case Studies", to: "/case-studies", hint: "Real build narratives",          section: "Primary" },
+  { label: "Capabilities", to: "/capabilities", hint: "The stack we ship in",           section: "Primary" },
+  { label: "Process",      to: "/process",      hint: "How the studio engages",         section: "Primary" },
+
+  // Engineering credibility surfaces.
+  { label: "Systems",      to: "/systems",      hint: "Reference implementations",      section: "Primary" },
+  { label: "Roadmap",      to: "/systems/future", hint: "What we are planning to build", section: "Primary" },
   { label: "Architecture", to: "/architecture", hint: "Decision records & diagrams",    section: "Primary" },
-  
-  { label: "Engineering Validation", to: "/benchmarks", hint: "Architecture validation & prototype results", section: "Primary" },
-  { label: "API",          to: "/api",          hint: "Interface reference",            section: "Primary" },
+  { label: "Engineering Validation & Benchmarks", to: "/benchmarks", hint: "Architecture validation & measurements", section: "Primary" },
   { label: "Research",     to: "/research",     hint: "Papers, benchmarks, notes",      section: "Primary" },
-  { label: "Research Assets", to: "/research/assets", hint: "Datasets, corpora & annotation pipelines", section: "Primary" },
+  { label: "Datasets",     to: "/research/assets", hint: "Datasets, corpora & annotation pipelines", section: "Primary" },
   { label: "Engineering",  to: "/engineering",  hint: "Handbook & standards",           section: "Primary" },
+  { label: "API",          to: "/api",          hint: "Interface reference",            section: "Primary" },
   { label: "Journal",      to: "/journal",      hint: "Long-form entries",              section: "Primary" },
+
+  // Meta / navigation.
   { label: "Graph",        to: "/graph",        hint: "Interactive knowledge graph",    section: "Meta" },
   { label: "Search",       to: "/search",       hint: "Universal search",               section: "Meta" },
   { label: "Timeline",     to: "/timeline",     hint: "Unified engineering timeline",   section: "Meta" },
-  { label: "Dashboards",   to: "/dashboards",   hint: "Operational metrics",            section: "Meta" },
   { label: "Explorer",     to: "/explorer",     hint: "Faceted entity browser",         section: "Meta" },
-  { label: "Surfaces",     to: "/teams",        hint: "Areas of the lab",               section: "Meta" },
-  { label: "Maintainer",   to: "/people",       hint: "Who writes and operates this",   section: "Meta" },
+  { label: "Surfaces",     to: "/teams",        hint: "Areas of the studio",            section: "Meta" },
   { label: "About",        to: "/about",        hint: "What VÆRØX is",                  section: "Meta" },
-  { label: "Contact",      to: "/contact",      hint: "Reach the maintainer",           section: "Meta" },
+  { label: "FAQ",          to: "/faq",          hint: "How the studio works",           section: "Meta" },
+  { label: "Contact",      to: "/contact",      hint: "Start a conversation",           section: "Meta" },
+  { label: "Dashboards",   to: "/dashboards",   hint: "Instrumentation targets",        section: "Meta" },
+  { label: "Projects",     to: "/projects",     hint: "Build write-ups",                section: "Meta" },
 ];

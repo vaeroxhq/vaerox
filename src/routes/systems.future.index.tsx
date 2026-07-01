@@ -14,17 +14,17 @@ const FILTERS: (FutureStatus | "All")[] = ["All", ...FUTURE_STATUSES];
 export const Route = createFileRoute("/systems/future/")({
   head: () => ({
     meta: [
-      { title: "Future Systems — VÆRØX" },
+      { title: "Roadmap — VÆRØX" },
       {
         name: "description",
         content:
-          "The long-term engineering roadmap of the VÆRØX Engineering Lab. Systems currently being designed, researched, or actively built. Nothing marked as production.",
+          "The VÆRØX studio roadmap: systems currently being designed, researched, or built. Every entry is honestly labelled — Building, Architecture, Research, Planned, or Concept. Nothing is marked as production.",
       },
-      { property: "og:title", content: "Future Systems — VÆRØX" },
+      { property: "og:title", content: "Roadmap — VÆRØX" },
       {
         property: "og:description",
         content:
-          "Long-term engineering roadmap — Building, Architecture, Research, Planned, Concept. Honestly labelled maturity for every future VÆRØX system.",
+          "What VÆRØX is planning to build next — Building, Architecture, Research, Planned, Concept.",
       },
     ],
   }),
@@ -54,15 +54,14 @@ function FutureSystemsIndex() {
       <Breadcrumbs
         items={[
           { label: "VÆRØX", to: "/" },
-          { label: "Systems", to: "/systems" },
-          { label: "Future" },
+          { label: "Roadmap" },
         ]}
       />
 
       <PageHeader
-        section="§ · Systems / Future"
-        title="Future systems."
-        summary="The long-term engineering roadmap of the VAERØX Engineering Lab. These systems are currently being designed, researched, or actively built. Nothing on this page is marked as production."
+        section="§ · Roadmap"
+        title="What we are planning to build."
+        summary="The VÆRØX studio roadmap. These systems are currently being designed, researched, or actively built. Every entry is honestly labelled — Building, Architecture, Research, Planned, or Concept. Nothing here is marked as production."
         meta={[
           { label: "Systems",  value: FUTURE_SYSTEMS.length.toString().padStart(2, "0") },
           { label: "Building", value: FUTURE_SYSTEMS.filter((f) => f.status === "Building").length.toString().padStart(2, "0") },
