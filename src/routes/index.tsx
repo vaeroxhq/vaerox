@@ -229,24 +229,8 @@ function ModuleMeta({
   );
 }
 
-function FootCell({
-  label,
-  value,
-  children,
-}: {
-  label: string;
-  value?: string;
-  children?: React.ReactNode;
-}) {
-  return (
-    <div className="bg-canvas px-4 py-3 flex items-baseline justify-between gap-4">
-      <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-        {label}
-      </span>
-      <span className="font-mono text-[11px] text-text-2 tabular">{children ?? value}</span>
-    </div>
-  );
-}
+
+
 
 /**
  * Blueprint overlay — the right side reads as an engineering drawing.
