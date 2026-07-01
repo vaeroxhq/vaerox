@@ -11,14 +11,14 @@ import { SectionRule } from "@/components/home/primitives";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "VÆRØX — An independent engineering laboratory" },
+      { title: "VÆRØX — Independent AI Engineering Studio" },
       {
         name: "description",
         content:
-          "VÆRØX is a public engineering lab maintained by one engineer. Architecture exploration, reference implementations, and long-form write-ups for enterprise AI, distributed platforms, and low-latency infrastructure.",
+          "VÆRØX is an independent AI engineering studio designing and shipping intelligent software — AI agents, LLM applications, RAG systems, MCP servers, workflow automation, and production-grade backend platforms.",
       },
-      { property: "og:title", content: "VÆRØX — An independent engineering laboratory" },
-      { property: "og:description", content: "A public engineering lab, written and maintained by one engineer." },
+      { property: "og:title", content: "VÆRØX — Independent AI Engineering Studio" },
+      { property: "og:description", content: "AI systems. Software engineering. Automation." },
     ],
   }),
   component: Index,
