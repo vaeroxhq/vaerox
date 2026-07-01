@@ -289,3 +289,16 @@ export const BENCHMARKS: Benchmark[] = [
     relatedIncidents: [],
   },
 ];
+
+export function benchmarkFormatValue(b: Benchmark, v: number): string {
+  const s = b.slug;
+  if (s.includes("latency") || s.includes("workflow") || s.includes("walkforward")) {
+    return v >= 1000 ? `${(v / 1000).toFixed(2)} s` : `${v} ms`;
+  }
+  if (s.includes("error") || s.includes("forecast")) return `${v}%`;
+  if (s.includes("baseline")) return `${v}%`;
+  if (s.includes("precision") || s.includes("classifier")) return `${v}`;
+  if (s.includes("replay")) return `${v}/14`;
+  if (s.includes("strategy-sim")) return `${v} pos`;
+  return `${v}`;
+}
