@@ -37,7 +37,7 @@ export const RESEARCH: ResearchEntry[] = [
     abstract:
       "A working-draft methodology for evaluating agent turns grounded in a user's own portfolio data, focused on faithfulness to the underlying numbers rather than surface fluency.",
     tags: ["vestra", "agents", "evaluation"],
-    authors: ["Mayank Sharma"],
+    authors: ["VÆRØX"],
   },
   {
     slug: "quantedge-walkforward-methodology",
@@ -49,7 +49,7 @@ export const RESEARCH: ResearchEntry[] = [
     abstract:
       "A pragmatic write-up of the walk-forward, Sharpe, and drawdown methodology used inside QuantEdge AI, including the failure modes that made naive backtests look better than they were.",
     tags: ["quantedge", "backtesting"],
-    authors: ["Mayank Sharma"],
+    authors: ["VÆRØX"],
   },
   {
     slug: "marketpulse-classifier-notes",
@@ -61,7 +61,7 @@ export const RESEARCH: ResearchEntry[] = [
     abstract:
       "Design notes for the MarketPulse classifier prompt: chain-of-tags vs. single-shot, held-out evaluation, and per-tag cost accounting.",
     tags: ["marketpulse", "llm", "classification"],
-    authors: ["Mayank Sharma"],
+    authors: ["VÆRØX"],
   },
   {
     slug: "aegis-triage-workflow-notes",
@@ -73,7 +73,7 @@ export const RESEARCH: ResearchEntry[] = [
     abstract:
       "Design notes on decomposing DFIR triage into typed LangGraph steps with explicit retry and analyst hand-off.",
     tags: ["aegis-ops", "security"],
-    authors: ["Mayank Sharma"],
+    authors: ["VÆRØX"],
   },
   {
     slug: "cloudcostiq-forecast-methodology",
@@ -85,7 +85,7 @@ export const RESEARCH: ResearchEntry[] = [
     abstract:
       "Forecasting monthly cloud spend with driver decomposition and honest error bounds. Notes on the modelling constraints an explainability requirement imposes.",
     tags: ["cloudcostiq", "forecasting"],
-    authors: ["Mayank Sharma"],
+    authors: ["VÆRØX"],
   },
   {
     slug: "supply-chain-validation-notes",
@@ -97,7 +97,7 @@ export const RESEARCH: ResearchEntry[] = [
     abstract:
       "Notes on validating the Supply Chain Twin against M/M/1 and Little's-law baselines before running any custom scenario in anger.",
     tags: ["supply-chain-twin", "simulation"],
-    authors: ["Mayank Sharma"],
+    authors: ["VÆRØX"],
   },
   {
     slug: "medical-cataract-notes",
@@ -109,7 +109,7 @@ export const RESEARCH: ResearchEntry[] = [
     abstract:
       "Ongoing exploration of the LMOD Cataract-1K dataset, focused on evaluation protocol and honest reporting of class imbalance.",
     tags: ["medical", "computer-vision"],
-    authors: ["Mayank Sharma"],
+    authors: ["VÆRØX"],
   },
   {
     slug: "agri-paddy-disease-notes",
@@ -121,6 +121,6 @@ export const RESEARCH: ResearchEntry[] = [
     abstract:
       "Notes from working the paddy disease dataset — data hygiene issues, augmentation choices, and how much of the reported accuracy is real.",
     tags: ["agriculture", "computer-vision"],
-    authors: ["Mayank Sharma"],
+    authors: ["VÆRØX"],
   },
 ];

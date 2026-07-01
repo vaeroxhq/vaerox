@@ -17,7 +17,7 @@ export type SystemEntry = {
 /**
  * Canonical roster — the nine engineering systems built inside the
  * VÆRØX Independent Engineering Lab. Every system is authored,
- * maintained, and signed by Mayank Sharma. Stages are honest:
+ * maintained, and signed by VÆRØX. Stages are honest:
  * "Building" and "Prototype" dominate. Nothing here is claimed as
  * live production infrastructure unless it genuinely is.
  */
@@ -25,7 +25,7 @@ export const SYSTEMS: SystemEntry[] = [
   {
     slug: "vestra",
     name: "VESTRA",
-    owner: "Mayank Sharma",
+    owner: "VÆRØX",
     stage: "Building",
     health: "Nominal",
     lastDeploy: "2026-06-28",
@@ -38,7 +38,7 @@ export const SYSTEMS: SystemEntry[] = [
   {
     slug: "quantedge",
     name: "QuantEdge AI",
-    owner: "Mayank Sharma",
+    owner: "VÆRØX",
     stage: "Building",
     health: "Nominal",
     lastDeploy: "2026-06-24",
@@ -51,7 +51,7 @@ export const SYSTEMS: SystemEntry[] = [
   {
     slug: "marketpulse",
     name: "MarketPulse",
-    owner: "Mayank Sharma",
+    owner: "VÆRØX",
     stage: "Prototype",
     health: "Nominal",
     lastDeploy: "2026-06-19",
@@ -64,7 +64,7 @@ export const SYSTEMS: SystemEntry[] = [
   {
     slug: "aegis-ops",
     name: "AEGIS OPS",
-    owner: "Mayank Sharma",
+    owner: "VÆRØX",
     stage: "Building",
     health: "Nominal",
     lastDeploy: "2026-06-30",
@@ -77,7 +77,7 @@ export const SYSTEMS: SystemEntry[] = [
   {
     slug: "leadpulse",
     name: "LeadPulse",
-    owner: "Mayank Sharma",
+    owner: "VÆRØX",
     stage: "Prototype",
     health: "Nominal",
     lastDeploy: "2026-06-14",
@@ -90,7 +90,7 @@ export const SYSTEMS: SystemEntry[] = [
   {
     slug: "cloudcostiq",
     name: "CloudCostIQ",
-    owner: "Mayank Sharma",
+    owner: "VÆRØX",
     stage: "Building",
     health: "Nominal",
     lastDeploy: "2026-06-22",
@@ -103,7 +103,7 @@ export const SYSTEMS: SystemEntry[] = [
   {
     slug: "axiom",
     name: "Axiom",
-    owner: "Mayank Sharma",
+    owner: "VÆRØX",
     stage: "Prototype",
     health: "Nominal",
     lastDeploy: "2026-06-08",
@@ -116,7 +116,7 @@ export const SYSTEMS: SystemEntry[] = [
   {
     slug: "supply-chain-twin",
     name: "Supply Chain Digital Twin",
-    owner: "Mayank Sharma",
+    owner: "VÆRØX",
     stage: "Research",
     health: "Nominal",
     lastDeploy: "2026-05-30",
@@ -129,7 +129,7 @@ export const SYSTEMS: SystemEntry[] = [
   {
     slug: "pitwall-ai",
     name: "PitWall AI",
-    owner: "Mayank Sharma",
+    owner: "VÆRØX",
     stage: "Research",
     health: "Nominal",
     lastDeploy: "2026-06-04",

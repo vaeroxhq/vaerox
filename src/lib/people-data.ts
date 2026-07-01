@@ -35,8 +35,8 @@ import { RESEARCH } from "@/lib/research-data";
 
 const MAINTAINER: Person = {
   slug: "maintainer",
-  name: "Mayank Sharma",
-  fullName: "Mayank Sharma",
+  name: "VÆRØX",
+  fullName: "VÆRØX",
   handle: "@vaerox",
   role: "Founder · Principal Engineer",
   team: "lab",
