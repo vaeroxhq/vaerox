@@ -1,250 +1,190 @@
 /**
- * Journal — chronological engineering feed. Each entry has enough
- * metadata to feel like a real content pipeline is behind it.
+ * Journal — chronological engineering feed. Authentic engineering
+ * notes tied to the canonical VÆRØX systems. No fictional incidents
+ * or fake operational reviews.
  */
 
 export type JournalCategory =
-  | "Incident Review"
-  | "Benchmark"
+  | "Engineering Notes"
   | "Architecture"
   | "Research"
-  | "Performance"
+  | "Evaluation"
+  | "Design Decision"
   | "Post-Mortem"
-  | "Engineering Notes"
-  | "Release Notes"
-  | "Observability"
-  | "Infrastructure";
+  | "Development Log";
 
 export type JournalStatus = "Published" | "Draft" | "Working note";
 
 export type JournalEntry = {
   slug: string;
-  date: string;         // ISO
+  date: string;
   title: string;
   category: JournalCategory;
-  tags: string[];
-  revision: string;     // "r.03"
+  tags: string[];       // canonical system slugs preferred
+  revision: string;
   author: string;
   status: JournalStatus;
   readingMinutes: number;
-  summary: string;      // dek
-  body: string[];       // paragraph list
+  summary: string;
+  body: string[];
 };
 
 export const JOURNAL: JournalEntry[] = [
   {
-    slug: "cardinality-budgets",
-    date: "2026-06-27",
-    title: "Cardinality budgets under fan-out",
-    category: "Observability",
-    tags: ["orbit", "metrics", "cardinality"],
-    revision: "r.04",
-    author: "Maintainer",
-    status: "Published",
-    readingMinutes: 9,
-    summary:
-      "Why we started rejecting label combinations at ingest, and how a strict per-service cardinality budget kept our storage cost flat across a 3x traffic quarter.",
-    body: [
-      "The instinct when cardinality explodes is to buy more storage. We did the opposite: we made cardinality a budgeted resource, owned by the service team, enforced at the collector.",
-      "The mechanism is simple. Every service declares a cardinality ceiling in its manifest. The collector maintains a sketch per service and refuses new label combinations once the ceiling is reached. Rejected series produce a well-known counter that the owning team can alert on.",
-      "The interesting part is what the budget forces. Teams stop adding user IDs as labels. They stop adding trace IDs. They start thinking about which dimensions matter for aggregation and which belong in traces or logs. Storage cost, unsurprisingly, went flat.",
-    ],
-  },
-  {
-    slug: "moe-routing-collapse",
-    date: "2026-06-20",
-    title: "Routing collapse in sparse MoE serving",
-    category: "Research",
-    tags: ["helix", "moe", "inference"],
+    slug: "vestra-tool-contracts",
+    date: "2026-06-24",
+    title: "Why VESTRA enforces a strict tool contract",
+    category: "Design Decision",
+    tags: ["vestra", "agents"],
     revision: "r.02",
-    author: "Maintainer",
-    status: "Published",
-    readingMinutes: 12,
-    summary:
-      "A note on how a subtle interaction between load-aware routing and expert warm-up caused all traffic to collapse onto two experts under bursty tenants.",
-    body: [
-      "Under steady load, the router distributed requests across experts as expected. Under bursty load — the kind produced by a tenant retrying a failed batch — 87% of traffic collapsed onto two experts within 400 milliseconds.",
-      "The root cause was a load-aware routing heuristic that treated cold experts as unhealthy. Warmup latency looked like elevated tail latency, which the router interpreted as backpressure, which caused it to route away from the cold experts, which kept them cold.",
-      "The fix was to distinguish cold latency from congested latency in the health signal. The larger lesson is that any feedback loop between routing and health has to model warmup explicitly.",
-    ],
-  },
-  {
-    slug: "region-failover-postmortem",
-    date: "2026-06-12",
-    title: "eu-west-2 region failover · post-mortem",
-    category: "Post-Mortem",
-    tags: ["atlas", "sev-1", "failover"],
-    revision: "r.06",
-    author: "Maintainer",
+    author: "Mayank Sharma",
     status: "Published",
     readingMinutes: 7,
     summary:
-      "eu-west-2 control-plane lost quorum for 47 minutes. Customer-facing impact was limited to control-plane operations; data plane remained healthy. Full timeline and remediation.",
+      "Every VESTRA tool call has a typed signature and a replayable trace. This is the single most useful design decision I've made on the agent layer.",
     body: [
-      "At 09:14 UTC, the eu-west-2 metadata leader failed to renew its lease. The standby did not promote because a stale entry in the quorum table caused the pre-vote check to fail. Customer control-plane operations degraded for 47 minutes; the data plane was unaffected.",
-      "The stale entry was left over from an incomplete migration in ADR·007. The migration guide called for the entry to be removed manually; the runbook did not.",
-      "Remediation: (1) ADR·022 introduces automated fencing and shortens RTO to 12 seconds under this failure mode; (2) migrations that leave manual cleanup steps are now rejected at ADR review.",
+      "The temptation with an agent framework is to let the model reach for whatever it needs. That works until the first time a portfolio summary is wrong and you have no way to isolate whether the model, the tool, or the data is at fault.",
+      "The contract is simple: every tool is a typed function, every call is logged with input and output, every trace is replayable. Adding a tool now costs a schema and a test.",
+      "In exchange, debugging a wrong number takes minutes instead of an afternoon. The parallel-tool-call optimisation in VAL-01 was only possible because tool boundaries were explicit.",
     ],
   },
   {
-    slug: "tenant-quotas-controller",
-    date: "2026-06-04",
-    title: "Tenant quotas as a controller",
+    slug: "quantedge-duckdb-decision",
+    date: "2026-06-18",
+    title: "QuantEdge: why DuckDB is the analytics core",
     category: "Architecture",
-    tags: ["atlas", "control-plane", "multitenancy"],
+    tags: ["quantedge", "duckdb"],
     revision: "r.01",
-    author: "Maintainer",
+    author: "Mayank Sharma",
     status: "Published",
     readingMinutes: 6,
     summary:
-      "We rewrote the tenant quota system as a reconciliation loop rather than a synchronous check. Consequences, mostly good, one bad.",
+      "Choosing an analytics engine for a solo research environment. Postgres was overkill; pandas was too slow. DuckDB fit the shape of the problem.",
     body: [
-      "The synchronous quota check lived in the request path and coupled every control-plane call to the freshness of the quota table. It was correct, but it made the p99 of the control plane bimodal.",
-      "The reconciliation model moves quota enforcement out of the request path. Requests admit against a locally cached ceiling; a controller reconciles usage against the ceiling every few seconds and revokes tokens when needed.",
-      "The trade-off is that we can be briefly over quota. In practice the overshoot is bounded by the reconciliation interval and small compared to the tenant ceiling. The p99 of the control plane is now unimodal.",
+      "The walk-forward runner spent most of its time in pandas group-by and merge operations. Refit-heavy strategies were bottlenecked on Python, not compute.",
+      "DuckDB moved the heavy analytics into a query engine without asking me to run a database. The reference-dataset walk-forward dropped from 145 s to 71 s after caching factor exposures.",
+      "The honest limitation: I have not validated behaviour at 10× the current reference dataset. When I get there, I'll publish the measurement.",
     ],
   },
   {
-    slug: "adr-027-consensus-model",
-    date: "2026-05-29",
-    title: "ADR·027 · Leaderless consensus for metadata",
-    category: "Architecture",
-    tags: ["parity", "consensus", "adr"],
+    slug: "marketpulse-prompt-eval",
+    date: "2026-06-19",
+    title: "MarketPulse: prompt versions get evaluated before they merge",
+    category: "Evaluation",
+    tags: ["marketpulse", "evaluation", "llm"],
     revision: "r.03",
-    author: "Maintainer",
-    status: "Published",
-    readingMinutes: 11,
-    summary:
-      "The design record for Parity, a leaderless consensus protocol tuned for platform metadata under asymmetric partitions and heterogeneous replica speeds.",
-    body: [
-      "Raft, as we ran it, produced leader churn under a specific workload: bursty writes to a small set of keys with a follower on a congested link. Pre-vote helped, but the workload was pathological for any leader-based protocol.",
-      "Parity is leaderless. Every replica accepts writes within its scope and resolves conflicts using an epoch-based ordering. Correctness is checked in TLA+; liveness is probed in Ray simulation.",
-      "The ADR is proposed, not accepted. The open question is operational: leaderless protocols invert the on-call mental model. We are running a shadow deployment for the next quarter before promoting it.",
-    ],
-  },
-  {
-    slug: "helix-p99-regression",
-    date: "2026-05-21",
-    title: "Helix P99 regression on H100 nodes",
-    category: "Performance",
-    tags: ["helix", "cuda", "p99"],
-    revision: "r.02",
-    author: "Maintainer",
+    author: "Mayank Sharma",
     status: "Published",
     readingMinutes: 8,
     summary:
-      "A p99 first-token regression traced to a CUDA driver update that changed the default async allocator behavior. Reproduction, bisection, and workaround.",
+      "A held-out 1,200-item set decides whether a prompt change ships. Two regressions caught this month that would have made it to main.",
     body: [
-      "The regression appeared after a driver bump and only on H100 nodes. Median latency was unchanged; p99 grew by 3.4x.",
-      "Bisection pointed at the async allocator. The new default reused blocks more aggressively, which was faster on average but produced occasional large allocations at request boundaries.",
-      "We reverted to the previous allocator policy for Helix nodes only and filed the finding upstream. Long-term fix will come when the allocator hint API stabilizes.",
+      "Spot-checking prompt changes through a chat UI is comforting and useless. Selection bias makes every change look better than the last.",
+      "The rule now: every prompt version is committed with a hash, evaluated against the held-out set, and merged with a delta report. Two regressions this month never made it out of the branch.",
+      "Chain-of-tags prompting beat single-shot by 4 F1 points at equal cost. The cheaper model gets within 1 F1 point on the majority classes at half the cost, which is going to matter for scaling.",
     ],
   },
   {
-    slug: "orbit-trace-sampling",
-    date: "2026-05-14",
-    title: "Tail-latency-aware trace sampling in Orbit",
-    category: "Observability",
-    tags: ["orbit", "tracing", "sampling"],
-    revision: "r.02",
-    author: "Maintainer",
+    slug: "aegis-langgraph-notes",
+    date: "2026-06-27",
+    title: "AEGIS OPS: what I learned building triage on LangGraph",
+    category: "Development Log",
+    tags: ["aegis-ops", "langgraph"],
+    revision: "r.01",
+    author: "Mayank Sharma",
     status: "Published",
     readingMinutes: 9,
-    summary: "The implementation notes behind ADR·018. Where the sampler lives, how it interacts with the collector, and what it cost.",
+    summary:
+      "LangGraph earned its place as the workflow substrate. Keeping tool logic outside the graph nodes turned out to be the load-bearing decision.",
     body: [
-      "The sampler runs at the collector, not at the SDK. This is deliberate: SDK-side samplers can't see the tail without buffering, and buffering at the SDK is a memory hazard on constrained services.",
-      "The collector buffers spans for a short window (a few seconds) and applies the sampling decision at trace root completion. Traces that exceed 2x their service SLO are retained in full.",
-      "The cost is roughly 4ms of buffered latency at the collector and 6% additional CPU. In exchange, every SLO breach is investigable.",
+      "Triage workflows grow branches quickly: retries, human-in-the-loop, escalations, fallbacks. Doing this in a hand-rolled state machine is where projects go to die.",
+      "The rule is: LangGraph handles the graph, plain Python functions handle the tools. That keeps vendor coupling small and testing sane.",
+      "Retrieval calls dominate latency on unseen alert shapes. Warming the retrieval cache brings median under 6 s — cold start still doesn't, and that's honest on the AEGIS page.",
     ],
   },
   {
-    slug: "bench-suite-2026-q2",
-    date: "2026-05-06",
-    title: "Benchmark suite · 2026 Q2 release",
-    category: "Benchmark",
-    tags: ["meridian", "benchmarks"],
+    slug: "leadpulse-human-in-loop",
+    date: "2026-06-12",
+    title: "LeadPulse: why I refused to build auto-send",
+    category: "Design Decision",
+    tags: ["leadpulse"],
     revision: "r.01",
-    author: "Maintainer",
+    author: "Mayank Sharma",
     status: "Published",
     readingMinutes: 5,
     summary:
-      "The Q2 release of the internal benchmark suite adds three retrieval workloads, two agentic workloads, and deprecates the legacy summarisation set.",
+      "The prototype drafts outreach; it does not send it. That constraint shaped the whole product surface.",
     body: [
-      "Q2 adds retrieval-augmented workloads at 4k, 16k, and 64k context sizes; two agentic workloads with tool-use budgets; and a long-horizon planning eval.",
-      "The legacy summarisation set is deprecated. It was insensitive to the model changes we care about and produced comparison charts that were more decorative than diagnostic.",
-      "All Q1 runs have been re-ingested against the Q2 schema; historical comparisons remain valid.",
+      "No confidence score justifies auto-sending an LLM-drafted email under someone else's name. The failure mode is reputational and asymmetric.",
+      "Human review is a real throughput constraint. That is a feature, not a bug, and it is documented as such on the LeadPulse page.",
     ],
   },
   {
-    slug: "signal-router-io-uring",
-    date: "2026-04-28",
-    title: "io_uring backpressure in Signal Router",
-    category: "Infrastructure",
-    tags: ["signal", "io_uring", "backpressure"],
-    revision: "r.03",
-    author: "Maintainer",
-    status: "Published",
-    readingMinutes: 10,
-    summary:
-      "Moving Signal Router from epoll to io_uring took throughput from 380k to 1.4M events/sec/core. The interesting part was rewriting backpressure.",
-    body: [
-      "Throughput was the headline; backpressure was the story. Under epoll, backpressure was expressed through the socket buffer and the event loop's ability to drain it. Under io_uring, backpressure moves to the submission queue depth.",
-      "This changes the tuning surface. A too-shallow SQ produces spurious backpressure under bursty load; a too-deep SQ delays failure signaling when a downstream is genuinely unhealthy.",
-      "The tuning guide is now part of the router runbook. The short version: size the SQ to two times the burst-of-bursts, not to the average load.",
-    ],
-  },
-  {
-    slug: "agent-eval-methodology",
-    date: "2026-04-19",
-    title: "Agent evaluation · methodology and pitfalls",
-    category: "Research",
-    tags: ["agents", "evaluation", "methodology"],
-    revision: "r.02",
-    author: "Maintainer",
-    status: "Published",
-    readingMinutes: 14,
-    summary:
-      "Notes on evaluating agentic systems: why single-turn benchmarks mislead, what stochastic seed policies to use, and how to price a tool-use budget.",
-    body: [
-      "Agent evaluations that report a single number for success rate consistently over-state agent capability. The distribution matters: an agent that succeeds 80% of the time but has 12 distinct failure modes is not fungible with one that succeeds 80% of the time in one mode.",
-      "Seed policy matters. We fix the environment seed and vary the agent seed; the reverse understates variance. The manifest records both.",
-      "Tool-use budgets are priced. Every eval has a budget in tool-calls and a budget in tokens; agents that succeed under budget are strictly preferred to agents that succeed unbounded.",
-    ],
-  },
-  {
-    slug: "atlas-scheduler-incident",
-    date: "2026-04-10",
-    title: "Atlas scheduler · cascading retry incident",
-    category: "Incident Review",
-    tags: ["atlas", "sev-2", "retries"],
-    revision: "r.04",
-    author: "Maintainer",
+    slug: "cloudcostiq-explainable-forecast",
+    date: "2026-06-22",
+    title: "CloudCostIQ: forecasts are worthless without drivers",
+    category: "Design Decision",
+    tags: ["cloudcostiq", "forecasting"],
+    revision: "r.01",
+    author: "Mayank Sharma",
     status: "Published",
     readingMinutes: 6,
     summary:
-      "A cascading retry pattern in the Atlas scheduler amplified a small transient into a 22-minute control-plane degradation. Timeline and remediation.",
+      "A cloud cost forecast should tell you what changed and why. Point estimates are a false comfort.",
     body: [
-      "A transient DNS blip caused a small percentage of scheduler calls to fail. The scheduler retried aggressively, without jitter, on top of an already-degraded resolver. Retries multiplied the load on the resolver, which multiplied the failure rate.",
-      "The pattern is textbook and the fix is textbook: exponential backoff, jitter, and a per-caller budget on outstanding retries.",
-      "The action item is not the fix. The action item is the audit: we now generate a retry-topology diagram at CI time for every service and flag any call site without a budget.",
+      "The first CloudCostIQ prototype rendered a monthly forecast as a single number with a confidence band. Users had no way to argue with it.",
+      "Every forecast surface now includes top drivers with signed contribution and an error bound. That constrains the model — no opaque ensembles — and that constraint is welcome.",
     ],
   },
   {
-    slug: "adr-031-eval-harness",
-    date: "2026-04-02",
-    title: "ADR·031 · Reproducible eval harness",
-    category: "Architecture",
-    tags: ["meridian", "evaluation", "adr"],
+    slug: "axiom-determinism-contracts",
+    date: "2026-06-08",
+    title: "Axiom: making determinism a first-class contract",
+    category: "Engineering Notes",
+    tags: ["axiom", "workflows"],
     revision: "r.01",
-    author: "Maintainer",
-    status: "Draft",
-    readingMinutes: 8,
+    author: "Mayank Sharma",
+    status: "Published",
+    readingMinutes: 7,
     summary:
-      "The design record for Meridian, a standard evaluation harness. Draft — comments welcome via the ADR review workflow.",
+      "If a workflow doesn't replay bit-identically, you can't safely debug it. Axiom treats determinism as a step contract, not a hope.",
     body: [
-      "Two teams shipped incompatible harnesses in the same year. Both were reproducible in principle, both were flaky in practice, both stored results in incompatible schemas.",
-      "Meridian is not a novel harness. It is a strict subset of what both harnesses did, plus a canonical results schema, plus a deterministic manifest per run.",
-      "The proposal is uninteresting; adoption is the hard part. This ADR is paired with a migration plan and a deprecation calendar.",
+      "Time, network, and randomness are the three places non-determinism sneaks in. Wrapping each of them with a recorded contract turned replay from aspirational to measurable.",
+      "Currently 11 of 14 prototype patterns replay bit-identically. The remaining 3 are open issues on the Axiom page, not swept under a demo.",
+    ],
+  },
+  {
+    slug: "supply-chain-baselines",
+    date: "2026-05-30",
+    title: "Supply Chain Twin: validate against analytical baselines first",
+    category: "Research",
+    tags: ["supply-chain-twin", "simulation"],
+    revision: "r.01",
+    author: "Mayank Sharma",
+    status: "Published",
+    readingMinutes: 5,
+    summary:
+      "Before trusting a custom scenario, the simulator has to reproduce M/M/1 and Little's law. Everything else is guesswork.",
+    body: [
+      "Discrete-event simulators are easy to write and hard to trust. The bar is: if the sim can't reproduce a closed-form baseline, it can't tell you anything credible about a custom scenario.",
+      "Current deviation is under 1.4% across the utilisation sweep. Custom scenarios remain explicitly unvalidated on every page.",
+    ],
+  },
+  {
+    slug: "pitwall-strategy-log",
+    date: "2026-06-04",
+    title: "PitWall AI: what the tire model got wrong",
+    category: "Development Log",
+    tags: ["pitwall-ai"],
+    revision: "r.01",
+    author: "Mayank Sharma",
+    status: "Published",
+    readingMinutes: 6,
+    summary:
+      "Tire degradation is the biggest error source. Adding a safety-car probability shrank the tail; the mean barely moved.",
+    body: [
+      "Naïve degradation curves under-predict wear on high-degradation tracks. Fitting per-track curves helped, but the sim still overestimates one-stop viability on those.",
+      "Adding a per-race safety-car probability made a bigger difference to tail error than to the mean — the sim now handicaps risky strategies more honestly.",
     ],
   },
 ];
