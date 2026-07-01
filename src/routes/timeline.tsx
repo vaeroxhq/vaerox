@@ -53,7 +53,7 @@ function buildEvents(): Event[] {
     const latest = b.runs[b.runs.length - 1];
     events.push({
       date: latest?.date ?? b.updated,
-      kind: "Benchmark",
+      kind: "Validation",
       title: `${b.title} · ${b.status.toLowerCase()}`,
       href: `/benchmarks/${b.slug}`, kicker: b.code,
       meta: latest?.build ?? b.phase, system: b.system,
