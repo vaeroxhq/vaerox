@@ -76,15 +76,16 @@ function DashboardsPage() {
       <Breadcrumbs items={[{ label: "VÆRØX", to: "/" }, { label: "Dashboards" }]} />
       <PageHeader
         section="§ · Dashboards"
-        title="Operational dashboards."
-        summary="Standing measurements across delivery, reliability, performance, and cost. Twenty-six week rolling windows. Deterministic time-series; no live telemetry."
+        title="Instrumentation targets."
+        summary="The lab is pre-production. These panels do not show live telemetry — they define the shape and threshold each canonical system should hit before its first tagged release. Series are deterministic simulations of a compliant trajectory."
         meta={[
           { label: "Panels",  value: DASHBOARDS.length.toString().padStart(2, "0") },
           { label: "Window",  value: "26 weeks" },
-          { label: "Refresh", value: "on-demand" },
-          { label: "Source",  value: "orbit · pull" },
+          { label: "Kind",    value: "design targets" },
+          { label: "Source",  value: "simulated" },
         ]}
       />
+
 
       <div className="hairline bg-canvas grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-line-1">
         {cards.map((c) => <DashCard key={c.code} d={c} />)}
