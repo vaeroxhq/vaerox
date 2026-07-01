@@ -84,13 +84,25 @@ function Index() {
 
 function MetaCell({ label, value }: { label: string; value: string }) {
   return (
-    <div className="bg-canvas px-4 py-4">
+    <div className="bg-canvas px-4 py-3">
       <dt className="font-mono text-[11px] text-text-3 uppercase tracking-[0.08em]">
         {label}
       </dt>
-      <dd className="font-mono text-[15px] text-text-1 mt-2 tabular">
+      <dd className="font-mono text-[15px] text-text-1 mt-1.5 tabular">
         {value}
       </dd>
     </div>
   );
 }
+
+function FootCell({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="bg-canvas px-4 py-3 flex items-baseline justify-between gap-4">
+      <span className="font-mono text-[11px] text-text-3 uppercase tracking-[0.08em]">
+        {label}
+      </span>
+      <span className="font-mono text-[11px] text-text-2 tabular">{value}</span>
+    </div>
+  );
+}
+
