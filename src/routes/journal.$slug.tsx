@@ -1,6 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { JOURNAL, type JournalEntry } from "@/lib/journal-data";
 import { PageHeader, SectionShell } from "@/components/section/section-bits";
+import { Breadcrumbs } from "@/components/doc/breadcrumbs";
+import { RelatedRail } from "@/components/doc/related-rail";
+import { DocShell, DocBlock } from "@/components/doc/doc-shell";
+import { PrevNext } from "@/components/doc/prev-next";
 import { OpsTag } from "@/components/ops/ops-tag";
 
 export const Route = createFileRoute("/journal/$slug")({
@@ -31,8 +35,19 @@ export const Route = createFileRoute("/journal/$slug")({
 
 function EntryPage() {
   const { entry } = Route.useLoaderData() as { entry: JournalEntry };
+  const sorted = [...JOURNAL].sort((a, b) => b.date.localeCompare(a.date));
+  const idx = sorted.findIndex((x) => x.slug === entry.slug);
+  const prev = sorted[idx + 1];
+  const next = sorted[idx - 1];
+
   return (
     <SectionShell>
+      <Breadcrumbs items={[
+        { label: "VÆRØX", to: "/" },
+        { label: "Journal", to: "/journal" },
+        { label: entry.category },
+      ]} />
+
       <PageHeader
         section={`§ · Journal · ${entry.category}`}
         title={entry.title}
@@ -54,18 +69,22 @@ function EntryPage() {
         ))}
       </div>
 
-      <article className="max-w-[720px] space-y-5">
-        {entry.body.map((p, i) => (
-          <p key={i} className="text-[16px] text-text-2 leading-[1.75]">{p}</p>
-        ))}
-      </article>
+      <DocShell rail={<RelatedRail kind="journal" id={entry.slug} />}>
+        <article className="max-w-[720px]">
+          <DocBlock heading="Entry">
+            <div className="space-y-5">
+              {entry.body.map((p, i) => (
+                <p key={i} className="text-[16px] text-text-2 leading-[1.75]">{p}</p>
+              ))}
+            </div>
+          </DocBlock>
+        </article>
+      </DocShell>
 
-      <div className="mt-16 hairline-t pt-6 flex items-center justify-between">
-        <Link to="/journal" className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1 transition-micro">
-          ← All entries
-        </Link>
-        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">{entry.category} · {entry.revision}</span>
-      </div>
+      <PrevNext
+        prev={prev ? { title: prev.title, href: `/journal/${prev.slug}`, kicker: "LOG" } : null}
+        next={next ? { title: next.title, href: `/journal/${next.slug}`, kicker: "LOG" } : null}
+      />
     </SectionShell>
   );
 }

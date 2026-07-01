@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/command";
 import { NAV } from "@/lib/nav";
 import { useTheme } from "@/lib/theme";
-import { PROJECTS, NOTES } from "@/lib/home-data";
+import { allEntities, KIND_LABEL, type Entity, type EntityKind } from "@/lib/graph";
 
 type Ctx = { open: () => void };
 const PaletteCtx = createContext<Ctx | null>(null);
@@ -20,6 +20,11 @@ export function useCommandPalette() {
   if (!ctx) throw new Error("useCommandPalette must be used inside <CommandPaletteProvider>");
   return ctx;
 }
+
+const GROUP_ORDER: EntityKind[] = [
+  "system", "adr", "incident", "benchmark", "api",
+  "project", "research", "journal", "handbook",
+];
 
 export function CommandPaletteProvider({ children }: { children: ReactNode }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,17 +44,23 @@ export function CommandPaletteProvider({ children }: { children: ReactNode }) {
 
   const go = (to: string) => {
     setIsOpen(false);
-    // navigate is dynamically typed here; all NAV paths exist as file routes.
     navigate({ to } as never);
   };
+
+  // Group entities by kind for the palette (all entities are indexed).
+  const grouped = new Map<EntityKind, Entity[]>();
+  for (const e of allEntities()) {
+    if (!grouped.has(e.kind)) grouped.set(e.kind, []);
+    grouped.get(e.kind)!.push(e);
+  }
 
   return (
     <PaletteCtx.Provider value={{ open: () => setIsOpen(true) }}>
       {children}
 
       <CommandDialog open={isOpen} onOpenChange={setIsOpen}>
-        <CommandInput placeholder="Search VÆRØX — pages, systems, references…" />
-        <CommandList className="max-h-[420px]">
+        <CommandInput placeholder="Search VÆRØX — systems, ADRs, incidents, benchmarks, APIs…" />
+        <CommandList className="max-h-[520px]">
           <CommandEmpty>
             <span className="font-mono text-[11px] text-text-3 uppercase tracking-[0.14em]">
               No results
@@ -58,51 +69,36 @@ export function CommandPaletteProvider({ children }: { children: ReactNode }) {
 
           <CommandGroup heading="Navigate">
             {NAV.filter((n) => n.section === "Primary").map((n) => (
-              <PaletteItem key={n.to} label={n.label} hint={n.hint} onSelect={() => go(n.to)} />
+              <PaletteItem key={n.to} label={n.label} hint={n.hint} tag="NAV" onSelect={() => go(n.to)} />
             ))}
           </CommandGroup>
 
-          <CommandGroup heading="Projects">
-            {PROJECTS.map((p) => (
-              <PaletteItem
-                key={p.slug}
-                label={p.name}
-                hint={`${p.status} · ${p.stack.join(" · ")}`}
-                onSelect={() => go("/projects")}
-              />
-            ))}
-          </CommandGroup>
-
-          <CommandGroup heading="Research">
-            <PaletteItem label="Browse research" hint="Papers, benchmarks, notes" onSelect={() => go("/research")} />
-          </CommandGroup>
-
-          <CommandGroup heading="Architecture">
-            <PaletteItem label="Browse architecture" hint="Diagrams & decision records" onSelect={() => go("/architecture")} />
-          </CommandGroup>
-
-          <CommandGroup heading="Journal">
-            {NOTES.map((n) => (
-              <PaletteItem
-                key={n.slug}
-                label={n.title}
-                hint={`${n.date} · ${n.category} · ${n.readingMinutes}m`}
-                onSelect={() => go("/journal")}
-              />
-            ))}
-          </CommandGroup>
+          {GROUP_ORDER.filter((k) => grouped.has(k)).map((k) => (
+            <CommandGroup key={k} heading={KIND_LABEL[k]}>
+              {grouped.get(k)!.map((e) => (
+                <PaletteItem
+                  key={`${e.kind}:${e.id}`}
+                  label={e.title}
+                  hint={e.summary}
+                  tag={e.kicker}
+                  onSelect={() => go(e.href)}
+                />
+              ))}
+            </CommandGroup>
+          ))}
 
           <CommandGroup heading="Meta">
             {NAV.filter((n) => n.section === "Meta").map((n) => (
-              <PaletteItem key={n.to} label={n.label} hint={n.hint} onSelect={() => go(n.to)} />
+              <PaletteItem key={n.to} label={n.label} hint={n.hint} tag="META" onSelect={() => go(n.to)} />
             ))}
-            <PaletteItem label="Home" hint="Return to the index" onSelect={() => go("/")} />
+            <PaletteItem label="Home" hint="Return to the index" tag="NAV" onSelect={() => go("/")} />
           </CommandGroup>
 
           <CommandGroup heading="Actions">
             <PaletteItem
               label="Toggle theme"
               hint="Switch between dark and light"
+              tag="ACTION"
               onSelect={() => {
                 toggleTheme();
                 setIsOpen(false);
@@ -118,20 +114,27 @@ export function CommandPaletteProvider({ children }: { children: ReactNode }) {
 function PaletteItem({
   label,
   hint,
+  tag,
   onSelect,
 }: {
   label: string;
   hint: string;
+  tag: string;
   onSelect: () => void;
 }) {
   return (
     <CommandItem
-      value={`${label} ${hint}`}
+      value={`${label} ${hint} ${tag}`}
       onSelect={onSelect}
       className="flex items-baseline justify-between gap-6"
     >
-      <span className="font-display text-[14px] text-text-1 tracking-[-0.01em]">{label}</span>
-      <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] truncate">
+      <div className="min-w-0 flex items-baseline gap-3">
+        <span className="font-mono text-[9.5px] text-text-3 uppercase tracking-[0.18em] tabular w-[70px] shrink-0">
+          {tag}
+        </span>
+        <span className="font-display text-[14px] text-text-1 tracking-[-0.01em] truncate">{label}</span>
+      </div>
+      <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] truncate max-w-[40%]">
         {hint}
       </span>
     </CommandItem>
