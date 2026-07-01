@@ -38,6 +38,12 @@ export function Hero() {
           Book a discovery call →
         </a>
         <a
+          href="/work"
+          className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1 transition-micro"
+        >
+          What we build →
+        </a>
+        <a
           href="/services"
           className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1 transition-micro"
         >
