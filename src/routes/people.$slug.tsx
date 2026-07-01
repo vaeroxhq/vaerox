@@ -94,13 +94,14 @@ function MaintainerDetail() {
 
           <DocBlock heading="How to read attribution">
             <p className="text-[13.5px] text-text-2 leading-[1.7]">
-              Anywhere on the site — in ADRs, incident reports, benchmarks, or APIs —
-              an <span className="font-mono text-[12.5px] text-text-1">owner</span> or{" "}
-              <span className="font-mono text-[12.5px] text-text-1">commander</span> field
-              refers to the same maintainer. Surface names (Platform, Inference,
-              Observability, etc.) refer to areas of practice, not teams of humans.
+              Anywhere on the site — in ADRs, validation records, APIs, or journal
+              entries — an <span className="font-mono text-[12.5px] text-text-1">owner</span> or{" "}
+              <span className="font-mono text-[12.5px] text-text-1">author</span> field
+              refers to the same maintainer. Surface names (Agent Systems, Market Data,
+              FinOps, etc.) refer to areas of practice, not teams of humans.
             </p>
           </DocBlock>
+
 
           {projects.length > 0 && (
             <DocBlock heading="Projects">
