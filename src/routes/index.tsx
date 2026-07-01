@@ -92,34 +92,8 @@ function Index() {
           </div>
         </section>
 
-        {/* ── Engineering build footer ── */}
-        <footer aria-label="Build metadata" className="mt-24">
-          <div className="hairline-t grid grid-cols-2 md:grid-cols-4 gap-px bg-line-1">
-            <FootCell label="Revision" value="—" />
-            <FootCell label="Build" value="v0.1.0" />
-            <FootCell label="Region" value="EU · Global" />
-            <FootCell label="Updated" value="2026-07-01" />
-            <FootCell label="Status">
-              <span className="inline-flex items-center gap-2">
-                <span className="dot text-success" aria-hidden="true" />
-                <span className="tabular">Nominal</span>
-              </span>
-            </FootCell>
-            <FootCell label="License" value="—" />
-            <FootCell label="Source" value="GitHub" />
-            <FootCell label="Mode" value="Dark canonical" />
-          </div>
-
-          {/* Colophon */}
-          <div className="hairline-t py-6 flex items-center justify-between">
-            <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-              © VÆRØX · Engineering Journal
-            </span>
-            <VaeroxMark size={14} className="opacity-60" />
-          </div>
-        </footer>
       </div>
-    </main>
+    </div>
   );
 }
 
