@@ -83,17 +83,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "color-scheme", content: "dark light" },
-      { title: "VÆRØX — Engineering Systems" },
+      { title: "VÆRØX — Independent AI Engineering Studio" },
       {
         name: "description",
         content:
-          "VÆRØX is an engineering organization building enterprise AI, platform, and distributed systems in public.",
+          "VÆRØX is an independent AI engineering studio designing and shipping intelligent software — AI agents, LLM applications, RAG systems, MCP servers, workflow automation, and production-grade backend platforms.",
       },
-      { property: "og:title", content: "VÆRØX — Engineering Systems" },
+      { property: "og:title", content: "VÆRØX — Independent AI Engineering Studio" },
       {
         property: "og:description",
         content:
-          "VÆRØX is an engineering organization building enterprise AI, platform, and distributed systems in public.",
+          "AI agents, LLM applications, RAG, MCP, workflow automation, and backend platforms — designed, built, and documented under one discipline.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
