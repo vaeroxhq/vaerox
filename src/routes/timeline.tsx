@@ -128,7 +128,7 @@ function TimelinePage() {
       <PageHeader
         section="§ · Timeline"
         title="Engineering timeline."
-        summary="Every deployment, decision, incident, benchmark, and release, interleaved in reverse chronological order. Filter by kind, system, and year."
+        summary="Every architecture decision, research note, validation record, project start, and journal entry, interleaved in reverse chronological order. Filter by kind, system, and year."
         meta={[
           { label: "Events",   value: events.length.toString().padStart(3, "0") },
           { label: "Filtered", value: filtered.length.toString().padStart(3, "0") },
