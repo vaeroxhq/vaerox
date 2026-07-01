@@ -21,11 +21,13 @@ import { APIS } from "./apis-data";
 import { PEOPLE, findPersonByName } from "./people-data";
 import { TEAMS } from "./teams-data";
 import { PROJECT_EVIDENCE, SYSTEM_EVIDENCE } from "./evidence-data";
+import { DATASETS } from "./datasets-data";
 
 export type EntityKind =
   | "system"
   | "project"
   | "research"
+  | "dataset"
   | "adr"
   | "handbook"
   | "journal"
@@ -182,6 +184,25 @@ for (const t of TEAMS) {
     kicker: "TEAM", summary: t.charter,
     owner: t.lead, updated: t.established, status: `${t.memberSlugs.length} members`,
   });
+}
+
+for (const d of DATASETS) {
+  register({
+    kind: "dataset", id: d.slug, slug: d.slug,
+    title: d.name, href: `/research/datasets/${d.slug}`,
+    kicker: "DAT", summary: d.purpose,
+    owner: d.domain, updated: d.updated, status: d.status,
+    tags: d.tags,
+  });
+}
+
+// Dataset ↔ related entities declared in the dataset registry.
+for (const d of DATASETS) {
+  const self: EntityRef = { kind: "dataset", id: d.slug };
+  for (const r of d.researchRefs)   link(self, { kind: "research",  id: r });
+  for (const j of d.journalRefs)    link(self, { kind: "journal",   id: j });
+  for (const p of d.projectRefs)    link(self, { kind: "project",   id: p });
+  for (const b of d.benchmarkRefs)  link(self, { kind: "benchmark", id: b });
 }
 
 /* ── Compute edges from the underlying data ──────────────── */
@@ -379,6 +400,7 @@ export const KIND_LABEL: Record<EntityKind, string> = {
   system: "System",
   project: "Project",
   research: "Research",
+  dataset: "Dataset",
   adr: "ADR",
   handbook: "Handbook",
   journal: "Journal",
