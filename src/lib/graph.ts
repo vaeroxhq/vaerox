@@ -153,11 +153,12 @@ for (const b of BENCHMARKS) {
   register({
     kind: "benchmark", id: b.slug, slug: b.slug,
     title: b.title, href: `/benchmarks/${b.slug}`,
-    kicker: b.code, summary: `${b.metric} · ${b.cadence.toLowerCase()}`,
-    owner: b.owner, updated: b.updated, status: b.cadence,
-    tags: [b.system],
+    kicker: b.code, summary: b.focus,
+    owner: b.system, updated: b.updated, status: b.status,
+    tags: [b.system, b.phase],
   });
 }
+
 
 for (const a of APIS) {
   register({
