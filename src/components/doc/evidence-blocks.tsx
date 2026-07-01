@@ -167,40 +167,38 @@ export function BenchmarkRefsBlock({ slugs }: { slugs: string[] }) {
   const bs = slugs.map((s) => BENCHMARKS.find((b) => b.slug === s)).filter(Boolean) as typeof BENCHMARKS;
   if (bs.length === 0) return null;
   return (
-    <DocBlock heading="Benchmarks">
+    <DocBlock heading="Engineering validation">
       <ul className="hairline bg-canvas">
-        {bs.map((b, i) => {
-          const latest = b.runs.at(-1);
-          return (
-            <li
-              key={b.slug}
-              className={`px-4 py-3 ${i < bs.length - 1 ? "hairline-b" : ""}`}
+        {bs.map((b, i) => (
+          <li
+            key={b.slug}
+            className={`px-4 py-3 ${i < bs.length - 1 ? "hairline-b" : ""}`}
+          >
+            <Link
+              to="/benchmarks/$slug"
+              params={{ slug: b.slug }}
+              className="group grid grid-cols-[64px_1fr_auto] items-baseline gap-4"
             >
-              <Link
-                to="/benchmarks/$slug"
-                params={{ slug: b.slug }}
-                className="group grid grid-cols-[64px_1fr_auto] items-baseline gap-4"
-              >
-                <span className="font-mono text-[11px] text-text-3 tabular">{b.code}</span>
-                <span className="min-w-0">
-                  <span className="font-display text-[14px] text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.005em]">
-                    {b.title}
-                  </span>
-                  <span className="block mt-0.5 font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-                    {b.metric} · {b.cadence.toLowerCase()} · methodology recorded
-                  </span>
+              <span className="font-mono text-[11px] text-text-3 tabular">{b.code}</span>
+              <span className="min-w-0">
+                <span className="font-display text-[14px] text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.005em]">
+                  {b.title}
                 </span>
-                <span className="font-mono text-[13px] text-text-1 tabular text-right">
-                  {latest ? benchmarkFormatValue(b, latest.value) : "—"}
+                <span className="block mt-0.5 font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
+                  {b.focus}
                 </span>
-              </Link>
-            </li>
-          );
-        })}
+              </span>
+              <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] tabular text-right">
+                {b.status}
+              </span>
+            </Link>
+          </li>
+        ))}
       </ul>
     </DocBlock>
   );
 }
+
 
 export function IncidentRefsBlock({ slugs }: { slugs: string[] }) {
   const incs = slugs.map((s) => INCIDENTS.find((i) => i.slug === s)).filter(Boolean) as typeof INCIDENTS;

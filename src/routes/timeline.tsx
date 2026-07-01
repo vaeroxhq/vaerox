@@ -64,12 +64,15 @@ function buildEvents(): Event[] {
   }
   for (const b of BENCHMARKS) {
     const latest = b.runs[b.runs.length - 1];
-    if (latest) events.push({
-      date: latest.date, kind: "Benchmark", title: `${b.title} · ${latest.value}${b.unit}`,
+    events.push({
+      date: latest?.date ?? b.updated,
+      kind: "Benchmark",
+      title: `${b.title} · ${b.status.toLowerCase()}`,
       href: `/benchmarks/${b.slug}`, kicker: b.code,
-      meta: latest.build, system: b.system,
+      meta: latest?.build ?? b.phase, system: b.system,
     });
   }
+
   for (const p of PROJECTS) {
     events.push({
       date: p.started, kind: "Project", title: `${p.name} started`,

@@ -86,20 +86,20 @@ function SystemDetail() {
         title={s.name}
         summary={s.summary}
         meta={[
-          { label: "Owner",       value: s.owner },
-          { label: "Stage",       value: s.stage },
-          { label: "Health",      value: s.health },
-          { label: "Last Deploy", value: s.lastDeploy },
+          { label: "Maintainer", value: "Mayank Sharma" },
+          { label: "Stage",      value: s.stage },
+          { label: "Primary",    value: s.stack[0] ?? "—" },
+          { label: "Updated",    value: s.lastDeploy },
         ]}
       />
 
       <div className="mb-6 flex flex-wrap items-center gap-x-3 gap-y-2">
         <StageDot tone={tone} />
-        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">{s.stage} · {s.health}</span>
-        <OpsTag label="LIVE" />
-        <OpsTag label="SIGNED" />
+        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">{s.stage}</span>
+        <OpsTag label="DOCUMENTED" />
         <OpsTag label="VERSIONED" />
       </div>
+
 
       <DocShell rail={<RelatedRail kind="system" id={s.slug} />}>
         <article className="max-w-[760px]">
