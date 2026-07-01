@@ -21,6 +21,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as SystemsSlugRouteImport } from './routes/systems.$slug'
 import { Route as ResearchSlugRouteImport } from './routes/research.$slug'
 import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
+import { Route as JournalSlugRouteImport } from './routes/journal.$slug'
+import { Route as ArchitectureAdrRouteImport } from './routes/architecture.$adr'
 
 const SystemsRoute = SystemsRouteImport.update({
   id: '/systems',
@@ -82,17 +84,29 @@ const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => ProjectsRoute,
 } as any)
+const JournalSlugRoute = JournalSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => JournalRoute,
+} as any)
+const ArchitectureAdrRoute = ArchitectureAdrRouteImport.update({
+  id: '/$adr',
+  path: '/$adr',
+  getParentRoute: () => ArchitectureRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/architecture': typeof ArchitectureRoute
+  '/architecture': typeof ArchitectureRouteWithChildren
   '/contact': typeof ContactRoute
   '/engineering': typeof EngineeringRoute
-  '/journal': typeof JournalRoute
+  '/journal': typeof JournalRouteWithChildren
   '/projects': typeof ProjectsRouteWithChildren
   '/research': typeof ResearchRouteWithChildren
   '/systems': typeof SystemsRouteWithChildren
+  '/architecture/$adr': typeof ArchitectureAdrRoute
+  '/journal/$slug': typeof JournalSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/research/$slug': typeof ResearchSlugRoute
   '/systems/$slug': typeof SystemsSlugRoute
@@ -100,13 +114,15 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/architecture': typeof ArchitectureRoute
+  '/architecture': typeof ArchitectureRouteWithChildren
   '/contact': typeof ContactRoute
   '/engineering': typeof EngineeringRoute
-  '/journal': typeof JournalRoute
+  '/journal': typeof JournalRouteWithChildren
   '/projects': typeof ProjectsRouteWithChildren
   '/research': typeof ResearchRouteWithChildren
   '/systems': typeof SystemsRouteWithChildren
+  '/architecture/$adr': typeof ArchitectureAdrRoute
+  '/journal/$slug': typeof JournalSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/research/$slug': typeof ResearchSlugRoute
   '/systems/$slug': typeof SystemsSlugRoute
@@ -115,13 +131,15 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/architecture': typeof ArchitectureRoute
+  '/architecture': typeof ArchitectureRouteWithChildren
   '/contact': typeof ContactRoute
   '/engineering': typeof EngineeringRoute
-  '/journal': typeof JournalRoute
+  '/journal': typeof JournalRouteWithChildren
   '/projects': typeof ProjectsRouteWithChildren
   '/research': typeof ResearchRouteWithChildren
   '/systems': typeof SystemsRouteWithChildren
+  '/architecture/$adr': typeof ArchitectureAdrRoute
+  '/journal/$slug': typeof JournalSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/research/$slug': typeof ResearchSlugRoute
   '/systems/$slug': typeof SystemsSlugRoute
@@ -138,6 +156,8 @@ export interface FileRouteTypes {
     | '/projects'
     | '/research'
     | '/systems'
+    | '/architecture/$adr'
+    | '/journal/$slug'
     | '/projects/$slug'
     | '/research/$slug'
     | '/systems/$slug'
@@ -152,6 +172,8 @@ export interface FileRouteTypes {
     | '/projects'
     | '/research'
     | '/systems'
+    | '/architecture/$adr'
+    | '/journal/$slug'
     | '/projects/$slug'
     | '/research/$slug'
     | '/systems/$slug'
@@ -166,6 +188,8 @@ export interface FileRouteTypes {
     | '/projects'
     | '/research'
     | '/systems'
+    | '/architecture/$adr'
+    | '/journal/$slug'
     | '/projects/$slug'
     | '/research/$slug'
     | '/systems/$slug'
@@ -174,10 +198,10 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
-  ArchitectureRoute: typeof ArchitectureRoute
+  ArchitectureRoute: typeof ArchitectureRouteWithChildren
   ContactRoute: typeof ContactRoute
   EngineeringRoute: typeof EngineeringRoute
-  JournalRoute: typeof JournalRoute
+  JournalRoute: typeof JournalRouteWithChildren
   ProjectsRoute: typeof ProjectsRouteWithChildren
   ResearchRoute: typeof ResearchRouteWithChildren
   SystemsRoute: typeof SystemsRouteWithChildren
@@ -269,8 +293,45 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsSlugRouteImport
       parentRoute: typeof ProjectsRoute
     }
+    '/journal/$slug': {
+      id: '/journal/$slug'
+      path: '/$slug'
+      fullPath: '/journal/$slug'
+      preLoaderRoute: typeof JournalSlugRouteImport
+      parentRoute: typeof JournalRoute
+    }
+    '/architecture/$adr': {
+      id: '/architecture/$adr'
+      path: '/$adr'
+      fullPath: '/architecture/$adr'
+      preLoaderRoute: typeof ArchitectureAdrRouteImport
+      parentRoute: typeof ArchitectureRoute
+    }
   }
 }
+
+interface ArchitectureRouteChildren {
+  ArchitectureAdrRoute: typeof ArchitectureAdrRoute
+}
+
+const ArchitectureRouteChildren: ArchitectureRouteChildren = {
+  ArchitectureAdrRoute: ArchitectureAdrRoute,
+}
+
+const ArchitectureRouteWithChildren = ArchitectureRoute._addFileChildren(
+  ArchitectureRouteChildren,
+)
+
+interface JournalRouteChildren {
+  JournalSlugRoute: typeof JournalSlugRoute
+}
+
+const JournalRouteChildren: JournalRouteChildren = {
+  JournalSlugRoute: JournalSlugRoute,
+}
+
+const JournalRouteWithChildren =
+  JournalRoute._addFileChildren(JournalRouteChildren)
 
 interface ProjectsRouteChildren {
   ProjectsSlugRoute: typeof ProjectsSlugRoute
@@ -310,10 +371,10 @@ const SystemsRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
-  ArchitectureRoute: ArchitectureRoute,
+  ArchitectureRoute: ArchitectureRouteWithChildren,
   ContactRoute: ContactRoute,
   EngineeringRoute: EngineeringRoute,
-  JournalRoute: JournalRoute,
+  JournalRoute: JournalRouteWithChildren,
   ProjectsRoute: ProjectsRouteWithChildren,
   ResearchRoute: ResearchRouteWithChildren,
   SystemsRoute: SystemsRouteWithChildren,
