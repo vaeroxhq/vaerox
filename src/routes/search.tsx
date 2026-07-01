@@ -87,7 +87,7 @@ function SearchPage() {
   }, [results]);
 
   const suggestions = useMemo(
-    () => ["Helix", "cardinality", "gRPC", "MoE", "atlas", "P95 latency", "incident", "MTTR"],
+    () => ["VESTRA", "MarketPulse", "QuantEdge", "AEGIS OPS", "LangGraph", "walk-forward", "prompt eval", "tool contract"],
     [],
   );
 
