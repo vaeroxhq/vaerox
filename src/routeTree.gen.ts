@@ -29,6 +29,7 @@ import { Route as IncidentsIdRouteImport } from './routes/incidents.$id'
 import { Route as BenchmarksSlugRouteImport } from './routes/benchmarks.$slug'
 import { Route as ArchitectureAdrRouteImport } from './routes/architecture.$adr'
 import { Route as ApiSlugRouteImport } from './routes/api.$slug'
+import { Route as ArchitectureDiagramsSlugRouteImport } from './routes/architecture.diagrams.$slug'
 
 const SystemsRoute = SystemsRouteImport.update({
   id: '/systems',
@@ -130,6 +131,12 @@ const ApiSlugRoute = ApiSlugRouteImport.update({
   path: '/api/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ArchitectureDiagramsSlugRoute =
+  ArchitectureDiagramsSlugRouteImport.update({
+    id: '/diagrams/$slug',
+    path: '/diagrams/$slug',
+    getParentRoute: () => ArchitectureRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -152,6 +159,7 @@ export interface FileRoutesByFullPath {
   '/research/$slug': typeof ResearchSlugRoute
   '/systems/$slug': typeof SystemsSlugRoute
   '/api/': typeof ApiIndexRoute
+  '/architecture/diagrams/$slug': typeof ArchitectureDiagramsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -174,6 +182,7 @@ export interface FileRoutesByTo {
   '/research/$slug': typeof ResearchSlugRoute
   '/systems/$slug': typeof SystemsSlugRoute
   '/api': typeof ApiIndexRoute
+  '/architecture/diagrams/$slug': typeof ArchitectureDiagramsSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -197,6 +206,7 @@ export interface FileRoutesById {
   '/research/$slug': typeof ResearchSlugRoute
   '/systems/$slug': typeof SystemsSlugRoute
   '/api/': typeof ApiIndexRoute
+  '/architecture/diagrams/$slug': typeof ArchitectureDiagramsSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -221,6 +231,7 @@ export interface FileRouteTypes {
     | '/research/$slug'
     | '/systems/$slug'
     | '/api/'
+    | '/architecture/diagrams/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -243,6 +254,7 @@ export interface FileRouteTypes {
     | '/research/$slug'
     | '/systems/$slug'
     | '/api'
+    | '/architecture/diagrams/$slug'
   id:
     | '__root__'
     | '/'
@@ -265,6 +277,7 @@ export interface FileRouteTypes {
     | '/research/$slug'
     | '/systems/$slug'
     | '/api/'
+    | '/architecture/diagrams/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -425,15 +438,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/architecture/diagrams/$slug': {
+      id: '/architecture/diagrams/$slug'
+      path: '/diagrams/$slug'
+      fullPath: '/architecture/diagrams/$slug'
+      preLoaderRoute: typeof ArchitectureDiagramsSlugRouteImport
+      parentRoute: typeof ArchitectureRoute
+    }
   }
 }
 
 interface ArchitectureRouteChildren {
   ArchitectureAdrRoute: typeof ArchitectureAdrRoute
+  ArchitectureDiagramsSlugRoute: typeof ArchitectureDiagramsSlugRoute
 }
 
 const ArchitectureRouteChildren: ArchitectureRouteChildren = {
   ArchitectureAdrRoute: ArchitectureAdrRoute,
+  ArchitectureDiagramsSlugRoute: ArchitectureDiagramsSlugRoute,
 }
 
 const ArchitectureRouteWithChildren = ArchitectureRoute._addFileChildren(

@@ -105,7 +105,12 @@ function ArchitecturePage() {
       <SectionHeading kicker="§ 03" title="Diagram catalog" caption="System · sequence · deployment · data flow · network · schema · API · dependency" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-line-1 hairline">
         {DIAGRAMS.map((d) => (
-          <article key={d.slug} className="group card-hover hover:card-hover-on bg-canvas px-5 pt-5 pb-4 flex flex-col">
+          <Link
+            key={d.slug}
+            to="/architecture/diagrams/$slug"
+            params={{ slug: d.slug }}
+            className="group card-hover hover:card-hover-on bg-canvas px-5 pt-5 pb-4 flex flex-col"
+          >
             <header className="flex items-baseline justify-between">
               <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">{d.kind}</span>
               <span className="font-mono text-[10px] text-text-3 tabular">{d.updated}</span>
@@ -128,7 +133,7 @@ function ArchitecturePage() {
               <OpsTag label="VERSIONED" />
               <span className="font-mono text-[11px] text-text-3">Open →</span>
             </div>
-          </article>
+          </Link>
         ))}
       </div>
     </SectionShell>
