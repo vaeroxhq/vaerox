@@ -3,7 +3,8 @@ import { PEOPLE } from "@/lib/people-data";
 import { PageHeader, SectionShell } from "@/components/section/section-bits";
 import { SYSTEMS } from "@/lib/systems-data";
 import { ADRS } from "@/lib/architecture-data";
-import { INCIDENTS } from "@/lib/incidents-data";
+import { PROJECTS } from "@/lib/projects-data";
+
 
 export const Route = createFileRoute("/people")({
   head: () => ({
