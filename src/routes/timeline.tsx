@@ -77,7 +77,7 @@ function buildEvents(): Event[] {
   return events.sort((a, b) => b.date.localeCompare(a.date));
 }
 
-const KIND_ORDER: Kind[] = ["Deploy", "ADR", "Incident", "Research", "Benchmark", "Project", "Journal"];
+const KIND_ORDER: Kind[] = ["ADR", "Research", "Validation", "Project", "Journal"];
 
 function TimelinePage() {
   const events = useMemo(buildEvents, []);
