@@ -17,7 +17,6 @@ export const Route = createFileRoute("/graph")({
 });
 
 const ALL_KINDS: EntityKind[] = [
-const KIND_ORDER: EntityKind[] = [
   "system", "project", "adr", "incident", "benchmark",
   "api", "research", "dataset", "handbook", "journal", "person", "team",
 ];
