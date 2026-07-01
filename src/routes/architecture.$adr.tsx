@@ -1,6 +1,10 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ADRS, type Adr } from "@/lib/architecture-data";
 import { PageHeader, SectionShell, StageDot } from "@/components/section/section-bits";
+import { Breadcrumbs } from "@/components/doc/breadcrumbs";
+import { RelatedRail } from "@/components/doc/related-rail";
+import { DocShell, DocBlock } from "@/components/doc/doc-shell";
+import { PrevNext } from "@/components/doc/prev-next";
 import { OpsTag } from "@/components/ops/ops-tag";
 
 export const Route = createFileRoute("/architecture/$adr")({
@@ -39,8 +43,19 @@ function AdrPage() {
     : adr.status === "Draft" ? "warning"
     : "muted";
 
+  const sorted = [...ADRS].sort((a, b) => a.number.localeCompare(b.number));
+  const idx = sorted.findIndex((a) => a.slug === adr.slug);
+  const prev = sorted[idx - 1];
+  const next = sorted[idx + 1];
+
   return (
     <SectionShell>
+      <Breadcrumbs items={[
+        { label: "VÆRØX", to: "/" },
+        { label: "Architecture", to: "/architecture" },
+        { label: `ADR·${adr.number}` },
+      ]} />
+
       <PageHeader
         section={`§ · Architecture · ADR·${adr.number}`}
         title={adr.title}
@@ -53,27 +68,35 @@ function AdrPage() {
         ]}
       />
 
-      <div className="mb-6 flex items-center gap-3">
+      <div className="mb-6 flex items-center flex-wrap gap-3">
         <StageDot tone={tone as "success" | "warning" | "info" | "muted"} />
         <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">{adr.status}</span>
         <span className="font-mono text-[10px] text-text-3 opacity-60">·</span>
         <OpsTag label="SIGNED" />
         <OpsTag label="VERSIONED" />
-        {adr.supersedes && (<><span className="font-mono text-[10px] text-text-3 opacity-60">·</span>
-          <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">Supersedes ADR·{adr.supersedes}</span></>)}
-        {adr.supersededBy && (<><span className="font-mono text-[10px] text-text-3 opacity-60">·</span>
-          <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">Superseded by ADR·{adr.supersededBy}</span></>)}
+        {adr.supersedes && (
+          <>
+            <span className="font-mono text-[10px] text-text-3 opacity-60">·</span>
+            <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">Supersedes ADR·{adr.supersedes}</span>
+          </>
+        )}
+        {adr.supersededBy && (
+          <>
+            <span className="font-mono text-[10px] text-text-3 opacity-60">·</span>
+            <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">Superseded by ADR·{adr.supersededBy}</span>
+          </>
+        )}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-10">
-        <article className="max-w-[720px]">
-          <Block heading="Context">
+      <DocShell rail={<RelatedRail kind="adr" id={adr.slug} />}>
+        <article className="max-w-[760px]">
+          <DocBlock heading="Context">
             <p className="text-[15px] text-text-2 leading-[1.7]">{adr.context}</p>
-          </Block>
-          <Block heading="Decision">
+          </DocBlock>
+          <DocBlock heading="Decision">
             <p className="text-[15px] text-text-2 leading-[1.7]">{adr.decision}</p>
-          </Block>
-          <Block heading="Consequences">
+          </DocBlock>
+          <DocBlock heading="Consequences">
             <ul className="space-y-2">
               {adr.consequences.map((c, i) => (
                 <li key={i} className="flex gap-3 text-[14px] text-text-2 leading-[1.65]">
@@ -82,9 +105,9 @@ function AdrPage() {
                 </li>
               ))}
             </ul>
-          </Block>
+          </DocBlock>
           {adr.alternatives.length > 0 && (
-            <Block heading="Alternatives considered">
+            <DocBlock heading="Alternatives considered">
               <ul className="hairline bg-canvas">
                 {adr.alternatives.map((alt, i) => (
                   <li key={i} className={`px-4 py-3 ${i < adr.alternatives.length - 1 ? "hairline-b" : ""}`}>
@@ -93,49 +116,31 @@ function AdrPage() {
                   </li>
                 ))}
               </ul>
-            </Block>
+            </DocBlock>
           )}
-          {adr.references.length > 0 && (
-            <Block heading="References">
-              <ul className="space-y-1">
-                {adr.references.map((r, i) => (
-                  <li key={i}>
-                    <a href={r.href} className="font-mono text-[12px] text-text-2 hover:text-text-1 transition-micro underline underline-offset-4 decoration-line-2">
-                      {r.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </Block>
-          )}
+          <DocBlock heading="Revision history">
+            <ol className="hairline bg-canvas">
+              <RevRow at={adr.decisionDate} note="Recorded" who={adr.owner} />
+              <RevRow at={adr.decisionDate} note={`Reviewed — ${adr.review}`} who={adr.team} last />
+            </ol>
+          </DocBlock>
         </article>
+      </DocShell>
 
-        <aside className="hairline bg-canvas h-fit">
-          <div className="px-4 py-3 hairline-b">
-            <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">Systems affected</span>
-          </div>
-          <ul>
-            {adr.systems.map((s) => (
-              <li key={s} className="px-4 py-3 hairline-b last:border-b-0 font-mono text-[12px] text-text-2">{s}</li>
-            ))}
-          </ul>
-        </aside>
-      </div>
-
-      <div className="mt-16 hairline-t pt-6">
-        <Link to="/architecture" className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1 transition-micro">
-          ← All ADRs
-        </Link>
-      </div>
+      <PrevNext
+        prev={prev ? { title: prev.title, href: `/architecture/${prev.slug}`, kicker: `ADR·${prev.number}` } : null}
+        next={next ? { title: next.title, href: `/architecture/${next.slug}`, kicker: `ADR·${next.number}` } : null}
+      />
     </SectionShell>
   );
 }
 
-function Block({ heading, children }: { heading: string; children: React.ReactNode }) {
+function RevRow({ at, note, who, last }: { at: string; note: string; who: string; last?: boolean }) {
   return (
-    <section className="mt-10 first:mt-0">
-      <h2 className="font-mono text-[10px] text-text-3 uppercase tracking-[0.18em] mb-3">{heading}</h2>
-      <div className="hairline-t pt-4">{children}</div>
-    </section>
+    <li className={`grid grid-cols-[110px_1fr_140px] gap-4 items-baseline px-4 py-3 ${last ? "" : "hairline-b"}`}>
+      <span className="font-mono text-[11px] text-text-2 tabular">{at}</span>
+      <span className="text-[14px] text-text-2">{note}</span>
+      <span className="font-mono text-[11px] text-text-3 tabular text-right">{who}</span>
+    </li>
   );
 }

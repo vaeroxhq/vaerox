@@ -1,6 +1,11 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { SYSTEMS } from "@/lib/systems-data";
 import { PageHeader, SectionShell, StageDot } from "@/components/section/section-bits";
+import { Breadcrumbs } from "@/components/doc/breadcrumbs";
+import { RelatedRail } from "@/components/doc/related-rail";
+import { DocShell, DocBlock } from "@/components/doc/doc-shell";
+import { PrevNext } from "@/components/doc/prev-next";
+import { OpsTag } from "@/components/ops/ops-tag";
 
 export const Route = createFileRoute("/systems/$slug")({
   head: ({ params }) => {
@@ -24,17 +29,8 @@ export const Route = createFileRoute("/systems/$slug")({
   component: SystemDetail,
   notFoundComponent: () => (
     <SectionShell>
-      <PageHeader
-        section="§ · Systems"
-        title="System not found."
-        summary="No system matches that identifier."
-      />
-      <Link
-        to="/systems"
-        className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1"
-      >
-        ← Back to registry
-      </Link>
+      <PageHeader section="§ · Systems" title="System not found." summary="No system matches that identifier." />
+      <Link to="/systems" className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1">← Back to registry</Link>
     </SectionShell>
   ),
 });
@@ -42,62 +38,84 @@ export const Route = createFileRoute("/systems/$slug")({
 function SystemDetail() {
   const { system: s } = Route.useLoaderData();
   const tone =
-    s.stage === "Production"
-      ? ("success" as const)
-      : s.stage === "Prototype"
-        ? ("warning" as const)
-        : s.stage === "Research"
-          ? ("info" as const)
-          : ("muted" as const);
+    s.stage === "Production" ? ("success" as const)
+    : s.stage === "Prototype" ? ("warning" as const)
+    : s.stage === "Research" ? ("info" as const)
+    : ("muted" as const);
+
+  const idx = SYSTEMS.findIndex((x) => x.slug === s.slug);
+  const prev = SYSTEMS[idx - 1];
+  const next = SYSTEMS[idx + 1];
 
   return (
     <SectionShell>
+      <Breadcrumbs items={[
+        { label: "VÆRØX", to: "/" },
+        { label: "Systems", to: "/systems" },
+        { label: s.name },
+      ]} />
+
       <PageHeader
         section={`§ · Systems / ${s.slug}`}
         title={s.name}
         summary={s.summary}
         meta={[
-          { label: "Owner", value: s.owner },
-          { label: "Stage", value: s.stage },
-          { label: "Health", value: s.health },
+          { label: "Owner",       value: s.owner },
+          { label: "Stage",       value: s.stage },
+          { label: "Health",      value: s.health },
           { label: "Last Deploy", value: s.lastDeploy },
         ]}
       />
 
-      <div className="mt-4 hairline bg-canvas p-6">
-        <div className="flex items-center gap-3 mb-4">
-          <StageDot tone={tone} />
-          <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-            Purpose
-          </span>
-        </div>
-        <p className="text-[15px] text-text-2 leading-[1.7] max-w-[720px]">{s.purpose}</p>
-
-        <div className="hairline-t mt-8 pt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <MetaBlock label="Stack" value={s.stack.join(" · ")} />
-          <MetaBlock label="Docs" value={s.docsPath} />
-        </div>
+      <div className="mb-6 flex flex-wrap items-center gap-x-3 gap-y-2">
+        <StageDot tone={tone} />
+        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">{s.stage} · {s.health}</span>
+        <OpsTag label="LIVE" />
+        <OpsTag label="SIGNED" />
+        <OpsTag label="VERSIONED" />
       </div>
 
-      <div className="mt-6">
-        <Link
-          to="/systems"
-          className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1"
-        >
-          ← Back to registry
-        </Link>
-      </div>
+      <DocShell rail={<RelatedRail kind="system" id={s.slug} />}>
+        <article className="max-w-[760px]">
+          <DocBlock heading="Purpose">
+            <p className="text-[15px] text-text-2 leading-[1.7]">{s.purpose}</p>
+          </DocBlock>
+
+          <DocBlock heading="Stack">
+            <div className="hairline bg-canvas">
+              {s.stack.map((t, i) => (
+                <div key={t} className={`px-4 py-3 flex items-baseline justify-between ${i < s.stack.length - 1 ? "hairline-b" : ""}`}>
+                  <span className="font-mono text-[12px] text-text-1 tabular">{t}</span>
+                  <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">runtime · {i === 0 ? "primary" : "supporting"}</span>
+                </div>
+              ))}
+            </div>
+          </DocBlock>
+
+          <DocBlock heading="Ownership & docs">
+            <div className="hairline bg-canvas">
+              <KV k="Owner"     v={s.owner} />
+              <KV k="Docs path" v={s.docsPath} />
+              <KV k="On-call"   v={`${s.owner} · rotation weekly`} />
+              <KV k="Repository" v={`vaerox/${s.slug}`} last />
+            </div>
+          </DocBlock>
+        </article>
+      </DocShell>
+
+      <PrevNext
+        prev={prev ? { title: prev.name, href: `/systems/${prev.slug}`, kicker: "SYS" } : null}
+        next={next ? { title: next.name, href: `/systems/${next.slug}`, kicker: "SYS" } : null}
+      />
     </SectionShell>
   );
 }
 
-function MetaBlock({ label, value }: { label: string; value: string }) {
+function KV({ k, v, last }: { k: string; v: string; last?: boolean }) {
   return (
-    <div>
-      <div className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-        {label}
-      </div>
-      <div className="mt-2 font-mono text-[13px] text-text-1 tabular">{value}</div>
+    <div className={`grid grid-cols-[160px_1fr] items-baseline gap-6 px-4 py-3 ${last ? "" : "hairline-b"}`}>
+      <dt className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">{k}</dt>
+      <dd className="font-mono text-[12px] text-text-1 tabular">{v}</dd>
     </div>
   );
 }

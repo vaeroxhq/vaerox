@@ -10,22 +10,15 @@ export type NavItem = {
 };
 
 export const NAV: NavItem[] = [
-  { label: "Systems", to: "/systems", hint: "Domains & production systems", section: "Primary" },
-  { label: "Projects", to: "/projects", hint: "Case studies & builds", section: "Primary" },
-  { label: "Research", to: "/research", hint: "Papers, benchmarks, notes", section: "Primary" },
-  {
-    label: "Architecture",
-    to: "/architecture",
-    hint: "Diagrams & decision records",
-    section: "Primary",
-  },
-  {
-    label: "Engineering",
-    to: "/engineering",
-    hint: "Practices, incidents, reviews",
-    section: "Primary",
-  },
-  { label: "Journal", to: "/journal", hint: "Long-form entries", section: "Primary" },
-  { label: "About", to: "/about", hint: "Organization & principles", section: "Meta" },
-  { label: "Contact", to: "/contact", hint: "Reach the team", section: "Meta" },
+  { label: "Systems",      to: "/systems",      hint: "Production systems & domains",   section: "Primary" },
+  { label: "Projects",     to: "/projects",     hint: "Case studies & builds",          section: "Primary" },
+  { label: "Architecture", to: "/architecture", hint: "Decision records & diagrams",    section: "Primary" },
+  { label: "Incidents",    to: "/incidents",    hint: "Post-mortems & action items",    section: "Primary" },
+  { label: "Benchmarks",   to: "/benchmarks",   hint: "Standing measurements",          section: "Primary" },
+  { label: "API",          to: "/api",          hint: "Interface reference",            section: "Primary" },
+  { label: "Research",     to: "/research",     hint: "Papers, benchmarks, notes",      section: "Primary" },
+  { label: "Engineering",  to: "/engineering",  hint: "Handbook & standards",           section: "Primary" },
+  { label: "Journal",      to: "/journal",      hint: "Long-form entries",              section: "Primary" },
+  { label: "About",        to: "/about",        hint: "Organization & principles",      section: "Meta" },
+  { label: "Contact",      to: "/contact",      hint: "Reach the team",                 section: "Meta" },
 ];
