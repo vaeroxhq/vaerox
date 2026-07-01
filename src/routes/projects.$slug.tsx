@@ -1,10 +1,23 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { PROJECTS } from "@/lib/projects-data";
+import { SYSTEMS } from "@/lib/systems-data";
+import { getProjectEvidence } from "@/lib/evidence-data";
 import { PageHeader, SectionShell, StageDot } from "@/components/section/section-bits";
 import { Breadcrumbs } from "@/components/doc/breadcrumbs";
 import { RelatedRail } from "@/components/doc/related-rail";
 import { DocShell, DocBlock } from "@/components/doc/doc-shell";
 import { PrevNext } from "@/components/doc/prev-next";
+import {
+  AdrRefsBlock,
+  BenchmarkRefsBlock,
+  EvolutionBlock,
+  FailuresBlock,
+  IncidentRefsBlock,
+  LanguageBreakdown,
+  LimitationsBlock,
+  MetricsGrid,
+  TradeoffsBlock,
+} from "@/components/doc/evidence-blocks";
 
 export const Route = createFileRoute("/projects/$slug")({
   head: ({ params }) => {
@@ -36,6 +49,11 @@ export const Route = createFileRoute("/projects/$slug")({
 
 function ProjectDetail() {
   const { project: p } = Route.useLoaderData();
+  const ev = getProjectEvidence(p.slug);
+  const linkedSystem = ev?.linkedSystem
+    ? SYSTEMS.find((s) => s.slug === ev.linkedSystem)
+    : undefined;
+
   const tone =
     p.stage === "Production" ? ("success" as const)
     : p.stage === "Prototype" ? ("warning" as const)
@@ -45,6 +63,17 @@ function ProjectDetail() {
   const idx = PROJECTS.findIndex((x) => x.slug === p.slug);
   const prev = PROJECTS[idx - 1];
   const next = PROJECTS[idx + 1];
+
+  const engineeringMetrics = ev
+    ? [
+        { label: "LOC", value: ev.loc.toLocaleString() },
+        { label: "Primary language", value: ev.languages[0]?.name ?? "—" },
+        { label: "ADRs referenced", value: String(ev.adrRefs.length) },
+        { label: "Benchmarks", value: String(ev.benchmarkRefs.length) },
+        { label: "Incidents linked", value: String(ev.incidentRefs.length) },
+        { label: "Design revisions", value: String(ev.evolution.length) },
+      ]
+    : [];
 
   return (
     <SectionShell>
@@ -69,6 +98,18 @@ function ProjectDetail() {
       <div className="mb-6 flex items-center gap-3">
         <StageDot tone={tone} />
         <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">{p.stage}</span>
+        {linkedSystem && (
+          <>
+            <span className="font-mono text-[10px] text-text-3 opacity-60">·</span>
+            <Link
+              to="/systems/$slug"
+              params={{ slug: linkedSystem.slug }}
+              className="font-mono text-[10px] text-text-2 hover:text-text-1 uppercase tracking-[0.14em] transition-micro"
+            >
+              Runs as system · {linkedSystem.name}
+            </Link>
+          </>
+        )}
       </div>
 
       <DocShell rail={<RelatedRail kind="project" id={p.slug} />}>
@@ -92,6 +133,24 @@ function ProjectDetail() {
           <DocBlock heading="Outcome">
             <p className="text-[15px] text-text-2 leading-[1.7]">{p.outcome}</p>
           </DocBlock>
+
+          {ev && <LanguageBreakdown langs={ev.languages} />}
+
+          {ev && <MetricsGrid columns={engineeringMetrics} extra={ev.additionalMetrics} />}
+
+          {ev && <EvolutionBlock items={ev.evolution} />}
+
+          {ev && <TradeoffsBlock items={ev.tradeoffs} />}
+
+          {ev && <AdrRefsBlock slugs={ev.adrRefs} />}
+
+          {ev && <BenchmarkRefsBlock slugs={ev.benchmarkRefs} />}
+
+          {ev && <IncidentRefsBlock slugs={ev.incidentRefs} />}
+
+          {ev && <FailuresBlock items={ev.failures} />}
+
+          {ev && <LimitationsBlock items={ev.limitations} />}
         </article>
       </DocShell>
 

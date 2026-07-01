@@ -27,6 +27,11 @@ import { Route as BenchmarksRouteImport } from './routes/benchmarks'
 import { Route as ArchitectureRouteImport } from './routes/architecture'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SystemsIndexRouteImport } from './routes/systems.index'
+import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
+import { Route as IncidentsIndexRouteImport } from './routes/incidents.index'
+import { Route as BenchmarksIndexRouteImport } from './routes/benchmarks.index'
+import { Route as ArchitectureIndexRouteImport } from './routes/architecture.index'
 import { Route as ApiIndexRouteImport } from './routes/api.index'
 import { Route as TeamsSlugRouteImport } from './routes/teams.$slug'
 import { Route as SystemsSlugRouteImport } from './routes/systems.$slug'
@@ -130,6 +135,31 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SystemsIndexRoute = SystemsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SystemsRoute,
+} as any)
+const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProjectsRoute,
+} as any)
+const IncidentsIndexRoute = IncidentsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => IncidentsRoute,
+} as any)
+const BenchmarksIndexRoute = BenchmarksIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BenchmarksRoute,
+} as any)
+const ArchitectureIndexRoute = ArchitectureIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ArchitectureRoute,
+} as any)
 const ApiIndexRoute = ApiIndexRouteImport.update({
   id: '/api/',
   path: '/api/',
@@ -222,25 +252,25 @@ export interface FileRoutesByFullPath {
   '/systems/$slug': typeof SystemsSlugRoute
   '/teams/$slug': typeof TeamsSlugRoute
   '/api/': typeof ApiIndexRoute
+  '/architecture/': typeof ArchitectureIndexRoute
+  '/benchmarks/': typeof BenchmarksIndexRoute
+  '/incidents/': typeof IncidentsIndexRoute
+  '/projects/': typeof ProjectsIndexRoute
+  '/systems/': typeof SystemsIndexRoute
   '/architecture/diagrams/$slug': typeof ArchitectureDiagramsSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/architecture': typeof ArchitectureRouteWithChildren
-  '/benchmarks': typeof BenchmarksRouteWithChildren
   '/contact': typeof ContactRoute
   '/dashboards': typeof DashboardsRoute
   '/engineering': typeof EngineeringRoute
   '/explorer': typeof ExplorerRoute
   '/graph': typeof GraphRoute
-  '/incidents': typeof IncidentsRouteWithChildren
   '/journal': typeof JournalRouteWithChildren
   '/people': typeof PeopleRouteWithChildren
-  '/projects': typeof ProjectsRouteWithChildren
   '/research': typeof ResearchRouteWithChildren
   '/search': typeof SearchRoute
-  '/systems': typeof SystemsRouteWithChildren
   '/teams': typeof TeamsRouteWithChildren
   '/timeline': typeof TimelineRoute
   '/api/$slug': typeof ApiSlugRoute
@@ -254,6 +284,11 @@ export interface FileRoutesByTo {
   '/systems/$slug': typeof SystemsSlugRoute
   '/teams/$slug': typeof TeamsSlugRoute
   '/api': typeof ApiIndexRoute
+  '/architecture': typeof ArchitectureIndexRoute
+  '/benchmarks': typeof BenchmarksIndexRoute
+  '/incidents': typeof IncidentsIndexRoute
+  '/projects': typeof ProjectsIndexRoute
+  '/systems': typeof SystemsIndexRoute
   '/architecture/diagrams/$slug': typeof ArchitectureDiagramsSlugRoute
 }
 export interface FileRoutesById {
@@ -287,6 +322,11 @@ export interface FileRoutesById {
   '/systems/$slug': typeof SystemsSlugRoute
   '/teams/$slug': typeof TeamsSlugRoute
   '/api/': typeof ApiIndexRoute
+  '/architecture/': typeof ArchitectureIndexRoute
+  '/benchmarks/': typeof BenchmarksIndexRoute
+  '/incidents/': typeof IncidentsIndexRoute
+  '/projects/': typeof ProjectsIndexRoute
+  '/systems/': typeof SystemsIndexRoute
   '/architecture/diagrams/$slug': typeof ArchitectureDiagramsSlugRoute
 }
 export interface FileRouteTypes {
@@ -321,25 +361,25 @@ export interface FileRouteTypes {
     | '/systems/$slug'
     | '/teams/$slug'
     | '/api/'
+    | '/architecture/'
+    | '/benchmarks/'
+    | '/incidents/'
+    | '/projects/'
+    | '/systems/'
     | '/architecture/diagrams/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
-    | '/architecture'
-    | '/benchmarks'
     | '/contact'
     | '/dashboards'
     | '/engineering'
     | '/explorer'
     | '/graph'
-    | '/incidents'
     | '/journal'
     | '/people'
-    | '/projects'
     | '/research'
     | '/search'
-    | '/systems'
     | '/teams'
     | '/timeline'
     | '/api/$slug'
@@ -353,6 +393,11 @@ export interface FileRouteTypes {
     | '/systems/$slug'
     | '/teams/$slug'
     | '/api'
+    | '/architecture'
+    | '/benchmarks'
+    | '/incidents'
+    | '/projects'
+    | '/systems'
     | '/architecture/diagrams/$slug'
   id:
     | '__root__'
@@ -385,6 +430,11 @@ export interface FileRouteTypes {
     | '/systems/$slug'
     | '/teams/$slug'
     | '/api/'
+    | '/architecture/'
+    | '/benchmarks/'
+    | '/incidents/'
+    | '/projects/'
+    | '/systems/'
     | '/architecture/diagrams/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -539,6 +589,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/systems/': {
+      id: '/systems/'
+      path: '/'
+      fullPath: '/systems/'
+      preLoaderRoute: typeof SystemsIndexRouteImport
+      parentRoute: typeof SystemsRoute
+    }
+    '/projects/': {
+      id: '/projects/'
+      path: '/'
+      fullPath: '/projects/'
+      preLoaderRoute: typeof ProjectsIndexRouteImport
+      parentRoute: typeof ProjectsRoute
+    }
+    '/incidents/': {
+      id: '/incidents/'
+      path: '/'
+      fullPath: '/incidents/'
+      preLoaderRoute: typeof IncidentsIndexRouteImport
+      parentRoute: typeof IncidentsRoute
+    }
+    '/benchmarks/': {
+      id: '/benchmarks/'
+      path: '/'
+      fullPath: '/benchmarks/'
+      preLoaderRoute: typeof BenchmarksIndexRouteImport
+      parentRoute: typeof BenchmarksRoute
+    }
+    '/architecture/': {
+      id: '/architecture/'
+      path: '/'
+      fullPath: '/architecture/'
+      preLoaderRoute: typeof ArchitectureIndexRouteImport
+      parentRoute: typeof ArchitectureRoute
+    }
     '/api/': {
       id: '/api/'
       path: '/api'
@@ -628,11 +713,13 @@ declare module '@tanstack/react-router' {
 
 interface ArchitectureRouteChildren {
   ArchitectureAdrRoute: typeof ArchitectureAdrRoute
+  ArchitectureIndexRoute: typeof ArchitectureIndexRoute
   ArchitectureDiagramsSlugRoute: typeof ArchitectureDiagramsSlugRoute
 }
 
 const ArchitectureRouteChildren: ArchitectureRouteChildren = {
   ArchitectureAdrRoute: ArchitectureAdrRoute,
+  ArchitectureIndexRoute: ArchitectureIndexRoute,
   ArchitectureDiagramsSlugRoute: ArchitectureDiagramsSlugRoute,
 }
 
@@ -642,10 +729,12 @@ const ArchitectureRouteWithChildren = ArchitectureRoute._addFileChildren(
 
 interface BenchmarksRouteChildren {
   BenchmarksSlugRoute: typeof BenchmarksSlugRoute
+  BenchmarksIndexRoute: typeof BenchmarksIndexRoute
 }
 
 const BenchmarksRouteChildren: BenchmarksRouteChildren = {
   BenchmarksSlugRoute: BenchmarksSlugRoute,
+  BenchmarksIndexRoute: BenchmarksIndexRoute,
 }
 
 const BenchmarksRouteWithChildren = BenchmarksRoute._addFileChildren(
@@ -654,10 +743,12 @@ const BenchmarksRouteWithChildren = BenchmarksRoute._addFileChildren(
 
 interface IncidentsRouteChildren {
   IncidentsIdRoute: typeof IncidentsIdRoute
+  IncidentsIndexRoute: typeof IncidentsIndexRoute
 }
 
 const IncidentsRouteChildren: IncidentsRouteChildren = {
   IncidentsIdRoute: IncidentsIdRoute,
+  IncidentsIndexRoute: IncidentsIndexRoute,
 }
 
 const IncidentsRouteWithChildren = IncidentsRoute._addFileChildren(
@@ -688,10 +779,12 @@ const PeopleRouteWithChildren =
 
 interface ProjectsRouteChildren {
   ProjectsSlugRoute: typeof ProjectsSlugRoute
+  ProjectsIndexRoute: typeof ProjectsIndexRoute
 }
 
 const ProjectsRouteChildren: ProjectsRouteChildren = {
   ProjectsSlugRoute: ProjectsSlugRoute,
+  ProjectsIndexRoute: ProjectsIndexRoute,
 }
 
 const ProjectsRouteWithChildren = ProjectsRoute._addFileChildren(
@@ -712,10 +805,12 @@ const ResearchRouteWithChildren = ResearchRoute._addFileChildren(
 
 interface SystemsRouteChildren {
   SystemsSlugRoute: typeof SystemsSlugRoute
+  SystemsIndexRoute: typeof SystemsIndexRoute
 }
 
 const SystemsRouteChildren: SystemsRouteChildren = {
   SystemsSlugRoute: SystemsSlugRoute,
+  SystemsIndexRoute: SystemsIndexRoute,
 }
 
 const SystemsRouteWithChildren =
