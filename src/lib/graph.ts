@@ -207,6 +207,26 @@ for (const d of DATASETS) {
   for (const b of d.benchmarkRefs)  link(self, { kind: "benchmark", id: b });
 }
 
+// Future systems — registered as a distinct kind so they never claim
+// production status. Cross-references target existing entities by slug;
+// dangling refs are silently ignored.
+for (const f of FUTURE_SYSTEMS) {
+  register({
+    kind: "future", id: f.slug, slug: f.slug,
+    title: f.name, href: `/systems/future/${f.slug}`,
+    kicker: "FUT", summary: f.description,
+    owner: f.category, updated: f.updated, status: f.status,
+    tags: f.tags,
+  });
+}
+for (const f of FUTURE_SYSTEMS) {
+  const self: EntityRef = { kind: "future", id: f.slug };
+  for (const s of f.relatedSystems)  link(self, { kind: "system",   id: s });
+  for (const p of f.relatedProjects) link(self, { kind: "project",  id: p });
+  for (const d of f.relatedDatasets) link(self, { kind: "dataset",  id: d });
+  for (const r of f.relatedResearch) link(self, { kind: "research", id: r });
+}
+
 /* ── Compute edges from the underlying data ──────────────── */
 
 // ADR ↔ systems (by system slug)
