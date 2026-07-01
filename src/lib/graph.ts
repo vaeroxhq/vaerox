@@ -20,6 +20,7 @@ import { BENCHMARKS } from "./benchmarks-data";
 import { APIS } from "./apis-data";
 import { PEOPLE, findPersonByName } from "./people-data";
 import { TEAMS } from "./teams-data";
+import { PROJECT_EVIDENCE, SYSTEM_EVIDENCE } from "./evidence-data";
 
 export type EntityKind =
   | "system"
@@ -225,6 +226,23 @@ for (const a of APIS) {
 // Projects ↔ system with matching slug (natural mapping in this dataset)
 for (const p of PROJECT_ROWS) {
   link({ kind: "project", id: p.slug }, { kind: "system", id: p.slug });
+}
+
+// Projects ↔ ADRs / benchmarks / incidents / systems declared in evidence
+for (const [slug, ev] of Object.entries(PROJECT_EVIDENCE)) {
+  const self: EntityRef = { kind: "project", id: slug };
+  if (ev.linkedSystem) link(self, { kind: "system", id: ev.linkedSystem });
+  for (const a of ev.adrRefs) link(self, { kind: "adr", id: a });
+  for (const b of ev.benchmarkRefs) link(self, { kind: "benchmark", id: b });
+  for (const i of ev.incidentRefs) link(self, { kind: "incident", id: i });
+  for (const r of ev.researchRefs) link(self, { kind: "research", id: r });
+}
+// Systems ↔ ADRs / benchmarks / incidents declared in evidence (redundant edges are idempotent)
+for (const [slug, ev] of Object.entries(SYSTEM_EVIDENCE)) {
+  const self: EntityRef = { kind: "system", id: slug };
+  for (const a of ev.adrRefs) link(self, { kind: "adr", id: a });
+  for (const b of ev.benchmarkRefs) link(self, { kind: "benchmark", id: b });
+  for (const i of ev.incidentRefs) link(self, { kind: "incident", id: i });
 }
 
 // Journal ↔ tags → best-effort system/ADR/benchmark linking
