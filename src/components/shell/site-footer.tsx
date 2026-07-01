@@ -10,14 +10,15 @@ export function SiteFooter() {
     <footer aria-label="Site metadata" className="mt-24">
       <div className="w-shell mx-auto px-6 md:px-10 lg:px-16">
         <div className="hairline-t grid grid-cols-2 md:grid-cols-4 gap-px bg-line-1">
-          <FootCell label="Studio" value="VÆRØX" />
-          <FootCell label="Discipline" value="AI Engineering Studio" />
-          <FootCell label="Last updated" value="2026-07-01" />
-          <FootCell label="Built with" value="TanStack Start · React · Tailwind" />
+          <FootCell label="Maintainer" value="VÆRØX" />
+          <FootCell label="Lab" value="Independent AI Engineering Studio" />
+          <FootLink label="Source" value="GitHub" href="https://github.com/vaerox" />
+          <FootLink label="Network" value="LinkedIn" href="https://www.linkedin.com/company/vaerox" />
+          <FootLink label="Instagram" value="@vaeroxlabs" href="https://instagram.com/vaeroxlabs" />
+          <FootLink label="Email" value="vaeroxhq@gmail.com" href="mailto:vaeroxhq@gmail.com" />
           <FootLink label="Services" value="/services" href="/services" />
           <FootLink label="Case Studies" value="/case-studies" href="/case-studies" />
-          <FootLink label="Capabilities" value="/capabilities" href="/capabilities" />
-          <FootLink label="Contact" value="hello@vaerox.dev" href="mailto:hello@vaerox.dev" />
+
         </div>
 
         <div className="hairline-t py-6 flex items-center justify-between">
