@@ -17,7 +17,7 @@ export const NAV: NavItem[] = [
   { label: "Benchmarks",   to: "/benchmarks",   hint: "Standing measurements",          section: "Primary" },
   { label: "API",          to: "/api",          hint: "Interface reference",            section: "Primary" },
   { label: "Research",     to: "/research",     hint: "Papers, benchmarks, notes",      section: "Primary" },
-  { label: "Datasets",     to: "/research/datasets", hint: "Datasets & research assets", section: "Primary" },
+  { label: "Research Assets", to: "/research/assets", hint: "Datasets, corpora & annotation pipelines", section: "Primary" },
   { label: "Engineering",  to: "/engineering",  hint: "Handbook & standards",           section: "Primary" },
   { label: "Journal",      to: "/journal",      hint: "Long-form entries",              section: "Primary" },
   { label: "Graph",        to: "/graph",        hint: "Interactive knowledge graph",    section: "Meta" },
