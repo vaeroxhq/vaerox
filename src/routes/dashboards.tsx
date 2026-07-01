@@ -27,21 +27,21 @@ type Dashboard = {
 };
 
 const DASHBOARDS: Dashboard[] = [
-  { code: "DEP-FREQ", title: "Deployment Frequency",   unit: "/wk",     lowerIsBetter: false, target: 40,   category: "Delivery",       seed: 11, base: 42,  amp: 6,   drift: 0.4 },
-  { code: "LEAD-T",   title: "Lead Time for Changes",  unit: "h",       lowerIsBetter: true,  target: 6,    category: "Delivery",       seed: 12, base: 6.4, amp: 1.4, drift: -0.05 },
-  { code: "MTTA",     title: "Mean Time to Acknowledge", unit: "min",   lowerIsBetter: true,  target: 5,    category: "Reliability",    seed: 13, base: 4.1, amp: 1.1, drift: -0.02 },
-  { code: "MTTR",     title: "Mean Time to Recover",   unit: "min",     lowerIsBetter: true,  target: 45,   category: "Reliability",    seed: 14, base: 38,  amp: 8,   drift: -0.2 },
-  { code: "INC-CNT",  title: "Incident Count",         unit: "/mo",     lowerIsBetter: true,  target: 4,    category: "Reliability",    seed: 15, base: 3.2, amp: 1.6, drift: -0.03 },
-  { code: "ERR-BUD",  title: "Error Budget Remaining", unit: "%",       lowerIsBetter: false, target: 60,   category: "Reliability",    seed: 16, base: 78,  amp: 10,  drift: -0.1 },
-  { code: "P95-EDGE", title: "Edge P95 Latency",       unit: "ms",      lowerIsBetter: true,  target: 90,   category: "Performance",    seed: 17, base: 82,  amp: 9,   drift: -0.15 },
-  { code: "P99-EDGE", title: "Edge P99 Latency",       unit: "ms",      lowerIsBetter: true,  target: 220,  category: "Performance",    seed: 18, base: 198, amp: 22,  drift: -0.3 },
-  { code: "AVAIL",    title: "Platform Availability",  unit: "%",       lowerIsBetter: false, target: 99.9, category: "Reliability",    seed: 19, base: 99.94, amp: 0.05, drift: 0.001 },
-  { code: "GPU-UTL",  title: "GPU Utilization",        unit: "%",       lowerIsBetter: false, target: 70,   category: "Infrastructure", seed: 20, base: 74,  amp: 8,   drift: 0.1 },
-  { code: "Q-DEPTH",  title: "Signal Queue Depth",     unit: "msg",     lowerIsBetter: true,  target: 5000, category: "Infrastructure", seed: 21, base: 4100, amp: 1200, drift: -8 },
-  { code: "INF-TPS",  title: "Inference Throughput",   unit: "req/s",   lowerIsBetter: false, target: 12000,category: "Performance",    seed: 22, base: 12800, amp: 900, drift: 25 },
-  { code: "STOR-GRW", title: "Storage Growth",         unit: "TB/wk",   lowerIsBetter: true,  target: 30,   category: "Infrastructure", seed: 23, base: 24,  amp: 4,   drift: 0.2 },
-  { code: "COST-REQ", title: "Cost per Million Req",   unit: "$",       lowerIsBetter: true,  target: 0.85, category: "Cost",           seed: 24, base: 0.78, amp: 0.08, drift: -0.005 },
+  { code: "REL-CAD",  title: "Release Cadence (target)",         unit: "/wk",     lowerIsBetter: false, target: 3,    category: "Delivery",       seed: 11, base: 2.4,  amp: 0.9, drift: 0.02 },
+  { code: "LEAD-T",   title: "Lead Time · commit → tag (target)",unit: "h",       lowerIsBetter: true,  target: 24,   category: "Delivery",       seed: 12, base: 32,   amp: 8,   drift: -0.2 },
+  { code: "TRIAGE",   title: "Time to Triage a Challenge (target)", unit: "h",    lowerIsBetter: true,  target: 24,   category: "Reliability",    seed: 13, base: 30,   amp: 8,   drift: -0.1 },
+  { code: "RESOLVE",  title: "Time to Resolve a Challenge (target)", unit: "d",   lowerIsBetter: true,  target: 7,    category: "Reliability",    seed: 14, base: 9,    amp: 3,   drift: -0.05 },
+  { code: "OPEN-CH",  title: "Open Engineering Challenges",      unit: "",        lowerIsBetter: true,  target: 10,   category: "Reliability",    seed: 15, base: 12,   amp: 4,   drift: -0.05 },
+  { code: "EVAL-COV", title: "Eval Coverage · contracts",        unit: "%",       lowerIsBetter: false, target: 90,   category: "Reliability",    seed: 16, base: 62,   amp: 12,  drift: 0.4 },
+  { code: "PLAN-P95", title: "VESTRA · plan-step P95 (target)",  unit: "ms",      lowerIsBetter: true,  target: 800,  category: "Performance",    seed: 17, base: 720,  amp: 90,  drift: -1.5 },
+  { code: "CLS-P95",  title: "MarketPulse · classify P95 (target)", unit: "ms",   lowerIsBetter: true,  target: 600,  category: "Performance",    seed: 18, base: 540,  amp: 80,  drift: -1.0 },
+  { code: "BT-STEP",  title: "QuantEdge · backtest step (target)",unit: "ms",     lowerIsBetter: true,  target: 250,  category: "Performance",    seed: 19, base: 210,  amp: 30,  drift: -0.4 },
+  { code: "DUCK-SC",  title: "DuckDB · scan MB/s (target)",      unit: "MB/s",    lowerIsBetter: false, target: 800,  category: "Infrastructure", seed: 20, base: 640,  amp: 90,  drift: 2.0 },
+  { code: "IDX-BLD",  title: "News index build (target)",        unit: "min",     lowerIsBetter: true,  target: 15,   category: "Infrastructure", seed: 21, base: 18,   amp: 4,   drift: -0.05 },
+  { code: "REPO-CI",  title: "CI wall-clock (target)",           unit: "min",     lowerIsBetter: true,  target: 8,    category: "Delivery",       seed: 22, base: 11,   amp: 3,   drift: -0.05 },
+  { code: "LOC-COST", title: "Local run cost per experiment",    unit: "$",       lowerIsBetter: true,  target: 0.50, category: "Cost",           seed: 23, base: 0.42, amp: 0.1, drift: -0.002 },
 ];
+
 
 function series(d: Dashboard, len = 26): number[] {
   const rand = mulberry32(d.seed);
