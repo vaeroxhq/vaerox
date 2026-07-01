@@ -42,24 +42,22 @@ export function OperationsStrip() {
 
       <section className="bg-canvas">
         <header className="px-4 py-3 hairline-b flex items-baseline justify-between">
-          <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">Latest benchmarks</span>
+          <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">Latest engineering validation</span>
           <Link to="/benchmarks" className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] hover:text-text-1 transition-micro">All →</Link>
         </header>
         <ul>
-          {benchmarks.map((b) => {
-            const last = b.runs.at(-1);
-            return (
-              <li key={b.slug} className="hairline-b last:border-b-0">
-                <Link to="/benchmarks/$slug" params={{ slug: b.slug }} className="group card-hover hover:card-hover-on grid grid-cols-[80px_1fr_100px] gap-3 px-4 py-3 items-baseline">
-                  <span className="font-mono text-[11px] text-text-2 tabular">{b.code}</span>
-                  <span className="font-display text-[13px] text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.005em] truncate">{b.title}</span>
-                  <span className="font-mono text-[12px] text-text-1 tabular text-right">{last ? benchmarkFormatValue(b, last.value) : "—"}</span>
-                </Link>
-              </li>
-            );
-          })}
+          {benchmarks.map((b) => (
+            <li key={b.slug} className="hairline-b last:border-b-0">
+              <Link to="/benchmarks/$slug" params={{ slug: b.slug }} className="group card-hover hover:card-hover-on grid grid-cols-[80px_1fr_140px] gap-3 px-4 py-3 items-baseline">
+                <span className="font-mono text-[11px] text-text-2 tabular">{b.code}</span>
+                <span className="font-display text-[13px] text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.005em] truncate">{b.title}</span>
+                <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] text-right truncate">{b.status}</span>
+              </Link>
+            </li>
+          ))}
         </ul>
       </section>
+
     </div>
   );
 }
