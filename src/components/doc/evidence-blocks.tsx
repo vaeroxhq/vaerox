@@ -226,7 +226,7 @@ export function IncidentRefsBlock({ slugs }: { slugs: string[] }) {
               <span className="font-mono text-[11px] text-text-1 tabular text-right">
                 {i.severity}
               </span>
-            </Link>
+            </div>
           </li>
         ))}
       </ul>
