@@ -18,7 +18,7 @@ export function WhyVaerox() {
       </div>
 
       <div className="mt-6 flex items-center justify-end">
-        <a href="/why" className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 transition-micro">
+        <a href="/engineering" className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 transition-micro">
           Full standards →
         </a>
       </div>

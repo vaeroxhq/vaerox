@@ -1,9 +1,8 @@
 import { DiamondGlyph, CornerFramed, MetaCell } from "./primitives";
 
 /**
- * Hero — studio positioning. VÆRØX is an independent AI & Software
- * Engineering Studio building modern systems for startups, SMBs, and
- * enterprise teams. Founder attribution stays on the About page.
+ * Hero — studio positioning. Three destinations, not seven.
+ * Everything else lives in the nav.
  */
 export function Hero() {
   return (
@@ -23,49 +22,20 @@ export function Hero() {
 
       <p className="mt-12 max-w-[700px] text-text-2 text-[15px] leading-[1.65]">
         VÆRØX is an independent AI &amp; software engineering studio. We design,
-        build, deploy and maintain modern software systems — AI agents, SaaS
-        products, internal tools, dashboards, backend platforms, and workflow
-        automation — for startups, growing businesses and enterprise teams.
-        Every system on this site is engineered under the same discipline we
-        bring to client work.
+        build and maintain modern software systems — AI agents, SaaS products,
+        internal tools, backend platforms, and workflow automation — for
+        startups, growing businesses and enterprise teams.
       </p>
 
       <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
-        <a
-          href="/contact"
-          className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 transition-micro"
-        >
+        <a href="/contact" className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 transition-micro">
           Book a discovery call →
         </a>
-        <a
-          href="/work"
-          className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1 transition-micro"
-        >
-          What we build →
-        </a>
-        <a
-          href="/services"
-          className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1 transition-micro"
-        >
+        <a href="/services" className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1 transition-micro">
           Services →
         </a>
-        <a
-          href="/case-studies"
-          className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1 transition-micro"
-        >
-          Case studies →
-        </a>
-        <a
-          href="/industries"
-          className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1 transition-micro"
-        >
-          Industries →
-        </a>
-        <a
-          href="/engagements"
-          className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1 transition-micro"
-        >
-          Engagement models →
+        <a href="/projects" className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1 transition-micro">
+          Projects →
         </a>
       </div>
 
@@ -79,7 +49,7 @@ export function Hero() {
           <MetaCell label="Studio" value="VÆRØX" />
           <MetaCell label="Model" value="Independent" />
           <MetaCell label="Clients" value="Startup → Enterprise" />
-          <MetaCell label="Contact" value="hello@vaerox.dev" />
+          <MetaCell label="Contact" value="vaeroxhq@gmail.com" />
         </dl>
       </CornerFramed>
     </section>

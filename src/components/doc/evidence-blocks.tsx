@@ -211,9 +211,7 @@ export function IncidentRefsBlock({ slugs }: { slugs: string[] }) {
             key={i.slug}
             className={`px-4 py-3 ${idx < incs.length - 1 ? "hairline-b" : ""}`}
           >
-            <Link
-              to="/incidents/$id"
-              params={{ id: i.slug }}
+            <div
               className="group grid grid-cols-[110px_1fr_80px] items-baseline gap-4"
             >
               <span className="font-mono text-[11px] text-text-3 tabular">{i.id}</span>
@@ -228,7 +226,7 @@ export function IncidentRefsBlock({ slugs }: { slugs: string[] }) {
               <span className="font-mono text-[11px] text-text-1 tabular text-right">
                 {i.severity}
               </span>
-            </Link>
+            </div>
           </li>
         ))}
       </ul>

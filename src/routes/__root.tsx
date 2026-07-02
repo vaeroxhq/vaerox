@@ -14,7 +14,6 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { ThemeProvider } from "@/lib/theme";
 import { CommandPaletteProvider } from "@/components/shell/command-palette";
 import { TopNav } from "@/components/shell/top-nav";
-import { StatusBar } from "@/components/shell/status-bar";
 import { SiteFooter } from "@/components/shell/site-footer";
 
 function NotFoundComponent() {
@@ -139,7 +138,6 @@ function RootComponent() {
           <div className="min-h-dvh bg-canvas text-text-1 flex flex-col">
             <div className="sticky top-0 z-40">
               <TopNav />
-              <StatusBar />
             </div>
             <main className="flex-1">
               {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
