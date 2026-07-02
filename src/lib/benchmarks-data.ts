@@ -8,11 +8,7 @@
  * here implies operating production infrastructure.
  */
 
-export type ValidationStatus =
-  | "Target"
-  | "Prototype measured"
-  | "In progress"
-  | "Not yet measured";
+export type ValidationStatus = "Target" | "Prototype measured" | "In progress" | "Not yet measured";
 
 export type ValidationPhase =
   | "Concept"
@@ -34,7 +30,7 @@ export type Benchmark = {
   slug: string;
   code: string;
   title: string;
-  system: string;           // canonical system slug
+  system: string; // canonical system slug
   focus: string;
   phase: ValidationPhase;
   status: ValidationStatus;
@@ -70,7 +66,12 @@ export const BENCHMARKS: Benchmark[] = [
     ],
     runs: [
       { date: "2026-05-18", value: 3400, build: "vestra@0.3.1", note: "Sequential tool calls." },
-      { date: "2026-06-24", value: 1950, build: "vestra@0.4.0", note: "Parallel tool calls, streaming." },
+      {
+        date: "2026-06-24",
+        value: 1950,
+        build: "vestra@0.4.0",
+        note: "Parallel tool calls, streaming.",
+      },
     ],
     relatedSystems: ["vestra"],
     relatedAdrs: [],
@@ -135,7 +136,8 @@ export const BENCHMARKS: Benchmark[] = [
     code: "VAL-04",
     title: "AEGIS OPS · triage workflow completion time",
     system: "aegis-ops",
-    focus: "End-to-end LangGraph workflow time for the standard triage playbook on synthetic alerts.",
+    focus:
+      "End-to-end LangGraph workflow time for the standard triage playbook on synthetic alerts.",
     phase: "Prototype",
     status: "Prototype measured",
     goal: "Under 6 s median for the standard triage playbook against synthetic SIEM alerts.",
@@ -189,7 +191,8 @@ export const BENCHMARKS: Benchmark[] = [
     code: "VAL-06",
     title: "CloudCostIQ · forecast MAPE",
     system: "cloudcostiq",
-    focus: "Mean absolute percentage error of the monthly cost forecast on synthetic billing exports.",
+    focus:
+      "Mean absolute percentage error of the monthly cost forecast on synthetic billing exports.",
     phase: "Prototype",
     status: "Prototype measured",
     goal: "≤ 8% MAPE on 30-day forward forecast for synthetic multi-account exports.",
@@ -255,9 +258,7 @@ export const BENCHMARKS: Benchmark[] = [
       "Within 1.4% across the utilization sweep. Confidence intervals published.",
       "Custom multi-tier scenarios remain unvalidated; explicitly noted on every scenario page.",
     ],
-    runs: [
-      { date: "2026-05-30", value: 1.4, build: "sct@0.1.0", note: "Max % deviation." },
-    ],
+    runs: [{ date: "2026-05-30", value: 1.4, build: "sct@0.1.0", note: "Max % deviation." }],
     relatedSystems: ["supply-chain-twin"],
     relatedAdrs: [],
     relatedIncidents: [],

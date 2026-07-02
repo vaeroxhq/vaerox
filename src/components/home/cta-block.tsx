@@ -22,12 +22,15 @@ export function CtaBlock() {
             Build something worth documenting.
           </h2>
           <p className="mt-5 max-w-[560px] text-[14px] text-text-2 leading-[1.65]">
-            An MVP, a rebuild, a production AI system, or a stubborn workflow
-            that needs to be automated. Written proposal inside a week.
+            An MVP, a rebuild, a production AI system, or a stubborn workflow that needs to be
+            automated. Written proposal inside a week.
           </p>
         </div>
 
-        <Link to="/contact" className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 active:opacity-50 transition-micro">
+        <Link
+          to="/contact"
+          className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 active:opacity-50 transition-micro"
+        >
           Book a discovery call →
         </Link>
       </div>

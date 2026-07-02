@@ -6,13 +6,13 @@ import { Breadcrumbs } from "@/components/doc/breadcrumbs";
 export const Route = createFileRoute("/benchmarks/")({
   head: () => ({
     meta: [
-      { title: "Engineering Validation & Benchmarks — VÆRØX" },
+      { title: "Engineering Validation & Benchmarks — Vareox" },
       {
         name: "description",
         content:
-          "Architecture validation, prototype benchmarks, and implementation measurements from the VÆRØX Engineering Studio. Every record is either measured on a defined workload, reproducible, or explicitly marked as a design target.",
+          "Architecture validation, prototype benchmarks, and implementation measurements from the Vareox Engineering Studio. Every record is either measured on a defined workload, reproducible, or explicitly marked as a design target.",
       },
-      { property: "og:title", content: "Engineering Validation & Benchmarks — VÆRØX" },
+      { property: "og:title", content: "Engineering Validation & Benchmarks — Vareox" },
       {
         property: "og:description",
         content:
@@ -25,21 +25,25 @@ export const Route = createFileRoute("/benchmarks/")({
 
 function ValidationPage() {
   const measured = BENCHMARKS.filter((b) => b.status === "Prototype measured").length;
-  const targets = BENCHMARKS.filter((b) => b.status === "Target" || b.status === "Not yet measured").length;
+  const targets = BENCHMARKS.filter(
+    (b) => b.status === "Target" || b.status === "Not yet measured",
+  ).length;
   const inProgress = BENCHMARKS.filter((b) => b.status === "In progress").length;
 
   return (
     <SectionShell>
-      <Breadcrumbs items={[{ label: "VÆRØX", to: "/" }, { label: "Engineering Validation & Benchmarks" }]} />
+      <Breadcrumbs
+        items={[{ label: "Vareox", to: "/" }, { label: "Engineering Validation & Benchmarks" }]}
+      />
       <PageHeader
         section="§ · Engineering Validation & Benchmarks"
         title="What has been measured, and what is still a design target."
         summary="Prototype benchmarks, architecture validation, and reproducible measurements collected while building the systems inside the VÆRØX Engineering Studio. Every record cites its workload, hardware, and dataset — or is explicitly marked as a design target."
         meta={[
-          { label: "Records",           value: BENCHMARKS.length.toString().padStart(2, "0") },
+          { label: "Records", value: BENCHMARKS.length.toString().padStart(2, "0") },
           { label: "Prototype measured", value: measured.toString() },
-          { label: "In progress",       value: inProgress.toString() },
-          { label: "Targets only",      value: targets.toString() },
+          { label: "In progress", value: inProgress.toString() },
+          { label: "Targets only", value: targets.toString() },
         ]}
       />
 
@@ -52,7 +56,9 @@ function ValidationPage() {
             className="group card-hover hover:card-hover-on bg-canvas p-5 flex flex-col"
           >
             <header className="flex items-baseline justify-between">
-              <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">{b.code}</span>
+              <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
+                {b.code}
+              </span>
               <StatusChip status={b.status} />
             </header>
             <h3 className="mt-3 font-display text-[19px] text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.015em]">
@@ -64,13 +70,17 @@ function ValidationPage() {
               <KV k="Phase" v={b.phase} />
               <KV k="System" v={b.system} />
               <div className="col-span-2">
-                <dt className="font-mono text-[9.5px] text-text-3 uppercase tracking-[0.18em] opacity-70">Design goal</dt>
+                <dt className="font-mono text-[9.5px] text-text-3 uppercase tracking-[0.18em] opacity-70">
+                  Design goal
+                </dt>
                 <dd className="mt-1 text-[13px] text-text-2 leading-[1.55]">{b.goal}</dd>
               </div>
             </dl>
 
             <div className="mt-4 pt-4 hairline-t flex items-center justify-between">
-              <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">Updated {b.updated}</span>
+              <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
+                Updated {b.updated}
+              </span>
               <span className="font-mono text-[10px] text-text-3 tabular">→</span>
             </div>
           </Link>
@@ -83,7 +93,9 @@ function ValidationPage() {
 function KV({ k, v }: { k: string; v: string }) {
   return (
     <div>
-      <dt className="font-mono text-[9.5px] text-text-3 uppercase tracking-[0.18em] opacity-70">{k}</dt>
+      <dt className="font-mono text-[9.5px] text-text-3 uppercase tracking-[0.18em] opacity-70">
+        {k}
+      </dt>
       <dd className="mt-1 font-mono text-[12px] text-text-1 tabular">{v}</dd>
     </div>
   );
@@ -91,14 +103,19 @@ function KV({ k, v }: { k: string; v: string }) {
 
 function StatusChip({ status }: { status: Benchmark["status"] }) {
   const tone =
-    status === "Prototype measured" ? ("info" as const)
-    : status === "In progress"      ? ("warning" as const)
-    : status === "Target"           ? ("muted" as const)
-    :                                  ("muted" as const);
+    status === "Prototype measured"
+      ? ("info" as const)
+      : status === "In progress"
+        ? ("warning" as const)
+        : status === "Target"
+          ? ("muted" as const)
+          : ("muted" as const);
   return (
     <span className="inline-flex items-center gap-1.5">
       <StageDot tone={tone} />
-      <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">{status}</span>
+      <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
+        {status}
+      </span>
     </span>
   );
 }

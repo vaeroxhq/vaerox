@@ -43,11 +43,11 @@ export type EntityRef = { kind: EntityKind; id: string };
 
 export type Entity = {
   kind: EntityKind;
-  id: string;                // stable, unique per (kind,id)
+  id: string; // stable, unique per (kind,id)
   slug: string;
   title: string;
   href: string;
-  kicker: string;            // "ADR·014", "INC-2026-041", "SYS", etc.
+  kicker: string; // "ADR·014", "INC-2026-041", "SYS", etc.
   summary: string;
   owner?: string;
   updated?: string;
@@ -82,119 +82,190 @@ function link(a: EntityRef, b: EntityRef | undefined | null) {
 
 for (const s of SYSTEMS) {
   register({
-    kind: "system", id: s.slug, slug: s.slug,
-    title: s.name, href: `/systems/${s.slug}`,
-    kicker: "SYS", summary: s.summary,
-    owner: s.owner, updated: s.lastDeploy, status: s.stage,
+    kind: "system",
+    id: s.slug,
+    slug: s.slug,
+    title: s.name,
+    href: `/systems/${s.slug}`,
+    kicker: "SYS",
+    summary: s.summary,
+    owner: s.owner,
+    updated: s.lastDeploy,
+    status: s.stage,
     tags: s.stack,
   });
 }
 
 for (const p of PROJECT_ROWS) {
   register({
-    kind: "project", id: p.slug, slug: p.slug,
-    title: p.name, href: `/projects/${p.slug}`,
-    kicker: "PRJ", summary: p.description,
-    owner: p.role, updated: p.updated, status: p.stage,
+    kind: "project",
+    id: p.slug,
+    slug: p.slug,
+    title: p.name,
+    href: `/projects/${p.slug}`,
+    kicker: "PRJ",
+    summary: p.description,
+    owner: p.role,
+    updated: p.updated,
+    status: p.stage,
     tags: p.stack,
   });
 }
 
 for (const r of RESEARCH) {
   register({
-    kind: "research", id: r.slug, slug: r.slug,
-    title: r.title, href: `/research/${r.slug}`,
-    kicker: "RES", summary: r.abstract,
-    owner: r.authors.join(", "), updated: r.published, status: r.status,
+    kind: "research",
+    id: r.slug,
+    slug: r.slug,
+    title: r.title,
+    href: `/research/${r.slug}`,
+    kicker: "RES",
+    summary: r.abstract,
+    owner: r.authors.join(", "),
+    updated: r.published,
+    status: r.status,
     tags: r.tags,
   });
 }
 
 for (const a of ADRS) {
   register({
-    kind: "adr", id: a.slug, slug: a.slug,
-    title: a.title, href: `/architecture/${a.slug}`,
-    kicker: `ADR·${a.number}`, summary: a.context,
-    owner: `${a.owner} · ${a.team}`, updated: a.decisionDate, status: a.status,
+    kind: "adr",
+    id: a.slug,
+    slug: a.slug,
+    title: a.title,
+    href: `/architecture/${a.slug}`,
+    kicker: `ADR·${a.number}`,
+    summary: a.context,
+    owner: `${a.owner} · ${a.team}`,
+    updated: a.decisionDate,
+    status: a.status,
     tags: a.systems,
   });
 }
 
 for (const h of HANDBOOK) {
   register({
-    kind: "handbook", id: h.slug, slug: h.slug,
-    title: h.title, href: `/engineering#${h.slug}`,
-    kicker: `§${h.index}`, summary: h.summary,
-    owner: h.owner, updated: h.updated, status: h.status,
+    kind: "handbook",
+    id: h.slug,
+    slug: h.slug,
+    title: h.title,
+    href: `/engineering#${h.slug}`,
+    kicker: `§${h.index}`,
+    summary: h.summary,
+    owner: h.owner,
+    updated: h.updated,
+    status: h.status,
   });
 }
 
 for (const j of JOURNAL) {
   register({
-    kind: "journal", id: j.slug, slug: j.slug,
-    title: j.title, href: `/journal/${j.slug}`,
-    kicker: "LOG", summary: j.summary,
-    owner: j.author, updated: j.date, status: j.status,
+    kind: "journal",
+    id: j.slug,
+    slug: j.slug,
+    title: j.title,
+    href: `/journal/${j.slug}`,
+    kicker: "LOG",
+    summary: j.summary,
+    owner: j.author,
+    updated: j.date,
+    status: j.status,
     tags: j.tags,
   });
 }
 
 for (const i of INCIDENTS) {
   register({
-    kind: "incident", id: i.slug, slug: i.slug,
-    title: i.title, href: `/incidents/${i.slug}`,
-    kicker: i.id, summary: i.summary,
-    owner: i.commander, updated: i.openedAt.slice(0, 10), status: i.severity,
+    kind: "incident",
+    id: i.slug,
+    slug: i.slug,
+    title: i.title,
+    href: `/incidents/${i.slug}`,
+    kicker: i.id,
+    summary: i.summary,
+    owner: i.commander,
+    updated: i.openedAt.slice(0, 10),
+    status: i.severity,
     tags: i.systemsAffected,
   });
 }
 
 for (const b of BENCHMARKS) {
   register({
-    kind: "benchmark", id: b.slug, slug: b.slug,
-    title: b.title, href: `/benchmarks/${b.slug}`,
-    kicker: b.code, summary: b.focus,
-    owner: b.system, updated: b.updated, status: b.status,
+    kind: "benchmark",
+    id: b.slug,
+    slug: b.slug,
+    title: b.title,
+    href: `/benchmarks/${b.slug}`,
+    kicker: b.code,
+    summary: b.focus,
+    owner: b.system,
+    updated: b.updated,
+    status: b.status,
     tags: [b.system, b.phase],
   });
 }
 
-
 for (const a of APIS) {
   register({
-    kind: "api", id: a.slug, slug: a.slug,
-    title: a.name, href: `/api/${a.slug}`,
-    kicker: a.code, summary: a.summary,
-    owner: a.owner, updated: a.updated, status: a.stability,
+    kind: "api",
+    id: a.slug,
+    slug: a.slug,
+    title: a.name,
+    href: `/api/${a.slug}`,
+    kicker: a.code,
+    summary: a.summary,
+    owner: a.owner,
+    updated: a.updated,
+    status: a.stability,
     tags: [a.version, a.system],
   });
 }
 
 for (const p of PEOPLE) {
   register({
-    kind: "person", id: p.slug, slug: p.slug,
-    title: p.name, href: `/people/${p.slug}`,
-    kicker: p.handle, summary: p.role,
-    owner: p.team, updated: p.joined, status: p.location,
+    kind: "person",
+    id: p.slug,
+    slug: p.slug,
+    title: p.name,
+    href: `/people/${p.slug}`,
+    kicker: p.handle,
+    summary: p.role,
+    owner: p.team,
+    updated: p.joined,
+    status: p.location,
     tags: p.expertise,
   });
 }
 
 for (const t of TEAMS) {
   register({
-    kind: "team", id: t.slug, slug: t.slug,
-    title: t.name, href: `/teams/${t.slug}`,
-    kicker: "TEAM", summary: t.charter,
-    owner: t.lead, updated: t.established, status: `${t.memberSlugs.length} members`,
+    kind: "team",
+    id: t.slug,
+    slug: t.slug,
+    title: t.name,
+    href: `/teams/${t.slug}`,
+    kicker: "TEAM",
+    summary: t.charter,
+    owner: t.lead,
+    updated: t.established,
+    status: `${t.memberSlugs.length} members`,
   });
 }
 
 for (const d of DATASETS) {
   register({
-    kind: "dataset", id: d.slug, slug: d.slug,
-    title: d.name, href: `/research/assets/${d.slug}`,
-    kicker: "DAT", summary: d.purpose,
-    owner: d.domain, updated: d.updated, status: d.status,
+    kind: "dataset",
+    id: d.slug,
+    slug: d.slug,
+    title: d.name,
+    href: `/research/assets/${d.slug}`,
+    kicker: "DAT",
+    summary: d.purpose,
+    owner: d.domain,
+    updated: d.updated,
+    status: d.status,
     tags: d.tags,
   });
 }
@@ -202,10 +273,10 @@ for (const d of DATASETS) {
 // Dataset ↔ related entities declared in the dataset registry.
 for (const d of DATASETS) {
   const self: EntityRef = { kind: "dataset", id: d.slug };
-  for (const r of d.researchRefs)   link(self, { kind: "research",  id: r });
-  for (const j of d.journalRefs)    link(self, { kind: "journal",   id: j });
-  for (const p of d.projectRefs)    link(self, { kind: "project",   id: p });
-  for (const b of d.benchmarkRefs)  link(self, { kind: "benchmark", id: b });
+  for (const r of d.researchRefs) link(self, { kind: "research", id: r });
+  for (const j of d.journalRefs) link(self, { kind: "journal", id: j });
+  for (const p of d.projectRefs) link(self, { kind: "project", id: p });
+  for (const b of d.benchmarkRefs) link(self, { kind: "benchmark", id: b });
 }
 
 // Future systems — registered as a distinct kind so they never claim
@@ -213,18 +284,24 @@ for (const d of DATASETS) {
 // dangling refs are silently ignored.
 for (const f of FUTURE_SYSTEMS) {
   register({
-    kind: "future", id: f.slug, slug: f.slug,
-    title: f.name, href: `/systems/future/${f.slug}`,
-    kicker: "FUT", summary: f.description,
-    owner: f.category, updated: f.updated, status: f.status,
+    kind: "future",
+    id: f.slug,
+    slug: f.slug,
+    title: f.name,
+    href: `/systems/future/${f.slug}`,
+    kicker: "FUT",
+    summary: f.description,
+    owner: f.category,
+    updated: f.updated,
+    status: f.status,
     tags: f.tags,
   });
 }
 for (const f of FUTURE_SYSTEMS) {
   const self: EntityRef = { kind: "future", id: f.slug };
-  for (const s of f.relatedSystems)  link(self, { kind: "system",   id: s });
-  for (const p of f.relatedProjects) link(self, { kind: "project",  id: p });
-  for (const d of f.relatedDatasets) link(self, { kind: "dataset",  id: d });
+  for (const s of f.relatedSystems) link(self, { kind: "system", id: s });
+  for (const p of f.relatedProjects) link(self, { kind: "project", id: p });
+  for (const d of f.relatedDatasets) link(self, { kind: "dataset", id: d });
   for (const r of f.relatedResearch) link(self, { kind: "research", id: r });
 }
 
@@ -237,8 +314,10 @@ for (const a of ADRS) {
     const sysSlug = SYSTEMS.find((s) => s.name === sysName || s.slug === sysName)?.slug;
     if (sysSlug) link(self, { kind: "system", id: sysSlug });
   }
-  if (a.supersedes) link(self, { kind: "adr", id: ADRS.find((x) => x.number === a.supersedes)?.slug ?? "" });
-  if (a.supersededBy) link(self, { kind: "adr", id: ADRS.find((x) => x.number === a.supersededBy)?.slug ?? "" });
+  if (a.supersedes)
+    link(self, { kind: "adr", id: ADRS.find((x) => x.number === a.supersedes)?.slug ?? "" });
+  if (a.supersededBy)
+    link(self, { kind: "adr", id: ADRS.find((x) => x.number === a.supersededBy)?.slug ?? "" });
 }
 
 // Incidents ↔ everything they reference
@@ -361,7 +440,6 @@ for (const a of APIS) {
   const person = findPersonByName(a.owner);
   if (person) link({ kind: "api", id: a.slug }, { kind: "person", id: person.slug });
 }
-
 
 /* ── Public API ─────────────────────────────────────────── */
 

@@ -7,23 +7,35 @@ import { allEntities, KIND_LABEL, type Entity, type EntityKind } from "@/lib/gra
 export const Route = createFileRoute("/search")({
   head: () => ({
     meta: [
-      { title: "Search — VÆRØX" },
-      { name: "description", content: "Universal search across every documented VÆRØX entity." },
+      { title: "Search — Vareox" },
+      { name: "description", content: "Universal search across every documented Vareox entity." },
     ],
   }),
   component: SearchPage,
 });
 
 const KIND_ORDER: EntityKind[] = [
-  "system", "future", "project", "api", "adr", "incident",
-  "benchmark", "research", "dataset", "handbook", "journal", "person", "team",
+  "system",
+  "future",
+  "project",
+  "api",
+  "adr",
+  "incident",
+  "benchmark",
+  "research",
+  "dataset",
+  "handbook",
+  "journal",
+  "person",
+  "team",
 ];
 
 const RECENT_KEY = "vx.search.recent";
 
 function score(entity: Entity, q: string): number {
   const t = q.toLowerCase();
-  const hay = `${entity.title} ${entity.summary} ${entity.kicker} ${entity.owner ?? ""} ${(entity.tags ?? []).join(" ")}`.toLowerCase();
+  const hay =
+    `${entity.title} ${entity.summary} ${entity.kicker} ${entity.owner ?? ""} ${(entity.tags ?? []).join(" ")}`.toLowerCase();
   if (!hay.includes(t)) {
     // fuzzy: allow gap-tolerant subsequence
     let i = 0;
@@ -51,7 +63,9 @@ function SearchPage() {
     try {
       const raw = window.localStorage.getItem(RECENT_KEY);
       if (raw) setRecent(JSON.parse(raw));
-    } catch { /* noop */ }
+    } catch {
+      /* noop */
+    }
   }, []);
 
   useEffect(() => {
@@ -59,7 +73,11 @@ function SearchPage() {
     const t = setTimeout(() => {
       setRecent((prev) => {
         const next = [q, ...prev.filter((x) => x !== q)].slice(0, 8);
-        try { window.localStorage.setItem(RECENT_KEY, JSON.stringify(next)); } catch { /* noop */ }
+        try {
+          window.localStorage.setItem(RECENT_KEY, JSON.stringify(next));
+        } catch {
+          /* noop */
+        }
         return next;
       });
     }, 800);
@@ -87,28 +105,38 @@ function SearchPage() {
   }, [results]);
 
   const suggestions = useMemo(
-    () => ["VESTRA", "MarketPulse", "QuantEdge", "AEGIS OPS", "LangGraph", "walk-forward", "prompt eval", "tool contract"],
+    () => [
+      "VESTRA",
+      "MarketPulse",
+      "QuantEdge",
+      "AEGIS OPS",
+      "LangGraph",
+      "walk-forward",
+      "prompt eval",
+      "tool contract",
+    ],
     [],
   );
 
   const toggleKind = (k: EntityKind) =>
     setActiveKinds((prev) => {
       const next = new Set(prev);
-      if (next.has(k)) next.delete(k); else next.add(k);
+      if (next.has(k)) next.delete(k);
+      else next.add(k);
       return next;
     });
 
   return (
     <SectionShell>
-      <Breadcrumbs items={[{ label: "VÆRØX", to: "/" }, { label: "Search" }]} />
+      <Breadcrumbs items={[{ label: "Vareox", to: "/" }, { label: "Search" }]} />
       <PageHeader
         section="§ · Search"
         title="Universal search."
         summary="Fuzzy search across every documented system, decision, validation record, API, dataset, person, and note. Grouped by kind, filterable, keyboard-first."
         meta={[
-          { label: "Indexed",  value: entities.length.toString().padStart(3, "0") + " entities" },
-          { label: "Kinds",    value: KIND_ORDER.length.toString().padStart(2, "0") },
-          { label: "Fuzzy",    value: "subsequence + substring" },
+          { label: "Indexed", value: entities.length.toString().padStart(3, "0") + " entities" },
+          { label: "Kinds", value: KIND_ORDER.length.toString().padStart(2, "0") },
+          { label: "Fuzzy", value: "subsequence + substring" },
           { label: "Shortcut", value: "⌘K palette" },
         ]}
       />

@@ -9,10 +9,16 @@ const FILTERS = ["All", "Accepted", "Proposed", "Superseded", "Deprecated", "Dra
 export const Route = createFileRoute("/architecture/")({
   head: () => ({
     meta: [
-      { title: "Architecture — VÆRØX" },
-      { name: "description", content: "Architecture Decision Records, system diagrams, sequence and dependency graphs." },
-      { property: "og:title", content: "Architecture — VÆRØX" },
-      { property: "og:description", content: "Architecture Decision Records, system diagrams, sequence and dependency graphs." },
+      { title: "Architecture — Vareox" },
+      {
+        name: "description",
+        content: "Architecture Decision Records, system diagrams, sequence and dependency graphs.",
+      },
+      { property: "og:title", content: "Architecture — Vareox" },
+      {
+        property: "og:description",
+        content: "Architecture Decision Records, system diagrams, sequence and dependency graphs.",
+      },
     ],
   }),
   component: ArchitecturePage,
@@ -24,8 +30,7 @@ function ArchitecturePage() {
 
   const adrs = useMemo(() => {
     const needle = q.trim().toLowerCase();
-    return ADRS
-      .filter((a) => filter === "All" || a.status === filter)
+    return ADRS.filter((a) => filter === "All" || a.status === filter)
       .filter((a) => {
         if (!needle) return true;
         return (
@@ -48,7 +53,7 @@ function ArchitecturePage() {
         title="Decisions, diagrams, dependencies."
         summary="The architecture spine of the platform: every consequential decision recorded, every system diagrammed, every dependency traceable to the ADR that shaped it."
         meta={[
-          { label: "ADRs",     value: ADRS.length.toString().padStart(2, "0") },
+          { label: "ADRs", value: ADRS.length.toString().padStart(2, "0") },
           { label: "Accepted", value: accepted.toString().padStart(2, "0") },
           { label: "Proposed", value: proposed.toString().padStart(2, "0") },
           { label: "Diagrams", value: DIAGRAMS.length.toString().padStart(2, "0") },
@@ -56,7 +61,11 @@ function ArchitecturePage() {
       />
 
       {/* ── ADR Repository ─────────────────────────────────── */}
-      <SectionHeading kicker="§ 01" title="Decision records" caption="Filterable · sortable · linked" />
+      <SectionHeading
+        kicker="§ 01"
+        title="Decision records"
+        caption="Filterable · sortable · linked"
+      />
 
       <Toolbar
         query={q}
@@ -71,7 +80,12 @@ function ArchitecturePage() {
       <div className="hairline border-t-0 bg-canvas">
         <div className="hidden md:grid grid-cols-[80px_1fr_140px_140px_180px_180px_100px] gap-4 px-4 py-3 hairline-b">
           {["ADR", "Title", "Status", "Decision", "Owner", "Systems", "Review"].map((h) => (
-            <span key={h} className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">{h}</span>
+            <span
+              key={h}
+              className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70"
+            >
+              {h}
+            </span>
           ))}
         </div>
         <ul>
@@ -88,9 +102,15 @@ function ArchitecturePage() {
                 </span>
                 <AdrStatusPill status={a.status} />
                 <span className="font-mono text-[11px] text-text-3 tabular">{a.decisionDate}</span>
-                <span className="font-mono text-[11px] text-text-2">{a.owner} · <span className="text-text-3">{a.team}</span></span>
-                <span className="font-mono text-[11px] text-text-3 truncate">{a.systems.join(" · ")}</span>
-                <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">{a.review}</span>
+                <span className="font-mono text-[11px] text-text-2">
+                  {a.owner} · <span className="text-text-3">{a.team}</span>
+                </span>
+                <span className="font-mono text-[11px] text-text-3 truncate">
+                  {a.systems.join(" · ")}
+                </span>
+                <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
+                  {a.review}
+                </span>
               </Link>
             </li>
           ))}
@@ -102,7 +122,11 @@ function ArchitecturePage() {
       <AdrTimeline />
 
       {/* ── Diagrams ───────────────────────────────────────── */}
-      <SectionHeading kicker="§ 03" title="Diagram catalog" caption="System · sequence · deployment · data flow · network · schema · API · dependency" />
+      <SectionHeading
+        kicker="§ 03"
+        title="Diagram catalog"
+        caption="System · sequence · deployment · data flow · network · schema · API · dependency"
+      />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-line-1 hairline">
         {DIAGRAMS.map((d) => (
           <Link
@@ -112,7 +136,9 @@ function ArchitecturePage() {
             className="group card-hover hover:card-hover-on bg-canvas px-5 pt-5 pb-4 flex flex-col"
           >
             <header className="flex items-baseline justify-between">
-              <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">{d.kind}</span>
+              <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
+                {d.kind}
+              </span>
               <span className="font-mono text-[10px] text-text-3 tabular">{d.updated}</span>
             </header>
             <div className="hairline-t mt-4" />
@@ -142,10 +168,13 @@ function ArchitecturePage() {
 
 function AdrStatusPill({ status }: { status: AdrStatus }) {
   const tone =
-    status === "Accepted" ? "success"
-    : status === "Proposed" ? "info"
-    : status === "Draft" ? "warning"
-    : "muted";
+    status === "Accepted"
+      ? "success"
+      : status === "Proposed"
+        ? "info"
+        : status === "Draft"
+          ? "warning"
+          : "muted";
   return (
     <span className="inline-flex items-center gap-2 font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
       <StageDot tone={tone as "success" | "warning" | "info" | "muted"} />
@@ -154,22 +183,44 @@ function AdrStatusPill({ status }: { status: AdrStatus }) {
   );
 }
 
-function SectionHeading({ kicker, title, caption }: { kicker: string; title: string; caption: string }) {
+function SectionHeading({
+  kicker,
+  title,
+  caption,
+}: {
+  kicker: string;
+  title: string;
+  caption: string;
+}) {
   return (
     <div className="mt-16 mb-6 flex items-baseline justify-between gap-4">
       <div className="flex items-baseline gap-4">
-        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">{kicker}</span>
+        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
+          {kicker}
+        </span>
         <h2 className="font-display text-[22px] text-text-1 tracking-[-0.018em]">{title}</h2>
       </div>
-      <span className="hidden md:inline font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">{caption}</span>
+      <span className="hidden md:inline font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
+        {caption}
+      </span>
     </div>
   );
 }
 
-function Meta({ label, value, className = "" }: { label: string; value: string; className?: string }) {
+function Meta({
+  label,
+  value,
+  className = "",
+}: {
+  label: string;
+  value: string;
+  className?: string;
+}) {
   return (
     <div className={`flex items-baseline justify-between gap-3 ${className}`}>
-      <dt className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">{label}</dt>
+      <dt className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
+        {label}
+      </dt>
       <dd className="font-mono text-[11px] text-text-2 tabular truncate">{value}</dd>
     </div>
   );

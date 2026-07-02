@@ -9,6 +9,7 @@
 ## Phase 1: Critical Fixes
 
 ### 1.1 Navigation Menu Chevron
+
 - **File:** `src/components/ui/navigation-menu.tsx`
 - **Change:** `transition duration-300` → `transition-transform duration-200`
 - **Purpose:** Icon rotation feedback on accordion open
@@ -19,6 +20,7 @@
 - **Status:** ✅ Done
 
 ### 1.2 Sheet Animation Timing
+
 - **File:** `src/components/ui/sheet.tsx`
 - **Change:** `data-[state=closed]:duration-300 data-[state=open]:duration-500` → `data-[state=closed]:duration-200 data-[state=open]:duration-200`
 - **Purpose:** Smooth drawer slide entrance/exit (symmetric)
@@ -29,6 +31,7 @@
 - **Status:** ✅ Done
 
 ### 1.3 Dialog Animations - Remove Zoom
+
 - **File:** `src/components/ui/dialog.tsx`
 - **Change:** Removed `data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95`
 - **Kept:** `data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0`
@@ -40,6 +43,7 @@
 - **Status:** ✅ Done
 
 ### 1.4 Alert Dialog Animations - Remove Zoom
+
 - **File:** `src/components/ui/alert-dialog.tsx`
 - **Change:** Removed `data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95`
 - **Kept:** `data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0`
@@ -55,6 +59,7 @@
 ## Phase 2: Standardization
 
 ### 2.1 Accordion Transitions
+
 - **File:** `src/components/ui/accordion.tsx`
 - **Change:** `transition-all` → `transition-colors` on trigger
 - **Purpose:** Only color transitions, chevron rotation handled separately with `transition-transform duration-200`
@@ -65,11 +70,12 @@
 - **Status:** ✅ Done
 
 ### 2.2 Sidebar Width Transitions
+
 - **File:** `src/components/ui/sidebar.tsx` (2 locations)
 - **Changes:**
   1. `.relative` container: `transition-[width] duration-200 ease-linear` → `transition-[width] duration-240 ease-standard`
   2. `.fixed` container: `transition-[left,right,width] duration-200 ease-linear` → `transition-[left,right,width] duration-240 ease-standard`
-- **Purpose:** 
+- **Purpose:**
   - 240ms aligns with VÆRØX "layout" timing (between UI 160ms and route 400ms)
   - `ease-standard` (cubic-bezier(0.2, 0.6, 0.2, 1)) is VÆRØX standard easing
   - Width changes are layout shifts (slower than UI feedback)
@@ -80,6 +86,7 @@
 - **Status:** ✅ Done
 
 ### 2.3 Skeleton Pulse Animation
+
 - **File:** `src/styles.css`
 - **Change:** `animation: vx-skeleton 1.4s ease-in-out infinite;` → `animation: vx-skeleton 1000ms ease-in-out infinite;`
 - **Purpose:** More standard skeleton pulse timing. 1000ms = 1 pulse per second (not 1 per 1.4s).
@@ -90,6 +97,7 @@
 - **Status:** ✅ Done
 
 ### 2.4 Add Duration & Easing to Tailwind Theme
+
 - **File:** `src/styles.css` (@theme inline)
 - **Changes:**
   - Added `--duration-80: var(--vx-dur-micro);` (80ms)
@@ -104,26 +112,29 @@
 ## Phase 3: Missing Improvements
 
 ### 3.1 Active State to Links with Hover Opacity
+
 Added `active:opacity-50` to all links using `hover:opacity-*`:
 
-| File | Link | Change |
-|------|------|--------|
-| `src/components/home/hero.tsx` | "Discuss your project →" | Added `active:opacity-50` |
-| `src/components/home/services-preview.tsx` | "All services →" | Added `active:opacity-50` |
-| `src/components/home/why-vaerox.tsx` | "Full standards →" | Added `active:opacity-50` |
-| `src/components/home/cta-block.tsx` | "Book a discovery call →" | Added `active:opacity-50` |
-| `src/components/shell/top-nav.tsx` | Logo/lockup | Added `active:opacity-50` |
+| File                                       | Link                      | Change                    |
+| ------------------------------------------ | ------------------------- | ------------------------- |
+| `src/components/home/hero.tsx`             | "Discuss your project →"  | Added `active:opacity-50` |
+| `src/components/home/services-preview.tsx` | "All services →"          | Added `active:opacity-50` |
+| `src/components/home/why-vaerox.tsx`       | "Full standards →"        | Added `active:opacity-50` |
+| `src/components/home/cta-block.tsx`        | "Book a discovery call →" | Added `active:opacity-50` |
+| `src/components/shell/top-nav.tsx`         | Logo/lockup               | Added `active:opacity-50` |
 
 - **Purpose:** Visual feedback on click (active state shows 50% opacity)
 - **Status:** ✅ Done
 
 ### 3.2 Motion Feedback on "View →" Links
+
 - **File:** `src/components/home/project-grid.tsx`
-- **Status:** Already present ✅ 
+- **Status:** Already present ✅
   - Arrow has `transition-transform group-hover:translate-x-[6px]`
   - Nudge communicates "click here to explore"
 
 ### 3.3 Enhanced Command Palette Animation
+
 - **File:** `src/components/ui/command.tsx`
 - **Change:** Added scale animation to CommandDialog
 - **Before:** Only fade-in/fade-out from inherited DialogContent
@@ -140,6 +151,7 @@ Added `active:opacity-50` to all links using `hover:opacity-*`:
 ## Verification Results
 
 ### Build Status
+
 - ✅ Build succeeded (0 errors, 0 warnings)
 - ✅ All TypeScript types valid
 - ✅ All imports resolved
@@ -147,26 +159,26 @@ Added `active:opacity-50` to all links using `hover:opacity-*`:
 
 ### Animation Compliance
 
-| Animation | VÆRØX Scale | Easing | GPU-Accelerated | Motion-Safe |
-|-----------|-------------|--------|-----------------|-------------|
-| Navigation chevron | 200ms (UI) | Default | ✅ Yes | ✅ Yes |
-| Sheet slide | 200ms (UI) | ease-in-out | ✅ Yes | ✅ Yes |
-| Dialog fade | 200ms (UI) | Default | ✅ Yes | ✅ Yes |
-| Accordion rotate | 200ms (UI) | Default | ✅ Yes | ✅ Yes |
-| Sidebar collapse | 240ms (Layout) | standard | ✅ Yes | ✅ Yes |
-| Skeleton pulse | 1000ms | ease-in-out | ✅ Yes | ✅ Yes |
-| Command palette scale | 200ms (UI) | Default | ✅ Yes | ✅ Yes |
+| Animation             | VÆRØX Scale    | Easing      | GPU-Accelerated | Motion-Safe |
+| --------------------- | -------------- | ----------- | --------------- | ----------- |
+| Navigation chevron    | 200ms (UI)     | Default     | ✅ Yes          | ✅ Yes      |
+| Sheet slide           | 200ms (UI)     | ease-in-out | ✅ Yes          | ✅ Yes      |
+| Dialog fade           | 200ms (UI)     | Default     | ✅ Yes          | ✅ Yes      |
+| Accordion rotate      | 200ms (UI)     | Default     | ✅ Yes          | ✅ Yes      |
+| Sidebar collapse      | 240ms (Layout) | standard    | ✅ Yes          | ✅ Yes      |
+| Skeleton pulse        | 1000ms         | ease-in-out | ✅ Yes          | ✅ Yes      |
+| Command palette scale | 200ms (UI)     | Default     | ✅ Yes          | ✅ Yes      |
 
 ### Timing Scale Alignment
 
-| Duration | Purpose | Count |
-|----------|---------|-------|
-| 80ms | Micro (state feedback) | 0 |
-| 160ms | UI (interactive) | 1 |
-| 200ms | UI (standard) | 5 |
-| 240ms | Layout (structural) | 2 |
-| 400ms | Route (navigation) | 0 |
-| Non-standard | Deprecated | 0 (was 1.4s, now fixed) |
+| Duration     | Purpose                | Count                   |
+| ------------ | ---------------------- | ----------------------- |
+| 80ms         | Micro (state feedback) | 0                       |
+| 160ms        | UI (interactive)       | 1                       |
+| 200ms        | UI (standard)          | 5                       |
+| 240ms        | Layout (structural)    | 2                       |
+| 400ms        | Route (navigation)     | 0                       |
+| Non-standard | Deprecated             | 0 (was 1.4s, now fixed) |
 
 **Status:** ✅ All animations now use VÆRØX scale
 
@@ -180,7 +192,7 @@ Added `active:opacity-50` to all links using `hover:opacity-*`:
 ✅ **Performant:** 100% GPU-accelerated (transform/opacity only)  
 ✅ **Consistent:** All timings use VÆRØX scale  
 ✅ **Timeless:** Will age well (not trendy animations)  
-✅ **Engineered:** Animations serve UI clarity, not aesthetics  
+✅ **Engineered:** Animations serve UI clarity, not aesthetics
 
 ---
 
@@ -232,4 +244,5 @@ Added `active:opacity-50` to all links using `hover:opacity-*`:
 ---
 
 ## Co-authored by
+
 Copilot <223556219+Copilot@users.noreply.github.com>

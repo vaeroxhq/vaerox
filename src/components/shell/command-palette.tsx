@@ -22,9 +22,19 @@ export function useCommandPalette() {
 }
 
 const GROUP_ORDER: EntityKind[] = [
-  "system", "future", "project", "team", "person",
-  "adr", "incident", "benchmark", "api",
-  "research", "dataset", "journal", "handbook",
+  "system",
+  "future",
+  "project",
+  "team",
+  "person",
+  "adr",
+  "incident",
+  "benchmark",
+  "api",
+  "research",
+  "dataset",
+  "journal",
+  "handbook",
 ];
 
 export function CommandPaletteProvider({ children }: { children: ReactNode }) {
@@ -70,7 +80,13 @@ export function CommandPaletteProvider({ children }: { children: ReactNode }) {
 
           <CommandGroup heading="Navigate">
             {NAV.filter((n) => n.section === "Primary").map((n) => (
-              <PaletteItem key={n.to} label={n.label} hint={n.hint} tag="NAV" onSelect={() => go(n.to)} />
+              <PaletteItem
+                key={n.to}
+                label={n.label}
+                hint={n.hint}
+                tag="NAV"
+                onSelect={() => go(n.to)}
+              />
             ))}
           </CommandGroup>
 
@@ -90,9 +106,20 @@ export function CommandPaletteProvider({ children }: { children: ReactNode }) {
 
           <CommandGroup heading="Meta">
             {NAV.filter((n) => n.section === "Meta").map((n) => (
-              <PaletteItem key={n.to} label={n.label} hint={n.hint} tag="META" onSelect={() => go(n.to)} />
+              <PaletteItem
+                key={n.to}
+                label={n.label}
+                hint={n.hint}
+                tag="META"
+                onSelect={() => go(n.to)}
+              />
             ))}
-            <PaletteItem label="Home" hint="Return to the index" tag="NAV" onSelect={() => go("/")} />
+            <PaletteItem
+              label="Home"
+              hint="Return to the index"
+              tag="NAV"
+              onSelect={() => go("/")}
+            />
           </CommandGroup>
 
           <CommandGroup heading="Actions">
@@ -133,7 +160,9 @@ function PaletteItem({
         <span className="font-mono text-[9.5px] text-text-3 uppercase tracking-[0.18em] tabular w-[70px] shrink-0">
           {tag}
         </span>
-        <span className="font-display text-[14px] text-text-1 tracking-[-0.01em] truncate">{label}</span>
+        <span className="font-display text-[14px] text-text-1 tracking-[-0.01em] truncate">
+          {label}
+        </span>
       </div>
       <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] truncate max-w-[40%]">
         {hint}

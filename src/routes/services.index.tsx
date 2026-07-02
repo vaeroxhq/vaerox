@@ -6,13 +6,13 @@ import { Breadcrumbs } from "@/components/doc/breadcrumbs";
 export const Route = createFileRoute("/services/")({
   head: () => ({
     meta: [
-      { title: "Services — VÆRØX" },
+      { title: "Services — Vareox" },
       {
         name: "description",
         content:
-          "What VÆRØX builds: AI agents, LLM applications, RAG systems, MCP servers, workflow automation, backend platforms, internal tools, computer vision, and data engineering.",
+          "What Vareox builds: AI agents, LLM applications, RAG systems, MCP servers, workflow automation, backend platforms, internal tools, computer vision, and data engineering.",
       },
-      { property: "og:title", content: "Services — VÆRØX" },
+      { property: "og:title", content: "Services — Vareox" },
       {
         property: "og:description",
         content:
@@ -26,19 +26,18 @@ export const Route = createFileRoute("/services/")({
 function ServicesIndex() {
   return (
     <SectionShell>
-      <Breadcrumbs items={[{ label: "VÆRØX", to: "/" }, { label: "Services" }]} />
+      <Breadcrumbs items={[{ label: "Vareox", to: "/" }, { label: "Services" }]} />
       <PageHeader
         section="§ · Services"
         title="What VÆRØX builds."
         summary="An independent AI & software engineering studio designing and shipping modern systems for startups, growing businesses, and enterprise teams — AI agents, SaaS products, internal tools, dashboards, backend platforms, and workflow automation. Every service links to the projects, research, and architecture behind it."
         meta={[
-          { label: "Services",  value: SERVICES.length.toString().padStart(2, "0") },
-          { label: "Clients",   value: "Startup → Enterprise" },
-          { label: "Model",     value: "Studio" },
-          { label: "Contact",   value: "hello@vaerox.dev" },
+          { label: "Services", value: SERVICES.length.toString().padStart(2, "0") },
+          { label: "Clients", value: "Startup → Enterprise" },
+          { label: "Model", value: "Studio" },
+          { label: "Contact", value: "vaeroxhq@gmail.com" },
         ]}
       />
-
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-line-1 hairline">
         {SERVICES.map((s) => (
@@ -49,7 +48,9 @@ function ServicesIndex() {
             className="group card-hover hover:card-hover-on bg-canvas p-5 flex flex-col"
           >
             <header className="flex items-baseline justify-between">
-              <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">{s.code}</span>
+              <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
+                {s.code}
+              </span>
               <span className="font-mono text-[10px] text-text-3 tabular">→</span>
             </header>
             <h3 className="mt-3 font-display text-[19px] text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.015em]">
@@ -58,10 +59,14 @@ function ServicesIndex() {
             <p className="mt-2 text-[13px] text-text-3">{s.tagline}</p>
 
             <div className="mt-5 hairline-t pt-4">
-              <div className="font-mono text-[9.5px] text-text-3 uppercase tracking-[0.18em] opacity-70">Stack</div>
+              <div className="font-mono text-[9.5px] text-text-3 uppercase tracking-[0.18em] opacity-70">
+                Stack
+              </div>
               <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
                 {s.technologies.slice(0, 6).map((t) => (
-                  <span key={t} className="font-mono text-[11px] text-text-2 tabular">{t}</span>
+                  <span key={t} className="font-mono text-[11px] text-text-2 tabular">
+                    {t}
+                  </span>
                 ))}
               </div>
             </div>

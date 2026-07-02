@@ -12,8 +12,8 @@ export type WorkQuestion = {
   question: string;
   answer: string;
   outcomes: string[];
-  relatedServices: string[];    // service slugs
-  relatedProjects: string[];    // project slugs
+  relatedServices: string[]; // service slugs
+  relatedProjects: string[]; // project slugs
   industries: string[];
 };
 

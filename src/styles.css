@@ -15,34 +15,33 @@
 :root {
   /* Neutrals — dark palette (canonical) */
   --vx-black-0: #000000;
-  --vx-black-1: #0B0B0B;
+  --vx-black-1: #0b0b0b;
   --vx-black-2: #121212;
-  --vx-black-3: #1A1A1A;
-  --vx-gray-1:  #232323;
-  --vx-gray-2:  #2E2E2E;
-  --vx-gray-3:  #3A3A3A;
-  --vx-gray-4:  #7A7A7A;
-  --vx-gray-5:  #B0B0B0;
-  --vx-white-0: #FFFFFF;
+  --vx-black-3: #1a1a1a;
+  --vx-gray-1: #232323;
+  --vx-gray-2: #2e2e2e;
+  --vx-gray-3: #3a3a3a;
+  --vx-gray-4: #7a7a7a;
+  --vx-gray-5: #b0b0b0;
+  --vx-white-0: #ffffff;
 
   /* Neutrals — light palette (parity) */
-  --vx-paper-0: #FFFFFF;
-  --vx-paper-1: #FAFAFA;
-  --vx-paper-2: #F2F2F2;
-  --vx-paper-3: #E8E8E8;
-  --vx-line-l1: #E5E5E5;
-  --vx-line-l2: #D9D9D9;
+  --vx-paper-0: #ffffff;
+  --vx-paper-1: #fafafa;
+  --vx-paper-2: #f2f2f2;
+  --vx-paper-3: #e8e8e8;
+  --vx-line-l1: #e5e5e5;
+  --vx-line-l2: #d9d9d9;
   --vx-ink-l1: #000000;
-  --vx-ink-l2: #4A4A4A;
-  --vx-ink-l3: #7A7A7A;
+  --vx-ink-l2: #4a4a4a;
+  --vx-ink-l3: #7a7a7a;
 
   /* States — muted, engineering-appropriate; never bright */
-  --vx-state-success: #3FA66A;   /* muted green   — production, live */
-  --vx-state-warning: #B7873A;   /* muted amber   — prototype, degraded */
-  --vx-state-danger:  #C2504B;   /* muted red     — incident */
-  --vx-state-info:    #3B82F6;   /* brand blue    — research, info */
-  --vx-state-neutral: #6E6E6E;   /* muted gray    — archived */
-
+  --vx-state-success: #3fa66a; /* muted green   — production, live */
+  --vx-state-warning: #b7873a; /* muted amber   — prototype, degraded */
+  --vx-state-danger: #c2504b; /* muted red     — incident */
+  --vx-state-info: #3b82f6; /* brand blue    — research, info */
+  --vx-state-neutral: #6e6e6e; /* muted gray    — archived */
 
   /* Space (4px baseline) */
   --vx-space-0: 0;
@@ -67,49 +66,48 @@
 
   /* Motion */
   --vx-dur-micro: 80ms;
-  --vx-dur-ui:    160ms;
+  --vx-dur-ui: 160ms;
   --vx-dur-layout: 240ms;
   --vx-dur-route: 400ms;
   --vx-ease-standard: cubic-bezier(0.2, 0.6, 0.2, 1);
 
   /* Type */
   --vx-font-sans:
-    "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
-  --vx-font-mono:
-    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    sans-serif;
+  --vx-font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
-  --vx-text-xs:  11px;
-  --vx-text-sm:  13px;
-  --vx-text-md:  15px;
-  --vx-text-lg:  17px;
-  --vx-text-xl:  20px;
+  --vx-text-xs: 11px;
+  --vx-text-sm: 13px;
+  --vx-text-md: 15px;
+  --vx-text-lg: 17px;
+  --vx-text-xl: 20px;
   --vx-text-2xl: 24px;
   --vx-text-3xl: 32px;
   --vx-text-4xl: 44px;
   --vx-text-display: 64px;
 
   --vx-leading-tight: 1.1;
-  --vx-leading-ui:    1.45;
+  --vx-leading-ui: 1.45;
   --vx-leading-prose: 1.65;
 
   --vx-tracking-tight: -0.015em;
   --vx-tracking-display: -0.025em;
-  --vx-tracking-wide:  0.02em;
+  --vx-tracking-wide: 0.02em;
 
   /* Widths */
   --vx-width-prose: 720px;
-  --vx-width-docs:  960px;
+  --vx-width-docs: 960px;
   --vx-width-shell: 1280px;
 }
 
 /* ── SEMANTIC — DARK (canonical) ──────────────────────────── */
 :root,
 .dark {
-  --bg-canvas:  var(--vx-black-0);
+  --bg-canvas: var(--vx-black-0);
   --bg-surface: var(--vx-black-1);
-  --bg-raised:  var(--vx-black-2);
-  --bg-hover:   var(--vx-black-3);
+  --bg-raised: var(--vx-black-2);
+  --bg-hover: var(--vx-black-3);
 
   --line-1: var(--vx-gray-1);
   --line-2: var(--vx-gray-2);
@@ -121,18 +119,18 @@
 
   --state-success: var(--vx-state-success);
   --state-warning: var(--vx-state-warning);
-  --state-danger:  var(--vx-state-danger);
-  --state-info:    var(--vx-state-info);
+  --state-danger: var(--vx-state-danger);
+  --state-info: var(--vx-state-info);
 
   --focus-ring: var(--vx-white-0);
 }
 
 /* ── SEMANTIC — LIGHT (parity) ────────────────────────────── */
 .light {
-  --bg-canvas:  var(--vx-paper-0);
+  --bg-canvas: var(--vx-paper-0);
   --bg-surface: var(--vx-paper-1);
-  --bg-raised:  var(--vx-paper-2);
-  --bg-hover:   var(--vx-paper-3);
+  --bg-raised: var(--vx-paper-2);
+  --bg-hover: var(--vx-paper-3);
 
   --line-1: var(--vx-line-l1);
   --line-2: var(--vx-line-l2);
@@ -147,10 +145,10 @@
 
 /* ── @theme inline — exposes semantic tokens as Tailwind utilities ── */
 @theme inline {
-  --color-canvas:  var(--bg-canvas);
+  --color-canvas: var(--bg-canvas);
   --color-surface: var(--bg-surface);
-  --color-raised:  var(--bg-raised);
-  --color-hover:   var(--bg-hover);
+  --color-raised: var(--bg-raised);
+  --color-hover: var(--bg-hover);
 
   --color-line-1: var(--line-1);
   --color-line-2: var(--line-2);
@@ -162,8 +160,8 @@
 
   --color-success: var(--state-success);
   --color-warning: var(--state-warning);
-  --color-danger:  var(--state-danger);
-  --color-info:    var(--state-info);
+  --color-danger: var(--state-danger);
+  --color-info: var(--state-info);
 
   /* Shadcn compatibility (all mapped to VÆRØX semantics — no shadows, hairlines only) */
   --color-background: var(--bg-canvas);
@@ -234,7 +232,10 @@
     outline-offset: 2px;
   }
 
-  code, kbd, samp, pre {
+  code,
+  kbd,
+  samp,
+  pre {
     font-family: var(--vx-font-mono);
     font-feature-settings: "zero", "ss01";
   }
@@ -258,17 +259,35 @@
 }
 
 /* Prose width */
-@utility w-prose { max-width: var(--vx-width-prose); }
-@utility w-docs  { max-width: var(--vx-width-docs); }
-@utility w-shell { max-width: var(--vx-width-shell); }
+@utility w-prose {
+  max-width: var(--vx-width-prose);
+}
+@utility w-docs {
+  max-width: var(--vx-width-docs);
+}
+@utility w-shell {
+  max-width: var(--vx-width-shell);
+}
 
 /* Hairlines — the only structural device */
-@utility hairline-t { border-top: 1px solid var(--line-1); }
-@utility hairline-b { border-bottom: 1px solid var(--line-1); }
-@utility hairline-l { border-left: 1px solid var(--line-1); }
-@utility hairline-r { border-right: 1px solid var(--line-1); }
-@utility hairline   { border: 1px solid var(--line-1); }
-@utility hairline-strong { border: 1px solid var(--line-2); }
+@utility hairline-t {
+  border-top: 1px solid var(--line-1);
+}
+@utility hairline-b {
+  border-bottom: 1px solid var(--line-1);
+}
+@utility hairline-l {
+  border-left: 1px solid var(--line-1);
+}
+@utility hairline-r {
+  border-right: 1px solid var(--line-1);
+}
+@utility hairline {
+  border: 1px solid var(--line-1);
+}
+@utility hairline-strong {
+  border: 1px solid var(--line-2);
+}
 
 /* 45° geometry — inherited from the mark */
 @utility diagonal-45 {
@@ -281,22 +300,10 @@
   );
 }
 @utility corner-cut-tr {
-  clip-path: polygon(
-    0 0,
-    calc(100% - 12px) 0,
-    100% 12px,
-    100% 100%,
-    0 100%
-  );
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
 }
 @utility corner-cut-bl {
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% 100%,
-    12px 100%,
-    0 calc(100% - 12px)
-  );
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 12px 100%, 0 calc(100% - 12px));
 }
 /* Notched frame — 45° cut on TR + BL corners; echoes the diamond mark */
 @utility notch-frame {
@@ -362,8 +369,14 @@
   animation: vx-reveal 320ms var(--vx-ease-standard) both;
 }
 @keyframes vx-reveal {
-  from { opacity: 0; transform: translateY(4px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Skeleton — 1px hairline block, subtle pulse */
@@ -373,15 +386,224 @@
   animation: vx-skeleton 1000ms ease-in-out infinite;
 }
 @keyframes vx-skeleton {
-  0%, 100% { opacity: 0.55; }
-  50%      { opacity: 0.85; }
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.85;
+  }
 }
 
+/* ═════════════════════════════════════════════════════════════
+ * ANIMATION KEYFRAMES — Premium, Minimal Motion System
+ * Motion Level: 3/10 (refined, crafted, never jarring)
+ * ═════════════════════════════════════════════════════════════ */
+
+/* Hero entrance — staggered fade + slide up */
+@keyframes vx-hero-entrance {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scroll reveal — fade + slide up for sections */
+@keyframes vx-scroll-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Command palette modal entrance — scale + fade backdrop */
+@keyframes vx-modal-entrance {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Command palette backdrop entrance */
+@keyframes vx-backdrop-entrance {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Mobile menu entrance — slide + fade */
+@keyframes vx-menu-entrance {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Navigation underline growth — left to right */
+@keyframes vx-underline-grow {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* Arrow nudge right on hover */
+@keyframes vx-arrow-nudge {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(3px);
+  }
+}
+
+/* ═════════════════════════════════════════════════════════════
+ * ANIMATION UTILITIES
+ * ═════════════════════════════════════════════════════════════ */
+
+/* Hero entrance — applied with staggered delays per element */
+@utility animate-hero-logo {
+  animation: vx-hero-entrance 600ms var(--vx-ease-standard) 0ms both;
+}
+
+@utility animate-hero-metadata {
+  animation: vx-hero-entrance 600ms var(--vx-ease-standard) 60ms both;
+}
+
+@utility animate-hero-heading {
+  animation: vx-hero-entrance 600ms var(--vx-ease-standard) 120ms both;
+}
+
+@utility animate-hero-description {
+  animation: vx-hero-entrance 600ms var(--vx-ease-standard) 180ms both;
+}
+
+@utility animate-hero-buttons {
+  animation: vx-hero-entrance 600ms var(--vx-ease-standard) 240ms both;
+}
+
+/* Scroll reveal — triggered by JS when scrolled into view */
+@utility animate-scroll-reveal {
+  animation: vx-scroll-reveal 300ms var(--vx-ease-standard) both;
+}
+
+@layer base {
+  .scroll-reveal-active {
+    animation: vx-scroll-reveal 300ms var(--vx-ease-standard) both;
+  }
+}
+
+/* Command palette modal */
+@utility animate-modal-entrance {
+  animation: vx-modal-entrance 220ms var(--vx-ease-standard) both;
+}
+
+@utility animate-backdrop-entrance {
+  animation: vx-backdrop-entrance 220ms var(--vx-ease-standard) both;
+}
+
+/* Mobile menu */
+@utility animate-menu-entrance {
+  animation: vx-menu-entrance 250ms var(--vx-ease-standard) both;
+}
+
+/* Navigation link underline — pseudo-element animation */
+@layer base {
+  .nav-link-underline {
+    position: relative;
+  }
+
+  .nav-link-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition:
+      transform 200ms ease-out,
+      opacity 200ms ease-out;
+    opacity: 0;
+  }
+
+  .nav-link-underline:hover::after {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+/* Card hover lift + color transition */
+@layer base {
+  .card-lift-on-hover {
+    transition:
+      transform 200ms ease-out,
+      background-color var(--vx-dur-ui) var(--vx-ease-standard),
+      border-color var(--vx-dur-ui) var(--vx-ease-standard);
+  }
+
+  .card-lift-on-hover:hover {
+    transform: translateY(-2px);
+  }
+
+  /* Button scale + color on hover */
+  .button-hover-scale {
+    transition:
+      transform 180ms ease-out,
+      background-color var(--vx-dur-ui) var(--vx-ease-standard),
+      border-color var(--vx-dur-ui) var(--vx-ease-standard);
+  }
+
+  .button-hover-scale:hover {
+    transform: scale(1.01);
+  }
+
+  /* Arrow nudge on hover */
+  .arrow-nudge {
+    display: inline-block;
+    transition: transform 200ms ease-out;
+  }
+
+  .group:hover .arrow-nudge {
+    transform: translateX(3px);
+  }
+}
+
+/* ═════════════════════════════════════════════════════════════
+ * ACCESSIBILITY: Respect prefers-reduced-motion
+ * ═════════════════════════════════════════════════════════════ */
+
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
 }
-

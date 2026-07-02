@@ -82,13 +82,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "color-scheme", content: "dark light" },
-      { title: "VÆRØX — AI & Software Engineering Studio" },
+      { title: "Vareox — AI & Software Engineering Studio" },
       {
         name: "description",
         content:
-          "VÆRØX is an independent AI & software engineering studio. We design, build, deploy and maintain modern software systems — AI agents, SaaS products, internal tools, dashboards, backend platforms, and workflow automation — for startups, growing businesses and enterprise teams.",
+          "Vareox is an independent AI & software engineering studio. We design, build, deploy and maintain modern software systems — AI agents, SaaS products, internal tools, dashboards, backend platforms, and workflow automation — for startups, growing businesses and enterprise teams.",
       },
-      { property: "og:title", content: "VÆRØX — AI & Software Engineering Studio" },
+      { property: "og:title", content: "Vareox — AI & Software Engineering Studio" },
       {
         property: "og:description",
         content:

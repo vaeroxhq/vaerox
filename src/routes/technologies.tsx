@@ -142,7 +142,11 @@ function buildIndex(): Record<Category, TechUsage[]> {
     (grouped[rec.category] ??= []).push(rec);
   }
   for (const c of CATEGORY_ORDER) {
-    grouped[c].sort((a, b) => (b.projects.length + b.services.length) - (a.projects.length + a.services.length) || a.name.localeCompare(b.name));
+    grouped[c].sort(
+      (a, b) =>
+        b.projects.length + b.services.length - (a.projects.length + a.services.length) ||
+        a.name.localeCompare(b.name),
+    );
   }
   return grouped;
 }
@@ -150,14 +154,17 @@ function buildIndex(): Record<Category, TechUsage[]> {
 export const Route = createFileRoute("/technologies")({
   head: () => ({
     meta: [
-      { title: "Technologies — VÆRØX" },
+      { title: "Technologies — Vareox" },
       {
         name: "description",
         content:
-          "Cross-index of every technology used across VÆRØX systems — languages, frameworks, LLMs, databases, infrastructure — with the projects and services each one powers.",
+          "Cross-index of every technology used across Vareox systems — languages, frameworks, LLMs, databases, infrastructure — with the projects and services each one powers.",
       },
-      { property: "og:title", content: "Technologies — VÆRØX" },
-      { property: "og:description", content: "The complete technology matrix behind VÆRØX systems." },
+      { property: "og:title", content: "Technologies — Vareox" },
+      {
+        property: "og:description",
+        content: "The complete technology matrix behind Vareox systems.",
+      },
     ],
   }),
   component: TechnologiesPage,
@@ -171,16 +178,16 @@ function TechnologiesPage() {
 
   return (
     <SectionShell>
-      <Breadcrumbs items={[{ label: "VÆRØX", to: "/" }, { label: "Technologies" }]} />
+      <Breadcrumbs items={[{ label: "Vareox", to: "/" }, { label: "Technologies" }]} />
       <PageHeader
         section="§ · Technology Matrix"
         title="Every tool, every project, every service."
         summary="A reverse index of the VÆRØX stack. For each technology, the projects that use it and the services it powers. If it isn't listed, VÆRØX doesn't ship production code in it."
         meta={[
-          { label: "Categories",   value: CATEGORY_ORDER.length.toString().padStart(2, "0") },
+          { label: "Categories", value: CATEGORY_ORDER.length.toString().padStart(2, "0") },
           { label: "Technologies", value: total.toString().padStart(2, "0") },
-          { label: "Projects",     value: PROJECTS.length.toString().padStart(2, "0") },
-          { label: "Services",     value: SERVICES.length.toString().padStart(2, "0") },
+          { label: "Projects", value: PROJECTS.length.toString().padStart(2, "0") },
+          { label: "Services", value: SERVICES.length.toString().padStart(2, "0") },
         ]}
       />
 
@@ -192,19 +199,31 @@ function TechnologiesPage() {
             <section key={cat}>
               <header className="hairline-t pt-4 mb-4 flex items-baseline justify-between">
                 <h2 className="font-display text-[20px] text-text-1 tracking-[-0.01em]">{cat}</h2>
-                <span className="font-mono text-[10px] text-text-3 tabular">{items.length.toString().padStart(2, "0")}</span>
+                <span className="font-mono text-[10px] text-text-3 tabular">
+                  {items.length.toString().padStart(2, "0")}
+                </span>
               </header>
               <ul className="hairline bg-canvas">
                 {items.map((it, i, arr) => (
-                  <li key={it.name} className={`px-5 py-4 grid grid-cols-1 md:grid-cols-[160px_1fr_1fr] gap-4 items-baseline ${i < arr.length - 1 ? "hairline-b" : ""}`}>
+                  <li
+                    key={it.name}
+                    className={`px-5 py-4 grid grid-cols-1 md:grid-cols-[160px_1fr_1fr] gap-4 items-baseline ${i < arr.length - 1 ? "hairline-b" : ""}`}
+                  >
                     <span className="font-mono text-[13px] text-text-1 tabular">{it.name}</span>
                     <div>
-                      <div className="font-mono text-[9.5px] text-text-3 uppercase tracking-[0.14em] mb-1.5">Projects</div>
+                      <div className="font-mono text-[9.5px] text-text-3 uppercase tracking-[0.14em] mb-1.5">
+                        Projects
+                      </div>
                       {it.projects.length ? (
                         <div className="flex flex-wrap gap-x-3 gap-y-1">
                           {it.projects.map((slug) => {
                             const p = projMap[slug];
-                            if (!p) return <span key={slug} className="font-mono text-[11px] text-text-3">{slug}</span>;
+                            if (!p)
+                              return (
+                                <span key={slug} className="font-mono text-[11px] text-text-3">
+                                  {slug}
+                                </span>
+                              );
                             return (
                               <Link
                                 key={slug}
@@ -222,7 +241,9 @@ function TechnologiesPage() {
                       )}
                     </div>
                     <div>
-                      <div className="font-mono text-[9.5px] text-text-3 uppercase tracking-[0.14em] mb-1.5">Services</div>
+                      <div className="font-mono text-[9.5px] text-text-3 uppercase tracking-[0.14em] mb-1.5">
+                        Services
+                      </div>
                       {it.services.length ? (
                         <div className="flex flex-wrap gap-x-3 gap-y-1">
                           {it.services.map((slug) => {

@@ -22,7 +22,7 @@ export type ApiSpec = {
   slug: string;
   code: string;
   name: string;
-  system: string;           // canonical system slug
+  system: string; // canonical system slug
   version: string;
   stability: ApiStability;
   baseUrl: string;

@@ -3,17 +3,23 @@ import { useMemo, useState } from "react";
 import { PROJECTS, type ProjectEntry, type ProjectStage } from "@/lib/projects-data";
 import { PageHeader, Toolbar, SectionShell, StageDot } from "@/components/section/section-bits";
 
-const FILTERS: (ProjectStage | "All")[] = ["All", "Production", "Prototype", "Research", "Archived"];
+const FILTERS: (ProjectStage | "All")[] = [
+  "All",
+  "Production",
+  "Prototype",
+  "Research",
+  "Archived",
+];
 
 export const Route = createFileRoute("/projects/")({
   head: () => ({
     meta: [
-      { title: "Projects — VÆRØX" },
+      { title: "Projects — Vareox" },
       {
         name: "description",
         content: "Engineering projects — architecture, stack, timeline, outcomes.",
       },
-      { property: "og:title", content: "Projects — VÆRØX" },
+      { property: "og:title", content: "Projects — Vareox" },
       {
         property: "og:description",
         content: "Engineering projects — architecture, stack, timeline, outcomes.",
@@ -60,15 +66,21 @@ function ProjectsPage() {
           { label: "Projects", value: PROJECTS.length.toString().padStart(2, "0") },
           {
             label: "Production",
-            value: PROJECTS.filter((p) => p.stage === "Production").length.toString().padStart(2, "0"),
+            value: PROJECTS.filter((p) => p.stage === "Production")
+              .length.toString()
+              .padStart(2, "0"),
           },
           {
             label: "Prototype",
-            value: PROJECTS.filter((p) => p.stage === "Prototype").length.toString().padStart(2, "0"),
+            value: PROJECTS.filter((p) => p.stage === "Prototype")
+              .length.toString()
+              .padStart(2, "0"),
           },
           {
             label: "Research",
-            value: PROJECTS.filter((p) => p.stage === "Research").length.toString().padStart(2, "0"),
+            value: PROJECTS.filter((p) => p.stage === "Research")
+              .length.toString()
+              .padStart(2, "0"),
           },
         ]}
       />

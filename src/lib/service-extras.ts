@@ -33,7 +33,8 @@ const GENERIC: ServiceExtras = {
     "Architecture documentation, ADRs, and a written handover.",
     "A deployment path and the operational glue to keep it running.",
   ],
-  typicalTimeline: "4–12 weeks depending on surface. Scoping conversation → written proposal → build → handover.",
+  typicalTimeline:
+    "4–12 weeks depending on surface. Scoping conversation → written proposal → build → handover.",
   faqs: [
     {
       q: "Can you start on an existing codebase?",
@@ -70,9 +71,18 @@ const OVERRIDES: Record<string, Partial<ServiceExtras>> = {
     ],
     typicalTimeline: "6–12 weeks for a first production agent. Prototype in weeks 1–2.",
     faqs: [
-      { q: "Which model providers do you use?", a: "OpenAI, Anthropic, Gemini — chosen per capability and per cost, not per allegiance. Provider swap is designed in." },
-      { q: "Do you build on LangGraph or your own runtime?", a: "LangGraph where its graph model earns its keep; a smaller custom runtime where it doesn't. The choice is per-project." },
-      { q: "How do you handle evaluation?", a: "Every agent ships with a fixture set and a scoring harness before it ships with a UI. Regressions are visible in CI." },
+      {
+        q: "Which model providers do you use?",
+        a: "OpenAI, Anthropic, Gemini — chosen per capability and per cost, not per allegiance. Provider swap is designed in.",
+      },
+      {
+        q: "Do you build on LangGraph or your own runtime?",
+        a: "LangGraph where its graph model earns its keep; a smaller custom runtime where it doesn't. The choice is per-project.",
+      },
+      {
+        q: "How do you handle evaluation?",
+        a: "Every agent ships with a fixture set and a scoring harness before it ships with a UI. Regressions are visible in CI.",
+      },
     ],
   },
   "workflow-automation": {
@@ -93,8 +103,14 @@ const OVERRIDES: Record<string, Partial<ServiceExtras>> = {
     ],
     typicalTimeline: "4–10 weeks depending on step count and approval complexity.",
     faqs: [
-      { q: "Temporal, Prefect, or something custom?", a: "Temporal-style semantics on the smallest runtime that fits — often embedded rather than a separate cluster." },
-      { q: "Can workflows call our existing APIs?", a: "Yes. Existing services are wrapped as typed steps; workflows never own business logic that already lives elsewhere." },
+      {
+        q: "Temporal, Prefect, or something custom?",
+        a: "Temporal-style semantics on the smallest runtime that fits — often embedded rather than a separate cluster.",
+      },
+      {
+        q: "Can workflows call our existing APIs?",
+        a: "Yes. Existing services are wrapped as typed steps; workflows never own business logic that already lives elsewhere.",
+      },
     ],
   },
   "mcp-development": {
@@ -115,8 +131,14 @@ const OVERRIDES: Record<string, Partial<ServiceExtras>> = {
     ],
     typicalTimeline: "3–8 weeks depending on capability surface size.",
     faqs: [
-      { q: "Does the MCP server run on our infrastructure?", a: "Yes — the deliverable is a service you deploy. VÆRØX does not host your data path." },
-      { q: "Can we start with read-only capabilities?", a: "Recommended. Read-only surface first, write capabilities added once the audit and authorisation surface is in place." },
+      {
+        q: "Does the MCP server run on our infrastructure?",
+        a: "Yes — the deliverable is a service you deploy. VÆRØX does not host your data path.",
+      },
+      {
+        q: "Can we start with read-only capabilities?",
+        a: "Recommended. Read-only surface first, write capabilities added once the audit and authorisation surface is in place.",
+      },
     ],
   },
   "saas-product": {
@@ -138,8 +160,14 @@ const OVERRIDES: Record<string, Partial<ServiceExtras>> = {
     ],
     typicalTimeline: "8–16 weeks to a real v1. Working slice in weeks 3–4.",
     faqs: [
-      { q: "Can you build against Lovable Cloud / Supabase / our own Postgres?", a: "All of the above. Data model and hosting are chosen per project, not per template." },
-      { q: "Do you handle billing integration?", a: "Yes — Stripe or Paddle, instrumented from day one so revenue and usage are visible in the admin surface." },
+      {
+        q: "Can you build against Lovable Cloud / Supabase / our own Postgres?",
+        a: "All of the above. Data model and hosting are chosen per project, not per template.",
+      },
+      {
+        q: "Do you handle billing integration?",
+        a: "Yes — Stripe or Paddle, instrumented from day one so revenue and usage are visible in the admin surface.",
+      },
     ],
   },
   dashboards: {
@@ -160,8 +188,14 @@ const OVERRIDES: Record<string, Partial<ServiceExtras>> = {
     ],
     typicalTimeline: "3–8 weeks. Working slice by week 2.",
     faqs: [
-      { q: "DuckDB, Postgres, or a warehouse?", a: "Chosen per shape of data. DuckDB for research-scale, Postgres for operational, warehouses only where they earn their keep." },
-      { q: "Can we own the dashboards after handover?", a: "Yes — the entire stack is code in your repo. Nothing runs on VÆRØX infrastructure." },
+      {
+        q: "DuckDB, Postgres, or a warehouse?",
+        a: "Chosen per shape of data. DuckDB for research-scale, Postgres for operational, warehouses only where they earn their keep.",
+      },
+      {
+        q: "Can we own the dashboards after handover?",
+        a: "Yes — the entire stack is code in your repo. Nothing runs on VÆRØX infrastructure.",
+      },
     ],
   },
   "computer-vision": {
@@ -182,8 +216,14 @@ const OVERRIDES: Record<string, Partial<ServiceExtras>> = {
     ],
     typicalTimeline: "6–14 weeks depending on data readiness.",
     faqs: [
-      { q: "Can you work with our existing dataset?", a: "Yes. Assessment starts with a dataset audit — labels, distributions, and known biases — before any modelling." },
-      { q: "PyTorch or something else?", a: "PyTorch by default; ONNX for portability. Model choice follows the eval, not the fashion." },
+      {
+        q: "Can you work with our existing dataset?",
+        a: "Yes. Assessment starts with a dataset audit — labels, distributions, and known biases — before any modelling.",
+      },
+      {
+        q: "PyTorch or something else?",
+        a: "PyTorch by default; ONNX for portability. Model choice follows the eval, not the fashion.",
+      },
     ],
   },
 };

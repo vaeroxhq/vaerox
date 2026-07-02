@@ -14,15 +14,21 @@ const FILTERS: (JournalCategory | "All")[] = [
   "Post-Mortem",
 ];
 
-
 export const Route = createFileRoute("/journal")({
   head: () => ({
     meta: [
-      { title: "Journal — VÆRØX" },
-      { name: "description", content: "Chronological engineering feed — architecture notes, design decisions, evaluations, and development logs from VÆRØX." },
-      { property: "og:title", content: "Journal — VÆRØX" },
-      { property: "og:description", content: "Chronological engineering feed — architecture notes, design decisions, evaluations, and development logs from VÆRØX." },
-
+      { title: "Journal — Vareox" },
+      {
+        name: "description",
+        content:
+          "Chronological engineering feed — architecture notes, design decisions, evaluations, and development logs from Vareox.",
+      },
+      { property: "og:title", content: "Journal — Vareox" },
+      {
+        property: "og:description",
+        content:
+          "Chronological engineering feed — architecture notes, design decisions, evaluations, and development logs from Vareox.",
+      },
     ],
   }),
   component: JournalPage,
@@ -34,8 +40,7 @@ function JournalPage() {
 
   const entries = useMemo(() => {
     const needle = q.trim().toLowerCase();
-    return JOURNAL
-      .filter((e) => filter === "All" || e.category === filter)
+    return JOURNAL.filter((e) => filter === "All" || e.category === filter)
       .filter((e) => {
         if (!needle) return true;
         return (
@@ -58,10 +63,10 @@ function JournalPage() {
         title="Engineering notebook."
         summary="Chronological notes, design decisions, and long-form essays from the VÆRØX maintainer. Written in the order they happened. Written to be re-read."
         meta={[
-          { label: "Entries",   value: JOURNAL.length.toString().padStart(2, "0") },
+          { label: "Entries", value: JOURNAL.length.toString().padStart(2, "0") },
           { label: "Published", value: published.toString().padStart(2, "0") },
-          { label: "Drafts",    value: draft.toString().padStart(2, "0") },
-          { label: "Latest",    value: entries[0]?.date ?? "—" },
+          { label: "Drafts", value: draft.toString().padStart(2, "0") },
+          { label: "Latest", value: entries[0]?.date ?? "—" },
         ]}
       />
 
@@ -89,20 +94,26 @@ function JournalPage() {
 
               <div className="col-span-9 md:col-span-7">
                 <div className="flex items-baseline gap-3 mb-1">
-                  <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">{e.category}</span>
+                  <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
+                    {e.category}
+                  </span>
                   <span className="font-mono text-[10px] text-text-3 opacity-50">·</span>
                   <span className="font-mono text-[10px] text-text-3 tabular">{e.revision}</span>
                   {e.status !== "Published" && (
                     <>
                       <span className="font-mono text-[10px] text-text-3 opacity-50">·</span>
-                      <span className="font-mono text-[10px] text-warning uppercase tracking-[0.14em]">{e.status}</span>
+                      <span className="font-mono text-[10px] text-warning uppercase tracking-[0.14em]">
+                        {e.status}
+                      </span>
                     </>
                   )}
                 </div>
                 <h3 className="font-display text-[18px] text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.014em]">
                   {e.title}
                 </h3>
-                <p className="mt-2 text-[13px] text-text-2 leading-[1.55] max-w-[720px]">{e.summary}</p>
+                <p className="mt-2 text-[13px] text-text-2 leading-[1.55] max-w-[720px]">
+                  {e.summary}
+                </p>
                 <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
                   {e.tags.map((t) => (
                     <span key={t}>· {t}</span>
@@ -115,7 +126,9 @@ function JournalPage() {
               </div>
               <div className="col-span-6 md:col-span-1 text-right font-mono text-[11px] text-text-3 tabular">
                 {e.readingMinutes}m
-                <span className="ml-3 inline-block transition-transform duration-200 ease-out group-hover:translate-x-[4px]">→</span>
+                <span className="ml-3 inline-block transition-transform duration-200 ease-out group-hover:translate-x-[4px]">
+                  →
+                </span>
               </div>
             </Link>
           </li>

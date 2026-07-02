@@ -26,7 +26,8 @@ export const PROJECTS: ProjectEntry[] = [
     description:
       "Building an AI-native wealth operating system: portfolio ingestion, goal planning, and grounded conversational agents.",
     stage: "Building",
-    architecture: "FastAPI service · LangGraph agents · Postgres portfolio store · React web client",
+    architecture:
+      "FastAPI service · LangGraph agents · Postgres portfolio store · React web client",
     stack: ["Python", "FastAPI", "PostgreSQL", "LangGraph", "React"],
     timeline: "2025-Q4 → present",
     started: "2025-11-02",
@@ -56,7 +57,8 @@ export const PROJECTS: ProjectEntry[] = [
     description:
       "News ingestion and LLM-based classification for equities and macro events, with explicit prompt-evaluation methodology.",
     stage: "Prototype",
-    architecture: "News ingestion workers · classification pipeline · sentiment store · evaluation harness",
+    architecture:
+      "News ingestion workers · classification pipeline · sentiment store · evaluation harness",
     stack: ["Python", "FastAPI", "PostgreSQL", "OpenAI"],
     timeline: "2025-Q4 → present",
     started: "2025-10-08",

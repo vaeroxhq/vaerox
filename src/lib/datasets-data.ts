@@ -45,10 +45,10 @@ export type Dataset = {
   updated: string; // ISO
   tags: string[];
   // Cross-references
-  researchRefs: string[];   // research slugs
-  journalRefs: string[];    // journal slugs
-  projectRefs: string[];    // project slugs
-  benchmarkRefs: string[];  // benchmark slugs
+  researchRefs: string[]; // research slugs
+  journalRefs: string[]; // journal slugs
+  projectRefs: string[]; // project slugs
+  benchmarkRefs: string[]; // benchmark slugs
   experimentRefs: string[]; // reserved
 };
 
@@ -136,12 +136,7 @@ export const DATASETS: Dataset[] = [
       "Documentation",
       "Evaluation design",
     ],
-    skills: [
-      "CNN",
-      "Vision Transformers",
-      "Agricultural AI",
-      "Image Classification",
-    ],
+    skills: ["CNN", "Vision Transformers", "Agricultural AI", "Image Classification"],
     engineeringNotes:
       "Field images vary heavily in lighting and framing; augmentation planning prioritised color-jitter and random-crop over synthetic distortions that break domain realism.",
     futureWork: [
@@ -192,10 +187,7 @@ export const DATASETS: Dataset[] = [
     ],
     engineeringNotes:
       "Mask fidelity is high on thick wire regions but degrades on sub-pixel strands; any challenge metric must weight boundary IoU or tolerate one-pixel dilations to remain honest.",
-    futureWork: [
-      "Publish annotation-quality audit",
-      "Prototype boundary-aware IoU grader",
-    ],
+    futureWork: ["Publish annotation-quality audit", "Prototype boundary-aware IoU grader"],
     category: "Industrial Vision Research",
     status: "Reviewed",
     currentStage: "Feasibility review complete; pipeline not yet instrumented.",
@@ -231,11 +223,7 @@ export const DATASETS: Dataset[] = [
       "Challenge planning",
       "Version comparison",
     ],
-    skills: [
-      "Remote Sensing",
-      "Large-scale ML",
-      "Satellite Vision",
-    ],
+    skills: ["Remote Sensing", "Large-scale ML", "Satellite Vision"],
     engineeringNotes:
       "Full corpus exceeds practical challenge budgets; v2 label revisions shift several minority classes and cannot be used interchangeably with v1 metrics.",
     futureWork: [
@@ -265,21 +253,12 @@ export const DATASETS: Dataset[] = [
     overview:
       "Multi-task computer-vision corpus spanning counting, keypoint detection, and continuous regression — used to prototype a submission format with a DINOv2-based baseline others can honestly beat.",
     domain: "Computer Vision",
-    tasks: [
-      "Object Counting",
-      "Keypoint Detection",
-      "Regression",
-      "Structured Prediction",
-    ],
+    tasks: ["Object Counting", "Keypoint Detection", "Regression", "Structured Prediction"],
     source: "Internal challenge corpus",
     purpose:
       "Prototype a multi-task submission format spanning counting, keypoints, and regression — with a DINOv2-based baseline that others can beat honestly.",
     size: "~8k labeled scenes across cloth and rigid objects",
-    annotationTypes: [
-      "Object counts",
-      "2D keypoints",
-      "Continuous regression targets",
-    ],
+    annotationTypes: ["Object counts", "2D keypoints", "Continuous regression targets"],
     workPerformed: [
       "Baseline prediction pipeline",
       "Submission generation",
@@ -338,16 +317,28 @@ export type PlannedCategory = {
 };
 
 export const PLANNED_CATEGORIES: PlannedCategory[] = [
-  { name: "Synthetic Data Generation",         rationale: "Programmatic corpora for controlled ablations." },
-  { name: "Reinforcement Learning Datasets",   rationale: "Offline RL traces and evaluation environments." },
-  { name: "Financial Time Series",             rationale: "Long-horizon market and macro series." },
-  { name: "Retrieval-Augmented Generation",    rationale: "Retrieval corpora and evaluation suites for RAG." },
-  { name: "Multi-Agent Evaluation Suites",     rationale: "Structured tasks for agent-vs-agent benchmarking." },
-  { name: "Autonomous Driving",                rationale: "Perception, prediction, and planning corpora." },
-  { name: "Robotics",                          rationale: "Manipulation and locomotion datasets." },
-  { name: "Document Intelligence",             rationale: "OCR, layout, and structured-extraction corpora." },
-  { name: "Medical NLP",                       rationale: "Clinical text, coding, and de-identification." },
-  { name: "Speech AI",                         rationale: "ASR, diarisation, and paralinguistic corpora." },
+  {
+    name: "Synthetic Data Generation",
+    rationale: "Programmatic corpora for controlled ablations.",
+  },
+  {
+    name: "Reinforcement Learning Datasets",
+    rationale: "Offline RL traces and evaluation environments.",
+  },
+  { name: "Financial Time Series", rationale: "Long-horizon market and macro series." },
+  {
+    name: "Retrieval-Augmented Generation",
+    rationale: "Retrieval corpora and evaluation suites for RAG.",
+  },
+  {
+    name: "Multi-Agent Evaluation Suites",
+    rationale: "Structured tasks for agent-vs-agent benchmarking.",
+  },
+  { name: "Autonomous Driving", rationale: "Perception, prediction, and planning corpora." },
+  { name: "Robotics", rationale: "Manipulation and locomotion datasets." },
+  { name: "Document Intelligence", rationale: "OCR, layout, and structured-extraction corpora." },
+  { name: "Medical NLP", rationale: "Clinical text, coding, and de-identification." },
+  { name: "Speech AI", rationale: "ASR, diarisation, and paralinguistic corpora." },
 ];
 
 export function findDataset(slug: string): Dataset | undefined {

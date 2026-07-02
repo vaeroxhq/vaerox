@@ -20,7 +20,7 @@ export type JournalEntry = {
   date: string;
   title: string;
   category: JournalCategory;
-  tags: string[];       // canonical system slugs preferred
+  tags: string[]; // canonical system slugs preferred
   revision: string;
   author: string;
   status: JournalStatus;

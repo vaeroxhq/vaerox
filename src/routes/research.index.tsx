@@ -16,16 +16,15 @@ const FILTERS: (ResearchCategory | "All")[] = [
   "Quantitative Evaluation",
 ];
 
-
 export const Route = createFileRoute("/research/")({
   head: () => ({
     meta: [
-      { title: "Research — VÆRØX" },
+      { title: "Research — Vareox" },
       {
         name: "description",
         content: "Publication archive — papers, preprints, working drafts, and dataset assets.",
       },
-      { property: "og:title", content: "Research — VÆRØX" },
+      { property: "og:title", content: "Research — Vareox" },
       {
         property: "og:description",
         content: "Publication archive — papers, preprints, working drafts, and dataset assets.",
@@ -60,10 +59,12 @@ function ResearchIndex() {
         summary="Preprints, published papers, working drafts, and dataset assets from VÆRØX engineering research. Filterable by category and searchable across abstracts."
         meta={[
           { label: "Publications", value: RESEARCH.length.toString().padStart(2, "0") },
-          { label: "Datasets",     value: DATASETS.length.toString().padStart(2, "0") },
+          { label: "Datasets", value: DATASETS.length.toString().padStart(2, "0") },
           {
             label: "Preprint",
-            value: RESEARCH.filter((r) => r.status === "Preprint").length.toString().padStart(2, "0"),
+            value: RESEARCH.filter((r) => r.status === "Preprint")
+              .length.toString()
+              .padStart(2, "0"),
           },
           {
             label: "Drafts",
@@ -87,10 +88,9 @@ function ResearchIndex() {
               Research Assets
             </div>
             <p className="mt-2 text-[13.5px] text-text-2 leading-[1.65] max-w-[68ch]">
-              Canonical registry of datasets, evaluation corpora, annotation
-              pipelines, and benchmark resources across medical imaging,
-              agriculture, industrial vision, remote sensing, and general
-              computer vision.
+              Canonical registry of datasets, evaluation corpora, annotation pipelines, and
+              benchmark resources across medical imaging, agriculture, industrial vision, remote
+              sensing, and general computer vision.
             </p>
           </div>
           <div className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] group-hover:text-text-1">

@@ -19,7 +19,11 @@ export const ENGAGEMENTS: Engagement[] = [
     name: "MVP Development",
     summary:
       "Take a validated idea to a shippable v1 — architected properly from day one so it doesn't have to be rebuilt at v2.",
-    idealFor: ["Pre-seed and seed startups", "Founders with a defined problem", "Teams replacing a prototype with a real product"],
+    idealFor: [
+      "Pre-seed and seed startups",
+      "Founders with a defined problem",
+      "Teams replacing a prototype with a real product",
+    ],
     deliverables: [
       "Full-stack MVP with auth, data model, and core flows",
       "Deployed environment (staging + production)",
@@ -34,7 +38,11 @@ export const ENGAGEMENTS: Engagement[] = [
     name: "Fixed-Scope Projects",
     summary:
       "A defined system, defined milestones, defined cost. Best when the requirements are clear and the risk is in execution, not exploration.",
-    idealFor: ["SMBs modernizing a specific workflow", "Enterprise teams delivering a bounded system", "Integration or migration work"],
+    idealFor: [
+      "SMBs modernizing a specific workflow",
+      "Enterprise teams delivering a bounded system",
+      "Integration or migration work",
+    ],
     deliverables: [
       "System delivered against written milestones",
       "Weekly written updates",
@@ -49,7 +57,11 @@ export const ENGAGEMENTS: Engagement[] = [
     name: "Long-Term Product Engineering",
     summary:
       "Ongoing engineering ownership of one or more product surfaces — features, infrastructure, evaluation, and maintenance under one relationship.",
-    idealFor: ["Post-seed startups without a full team", "Scale-ups adding a specialized surface", "Product teams needing AI depth"],
+    idealFor: [
+      "Post-seed startups without a full team",
+      "Scale-ups adding a specialized surface",
+      "Product teams needing AI depth",
+    ],
     deliverables: [
       "Continuous feature delivery",
       "Roadmap co-ownership",
@@ -64,7 +76,11 @@ export const ENGAGEMENTS: Engagement[] = [
     name: "Fractional Engineering",
     summary:
       "Senior engineering capacity by the week for teams that need a strong hand on architecture, AI, or infrastructure — without a full-time hire.",
-    idealFor: ["Startups without a technical co-founder", "Teams between senior hires", "Scale-ups needing an AI or platform specialist"],
+    idealFor: [
+      "Startups without a technical co-founder",
+      "Teams between senior hires",
+      "Scale-ups needing an AI or platform specialist",
+    ],
     deliverables: [
       "Weekly engineering hours",
       "Architecture and code review",
@@ -79,7 +95,11 @@ export const ENGAGEMENTS: Engagement[] = [
     name: "Technical Consulting",
     summary:
       "Short, high-density engagements to unblock a decision — architecture review, technology selection, hiring plan, or system audit.",
-    idealFor: ["CTOs facing a rebuild-or-refactor decision", "Founders scoping a new platform", "Teams evaluating a vendor or migration"],
+    idealFor: [
+      "CTOs facing a rebuild-or-refactor decision",
+      "Founders scoping a new platform",
+      "Teams evaluating a vendor or migration",
+    ],
     deliverables: [
       "Written technical report",
       "Recommended architecture and stack",
@@ -94,7 +114,11 @@ export const ENGAGEMENTS: Engagement[] = [
     name: "AI Strategy & Implementation",
     summary:
       "End-to-end: identify the AI surfaces worth building, design them, build a validated prototype, then take the winners to production.",
-    idealFor: ["Businesses new to shipping AI features", "Operations teams looking to automate knowledge work", "Product teams adding AI depth"],
+    idealFor: [
+      "Businesses new to shipping AI features",
+      "Operations teams looking to automate knowledge work",
+      "Product teams adding AI depth",
+    ],
     deliverables: [
       "AI opportunity map",
       "Validated prototype on real data",
@@ -109,7 +133,11 @@ export const ENGAGEMENTS: Engagement[] = [
     name: "Legacy System Modernization",
     summary:
       "Incremental replacement of aging systems — data first, contracts second, UI last — without stopping the business that depends on them.",
-    idealFor: ["Established businesses on aging stacks", "Teams with a working system that no longer scales", "Migrations off costly vendors"],
+    idealFor: [
+      "Established businesses on aging stacks",
+      "Teams with a working system that no longer scales",
+      "Migrations off costly vendors",
+    ],
     deliverables: [
       "Strangler-pattern migration plan",
       "Incremental replacement in production",

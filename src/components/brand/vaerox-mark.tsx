@@ -48,7 +48,10 @@ export function VaeroxLockup({
         className="inline-block bg-line-2"
         style={{ width: 1, height: markSize * 0.82 }}
       />
-      <span className="font-display text-[15px] md:text-[16px] font-medium tracking-[0.14em]" aria-hidden="true">
+      <span
+        className="font-display text-[15px] md:text-[16px] font-medium tracking-[0.14em]"
+        aria-hidden="true"
+      >
         VÆRØX
       </span>
     </span>

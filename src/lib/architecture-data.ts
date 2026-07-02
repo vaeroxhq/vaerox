@@ -16,7 +16,7 @@ export type Adr = {
   decisionDate: string;
   owner: string;
   team: string;
-  systems: string[];          // canonical system slugs
+  systems: string[]; // canonical system slugs
   review: ReviewStatus;
   supersedes?: string;
   supersededBy?: string;
@@ -48,7 +48,10 @@ export const ADRS: Adr[] = [
       "Repository size grows; sparse-checkout guidance documented.",
     ],
     alternatives: [
-      { name: "Multi-repo with a meta tool", rejectedBecause: "Added a coordination layer without solving drift." },
+      {
+        name: "Multi-repo with a meta tool",
+        rejectedBecause: "Added a coordination layer without solving drift.",
+      },
     ],
     references: [],
   },
@@ -72,7 +75,10 @@ export const ADRS: Adr[] = [
       "Enabled the parallel-tool-call optimisation captured in VAL-01.",
     ],
     alternatives: [
-      { name: "Free-form tool calls with post-hoc logging", rejectedBecause: "Failures could not be reproduced deterministically." },
+      {
+        name: "Free-form tool calls with post-hoc logging",
+        rejectedBecause: "Failures could not be reproduced deterministically.",
+      },
     ],
     references: [],
   },
@@ -84,10 +90,19 @@ export const ADRS: Adr[] = [
     decisionDate: "2026-02-14",
     owner: "VÆRØX",
     team: "Lab",
-    systems: ["vestra", "quantedge", "marketpulse", "aegis-ops", "leadpulse", "cloudcostiq", "axiom", "supply-chain-twin", "pitwall-ai"],
+    systems: [
+      "vestra",
+      "quantedge",
+      "marketpulse",
+      "aegis-ops",
+      "leadpulse",
+      "cloudcostiq",
+      "axiom",
+      "supply-chain-twin",
+      "pitwall-ai",
+    ],
     review: "Signed off",
-    context:
-      "The site needed stable URLs before any deep linking or external references.",
+    context: "The site needed stable URLs before any deep linking or external references.",
     decision:
       "Adopt /systems, /projects, /architecture, /research, /journal, /benchmarks, /graph as canonical sections. URL structure is the sitemap.",
     consequences: ["URLs remain stable across content-model evolution."],
@@ -114,7 +129,10 @@ export const ADRS: Adr[] = [
       "Not validated at 10× dataset size.",
     ],
     alternatives: [
-      { name: "Postgres + read replicas", rejectedBecause: "Operational cost too high for a solo research tool." },
+      {
+        name: "Postgres + read replicas",
+        rejectedBecause: "Operational cost too high for a solo research tool.",
+      },
       { name: "Stay on pandas", rejectedBecause: "Refit time dominated iteration speed." },
     ],
     references: [],
@@ -138,7 +156,10 @@ export const ADRS: Adr[] = [
       "Held-out set becomes a maintained artifact, not an afterthought.",
     ],
     alternatives: [
-      { name: "Spot-check via chat UI", rejectedBecause: "Selection bias made every change look like an improvement." },
+      {
+        name: "Spot-check via chat UI",
+        rejectedBecause: "Selection bias made every change look like an improvement.",
+      },
     ],
     references: [],
   },
@@ -161,7 +182,10 @@ export const ADRS: Adr[] = [
       "Vendor coupling — mitigated by keeping tool logic outside LangGraph nodes.",
     ],
     alternatives: [
-      { name: "Custom state machine", rejectedBecause: "Reinvents observability, retry, and branching primitives." },
+      {
+        name: "Custom state machine",
+        rejectedBecause: "Reinvents observability, retry, and branching primitives.",
+      },
     ],
     references: [],
   },
@@ -184,7 +208,10 @@ export const ADRS: Adr[] = [
       "Product boundary is explicit and defensible.",
     ],
     alternatives: [
-      { name: "Auto-send above a confidence threshold", rejectedBecause: "No confidence score justifies the failure mode." },
+      {
+        name: "Auto-send above a confidence threshold",
+        rejectedBecause: "No confidence score justifies the failure mode.",
+      },
     ],
     references: [],
   },
@@ -207,7 +234,10 @@ export const ADRS: Adr[] = [
       "Modelling constraint: the model must be decomposable, ruling out opaque ensembles.",
     ],
     alternatives: [
-      { name: "Point estimate with a tooltip", rejectedBecause: "Buries the information users need most." },
+      {
+        name: "Point estimate with a tooltip",
+        rejectedBecause: "Buries the information users need most.",
+      },
     ],
     references: [],
   },
@@ -230,7 +260,10 @@ export const ADRS: Adr[] = [
       "Some third-party libraries fail contracts — reported as a known limitation.",
     ],
     alternatives: [
-      { name: "Best-effort replay", rejectedBecause: "Silent divergence is worse than an honest failure." },
+      {
+        name: "Best-effort replay",
+        rejectedBecause: "Silent divergence is worse than an honest failure.",
+      },
     ],
     references: [],
   },
@@ -240,14 +273,7 @@ export const ADRS: Adr[] = [
  * canonical location. Text labels only; no raster images. */
 
 export type DiagramKind =
-  | "System"
-  | "Sequence"
-  | "Deployment"
-  | "Data flow"
-  | "Network"
-  | "Schema"
-  | "API"
-  | "Dependency";
+  "System" | "Sequence" | "Deployment" | "Data flow" | "Network" | "Schema" | "API" | "Dependency";
 
 export type Diagram = {
   slug: string;
@@ -260,14 +286,94 @@ export type Diagram = {
 };
 
 export const DIAGRAMS: Diagram[] = [
-  { slug: "vestra-agent-loop",        kind: "System",     title: "VESTRA agent loop",                summary: "User turn → planner → tool contracts → portfolio store → streamed response.", systems: ["vestra"], updated: "2026-06-24", nodes: 12 },
-  { slug: "vestra-portfolio-schema",  kind: "Schema",     title: "VESTRA portfolio schema",          summary: "accounts · holdings · goals · plan_nodes.", systems: ["vestra"], updated: "2026-05-30", nodes: 9 },
-  { slug: "quantedge-runner-flow",    kind: "Data flow",  title: "QuantEdge walk-forward runner",     summary: "Strategy DSL → refit windows → DuckDB analytics core → report.", systems: ["quantedge"], updated: "2026-06-18", nodes: 11 },
-  { slug: "marketpulse-classifier",   kind: "Data flow",  title: "MarketPulse classifier pipeline",   summary: "News source → normalizer → classifier prompt → sentiment store → held-out eval.", systems: ["marketpulse"], updated: "2026-06-19", nodes: 10 },
-  { slug: "aegis-triage-graph",       kind: "Sequence",   title: "AEGIS triage workflow",             summary: "Alert → enrichment → LangGraph branches → analyst summary.", systems: ["aegis-ops"], updated: "2026-06-27", nodes: 14 },
-  { slug: "leadpulse-scoring",        kind: "Data flow",  title: "LeadPulse scoring pipeline",        summary: "Signals → feature builder → model → segment calibration → review UI.", systems: ["leadpulse"], updated: "2026-06-12", nodes: 9 },
-  { slug: "cloudcostiq-attribution",  kind: "Data flow",  title: "CloudCostIQ attribution",           summary: "Billing export → normalizer → attribution rules → rollup store → forecast.", systems: ["cloudcostiq"], updated: "2026-06-22", nodes: 12 },
-  { slug: "axiom-runtime",            kind: "System",     title: "Axiom workflow runtime",            summary: "Workflow spec → step scheduler → contract layer → durable log → replay.", systems: ["axiom"], updated: "2026-06-08", nodes: 11 },
-  { slug: "supply-chain-model",       kind: "System",     title: "Supply Chain Twin model",           summary: "Suppliers → tiers → distribution → SimPy events → validation harness.", systems: ["supply-chain-twin"], updated: "2026-05-30", nodes: 13 },
-  { slug: "pitwall-strategy",         kind: "System",     title: "PitWall AI strategy sim",           summary: "Qualifying → tire model → stint planner → Monte-Carlo runner → outcome distribution.", systems: ["pitwall-ai"], updated: "2026-06-04", nodes: 10 },
+  {
+    slug: "vestra-agent-loop",
+    kind: "System",
+    title: "VESTRA agent loop",
+    summary: "User turn → planner → tool contracts → portfolio store → streamed response.",
+    systems: ["vestra"],
+    updated: "2026-06-24",
+    nodes: 12,
+  },
+  {
+    slug: "vestra-portfolio-schema",
+    kind: "Schema",
+    title: "VESTRA portfolio schema",
+    summary: "accounts · holdings · goals · plan_nodes.",
+    systems: ["vestra"],
+    updated: "2026-05-30",
+    nodes: 9,
+  },
+  {
+    slug: "quantedge-runner-flow",
+    kind: "Data flow",
+    title: "QuantEdge walk-forward runner",
+    summary: "Strategy DSL → refit windows → DuckDB analytics core → report.",
+    systems: ["quantedge"],
+    updated: "2026-06-18",
+    nodes: 11,
+  },
+  {
+    slug: "marketpulse-classifier",
+    kind: "Data flow",
+    title: "MarketPulse classifier pipeline",
+    summary: "News source → normalizer → classifier prompt → sentiment store → held-out eval.",
+    systems: ["marketpulse"],
+    updated: "2026-06-19",
+    nodes: 10,
+  },
+  {
+    slug: "aegis-triage-graph",
+    kind: "Sequence",
+    title: "AEGIS triage workflow",
+    summary: "Alert → enrichment → LangGraph branches → analyst summary.",
+    systems: ["aegis-ops"],
+    updated: "2026-06-27",
+    nodes: 14,
+  },
+  {
+    slug: "leadpulse-scoring",
+    kind: "Data flow",
+    title: "LeadPulse scoring pipeline",
+    summary: "Signals → feature builder → model → segment calibration → review UI.",
+    systems: ["leadpulse"],
+    updated: "2026-06-12",
+    nodes: 9,
+  },
+  {
+    slug: "cloudcostiq-attribution",
+    kind: "Data flow",
+    title: "CloudCostIQ attribution",
+    summary: "Billing export → normalizer → attribution rules → rollup store → forecast.",
+    systems: ["cloudcostiq"],
+    updated: "2026-06-22",
+    nodes: 12,
+  },
+  {
+    slug: "axiom-runtime",
+    kind: "System",
+    title: "Axiom workflow runtime",
+    summary: "Workflow spec → step scheduler → contract layer → durable log → replay.",
+    systems: ["axiom"],
+    updated: "2026-06-08",
+    nodes: 11,
+  },
+  {
+    slug: "supply-chain-model",
+    kind: "System",
+    title: "Supply Chain Twin model",
+    summary: "Suppliers → tiers → distribution → SimPy events → validation harness.",
+    systems: ["supply-chain-twin"],
+    updated: "2026-05-30",
+    nodes: 13,
+  },
+  {
+    slug: "pitwall-strategy",
+    kind: "System",
+    title: "PitWall AI strategy sim",
+    summary: "Qualifying → tire model → stint planner → Monte-Carlo runner → outcome distribution.",
+    systems: ["pitwall-ai"],
+    updated: "2026-06-04",
+    nodes: 10,
+  },
 ];

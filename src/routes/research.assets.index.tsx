@@ -15,17 +15,17 @@ const FILTERS: (DatasetCategory | "All")[] = ["All", ...DATASET_CATEGORIES];
 export const Route = createFileRoute("/research/assets/")({
   head: () => ({
     meta: [
-      { title: "Research Assets — VÆRØX" },
+      { title: "Research Assets — Vareox" },
       {
         name: "description",
         content:
           "Canonical registry of research assets — datasets, evaluation corpora, annotation pipelines, and benchmark resources across medical, agricultural, industrial, remote sensing, and computer vision domains.",
       },
-      { property: "og:title", content: "Research Assets — VÆRØX" },
+      { property: "og:title", content: "Research Assets — Vareox" },
       {
         property: "og:description",
         content:
-          "Datasets, evaluation corpora, annotation pipelines, and benchmark resources maintained by the VÆRØX Engineering Lab.",
+          "Datasets, evaluation corpora, annotation pipelines, and benchmark resources maintained by the Vareox Engineering Lab.",
       },
     ],
   }),
@@ -67,10 +67,13 @@ function AssetsIndex() {
         title="Research assets."
         summary="Datasets, evaluation corpora, annotation pipelines, and benchmark resources the lab has evaluated, prepared, or built pipelines around. Each entry records domain, task, source, purpose, annotation types, skills demonstrated, and cross-references to related research."
         meta={[
-          { label: "Assets",     value: DATASETS.length.toString().padStart(2, "0") },
-          { label: "Domains",    value: new Set(DATASETS.map((d) => d.domain)).size.toString().padStart(2, "0") },
+          { label: "Assets", value: DATASETS.length.toString().padStart(2, "0") },
+          {
+            label: "Domains",
+            value: new Set(DATASETS.map((d) => d.domain)).size.toString().padStart(2, "0"),
+          },
           { label: "Categories", value: DATASET_CATEGORIES.length.toString().padStart(2, "0") },
-          { label: "Planned",    value: PLANNED_CATEGORIES.length.toString().padStart(2, "0") },
+          { label: "Planned", value: PLANNED_CATEGORIES.length.toString().padStart(2, "0") },
         ]}
       />
 
@@ -103,8 +106,8 @@ function AssetsIndex() {
         </div>
         <div className="hairline bg-canvas p-5">
           <p className="text-[13.5px] text-text-2 leading-[1.7] max-w-[68ch]">
-            Categories reserved for future expansion. Nothing lives under
-            them yet — content is added only when real assets exist.
+            Categories reserved for future expansion. Nothing lives under them yet — content is
+            added only when real assets exist.
           </p>
           <ul className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-0">
             {PLANNED_CATEGORIES.map((p, i) => (
@@ -175,9 +178,9 @@ function AssetRow({ entry: d }: { entry: Dataset }) {
 
         <aside className="md:border-l md:pl-6" style={{ borderColor: "var(--line-1)" }}>
           <dl className="grid grid-cols-2 md:grid-cols-1 gap-y-3 gap-x-4">
-            <Field label="Domain"  value={d.domain} />
-            <Field label="Task"    value={d.tasks[0]} />
-            <Field label="Size"    value={d.size ?? "—"} />
+            <Field label="Domain" value={d.domain} />
+            <Field label="Task" value={d.tasks[0]} />
+            <Field label="Size" value={d.size ?? "—"} />
             <Field label="Updated" value={d.updated} />
           </dl>
           <div className="mt-4 font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] group-hover:text-text-1">

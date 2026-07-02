@@ -15,7 +15,7 @@ export const Route = createFileRoute("/architecture/$adr")({
   },
   head: ({ loaderData }) => {
     const a = loaderData?.adr;
-    const title = a ? `ADR·${a.number} · ${a.title} — VÆRØX` : "ADR — VÆRØX";
+    const title = a ? `ADR·${a.number} · ${a.title} — Vareox` : "ADR — Vareox";
     const desc = a?.context ?? "Architecture Decision Record.";
     return {
       meta: [
@@ -29,8 +29,17 @@ export const Route = createFileRoute("/architecture/$adr")({
   component: AdrPage,
   notFoundComponent: () => (
     <SectionShell>
-      <PageHeader section="§ · Architecture" title="ADR not found." summary="This decision record could not be located." />
-      <Link to="/architecture" className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1">← Back to architecture</Link>
+      <PageHeader
+        section="§ · Architecture"
+        title="ADR not found."
+        summary="This decision record could not be located."
+      />
+      <Link
+        to="/architecture"
+        className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1"
+      >
+        ← Back to architecture
+      </Link>
     </SectionShell>
   ),
 });
@@ -38,10 +47,13 @@ export const Route = createFileRoute("/architecture/$adr")({
 function AdrPage() {
   const { adr } = Route.useLoaderData() as { adr: Adr };
   const tone =
-    adr.status === "Accepted" ? "success"
-    : adr.status === "Proposed" ? "info"
-    : adr.status === "Draft" ? "warning"
-    : "muted";
+    adr.status === "Accepted"
+      ? "success"
+      : adr.status === "Proposed"
+        ? "info"
+        : adr.status === "Draft"
+          ? "warning"
+          : "muted";
 
   const sorted = [...ADRS].sort((a, b) => a.number.localeCompare(b.number));
   const idx = sorted.findIndex((a) => a.slug === adr.slug);
@@ -50,40 +62,48 @@ function AdrPage() {
 
   return (
     <SectionShell>
-      <Breadcrumbs items={[
-        { label: "VÆRØX", to: "/" },
-        { label: "Architecture", to: "/architecture" },
-        { label: `ADR·${adr.number}` },
-      ]} />
+      <Breadcrumbs
+        items={[
+          { label: "VÆRØX", to: "/" },
+          { label: "Architecture", to: "/architecture" },
+          { label: `ADR·${adr.number}` },
+        ]}
+      />
 
       <PageHeader
         section={`§ · Architecture · ADR·${adr.number}`}
         title={adr.title}
         summary={adr.context}
         meta={[
-          { label: "Status",   value: adr.status },
+          { label: "Status", value: adr.status },
           { label: "Decision", value: adr.decisionDate },
-          { label: "Owner",    value: `${adr.owner} · ${adr.team}` },
-          { label: "Review",   value: adr.review },
+          { label: "Owner", value: `${adr.owner} · ${adr.team}` },
+          { label: "Review", value: adr.review },
         ]}
       />
 
       <div className="mb-6 flex items-center flex-wrap gap-3">
         <StageDot tone={tone as "success" | "warning" | "info" | "muted"} />
-        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">{adr.status}</span>
+        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
+          {adr.status}
+        </span>
         <span className="font-mono text-[10px] text-text-3 opacity-60">·</span>
         <OpsTag label="SIGNED" />
         <OpsTag label="VERSIONED" />
         {adr.supersedes && (
           <>
             <span className="font-mono text-[10px] text-text-3 opacity-60">·</span>
-            <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">Supersedes ADR·{adr.supersedes}</span>
+            <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
+              Supersedes ADR·{adr.supersedes}
+            </span>
           </>
         )}
         {adr.supersededBy && (
           <>
             <span className="font-mono text-[10px] text-text-3 opacity-60">·</span>
-            <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">Superseded by ADR·{adr.supersededBy}</span>
+            <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
+              Superseded by ADR·{adr.supersededBy}
+            </span>
           </>
         )}
       </div>
@@ -110,9 +130,16 @@ function AdrPage() {
             <DocBlock heading="Alternatives considered">
               <ul className="hairline bg-canvas">
                 {adr.alternatives.map((alt, i) => (
-                  <li key={i} className={`px-4 py-3 ${i < adr.alternatives.length - 1 ? "hairline-b" : ""}`}>
-                    <div className="font-display text-[14px] text-text-1 tracking-[-0.005em]">{alt.name}</div>
-                    <div className="mt-1 font-mono text-[11px] text-text-3">Rejected — {alt.rejectedBecause}</div>
+                  <li
+                    key={i}
+                    className={`px-4 py-3 ${i < adr.alternatives.length - 1 ? "hairline-b" : ""}`}
+                  >
+                    <div className="font-display text-[14px] text-text-1 tracking-[-0.005em]">
+                      {alt.name}
+                    </div>
+                    <div className="mt-1 font-mono text-[11px] text-text-3">
+                      Rejected — {alt.rejectedBecause}
+                    </div>
                   </li>
                 ))}
               </ul>
@@ -128,16 +155,44 @@ function AdrPage() {
       </DocShell>
 
       <PrevNext
-        prev={prev ? { title: prev.title, href: `/architecture/${prev.slug}`, kicker: `ADR·${prev.number}` } : null}
-        next={next ? { title: next.title, href: `/architecture/${next.slug}`, kicker: `ADR·${next.number}` } : null}
+        prev={
+          prev
+            ? {
+                title: prev.title,
+                href: `/architecture/${prev.slug}`,
+                kicker: `ADR·${prev.number}`,
+              }
+            : null
+        }
+        next={
+          next
+            ? {
+                title: next.title,
+                href: `/architecture/${next.slug}`,
+                kicker: `ADR·${next.number}`,
+              }
+            : null
+        }
       />
     </SectionShell>
   );
 }
 
-function RevRow({ at, note, who, last }: { at: string; note: string; who: string; last?: boolean }) {
+function RevRow({
+  at,
+  note,
+  who,
+  last,
+}: {
+  at: string;
+  note: string;
+  who: string;
+  last?: boolean;
+}) {
   return (
-    <li className={`grid grid-cols-[110px_1fr_140px] gap-4 items-baseline px-4 py-3 ${last ? "" : "hairline-b"}`}>
+    <li
+      className={`grid grid-cols-[110px_1fr_140px] gap-4 items-baseline px-4 py-3 ${last ? "" : "hairline-b"}`}
+    >
       <span className="font-mono text-[11px] text-text-2 tabular">{at}</span>
       <span className="text-[14px] text-text-2">{note}</span>
       <span className="font-mono text-[11px] text-text-3 tabular text-right">{who}</span>

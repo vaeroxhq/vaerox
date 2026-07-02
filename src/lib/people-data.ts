@@ -59,7 +59,6 @@ const MAINTAINER: Person = {
   researchAuthored: RESEARCH.map((r) => r.slug),
 };
 
-
 export const PEOPLE: Person[] = [MAINTAINER];
 
 /**

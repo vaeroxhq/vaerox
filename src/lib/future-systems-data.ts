@@ -8,12 +8,7 @@
  * assets by slug. Dangling refs are ignored by the graph.
  */
 
-export type FutureStatus =
-  | "Building"
-  | "Architecture"
-  | "Research"
-  | "Planned"
-  | "Concept";
+export type FutureStatus = "Building" | "Architecture" | "Research" | "Planned" | "Concept";
 
 export type FutureCategory =
   | "Agent Infrastructure"
@@ -34,19 +29,19 @@ export type FutureSystem = {
   name: string;
   status: FutureStatus;
   category: FutureCategory;
-  progress: number;          // 0..100
-  updated: string;           // ISO
+  progress: number; // 0..100
+  updated: string; // ISO
   description: string;
   vision: string;
   motivation: string;
   futureFeatures: string[];
   plannedStack: string[];
-  architectureSketch: string[];   // bullet placeholders for future diagrams
+  architectureSketch: string[]; // bullet placeholders for future diagrams
   milestones: Milestone[];
-  relatedSystems: string[];       // system slugs
-  relatedProjects: string[];      // project slugs
-  relatedDatasets: string[];      // dataset slugs
-  relatedResearch: string[];      // research slugs
+  relatedSystems: string[]; // system slugs
+  relatedProjects: string[]; // project slugs
+  relatedDatasets: string[]; // dataset slugs
+  relatedResearch: string[]; // research slugs
   tags: string[];
 };
 
@@ -60,8 +55,7 @@ export const FUTURE_SYSTEMS: FutureSystem[] = [
     category: "Agent Infrastructure",
     progress: 32,
     updated: "2026-06-24",
-    description:
-      "A modular agent runtime for building production-grade AI systems.",
+    description: "A modular agent runtime for building production-grade AI systems.",
     vision:
       "Provide the foundational runtime used across all future VAERØX AI products — one execution layer, one memory model, one approval story.",
     motivation:
@@ -86,11 +80,11 @@ export const FUTURE_SYSTEMS: FutureSystem[] = [
       "Observability sidecar (traces, spans, replay)",
     ],
     milestones: [
-      { label: "Kernel prototype",             status: "done" },
-      { label: "Tool execution + MCP bridge",  status: "current" },
-      { label: "Approval workflows",           status: "next" },
-      { label: "Long-term memory backend",     status: "later" },
-      { label: "Multi-model routing GA",       status: "later" },
+      { label: "Kernel prototype", status: "done" },
+      { label: "Tool execution + MCP bridge", status: "current" },
+      { label: "Approval workflows", status: "next" },
+      { label: "Long-term memory backend", status: "later" },
+      { label: "Multi-model routing GA", status: "later" },
     ],
     relatedSystems: [],
     relatedProjects: [],
@@ -129,10 +123,10 @@ export const FUTURE_SYSTEMS: FutureSystem[] = [
       "Secrets broker (short-lived credentials)",
     ],
     milestones: [
-      { label: "Architecture doc + ADRs",   status: "current" },
-      { label: "Inventory + read-only UI",  status: "next" },
-      { label: "Deployment orchestrator",   status: "later" },
-      { label: "Policy engine GA",          status: "later" },
+      { label: "Architecture doc + ADRs", status: "current" },
+      { label: "Inventory + read-only UI", status: "next" },
+      { label: "Deployment orchestrator", status: "later" },
+      { label: "Policy engine GA", status: "later" },
     ],
     relatedSystems: [],
     relatedProjects: [],
@@ -147,8 +141,7 @@ export const FUTURE_SYSTEMS: FutureSystem[] = [
     category: "AI Evaluation",
     progress: 12,
     updated: "2026-05-30",
-    description:
-      "Evaluation framework for AI models, RAG systems and autonomous agents.",
+    description: "Evaluation framework for AI models, RAG systems and autonomous agents.",
     vision:
       "The default place to run, compare, and regress evaluations across every VAERØX AI system — with honest metrics and reproducible datasets.",
     motivation:
@@ -171,10 +164,10 @@ export const FUTURE_SYSTEMS: FutureSystem[] = [
       "Dataset adapter (Research Assets → eval)",
     ],
     milestones: [
-      { label: "Metric registry spec",       status: "current" },
-      { label: "Prompt eval runner",         status: "next" },
-      { label: "Agent eval runner",          status: "later" },
-      { label: "Regression dashboards",      status: "later" },
+      { label: "Metric registry spec", status: "current" },
+      { label: "Prompt eval runner", status: "next" },
+      { label: "Agent eval runner", status: "later" },
+      { label: "Regression dashboards", status: "later" },
     ],
     relatedSystems: [],
     relatedProjects: [],
@@ -212,10 +205,10 @@ export const FUTURE_SYSTEMS: FutureSystem[] = [
       "Webhook egress with retries",
     ],
     milestones: [
-      { label: "Router core prototype",   status: "done" },
-      { label: "Producer SDK",            status: "current" },
-      { label: "Replay + DLQ console",    status: "next" },
-      { label: "Webhook egress GA",       status: "later" },
+      { label: "Router core prototype", status: "done" },
+      { label: "Producer SDK", status: "current" },
+      { label: "Replay + DLQ console", status: "next" },
+      { label: "Webhook egress GA", status: "later" },
     ],
     relatedSystems: ["marketpulse"],
     relatedProjects: ["marketpulse"],
@@ -253,9 +246,9 @@ export const FUTURE_SYSTEMS: FutureSystem[] = [
     ],
     milestones: [
       { label: "Architecture + backend survey", status: "current" },
-      { label: "Cache + blob adapters",         status: "next" },
-      { label: "Vector adapter",                status: "later" },
-      { label: "Artifact catalog",              status: "later" },
+      { label: "Cache + blob adapters", status: "next" },
+      { label: "Vector adapter", status: "later" },
+      { label: "Artifact catalog", status: "later" },
     ],
     relatedSystems: [],
     relatedProjects: [],
@@ -293,10 +286,10 @@ export const FUTURE_SYSTEMS: FutureSystem[] = [
       "Synthetic data adapters",
     ],
     milestones: [
-      { label: "Registry schema",           status: "current" },
-      { label: "Validation engine",         status: "next" },
-      { label: "Challenge builder",         status: "later" },
-      { label: "Synthetic data adapters",   status: "later" },
+      { label: "Registry schema", status: "current" },
+      { label: "Validation engine", status: "next" },
+      { label: "Challenge builder", status: "later" },
+      { label: "Synthetic data adapters", status: "later" },
     ],
     relatedSystems: [],
     relatedProjects: [],
@@ -338,10 +331,10 @@ export const FUTURE_SYSTEMS: FutureSystem[] = [
       "A/B router (traffic split, cost ledger)",
     ],
     milestones: [
-      { label: "Product brief",         status: "current" },
-      { label: "Prompt registry v0",    status: "next" },
-      { label: "Meridian eval bridge",  status: "later" },
-      { label: "A/B routing",           status: "later" },
+      { label: "Product brief", status: "current" },
+      { label: "Prompt registry v0", status: "next" },
+      { label: "Meridian eval bridge", status: "later" },
+      { label: "A/B routing", status: "later" },
     ],
     relatedSystems: [],
     relatedProjects: [],
@@ -374,9 +367,9 @@ export const FUTURE_SYSTEMS: FutureSystem[] = [
       "Scoring service (methodology-first)",
     ],
     milestones: [
-      { label: "Scope + task taxonomy",   status: "current" },
-      { label: "Reference task set",      status: "next" },
-      { label: "Reproducible harness",    status: "later" },
+      { label: "Scope + task taxonomy", status: "current" },
+      { label: "Reference task set", status: "next" },
+      { label: "Reproducible harness", status: "later" },
     ],
     relatedSystems: [],
     relatedProjects: [],
@@ -391,8 +384,7 @@ export const FUTURE_SYSTEMS: FutureSystem[] = [
     category: "AI Infrastructure",
     progress: 16,
     updated: "2026-06-01",
-    description:
-      "Unified vector database abstraction supporting multiple embedding backends.",
+    description: "Unified vector database abstraction supporting multiple embedding backends.",
     vision:
       "One vector API for every VAERØX product — pluggable backends, hybrid search, and clean migration paths.",
     motivation:
@@ -405,9 +397,9 @@ export const FUTURE_SYSTEMS: FutureSystem[] = [
       "Hybrid search (BM25 + vector)",
     ],
     milestones: [
-      { label: "Architecture doc",       status: "current" },
+      { label: "Architecture doc", status: "current" },
       { label: "pgvector + Qdrant adapters", status: "next" },
-      { label: "Hybrid search",          status: "later" },
+      { label: "Hybrid search", status: "later" },
     ],
     relatedSystems: [],
     relatedProjects: [],
@@ -434,15 +426,11 @@ export const FUTURE_SYSTEMS: FutureSystem[] = [
       "Graph query API",
     ],
     plannedStack: ["Python", "PostgreSQL", "Neo4j (candidate)"],
-    architectureSketch: [
-      "Entity ingestion pipeline",
-      "Event/news linker",
-      "Graph query API",
-    ],
+    architectureSketch: ["Entity ingestion pipeline", "Event/news linker", "Graph query API"],
     milestones: [
-      { label: "Concept doc",   status: "current" },
-      { label: "Entity model",  status: "next" },
-      { label: "Pipeline v0",   status: "later" },
+      { label: "Concept doc", status: "current" },
+      { label: "Entity model", status: "next" },
+      { label: "Pipeline v0", status: "later" },
     ],
     relatedSystems: ["marketpulse"],
     relatedProjects: ["marketpulse"],

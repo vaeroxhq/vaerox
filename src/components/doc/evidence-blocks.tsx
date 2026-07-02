@@ -50,10 +50,7 @@ export function TradeoffsBlock({ items }: { items: EvidenceTradeoff[] }) {
     <DocBlock heading="Trade-offs">
       <ul className="hairline bg-canvas">
         {items.map((t, i) => (
-          <li
-            key={i}
-            className={`px-4 py-3 ${i < items.length - 1 ? "hairline-b" : ""}`}
-          >
+          <li key={i} className={`px-4 py-3 ${i < items.length - 1 ? "hairline-b" : ""}`}>
             <div className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
               Chose {t.choice} over {t.over}
             </div>
@@ -107,10 +104,7 @@ export function FailuresBlock({ items }: { items: EvidenceFailure[] }) {
     <DocBlock heading="Failure stories">
       <ul className="hairline bg-canvas">
         {items.map((f, i) => (
-          <li
-            key={i}
-            className={`px-4 py-3 ${i < items.length - 1 ? "hairline-b" : ""}`}
-          >
+          <li key={i} className={`px-4 py-3 ${i < items.length - 1 ? "hairline-b" : ""}`}>
             <div className="flex items-baseline gap-3">
               <span className="font-mono text-[11px] text-text-3 tabular">{f.at}</span>
               <span className="font-display text-[14px] text-text-1 tracking-[-0.005em]">
@@ -118,9 +112,7 @@ export function FailuresBlock({ items }: { items: EvidenceFailure[] }) {
               </span>
             </div>
             <p className="mt-2 text-[13px] text-text-2 leading-[1.6]">{f.detail}</p>
-            <p className="mt-1 font-mono text-[11px] text-text-3">
-              Lesson — {f.lesson}
-            </p>
+            <p className="mt-1 font-mono text-[11px] text-text-3">Lesson — {f.lesson}</p>
           </li>
         ))}
       </ul>
@@ -135,10 +127,7 @@ export function AdrRefsBlock({ slugs }: { slugs: string[] }) {
     <DocBlock heading="Architecture decisions">
       <ul className="hairline bg-canvas">
         {adrs.map((a, i) => (
-          <li
-            key={a.slug}
-            className={`px-4 py-3 ${i < adrs.length - 1 ? "hairline-b" : ""}`}
-          >
+          <li key={a.slug} className={`px-4 py-3 ${i < adrs.length - 1 ? "hairline-b" : ""}`}>
             <Link
               to="/architecture/$adr"
               params={{ adr: a.slug }}
@@ -164,16 +153,15 @@ export function AdrRefsBlock({ slugs }: { slugs: string[] }) {
 }
 
 export function BenchmarkRefsBlock({ slugs }: { slugs: string[] }) {
-  const bs = slugs.map((s) => BENCHMARKS.find((b) => b.slug === s)).filter(Boolean) as typeof BENCHMARKS;
+  const bs = slugs
+    .map((s) => BENCHMARKS.find((b) => b.slug === s))
+    .filter(Boolean) as typeof BENCHMARKS;
   if (bs.length === 0) return null;
   return (
     <DocBlock heading="Engineering validation">
       <ul className="hairline bg-canvas">
         {bs.map((b, i) => (
-          <li
-            key={b.slug}
-            className={`px-4 py-3 ${i < bs.length - 1 ? "hairline-b" : ""}`}
-          >
+          <li key={b.slug} className={`px-4 py-3 ${i < bs.length - 1 ? "hairline-b" : ""}`}>
             <Link
               to="/benchmarks/$slug"
               params={{ slug: b.slug }}
@@ -199,21 +187,17 @@ export function BenchmarkRefsBlock({ slugs }: { slugs: string[] }) {
   );
 }
 
-
 export function IncidentRefsBlock({ slugs }: { slugs: string[] }) {
-  const incs = slugs.map((s) => INCIDENTS.find((i) => i.slug === s)).filter(Boolean) as typeof INCIDENTS;
+  const incs = slugs
+    .map((s) => INCIDENTS.find((i) => i.slug === s))
+    .filter(Boolean) as typeof INCIDENTS;
   if (incs.length === 0) return null;
   return (
     <DocBlock heading="Incidents & post-mortems">
       <ul className="hairline bg-canvas">
         {incs.map((i, idx) => (
-          <li
-            key={i.slug}
-            className={`px-4 py-3 ${idx < incs.length - 1 ? "hairline-b" : ""}`}
-          >
-            <div
-              className="group grid grid-cols-[110px_1fr_80px] items-baseline gap-4"
-            >
+          <li key={i.slug} className={`px-4 py-3 ${idx < incs.length - 1 ? "hairline-b" : ""}`}>
+            <div className="group grid grid-cols-[110px_1fr_80px] items-baseline gap-4">
               <span className="font-mono text-[11px] text-text-3 tabular">{i.id}</span>
               <span className="min-w-0">
                 <span className="font-display text-[14px] text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.005em]">
@@ -261,11 +245,7 @@ export function MetricsGrid({
   );
 }
 
-export function LanguageBreakdown({
-  langs,
-}: {
-  langs: { name: string; share: number }[];
-}) {
+export function LanguageBreakdown({ langs }: { langs: { name: string; share: number }[] }) {
   if (langs.length === 0) return null;
   return (
     <DocBlock heading="Language composition">

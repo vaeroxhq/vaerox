@@ -16,7 +16,9 @@ export function DocShell({ children, rail }: { children: ReactNode; rail?: React
 export function DocBlock({ heading, children }: { heading: string; children: ReactNode }) {
   return (
     <section className="mt-10 first:mt-0">
-      <h2 className="font-mono text-[10px] text-text-3 uppercase tracking-[0.18em] mb-3">{heading}</h2>
+      <h2 className="font-mono text-[10px] text-text-3 uppercase tracking-[0.18em] mb-3">
+        {heading}
+      </h2>
       <div className="hairline-t pt-4">{children}</div>
     </section>
   );

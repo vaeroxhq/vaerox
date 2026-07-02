@@ -9,7 +9,7 @@ import { PrevNext } from "@/components/doc/prev-next";
 export const Route = createFileRoute("/research/$slug")({
   head: ({ params }) => {
     const r = RESEARCH.find((x) => x.slug === params.slug);
-    const title = r ? `${r.title} — Research — VÆRØX` : "Research — VÆRØX";
+    const title = r ? `${r.title} — Research — Vareox` : "Research — Vareox";
     const description = r?.abstract ?? "Research publication.";
     return {
       meta: [
@@ -28,8 +28,17 @@ export const Route = createFileRoute("/research/$slug")({
   component: ResearchDetail,
   notFoundComponent: () => (
     <SectionShell>
-      <PageHeader section="§ · Research" title="Publication not found." summary="No publication matches that identifier." />
-      <Link to="/research" className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1">← Back to archive</Link>
+      <PageHeader
+        section="§ · Research"
+        title="Publication not found."
+        summary="No publication matches that identifier."
+      />
+      <Link
+        to="/research"
+        className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1"
+      >
+        ← Back to archive
+      </Link>
     </SectionShell>
   ),
 });
@@ -43,21 +52,23 @@ function ResearchDetail() {
 
   return (
     <SectionShell>
-      <Breadcrumbs items={[
-        { label: "VÆRØX", to: "/" },
-        { label: "Research", to: "/research" },
-        { label: r.category },
-      ]} />
+      <Breadcrumbs
+        items={[
+          { label: "Vareox", to: "/" },
+          { label: "Research", to: "/research" },
+          { label: r.category },
+        ]}
+      />
 
       <PageHeader
         section={`§ · Research / ${r.category}`}
         title={r.title}
         summary={r.abstract}
         meta={[
-          { label: "Status",    value: r.status },
+          { label: "Status", value: r.status },
           { label: "Published", value: r.published },
-          { label: "Reading",   value: `${r.readingMinutes}m` },
-          { label: "Authors",   value: r.authors.join(", ") },
+          { label: "Reading", value: `${r.readingMinutes}m` },
+          { label: "Authors", value: r.authors.join(", ") },
         ]}
       />
 
@@ -69,7 +80,12 @@ function ResearchDetail() {
           <DocBlock heading="Tags">
             <ul className="flex items-center gap-2 flex-wrap">
               {r.tags.map((t: string) => (
-                <li key={t} className="hairline px-2 py-[2px] font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">{t}</li>
+                <li
+                  key={t}
+                  className="hairline px-2 py-[2px] font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]"
+                >
+                  {t}
+                </li>
               ))}
             </ul>
           </DocBlock>

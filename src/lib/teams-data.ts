@@ -27,13 +27,15 @@ export type Team = {
 };
 
 const MAINT = "maintainer";
-const NOT_APPLICABLE = "Not applicable — the lab is pre-production. Issues are triaged as they surface.";
+const NOT_APPLICABLE =
+  "Not applicable — the lab is pre-production. Issues are triaged as they surface.";
 
 export const TEAMS: Team[] = [
   {
     slug: "agents",
     name: "Agent Systems",
-    charter: "Design of long-running LLM agents — plan graphs, tool contracts, memory boundaries, human review checkpoints.",
+    charter:
+      "Design of long-running LLM agents — plan graphs, tool contracts, memory boundaries, human review checkpoints.",
     lead: MAINT,
     established: "2024-11",
     memberSlugs: [],
@@ -50,7 +52,8 @@ export const TEAMS: Team[] = [
   {
     slug: "market-data",
     name: "Market Data & Analytics",
-    charter: "Ingestion, normalization, and evaluation of market and financial data — venue adapters, clock discipline, walk-forward evaluation.",
+    charter:
+      "Ingestion, normalization, and evaluation of market and financial data — venue adapters, clock discipline, walk-forward evaluation.",
     lead: MAINT,
     established: "2024-08",
     memberSlugs: [],
@@ -67,7 +70,8 @@ export const TEAMS: Team[] = [
   {
     slug: "finops",
     name: "FinOps & Forecasting",
-    charter: "Driver-decomposed cost forecasting and cloud spend intelligence — honest error bounds, explainable projections.",
+    charter:
+      "Driver-decomposed cost forecasting and cloud spend intelligence — honest error bounds, explainable projections.",
     lead: MAINT,
     established: "2025-02",
     memberSlugs: [],
@@ -100,7 +104,8 @@ export const TEAMS: Team[] = [
   {
     slug: "simulation",
     name: "Simulation & Digital Twins",
-    charter: "Discrete-event and physics-informed simulation for supply chain and motorsport strategy.",
+    charter:
+      "Discrete-event and physics-informed simulation for supply chain and motorsport strategy.",
     lead: MAINT,
     established: "2025-04",
     memberSlugs: [],
@@ -117,7 +122,8 @@ export const TEAMS: Team[] = [
   {
     slug: "research",
     name: "Public Research",
-    charter: "Reproducible evaluation harnesses, methodology write-ups, and reading notes that back the lab's technical claims.",
+    charter:
+      "Reproducible evaluation harnesses, methodology write-ups, and reading notes that back the lab's technical claims.",
     lead: MAINT,
     established: "2024-09",
     memberSlugs: [],
@@ -149,7 +155,8 @@ export const TEAMS: Team[] = [
   {
     slug: "devex",
     name: "Developer Experience",
-    charter: "The build graph, CI conventions, ADR tooling, and the daily loop the lab itself runs on.",
+    charter:
+      "The build graph, CI conventions, ADR tooling, and the daily loop the lab itself runs on.",
     lead: MAINT,
     established: "2024-06",
     memberSlugs: [],

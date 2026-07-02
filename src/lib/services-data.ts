@@ -13,10 +13,10 @@ export type Service = {
   overview: string;
   approach: string;
   technologies: string[];
-  relatedProjects: string[];   // system/project slugs
-  relatedResearch: string[];   // research slugs
-  relatedAdrs: string[];       // ADR numbers
-  examples: string[];          // short bullet descriptions
+  relatedProjects: string[]; // system/project slugs
+  relatedResearch: string[]; // research slugs
+  relatedAdrs: string[]; // ADR numbers
+  examples: string[]; // short bullet descriptions
 };
 
 export const SERVICES: Service[] = [
@@ -160,10 +160,7 @@ export const SERVICES: Service[] = [
     relatedProjects: [],
     relatedResearch: ["cataract", "paddy", "wireseg", "cloth-geometry"],
     relatedAdrs: [],
-    examples: [
-      "Segmentation over LMOD-Cataract-1K",
-      "Wire segmentation with WireSeg-36K",
-    ],
+    examples: ["Segmentation over LMOD-Cataract-1K", "Wire segmentation with WireSeg-36K"],
   },
   {
     slug: "financial-ai",
@@ -392,7 +389,6 @@ export const SERVICES: Service[] = [
     ],
   },
 ];
-
 
 export function findService(slug: string) {
   return SERVICES.find((s) => s.slug === slug);

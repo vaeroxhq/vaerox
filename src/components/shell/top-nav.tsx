@@ -7,6 +7,9 @@ import { useTheme } from "@/lib/theme";
 /**
  * Top navigation — typography + hairlines only.
  * No buttons, no backgrounds. Active state is a top hairline over the link.
+ *
+ * Animation: Navigation link underline grows from LEFT to RIGHT on hover
+ * Duration: 200ms, easing: ease-out
  */
 export function TopNav() {
   const { open } = useCommandPalette();
@@ -32,10 +35,10 @@ export function TopNav() {
               <li key={item.to} className="h-full">
                 <Link
                   to={item.to}
-                  className="relative h-full px-4 flex items-center font-mono text-[11px] text-text-3 uppercase tracking-[0.14em] transition-micro hover:text-text-1"
+                  className="relative h-full px-4 flex items-center font-mono text-[11px] text-text-3 uppercase tracking-[0.14em] transition-colors duration-200 hover:text-text-1 after:absolute after:bottom-3 after:left-4 after:right-4 after:h-px after:bg-text-3 after:transition-all after:duration-200 after:ease-out hover:after:bg-text-1 after:transform after:scale-x-0 after:origin-left hover:after:scale-x-100"
                   activeProps={{
                     className:
-                      "relative h-full px-4 flex items-center font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] before:content-[''] before:absolute before:left-3 before:right-3 before:top-0 before:h-px before:bg-text-1",
+                      "relative h-full px-4 flex items-center font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] after:absolute after:bottom-3 after:left-3 after:right-3 after:h-px after:bg-text-1 after:scale-x-100",
                   }}
                 >
                   {item.label}
@@ -51,10 +54,10 @@ export function TopNav() {
             type="button"
             onClick={open}
             aria-label="Open command palette"
-            className="inline-flex items-center gap-3 font-mono text-[11px] text-text-3 uppercase tracking-[0.14em] transition-micro hover:text-text-1"
+            className="inline-flex items-center gap-3 font-mono text-[11px] text-text-3 uppercase tracking-[0.14em] transition-colors duration-200 hover:text-text-1 active:opacity-50"
           >
             <span>Search</span>
-            <kbd className="hidden sm:inline font-mono text-[10px] text-text-3 tracking-[0.14em] hairline px-1.5 py-[1px] rounded-[2px]">
+            <kbd className="hidden sm:inline font-mono text-[10px] text-text-3 tracking-[0.14em] hairline px-1.5 py-[1px] rounded-[2px] transition-colors duration-200 group-hover:text-text-1">
               ⌘K
             </kbd>
           </button>
@@ -63,7 +66,7 @@ export function TopNav() {
             type="button"
             onClick={toggle}
             aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-            className="font-mono text-[11px] text-text-3 uppercase tracking-[0.14em] transition-micro hover:text-text-1 tabular"
+            className="font-mono text-[11px] text-text-3 uppercase tracking-[0.14em] transition-colors duration-200 hover:text-text-1 active:opacity-50 tabular"
           >
             {theme === "dark" ? "Dark" : "Light"}
           </button>

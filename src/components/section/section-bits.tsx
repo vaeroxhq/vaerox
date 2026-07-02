@@ -120,9 +120,7 @@ export function Toolbar({
 }
 
 export function SectionShell({ children }: { children: ReactNode }) {
-  return (
-    <div className="w-shell mx-auto px-6 md:px-10 lg:px-16 pb-24">{children}</div>
-  );
+  return <div className="w-shell mx-auto px-6 md:px-10 lg:px-16 pb-24">{children}</div>;
 }
 
 export function StageDot({ tone }: { tone: "success" | "warning" | "info" | "muted" }) {

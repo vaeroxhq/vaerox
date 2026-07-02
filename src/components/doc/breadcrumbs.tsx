@@ -17,16 +17,17 @@ export function Breadcrumbs({ items }: { items: Crumb[] }) {
         return (
           <span key={`${i}-${c.label}`} className="inline-flex items-center gap-2">
             {c.to && !isLast ? (
-              <Link
-                to={c.to}
-                className="hover:text-text-1 transition-micro"
-              >
+              <Link to={c.to} className="hover:text-text-1 transition-micro">
                 {c.label}
               </Link>
             ) : (
               <span className={isLast ? "text-text-2" : ""}>{c.label}</span>
             )}
-            {!isLast && <span aria-hidden="true" className="opacity-50">/</span>}
+            {!isLast && (
+              <span aria-hidden="true" className="opacity-50">
+                /
+              </span>
+            )}
           </span>
         );
       })}

@@ -66,9 +66,9 @@ function AssetDetail() {
         title={d.name}
         summary={d.overview}
         meta={[
-          { label: "Domain",  value: d.domain },
-          { label: "Task",    value: d.tasks[0] },
-          { label: "Status",  value: d.status },
+          { label: "Domain", value: d.domain },
+          { label: "Task", value: d.tasks[0] },
+          { label: "Status", value: d.status },
           { label: "Updated", value: d.updated },
         ]}
       />
@@ -82,15 +82,15 @@ function AssetDetail() {
           <DocBlock heading="Engineering metadata">
             <MetaGrid
               items={[
-                { label: "Domain",         value: d.domain },
-                { label: "Task",           value: d.tasks.join(" · ") },
-                { label: "Source",         value: d.source },
-                { label: "Size",           value: d.size ?? NYD },
+                { label: "Domain", value: d.domain },
+                { label: "Task", value: d.tasks.join(" · ") },
+                { label: "Source", value: d.source },
+                { label: "Size", value: d.size ?? NYD },
                 { label: "Research status", value: d.status },
-                { label: "Current stage",  value: d.currentStage },
-                { label: "Difficulty",     value: d.difficulty },
-                { label: "Category",       value: d.category },
-                { label: "Updated",        value: d.updated },
+                { label: "Current stage", value: d.currentStage },
+                { label: "Difficulty", value: d.difficulty },
+                { label: "Category", value: d.category },
+                { label: "Updated", value: d.updated },
               ]}
             />
           </DocBlock>
@@ -134,11 +134,7 @@ function AssetDetail() {
           </DocBlock>
 
           <DocBlock heading="Research notes">
-            {d.researchNotes.length > 0 ? (
-              <KVList items={d.researchNotes} />
-            ) : (
-              <NotDocumented />
-            )}
+            {d.researchNotes.length > 0 ? <KVList items={d.researchNotes} /> : <NotDocumented />}
           </DocBlock>
 
           <DocBlock heading="Related technologies">
@@ -186,8 +182,12 @@ function AssetDetail() {
       </DocShell>
 
       <PrevNext
-        prev={prev ? { title: prev.name, href: `/research/assets/${prev.slug}`, kicker: "AST" } : null}
-        next={next ? { title: next.name, href: `/research/assets/${next.slug}`, kicker: "AST" } : null}
+        prev={
+          prev ? { title: prev.name, href: `/research/assets/${prev.slug}`, kicker: "AST" } : null
+        }
+        next={
+          next ? { title: next.name, href: `/research/assets/${next.slug}`, kicker: "AST" } : null
+        }
       />
     </SectionShell>
   );
@@ -246,9 +246,5 @@ function MetaGrid({ items }: { items: { label: string; value: string }[] }) {
 }
 
 function NotDocumented() {
-  return (
-    <p className="font-mono text-[11px] text-text-3 uppercase tracking-[0.14em]">
-      {NYD}
-    </p>
-  );
+  return <p className="font-mono text-[11px] text-text-3 uppercase tracking-[0.14em]">{NYD}</p>;
 }

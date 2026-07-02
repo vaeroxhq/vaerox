@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { SERVICES } from "@/lib/services-data";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const FEATURED = [
   "custom-software",
@@ -19,22 +20,37 @@ const FEATURED = [
 /**
  * ServicesPreview — the studio's service surface at a glance. Links into
  * the full /services index for depth.
+ *
+ * Animation: On hover:
+ * - Lift 2px (translateY: 0 → -2px)
+ * - Background + border transition
+ * - Arrow moves 3px right
+ * Duration: 200ms, easing: ease-out
+ *
+ * Scroll reveal: Fades and slides up when scrolled into view (once only)
  */
 export function ServicesPreview() {
-  const items = FEATURED.map((slug) => SERVICES.find((s) => s.slug === slug)).filter(Boolean) as typeof SERVICES;
+  const ref = useScrollReveal();
+  const items = FEATURED.map((slug) => SERVICES.find((s) => s.slug === slug)).filter(
+    Boolean,
+  ) as typeof SERVICES;
 
   return (
-    <section className="mt-10 mb-24">
+    <section ref={ref} className="mt-10 mb-24">
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-line-1 hairline">
         {items.map((s) => (
           <a
             key={s.slug}
             href={`/services/${s.slug}`}
-            className="bg-canvas px-4 py-4 group block transition-ui hover:bg-surface"
+            className="bg-canvas px-4 py-4 group block transition-all duration-200 ease-out hover:bg-surface hover:translate-y-[-2px]"
           >
             <header className="flex items-baseline justify-between">
-              <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">{s.code}</span>
-              <span className="font-mono text-[10px] text-text-3">→</span>
+              <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
+                {s.code}
+              </span>
+              <span className="font-mono text-[10px] text-text-3 transition-transform duration-200 ease-out group-hover:translate-x-[3px]">
+                →
+              </span>
             </header>
             <h3 className="mt-3 font-display font-medium text-[17px] text-text-2 group-hover:text-text-1 tracking-[-0.012em] transition-micro">
               {s.name}
@@ -48,7 +64,10 @@ export function ServicesPreview() {
         <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
           {SERVICES.length.toString().padStart(2, "0")} services in total
         </span>
-        <Link to="/services" className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 active:opacity-50 transition-micro">
+        <Link
+          to="/services"
+          className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 active:opacity-50 transition-micro"
+        >
           All services →
         </Link>
       </div>

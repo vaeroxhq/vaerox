@@ -1,6 +1,7 @@
 # Project Memory
 
 ## Core
+
 VÆRØX is an independent engineering laboratory maintained by Mayank Sharma. Not an agency, startup, portfolio, or AI wrapper.
 Dark canonical, monochrome, hairline borders. No gradients, glassmorphism, shadows, neon, illustrations, emojis, marketing graphics.
 Typography: Geist + IBM Plex Mono only. Feels like internal engineering software.
@@ -10,4 +11,5 @@ Future Systems status is Building / Architecture / Concept / Research — never 
 Every change must reduce future complexity, increase engineering trust, and improve educational value.
 
 ## Memories
+
 - [Constitution](mem://constitution) — Full permanent spec: identity, systems roster, IA, doc shape, knowledge graph rules

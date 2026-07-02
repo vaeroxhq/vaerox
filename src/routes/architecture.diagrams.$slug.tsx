@@ -16,9 +16,9 @@ export const Route = createFileRoute("/architecture/diagrams/$slug")({
     const d = loaderData?.d;
     return {
       meta: [
-        { title: d ? `${d.title} — Diagram — VÆRØX` : "Diagram — VÆRØX" },
+        { title: d ? `${d.title} — Diagram — Vareox` : "Diagram — Vareox" },
         { name: "description", content: (d?.summary ?? "").slice(0, 160) },
-        { property: "og:title", content: d?.title ?? "Diagram — VÆRØX" },
+        { property: "og:title", content: d?.title ?? "Diagram — Vareox" },
         { property: "og:description", content: (d?.summary ?? "").slice(0, 160) },
       ],
     };
@@ -26,8 +26,17 @@ export const Route = createFileRoute("/architecture/diagrams/$slug")({
   component: DiagramDetail,
   notFoundComponent: () => (
     <SectionShell>
-      <PageHeader section="§ · Architecture" title="Diagram not found." summary="No diagram matches that identifier." />
-      <Link to="/architecture" className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1">← Back to architecture</Link>
+      <PageHeader
+        section="§ · Architecture"
+        title="Diagram not found."
+        summary="No diagram matches that identifier."
+      />
+      <Link
+        to="/architecture"
+        className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1"
+      >
+        ← Back to architecture
+      </Link>
     </SectionShell>
   ),
 });
@@ -40,20 +49,22 @@ function DiagramDetail() {
 
   return (
     <SectionShell>
-      <Breadcrumbs items={[
-        { label: "VÆRØX", to: "/" },
-        { label: "Architecture", to: "/architecture" },
-        { label: "Diagrams" },
-        { label: d.title },
-      ]} />
+      <Breadcrumbs
+        items={[
+          { label: "VÆRØX", to: "/" },
+          { label: "Architecture", to: "/architecture" },
+          { label: "Diagrams" },
+          { label: d.title },
+        ]}
+      />
 
       <PageHeader
         section={`§ · Diagram · ${d.kind}`}
         title={d.title}
         summary={d.summary}
         meta={[
-          { label: "Kind",    value: d.kind },
-          { label: "Nodes",   value: d.nodes.toString().padStart(2, "0") },
+          { label: "Kind", value: d.kind },
+          { label: "Nodes", value: d.nodes.toString().padStart(2, "0") },
           { label: "Updated", value: d.updated },
           { label: "Systems", value: d.systems.length.toString() },
         ]}
@@ -64,24 +75,33 @@ function DiagramDetail() {
         <OpsTag label="SIGNED" />
       </div>
 
-      <DocShell rail={
-        <aside className="hairline bg-canvas h-fit sticky top-24">
-          <div className="px-4 py-3 hairline-b">
-            <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">Systems in scope</span>
-          </div>
-          <ul>
-            {d.systems.map((s: string) => (
-              <li key={s} className="px-4 py-3 hairline-b last:border-b-0 font-mono text-[12px] text-text-2">{s}</li>
-            ))}
-          </ul>
-        </aside>
-      }>
+      <DocShell
+        rail={
+          <aside className="hairline bg-canvas h-fit sticky top-24">
+            <div className="px-4 py-3 hairline-b">
+              <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
+                Systems in scope
+              </span>
+            </div>
+            <ul>
+              {d.systems.map((s: string) => (
+                <li
+                  key={s}
+                  className="px-4 py-3 hairline-b last:border-b-0 font-mono text-[12px] text-text-2"
+                >
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </aside>
+        }
+      >
         <article className="max-w-[820px]">
           <DocBlock heading="Diagram">
             <DiagramCanvas nodes={d.nodes} />
             <p className="mt-3 font-mono text-[11px] text-text-3 tracking-[0.06em]">
-              Interactive viewer with pan/zoom, dependency highlighting, and component drill-down ships in the next
-              architecture release. This is the canonical structural render.
+              Interactive viewer with pan/zoom, dependency highlighting, and component drill-down
+              ships in the next architecture release. This is the canonical structural render.
             </p>
           </DocBlock>
           <DocBlock heading="Structure">
@@ -91,8 +111,16 @@ function DiagramDetail() {
       </DocShell>
 
       <PrevNext
-        prev={prev ? { title: prev.title, href: `/architecture/diagrams/${prev.slug}`, kicker: prev.kind } : null}
-        next={next ? { title: next.title, href: `/architecture/diagrams/${next.slug}`, kicker: next.kind } : null}
+        prev={
+          prev
+            ? { title: prev.title, href: `/architecture/diagrams/${prev.slug}`, kicker: prev.kind }
+            : null
+        }
+        next={
+          next
+            ? { title: next.title, href: `/architecture/diagrams/${next.slug}`, kicker: next.kind }
+            : null
+        }
       />
     </SectionShell>
   );
@@ -103,7 +131,10 @@ function DiagramCanvas({ nodes }: { nodes: number }) {
   const rows = Math.ceil(nodes / cols);
   return (
     <div className="hairline bg-canvas p-6">
-      <div className="grid gap-3" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}>
+      <div
+        className="grid gap-3"
+        style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
+      >
         {Array.from({ length: cols * rows }).map((_, i) => (
           <div
             key={i}
