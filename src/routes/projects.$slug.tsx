@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { PROJECTS } from "@/lib/projects-data";
-import { SYSTEMS } from "@/lib/systems-data";
+
 import { getDossier } from "@/lib/dossiers-data";
 import { getDossierExtras } from "@/lib/dossier-extras";
 import { ADRS, DIAGRAMS } from "@/lib/architecture-data";
@@ -61,7 +61,7 @@ function ProjectDetail() {
   const { project: p } = Route.useLoaderData();
   const dossier = getDossier(p.slug);
   const extras = getDossierExtras(p.slug);
-  const linkedSystem = SYSTEMS.find((s) => s.slug === p.slug);
+  
 
   const tone =
     p.stage === "Production" ? ("success" as const)
