@@ -19,7 +19,7 @@ export function WhyVaerox() {
       </div>
 
       <div className="mt-6 flex items-center justify-end">
-        <Link to="/engineering" className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 transition-micro">
+        <Link to="/engineering" className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 active:opacity-50 transition-micro">
           Full standards →
         </Link>
       </div>

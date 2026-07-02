@@ -193,6 +193,11 @@
   --radius-md: var(--vx-radius-2);
   --radius-lg: var(--vx-radius-2);
   --radius-xl: var(--vx-radius-2);
+
+  --duration-80: var(--vx-dur-micro);
+  --duration-160: var(--vx-dur-ui);
+  --duration-240: var(--vx-dur-layout);
+  --ease-standard: var(--vx-ease-standard);
 }
 
 /* ── Base ────────────────────────────────────────────────── */
@@ -365,7 +370,7 @@
 @utility skeleton {
   background: var(--bg-surface);
   border: 1px solid var(--line-1);
-  animation: vx-skeleton 1.4s ease-in-out infinite;
+  animation: vx-skeleton 1000ms ease-in-out infinite;
 }
 @keyframes vx-skeleton {
   0%, 100% { opacity: 0.55; }

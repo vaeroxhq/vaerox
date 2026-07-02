@@ -40,7 +40,7 @@ export function Hero() {
       </div>
 
       <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
-        <Link to="/contact" className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 transition-micro">
+        <Link to="/contact" className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 active:opacity-50 transition-micro">
           Discuss your project →
         </Link>
         <Link to="/services" className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1 transition-micro">

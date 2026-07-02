@@ -19,7 +19,7 @@ export function TopNav() {
         {/* Left — lockup */}
         <Link
           to="/"
-          className="shrink-0 transition-micro hover:opacity-80"
+          className="shrink-0 transition-micro hover:opacity-80 active:opacity-50"
           aria-label="VÆRØX — Home"
         >
           <VaeroxLockup markSize={25} />

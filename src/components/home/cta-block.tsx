@@ -27,7 +27,7 @@ export function CtaBlock() {
           </p>
         </div>
 
-        <Link to="/contact" className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 transition-micro">
+        <Link to="/contact" className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 active:opacity-50 transition-micro">
           Book a discovery call →
         </Link>
       </div>

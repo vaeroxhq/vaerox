@@ -48,7 +48,7 @@ export function ServicesPreview() {
         <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
           {SERVICES.length.toString().padStart(2, "0")} services in total
         </span>
-        <Link to="/services" className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 transition-micro">
+        <Link to="/services" className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 active:opacity-50 transition-micro">
           All services →
         </Link>
       </div>

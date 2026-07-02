@@ -27,7 +27,7 @@ Command.displayName = CommandPrimitive.displayName;
 const CommandDialog = ({ children, ...props }: DialogProps) => {
   return (
     <Dialog {...props}>
-      <DialogContent className="overflow-hidden p-0">
+      <DialogContent className="overflow-hidden p-0 data-[state=open]:animate-in data-[state=open]:zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:zoom-out-95">
         <VisuallyHidden>
           <DialogTitle>Command palette</DialogTitle>
           <DialogDescription>Search pages, systems, and actions.</DialogDescription>
