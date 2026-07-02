@@ -13,7 +13,7 @@ export function BlueprintOverlay() {
     >
       <svg
         className="absolute inset-y-0 right-0 h-full w-[62%] text-text-3"
-        style={{ opacity: 0.035 }}
+        style={{ opacity: 0.03 }}
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
@@ -26,7 +26,7 @@ export function BlueprintOverlay() {
 
       <svg
         className="absolute text-text-2"
-        style={{ top: 96, right: -96, width: 880, height: 880, opacity: 0.045 }}
+        style={{ top: 96, right: -96, width: 880, height: 880, opacity: 0.03 }}
         viewBox="0 0 880 880"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -41,13 +41,13 @@ export function BlueprintOverlay() {
         </g>
       </svg>
 
-      <div className="absolute" style={{ top: 336, right: 144, opacity: 0.04 }}>
+      <div className="absolute" style={{ top: 336, right: 144, opacity: 0.03 }}>
         <VaeroxMark size={400} />
       </div>
 
       <div
         className="absolute right-6 top-40 flex flex-col gap-8 font-mono text-[9px] text-text-3 uppercase tracking-[0.14em] tabular"
-        style={{ opacity: 0.5 }}
+        style={{ opacity: 0.03 }}
       >
         {["y·000", "y·080", "y·160", "y·240", "y·320", "y·400", "y·480"].map((t) => (
           <span key={t} className="flex items-center gap-2">
@@ -59,7 +59,7 @@ export function BlueprintOverlay() {
 
       <div
         className="absolute right-6 bottom-40 flex flex-col items-end gap-1 font-mono text-[9px] text-text-3 uppercase tracking-[0.14em] tabular"
-        style={{ opacity: 0.55 }}
+        style={{ opacity: 0.02 }}
       >
         <span>rev · 001</span>
         <span>sheet · 01/01</span>

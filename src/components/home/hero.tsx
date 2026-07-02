@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { DiamondGlyph, CornerFramed, MetaCell } from "./primitives";
 
 /**
@@ -14,7 +15,7 @@ export function Hero() {
         </span>
       </div>
 
-      <h1 className="font-display text-[52px] md:text-[80px] lg:text-[96px] leading-[0.98] tracking-[-0.032em] max-w-[1040px]">
+      <h1 className="font-display text-[52px] md:text-[80px] lg:text-[96px] leading-[1.05] tracking-[-0.032em] max-w-[1040px]">
         Modern software,
         <br />
         <span className="text-text-2">engineered end-to-end.</span>
@@ -27,16 +28,27 @@ export function Hero() {
         startups, growing businesses and enterprise teams.
       </p>
 
+      <div className="mt-8 flex flex-col gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
+          <span className="text-[12px] text-text-3">AI Agents</span>
+          <span className="text-[12px] text-text-3">Custom Software</span>
+          <span className="text-[12px] text-text-3">Internal Platforms</span>
+          <span className="text-[12px] text-text-3">SaaS Products</span>
+          <span className="text-[12px] text-text-3">Automation</span>
+          <span className="text-[12px] text-text-3">Infrastructure</span>
+        </div>
+      </div>
+
       <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
-        <a href="/contact" className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 transition-micro">
-          Book a discovery call →
-        </a>
-        <a href="/services" className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1 transition-micro">
-          Services →
-        </a>
-        <a href="/projects" className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1 transition-micro">
-          Projects →
-        </a>
+        <Link to="/contact" className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 transition-micro">
+          Discuss your project →
+        </Link>
+        <Link to="/services" className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1 transition-micro">
+          View services →
+        </Link>
+        <Link to="/projects" className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1 transition-micro">
+          Case studies →
+        </Link>
       </div>
 
       <div className="mt-20 max-w-[640px]">

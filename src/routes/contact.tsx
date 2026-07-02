@@ -6,14 +6,14 @@ import { DocShell, DocBlock } from "@/components/doc/doc-shell";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — VÆRØX" },
+      { title: "Contact VÆRØX — AI & Software Engineering Studio" },
       {
         name: "description",
         content:
-          "Start a project with VÆRØX. Book a discovery call, request a written proposal, or brief the studio on an MVP, rebuild, or AI system.",
+          "Reach the VÆRØX engineering studio. Book a discovery call, brief your project, or request a written proposal. Typical response within 24 hours.",
       },
       { property: "og:title", content: "Contact — VÆRØX" },
-      { property: "og:description", content: "Book a discovery call or brief the studio on a project." },
+      { property: "og:description", content: "Start a project with VÆRØX. Fast response, transparent process, fixed scope." },
     ],
   }),
   component: ContactPage,
@@ -36,12 +36,12 @@ function ContactPage() {
       <PageHeader
         section="§ · Contact"
         title="Start a project."
-        summary="VÆRØX is an independent AI & software engineering studio. Reach the studio to book a discovery call, brief a project, or request a written proposal — we reply inside a week."
+        summary="VÆRØX is an independent AI & software engineering studio. Reach us to discuss your project, book a discovery call, or request a written proposal — we reply within 24 hours."
         meta={[
-          { label: "Email",    value: "hello@vaerox.dev" },
-          { label: "Response", value: "Within a week" },
-          { label: "Proposal", value: "Written" },
-          { label: "Terms",    value: "Fixed / Capped" },
+          { label: "Response",  value: "Within 24 hours" },
+          { label: "Timezone",  value: "IST (UTC+5:30)" },
+          { label: "Availability", value: "Remote, Worldwide" },
+          { label: "Process",   value: "Transparent, Fixed" },
         ]}
       />
 

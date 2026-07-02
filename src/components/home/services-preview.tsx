@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { SERVICES } from "@/lib/services-data";
 
 const FEATURED = [
@@ -29,16 +30,16 @@ export function ServicesPreview() {
           <a
             key={s.slug}
             href={`/services/${s.slug}`}
-            className="bg-canvas px-4 pt-4 pb-5 group transition-ui hover:bg-surface"
+            className="bg-canvas px-4 py-4 group block transition-ui hover:bg-surface"
           >
             <header className="flex items-baseline justify-between">
               <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">{s.code}</span>
               <span className="font-mono text-[10px] text-text-3">→</span>
             </header>
-            <h3 className="mt-3 font-display text-[15.5px] text-text-2 group-hover:text-text-1 tracking-[-0.012em] transition-micro">
+            <h3 className="mt-3 font-display font-medium text-[17px] text-text-2 group-hover:text-text-1 tracking-[-0.012em] transition-micro">
               {s.name}
             </h3>
-            <p className="mt-1.5 text-[11.5px] text-text-3 leading-[1.5]">{s.tagline}</p>
+            <p className="mt-2 text-[11.5px] text-text-3 leading-[1.5]">{s.tagline}</p>
           </a>
         ))}
       </div>
@@ -47,9 +48,9 @@ export function ServicesPreview() {
         <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
           {SERVICES.length.toString().padStart(2, "0")} services in total
         </span>
-        <a href="/services" className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 transition-micro">
+        <Link to="/services" className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 transition-micro">
           All services →
-        </a>
+        </Link>
       </div>
     </section>
   );

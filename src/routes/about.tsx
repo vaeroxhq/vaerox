@@ -56,12 +56,28 @@ function AboutPage() {
           </DocBlock>
 
           <DocBlock heading="How we work">
-            <p className="text-[14.5px] text-text-2 leading-[1.75]">
+            <p className="text-[14.5px] text-text-2 leading-[1.75] mb-6">
               Fixed-scope MVPs, capped-cost builds, and long-form retainers.
               Written proposal inside a week, weekly demo cadence, and a
               hand-off package on delivery. No open-ended time-and-materials
               contracts.
             </p>
+            <ol className="hairline bg-canvas">
+              {[
+                ["01", "Discovery Call", "30 minutes async or live. We understand the problem, the timeline, and where the risk sits."],
+                ["02", "Technical Proposal", "Written brief inside a week. Architecture, milestones, and a fixed or capped estimate."],
+                ["03", "Development", "Weekly written updates. Everything under version control from day one. Transparent progress."],
+                ["04", "Launch & Support", "Hand-off package includes documentation, architecture, and deployment runbooks. Optional ongoing support."],
+              ].map(([num, title, desc], i, arr) => (
+                <li key={num} className={`grid grid-cols-[56px_1fr] gap-4 px-4 py-4 ${i < arr.length - 1 ? "hairline-b" : ""}`}>
+                  <span className="font-mono text-[11px] text-text-3 tabular pt-0.5">{num}</span>
+                  <div>
+                    <div className="font-display text-[14px] text-text-1 tracking-[-0.005em] mb-1">{title}</div>
+                    <p className="text-[12px] text-text-2 leading-[1.55]">{desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </DocBlock>
 
           <DocBlock heading="How to read the site">

@@ -10,18 +10,22 @@ import { SectionRule } from "@/components/home/primitives";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "VÆRØX — AI & Software Engineering Studio" },
+      { title: "VÆRØX — AI & Software Engineering Studio | Production AI Agents & Custom Software" },
       {
         name: "description",
         content:
-          "VÆRØX is an independent AI & software engineering studio. We design, build and maintain modern software systems — AI agents, SaaS products, internal tools, backend platforms, and workflow automation.",
+          "VÆRØX is an independent AI & software engineering studio building production-grade AI agents, SaaS products, internal tools, backend platforms, and workflow automation for startups, SMBs, and enterprises. Based in IST timezone, remote worldwide, typical response within 24 hours.",
       },
       { property: "og:title", content: "VÆRØX — AI & Software Engineering Studio" },
       {
         property: "og:description",
         content:
-          "Modern software systems, engineered end-to-end.",
+          "Modern software systems, engineered end-to-end. AI agents, SaaS, internal tools, backend platforms, automation.",
       },
+      { name: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "VÆRØX — AI & Software Engineering Studio" },
+      { name: "keywords", content: "AI agents, LLM applications, custom software, SaaS development, backend engineering, workflow automation, AI engineering studio" },
     ],
   }),
   component: Index,

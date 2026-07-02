@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { DiamondGlyph } from "./primitives";
 
 /**
@@ -15,7 +16,7 @@ export function CtaBlock() {
         </span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 items-end pb-8">
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-end pb-8">
         <div>
           <h2 className="font-display text-[32px] md:text-[44px] leading-[1.02] tracking-[-0.024em] max-w-[720px]">
             Build something worth documenting.
@@ -26,9 +27,9 @@ export function CtaBlock() {
           </p>
         </div>
 
-        <a href="/contact" className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 transition-micro">
+        <Link to="/contact" className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 transition-micro">
           Book a discovery call →
-        </a>
+        </Link>
       </div>
     </section>
   );

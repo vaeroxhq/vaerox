@@ -26,7 +26,7 @@ function ProjectCard({ project }: { project: Project }) {
 
   return (
     <article
-      className="group card-hover hover:card-hover-on bg-canvas px-5 pt-5 pb-4 relative flex flex-col"
+      className="group card-hover hover:card-hover-on bg-canvas px-4 py-4 relative flex flex-col"
     >
       <span
         aria-hidden="true"
@@ -42,7 +42,7 @@ function ProjectCard({ project }: { project: Project }) {
 
       <div className="hairline-t mt-4" />
 
-      <h3 className="font-display text-[22px] mt-6 tracking-[-0.022em] text-text-2 transition-micro group-hover:text-text-1">
+      <h3 className="font-display font-medium text-[17px] mt-4 tracking-[-0.022em] text-text-2 transition-micro group-hover:text-text-1">
         {name}
       </h3>
       <p className="mt-2 text-[13px] text-text-2 leading-[1.55]">{description}</p>
@@ -72,14 +72,14 @@ function ProjectCard({ project }: { project: Project }) {
       )}
 
       <div className="mt-6 pt-4 hairline-t flex items-center justify-between">
-        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
+        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
           Case study
         </span>
         <a
           href={`/projects/${project.slug}`}
-          className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] transition-micro group-hover:text-text-1"
+          className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] transition-micro group-hover:text-text-1 active:opacity-50"
         >
-          <span className="inline-block transition-transform duration-200 ease-out group-hover:translate-x-[6px]">
+          <span className="inline-block transition-transform group-hover:translate-x-[6px]">
             View →
           </span>
         </a>
@@ -113,7 +113,7 @@ function Meta({
 }) {
   return (
     <div className={`flex items-baseline justify-between gap-3 ${className}`}>
-      <dt className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
+      <dt className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
         {label}
       </dt>
       <dd className="font-mono text-[11px] text-text-2 tabular truncate">{value}</dd>
