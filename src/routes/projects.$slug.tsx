@@ -115,18 +115,6 @@ function ProjectDetail() {
         <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
           {dossier?.timeline.currentPhase ?? p.stage}
         </span>
-        {linkedSystem && (
-          <>
-            <span className="font-mono text-[10px] text-text-3 opacity-60">·</span>
-            <Link
-              to="/systems/$slug"
-              params={{ slug: linkedSystem.slug }}
-              className="font-mono text-[10px] text-text-2 hover:text-text-1 uppercase tracking-[0.14em] transition-micro"
-            >
-              System page · {linkedSystem.name}
-            </Link>
-          </>
-        )}
       </div>
 
       {dossier && (
