@@ -21,6 +21,11 @@ const FEATURED = [
  * ServicesPreview — the studio's service surface at a glance. Links into
  * the full /services index for depth.
  *
+ * Desktop Layout: Locked to 4 columns (grid-cols-4) on all desktops (1024px+)
+ * This maintains visual composition across all desktop resolutions.
+ * Tablet (640-1023px): 2 columns
+ * Mobile (<640px): 1 column
+ *
  * Animation: On hover:
  * - Lift 2px (translateY: 0 → -2px)
  * - Background + border transition
@@ -37,12 +42,12 @@ export function ServicesPreview() {
 
   return (
     <section ref={ref} className="mt-10 mb-24">
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-line-1 hairline">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-line-1 hairline">
         {items.map((s) => (
           <a
             key={s.slug}
             href={`/services/${s.slug}`}
-            className="bg-canvas px-4 py-4 group block transition-all duration-200 ease-out hover:bg-surface hover:translate-y-[-2px]"
+            className="bg-canvas px-4 py-4 group block animate-card-hover-elevation hover:bg-surface hover:text-text-1 cursor-pointer relative"
           >
             <header className="flex items-baseline justify-between">
               <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">

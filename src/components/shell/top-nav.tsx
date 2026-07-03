@@ -22,7 +22,7 @@ export function TopNav() {
         {/* Left — lockup */}
         <Link
           to="/"
-          className="shrink-0 transition-micro hover:opacity-80 active:opacity-50"
+          className="shrink-0 animate-logo-hover hover:opacity-80 active:opacity-50"
           aria-label="VÆRØX — Home"
         >
           <VaeroxLockup markSize={25} />
@@ -32,16 +32,16 @@ export function TopNav() {
         <nav aria-label="Primary" className="hidden lg:flex items-center h-full">
           <ul className="flex items-center h-full">
             {primary.map((item) => (
-              <li key={item.to} className="h-full">
+              <li key={item.to} className="h-full relative">
                 <Link
                   to={item.to}
-                  className="relative h-full px-4 flex items-center font-mono text-[11px] text-text-3 uppercase tracking-[0.14em] transition-colors duration-200 hover:text-text-1 after:absolute after:bottom-3 after:left-4 after:right-4 after:h-px after:bg-text-3 after:transition-all after:duration-200 after:ease-out hover:after:bg-text-1 after:transform after:scale-x-0 after:origin-left hover:after:scale-x-100"
+                  className="relative h-full px-4 flex items-center font-mono text-[11px] text-text-3 uppercase tracking-[0.14em] transition-colors duration-200 hover:text-text-1 group"
                   activeProps={{
-                    className:
-                      "relative h-full px-4 flex items-center font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] after:absolute after:bottom-3 after:left-3 after:right-3 after:h-px after:bg-text-1 after:scale-x-100",
+                    className: "relative h-full px-4 flex items-center font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] transition-colors duration-200",
                   }}
                 >
                   {item.label}
+                  <span className="absolute bottom-3 left-4 right-4 h-px bg-text-3 transition-all duration-300 ease-out scale-x-0 origin-left group-hover:scale-x-100 group-hover:bg-text-1" />
                 </Link>
               </li>
             ))}

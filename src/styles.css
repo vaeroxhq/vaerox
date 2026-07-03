@@ -95,10 +95,37 @@
   --vx-tracking-display: -0.025em;
   --vx-tracking-wide: 0.02em;
 
-  /* Widths */
+  /* Widths — Adaptive Container System
+   * STRATEGY: Desktop resolutions (1366–2560px) should maintain ~95–99% visual consistency
+   * NOT a fluid layout. Each breakpoint is intentional.
+   * 
+   * Desktop 1366–1599px: 90% width, max 1280px
+   * Desktop 1600–2199px: 92% width, max 1600px  
+   * Desktop XL 2200+px: 94% width, max 1920px
+   * Ultra-wide 3200+px: 96% width, max 2400px
+   */
   --vx-width-prose: 720px;
   --vx-width-docs: 960px;
   --vx-width-shell: 1280px;
+  --vx-width-adaptive: clamp(1024px, 90vw, 1280px);
+  
+  /* Typography scaling — REDUCED from 5vw to 1.8vw
+   * STRATEGY: Typography should scale very subtly across desktops.
+   * Screenshot A (2560px): must look nearly identical at 1366px and 1920px.
+   * Using lower vw values ensures minimal scaling.
+   * 
+   * Desktop 1366–1920px: Subtle scaling (68px → 76px)
+   * Desktop 1920–2560px: Reaches max, no further scaling
+   * This preserves visual hierarchy and line breaks.
+   */
+  --vx-text-display-adaptive: clamp(56px, 1.8vw, 76px);
+  --vx-text-3xl-adaptive: clamp(36px, 1.4vw, 48px);
+  --vx-text-2xl-adaptive: clamp(28px, 1.2vw, 38px);
+  --vx-text-xl-adaptive: clamp(22px, 1vw, 30px);
+  --vx-text-lg-adaptive: clamp(18px, 0.85vw, 24px);
+  --vx-text-md-adaptive: clamp(15px, 0.75vw, 19px);
+  --vx-text-sm-adaptive: clamp(13px, 0.65vw, 17px);
+  --vx-text-xs-adaptive: clamp(11px, 0.6vw, 15px);
 }
 
 /* ── SEMANTIC — DARK (canonical) ──────────────────────────── */
@@ -214,6 +241,7 @@
     font-size: var(--vx-text-md);
     line-height: var(--vx-leading-ui);
     font-feature-settings: "ss01", "cv11";
+    scroll-behavior: smooth;
   }
 
   body {
@@ -232,12 +260,35 @@
     outline-offset: 2px;
   }
 
+  input,
+  textarea,
+  select {
+    transition: background-color 200ms var(--vx-ease-standard),
+                border-color 200ms var(--vx-ease-standard),
+                box-shadow 200ms var(--vx-ease-standard);
+  }
+
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg-canvas), 
+                0 0 0 4px var(--text-1);
+  }
+
   code,
   kbd,
   samp,
   pre {
     font-family: var(--vx-font-mono);
     font-feature-settings: "zero", "ss01";
+  }
+
+  /* Global link transitions */
+  a {
+    transition: color 200ms var(--vx-ease-standard),
+                opacity 200ms var(--vx-ease-standard),
+                text-decoration 200ms var(--vx-ease-standard);
   }
 }
 
@@ -258,6 +309,38 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* Adaptive Typography — scales smoothly across desktop resolutions
+ * These use clamp(min, preferred, max) to ensure smooth scaling
+ * Desktop 1366–3440px maintains visual consistency */
+@utility text-display-adaptive {
+  font-size: var(--vx-text-display-adaptive);
+  line-height: var(--vx-leading-tight);
+  letter-spacing: var(--vx-tracking-display);
+  font-weight: 500;
+}
+@utility text-3xl-adaptive {
+  font-size: var(--vx-text-3xl-adaptive);
+  line-height: var(--vx-leading-tight);
+  letter-spacing: var(--vx-tracking-display);
+}
+@utility text-2xl-adaptive {
+  font-size: var(--vx-text-2xl-adaptive);
+  line-height: var(--vx-leading-tight);
+  letter-spacing: var(--vx-tracking-display);
+}
+@utility text-xl-adaptive {
+  font-size: var(--vx-text-xl-adaptive);
+  line-height: var(--vx-leading-ui);
+}
+@utility text-lg-adaptive {
+  font-size: var(--vx-text-lg-adaptive);
+  line-height: var(--vx-leading-ui);
+}
+@utility text-md-adaptive {
+  font-size: var(--vx-text-md-adaptive);
+  line-height: var(--vx-leading-ui);
+}
+
 /* Prose width */
 @utility w-prose {
   max-width: var(--vx-width-prose);
@@ -267,6 +350,9 @@
 }
 @utility w-shell {
   max-width: var(--vx-width-shell);
+}
+@utility w-adaptive {
+  max-width: var(--vx-width-adaptive);
 }
 
 /* Hairlines — the only structural device */
@@ -480,6 +566,88 @@
   }
 }
 
+/* Subtle floating motion for background artwork — barely perceptible
+   Used on blueprint circles and decorative elements to create depth */
+@keyframes vx-float-subtle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+/* Card hover elevation + shadow — premium interactive feel */
+@keyframes vx-card-hover-in {
+  from {
+    transform: translateY(0) scale(1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  to {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.05), 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Focus ring animation — subtle pulse on focus */
+@keyframes vx-focus-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+/* Button CTA hover — enhanced scale and brightness */
+@keyframes vx-button-cta-hover {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.02);
+    opacity: 0.9;
+  }
+}
+
+/* Logo rotation on hover — very subtle */
+@keyframes vx-logo-hover {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+  to {
+    transform: rotate(-2deg) scale(1.02);
+  }
+}
+
+/* Section reveal staggered children — fade + slide with stagger */
+@keyframes vx-reveal-child {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Cursor glow effect — very subtle halo for premium feel */
+@keyframes vx-glow-pulse {
+  0%, 100% {
+    opacity: 0.5;
+    filter: blur(2px);
+  }
+  50% {
+    opacity: 0.8;
+    filter: blur(3px);
+  }
+}
+
 /* ═════════════════════════════════════════════════════════════
  * ANIMATION UTILITIES
  * ═════════════════════════════════════════════════════════════ */
@@ -528,6 +696,86 @@
 /* Mobile menu */
 @utility animate-menu-entrance {
   animation: vx-menu-entrance 250ms var(--vx-ease-standard) both;
+}
+
+/* Floating background artwork — subtle, continuous, never distracting */
+@utility animate-float-subtle {
+  animation: vx-float-subtle 6s ease-in-out infinite;
+}
+
+/* Card hover elevation — used on services, projects, standard cards */
+@utility animate-card-hover-elevation {
+  transition: transform 240ms var(--vx-ease-standard), 
+              box-shadow 240ms var(--vx-ease-standard),
+              background-color var(--vx-dur-ui) var(--vx-ease-standard),
+              border-color var(--vx-dur-ui) var(--vx-ease-standard);
+}
+
+/* Apply on hover */
+@layer base {
+  .card-hover-elevation:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.05), 
+                0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Button CTA premium hover */
+@utility animate-button-cta-hover {
+  transition: transform 200ms var(--vx-ease-standard),
+              opacity 200ms var(--vx-ease-standard),
+              box-shadow 200ms var(--vx-ease-standard);
+}
+
+@layer base {
+  .button-cta-hover:hover {
+    transform: scale(1.02);
+  }
+
+  .button-cta-hover:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Logo hover — subtle rotation and scale */
+@utility animate-logo-hover {
+  transition: transform 300ms var(--vx-ease-standard);
+}
+
+@layer base {
+  .logo-hover:hover {
+    transform: rotate(-2deg) scale(1.02);
+  }
+}
+
+/* Reveal child — staggered reveal for section items */
+@utility animate-reveal-child {
+  animation: vx-reveal-child 400ms var(--vx-ease-standard) both;
+}
+
+/* Focus ring animation — for keyboard navigation */
+@utility animate-focus-ring {
+  transition: box-shadow 160ms var(--vx-ease-standard);
+}
+
+@layer base {
+  .focus-ring-animation:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--bg-canvas), 
+                0 0 0 4px var(--text-1);
+  }
+}
+
+/* Link hover glow — subtle brightening */
+@utility hover-text-glow {
+  transition: color 200ms var(--vx-ease-standard), 
+              text-shadow 200ms var(--vx-ease-standard);
+}
+
+@layer base {
+  .hover-text-glow:hover {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+  }
 }
 
 /* Navigation link underline — pseudo-element animation */

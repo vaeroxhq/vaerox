@@ -45,13 +45,13 @@ function ServicesIndex() {
             key={s.slug}
             to="/services/$slug"
             params={{ slug: s.slug }}
-            className="group card-hover hover:card-hover-on bg-canvas p-5 flex flex-col"
+            className="group animate-card-hover-elevation card-hover hover:card-hover-on bg-canvas p-5 flex flex-col cursor-pointer"
           >
             <header className="flex items-baseline justify-between">
               <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
                 {s.code}
               </span>
-              <span className="font-mono text-[10px] text-text-3 tabular">→</span>
+              <span className="font-mono text-[10px] text-text-3 tabular transition-transform duration-200 ease-out group-hover:translate-x-[3px]">→</span>
             </header>
             <h3 className="mt-3 font-display text-[19px] text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.015em]">
               {s.name}

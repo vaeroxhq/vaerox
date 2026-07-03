@@ -5,6 +5,11 @@ import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 /**
  * Featured Systems — monochrome cards, hairline borders, mono metadata.
  *
+ * Desktop Layout: Locked to 3 columns (grid-cols-3) on all desktops (1024px+)
+ * This maintains visual composition across all desktop resolutions.
+ * Tablet (640-1023px): 2 columns
+ * Mobile (<640px): 1 column
+ *
  * Animation: On hover:
  * - Lift 2px (translateY: 0 → -2px)
  * - Border brightens (opacity change)
@@ -50,7 +55,7 @@ function ProjectCard({ project }: { project: Project }) {
   } = project;
 
   return (
-    <article className="group card-hover hover:card-hover-on bg-canvas px-4 py-4 relative flex flex-col transition-all duration-200 ease-out hover:translate-y-[-2px]">
+    <article className="group animate-card-hover-elevation card-hover hover:card-hover-on bg-canvas px-4 py-4 relative flex flex-col cursor-pointer">
       <span
         aria-hidden="true"
         className="absolute top-0 right-0 h-3 w-3 border-t border-r border-line-2"

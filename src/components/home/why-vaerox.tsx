@@ -4,6 +4,12 @@ import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 /**
  * Why Vaerox — engineering standards section
+ * 
+ * Desktop Layout: Locked to 3 columns (grid-cols-3) on all desktops (1024px+)
+ * This maintains visual composition across all desktop resolutions.
+ * Tablet (640-1023px): 2 columns
+ * Mobile (<640px): 1 column
+ * 
  * Animation: Fades and slides up when scrolled into view (once only)
  */
 export function WhyVaerox() {
@@ -15,7 +21,7 @@ export function WhyVaerox() {
         {WHY_POINTS.slice(0, 9).map((p) => (
           <article
             key={p.code}
-            className="bg-canvas px-4 py-4 transition-all duration-200 ease-out hover:bg-surface hover:text-text-1 hover:translate-y-[-2px]"
+            className="bg-canvas px-4 py-4 animate-card-hover-elevation hover:bg-surface hover:text-text-1 cursor-pointer"
           >
             <header className="flex items-baseline justify-between">
               <span className="font-mono text-[11px] text-text-3 uppercase tracking-[0.14em] tabular">

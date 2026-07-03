@@ -43,12 +43,20 @@ export const Route = createFileRoute("/")({
  * → Why (standards) → Contact (start).
  * Industries, engagements, principles, graph, and notes previews
  * were removed because they duplicate their own pages.
+ * 
+ * Layout: Adaptive container scales 90vw (clamped 1024–1280px) for
+ * visual consistency across all desktop resolutions (1366–3440px).
+ * Padding is fixed at px-8 for all desktops, only adjusts on tablet/mobile.
+ * 
+ * Strategy: Not a fluid layout. Each resolution should look like a perfectly
+ * scaled version of Screenshot A (2560×1600). Typography uses reduced vw% to
+ * minimize scaling differences across desktop resolutions.
  */
 function Index() {
   return (
     <div className="bg-canvas text-text-1 relative overflow-hidden">
       <BlueprintOverlay />
-      <div className="relative w-shell mx-auto px-6 md:px-10 lg:px-16">
+      <div className="relative w-adaptive mx-auto px-8 md:px-10 lg:px-8">
         <Hero />
 
         <SectionRule label="§02 · Services" />

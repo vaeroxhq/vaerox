@@ -4,12 +4,28 @@ import { VaeroxMark } from "@/components/brand/vaerox-mark";
  * Blueprint overlay — the right side reads as an engineering drawing.
  * Guides, intersections, coordinate marks, revision tags. Everything is
  * aria-hidden, pointer-events-none, ≤ 5% opacity. Desktop only.
+ * 
+ * Scaling Strategy: REDUCED from previous 50vw/25vw to maintain visual consistency
+ * across all desktop resolutions (1366–3440px). Decorative elements should NOT
+ * drift visually as viewport changes.
+ * 
+ * Circle: ~20–25% of viewport width (not 50vw), clamped tightly
+ * Mark: ~10–12% of viewport width (not 25vw)
+ * Offset: Subtle scaling only
+ * 
+ * Result: Blueprint graphics remain visually anchored to Screenshot A composition.
  */
 export function BlueprintOverlay() {
   return (
     <div
       aria-hidden="true"
       className="pointer-events-none absolute inset-0 hidden lg:block select-none"
+      style={{
+        "--blueprint-circle-size": "clamp(500px, 20vw, 700px)",
+        "--blueprint-mark-size": "clamp(250px, 10vw, 350px)",
+        "--blueprint-offset-top": "clamp(120px, 6vh, 180px)",
+        "--blueprint-offset-right": "clamp(-100px, -2vw, -120px)",
+      } as React.CSSProperties}
     >
       <svg
         className="absolute inset-y-0 right-0 h-full w-[62%] text-text-3"
@@ -25,8 +41,14 @@ export function BlueprintOverlay() {
       </svg>
 
       <svg
-        className="absolute text-text-2"
-        style={{ top: 96, right: -96, width: 880, height: 880, opacity: 0.03 }}
+        className="absolute text-text-2 animate-float-subtle"
+        style={{
+          top: "var(--blueprint-offset-top)",
+          right: "var(--blueprint-offset-right)",
+          width: "var(--blueprint-circle-size)",
+          height: "var(--blueprint-circle-size)",
+          opacity: 0.03,
+        }}
         viewBox="0 0 880 880"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -41,8 +63,15 @@ export function BlueprintOverlay() {
         </g>
       </svg>
 
-      <div className="absolute" style={{ top: 336, right: 144, opacity: 0.03 }}>
-        <VaeroxMark size={400} />
+      <div
+        className="absolute"
+        style={{
+          top: "clamp(280px, 18vh, 360px)",
+          right: "clamp(100px, 6vw, 200px)",
+          opacity: 0.03,
+        }}
+      >
+        <VaeroxMark size={parseInt(getComputedStyle(document.documentElement).getPropertyValue("--blueprint-mark-size")?.replace("px", "") || "300")} />
       </div>
 
       <div

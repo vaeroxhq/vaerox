@@ -10,7 +10,7 @@ import { DiamondGlyph, CornerFramed, MetaCell } from "./primitives";
  */
 export function Hero() {
   return (
-    <section className="relative pt-28 md:pt-40 lg:pt-48 pb-24 md:pb-32">
+    <section className="relative py-16 md:py-24 lg:py-32">
       <div className="flex items-center gap-3 mb-14 animate-hero-logo">
         <DiamondGlyph />
         <span className="font-mono text-[11px] text-text-3 uppercase tracking-[0.14em]">
@@ -18,13 +18,13 @@ export function Hero() {
         </span>
       </div>
 
-      <h1 className="font-display text-[52px] md:text-[80px] lg:text-[96px] leading-[1.05] tracking-[-0.032em] max-w-[1040px] animate-hero-heading">
+      <h1 className="text-display-adaptive max-w-[1040px] animate-hero-heading">
         Modern software,
         <br />
         <span className="text-text-2">engineered end-to-end.</span>
       </h1>
 
-      <p className="mt-12 max-w-[700px] text-text-2 text-[15px] leading-[1.65] animate-hero-description">
+      <p className="mt-12 max-w-[700px] text-text-2 text-md-adaptive leading-[1.65] animate-hero-description">
         VÆRØX is an independent AI &amp; software engineering studio. We design, build and maintain
         modern software systems — AI agents, SaaS products, internal tools, backend platforms, and
         workflow automation — for startups, growing businesses and enterprise teams.
@@ -44,19 +44,19 @@ export function Hero() {
       <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 animate-hero-buttons">
         <Link
           to="/contact"
-          className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 active:opacity-50 transition-micro"
+          className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] animate-button-cta-hover hover:opacity-70 active:opacity-50 transition-micro"
         >
           Discuss your project →
         </Link>
         <Link
           to="/services"
-          className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1 transition-micro"
+          className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] animate-button-cta-hover hover:text-text-1 transition-micro"
         >
           View services →
         </Link>
         <Link
           to="/projects"
-          className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1 transition-micro"
+          className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] animate-button-cta-hover hover:text-text-1 transition-micro"
         >
           Case studies →
         </Link>
