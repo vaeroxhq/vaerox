@@ -13,6 +13,7 @@ import { Breadcrumbs } from "@/components/doc/breadcrumbs";
 import { RelatedRail } from "@/components/doc/related-rail";
 import { DocShell } from "@/components/doc/doc-shell";
 import { PrevNext } from "@/components/doc/prev-next";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import {
   ExecutiveSummary,
   ProblemStatement,

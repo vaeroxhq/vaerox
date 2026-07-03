@@ -4,6 +4,7 @@ import { PROJECTS } from "@/lib/projects-data";
 import { getServiceExtras } from "@/lib/service-extras";
 import { PageHeader, SectionShell } from "@/components/section/section-bits";
 import { Breadcrumbs } from "@/components/doc/breadcrumbs";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 export const Route = createFileRoute("/services/$slug")({
   loader: ({ params }): Service => {
@@ -62,6 +63,7 @@ function ServiceDetail() {
   const s = Route.useLoaderData() as Service;
   const projects = PROJECTS.filter((p) => s.relatedProjects.includes(p.slug));
   const ex = getServiceExtras(s.slug);
+  const sectionRef = useScrollReveal();
 
   return (
     <SectionShell>
@@ -85,7 +87,7 @@ function ServiceDetail() {
         ]}
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-px bg-line-1 hairline">
+      <div ref={sectionRef} className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-px bg-line-1 hairline">
         <div className="bg-canvas p-6 space-y-8">
           <Block heading="Approach">
             <p className="text-[14.5px] text-text-2 leading-[1.75] max-w-[640px]">{s.approach}</p>
