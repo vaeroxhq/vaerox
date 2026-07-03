@@ -154,16 +154,16 @@ function buildIndex(): Record<Category, TechUsage[]> {
 export const Route = createFileRoute("/technologies")({
   head: () => ({
     meta: [
-      { title: "Technologies — Vareox" },
+      { title: "Technologies — Vaerox" },
       {
         name: "description",
         content:
-          "Cross-index of every technology used across Vareox systems — languages, frameworks, LLMs, databases, infrastructure — with the projects and services each one powers.",
+          "Cross-index of every technology used across Vaerox systems — languages, frameworks, LLMs, databases, infrastructure — with the projects and services each one powers.",
       },
-      { property: "og:title", content: "Technologies — Vareox" },
+      { property: "og:title", content: "Technologies — Vaerox" },
       {
         property: "og:description",
-        content: "The complete technology matrix behind Vareox systems.",
+        content: "The complete technology matrix behind Vaerox systems.",
       },
     ],
   }),
@@ -178,7 +178,7 @@ function TechnologiesPage() {
 
   return (
     <SectionShell>
-      <Breadcrumbs items={[{ label: "Vareox", to: "/" }, { label: "Technologies" }]} />
+      <Breadcrumbs items={[{ label: "Vaerox", to: "/" }, { label: "Technologies" }]} />
       <PageHeader
         section="§ · Technology Matrix"
         title="Every tool, every project, every service."
@@ -198,8 +198,8 @@ function TechnologiesPage() {
           return (
             <section key={cat}>
               <header className="hairline-t pt-4 mb-4 flex items-baseline justify-between">
-                <h2 className="font-display text-[20px] text-text-1 tracking-[-0.01em]">{cat}</h2>
-                <span className="font-mono text-[10px] text-text-3 tabular">
+                <h2 className="text-heading-m text-text-1">{cat}</h2>
+                <span className="text-metadata text-text-3">
                   {items.length.toString().padStart(2, "0")}
                 </span>
               </header>
@@ -209,18 +209,16 @@ function TechnologiesPage() {
                     key={it.name}
                     className={`px-5 py-4 grid grid-cols-1 md:grid-cols-[160px_1fr_1fr] gap-4 items-baseline ${i < arr.length - 1 ? "hairline-b" : ""}`}
                   >
-                    <span className="font-mono text-[13px] text-text-1 tabular">{it.name}</span>
+                    <span className="text-code text-text-1">{it.name}</span>
                     <div>
-                      <div className="font-mono text-[9.5px] text-text-3 uppercase tracking-[0.14em] mb-1.5">
-                        Projects
-                      </div>
+                      <div className="text-overline text-text-3 mb-1.5">Projects</div>
                       {it.projects.length ? (
                         <div className="flex flex-wrap gap-x-3 gap-y-1">
                           {it.projects.map((slug) => {
                             const p = projMap[slug];
                             if (!p)
                               return (
-                                <span key={slug} className="font-mono text-[11px] text-text-3">
+                                <span key={slug} className="text-label text-text-3">
                                   {slug}
                                 </span>
                               );
@@ -229,7 +227,7 @@ function TechnologiesPage() {
                                 key={slug}
                                 to="/projects/$slug"
                                 params={{ slug }}
-                                className="font-mono text-[11.5px] text-text-2 hover:text-text-1 underline decoration-line-3 underline-offset-4"
+                                className="text-label text-text-2 hover:text-text-1 underline decoration-line-3 underline-offset-4"
                               >
                                 {p.name}
                               </Link>
@@ -237,13 +235,11 @@ function TechnologiesPage() {
                           })}
                         </div>
                       ) : (
-                        <span className="font-mono text-[11px] text-text-3">—</span>
+                        <span className="text-label text-text-3">—</span>
                       )}
                     </div>
                     <div>
-                      <div className="font-mono text-[9.5px] text-text-3 uppercase tracking-[0.14em] mb-1.5">
-                        Services
-                      </div>
+                      <div className="text-overline text-text-3 mb-1.5">Services</div>
                       {it.services.length ? (
                         <div className="flex flex-wrap gap-x-3 gap-y-1">
                           {it.services.map((slug) => {
@@ -254,7 +250,7 @@ function TechnologiesPage() {
                                 key={slug}
                                 to="/services/$slug"
                                 params={{ slug }}
-                                className="font-mono text-[11.5px] text-text-2 hover:text-text-1 underline decoration-line-3 underline-offset-4"
+                                className="text-label text-text-2 hover:text-text-1 underline decoration-line-3 underline-offset-4"
                               >
                                 {s.name}
                               </Link>
@@ -262,7 +258,7 @@ function TechnologiesPage() {
                           })}
                         </div>
                       ) : (
-                        <span className="font-mono text-[11px] text-text-3">—</span>
+                        <span className="text-label text-text-3">—</span>
                       )}
                     </div>
                   </li>

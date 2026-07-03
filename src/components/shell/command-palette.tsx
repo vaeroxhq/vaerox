@@ -73,9 +73,7 @@ export function CommandPaletteProvider({ children }: { children: ReactNode }) {
         <CommandInput placeholder="Search VÆRØX — systems, ADRs, validation, APIs, journal…" />
         <CommandList className="max-h-[520px]">
           <CommandEmpty>
-            <span className="font-mono text-[11px] text-text-3 uppercase tracking-[0.14em]">
-              No results
-            </span>
+            <span className="text-overline text-text-3">No results</span>
           </CommandEmpty>
 
           <CommandGroup heading="Navigate">
@@ -157,16 +155,10 @@ function PaletteItem({
       className="flex items-baseline justify-between gap-6"
     >
       <div className="min-w-0 flex items-baseline gap-3">
-        <span className="font-mono text-[9.5px] text-text-3 uppercase tracking-[0.18em] tabular w-[70px] shrink-0">
-          {tag}
-        </span>
-        <span className="font-display text-[14px] text-text-1 tracking-[-0.01em] truncate">
-          {label}
-        </span>
+        <span className="text-metadata text-text-3 opacity-70 w-[70px] shrink-0">{tag}</span>
+        <span className="font-display text-body-m font-medium text-text-1 truncate">{label}</span>
       </div>
-      <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] truncate max-w-[40%]">
-        {hint}
-      </span>
+      <span className="text-overline text-text-3 truncate max-w-[40%]">{hint}</span>
     </CommandItem>
   );
 }

@@ -12,7 +12,7 @@ export function VaeroxMark({
   className = "",
   title = "VÆRØX",
 }: {
-  size?: number;
+  size?: number | string;
   className?: string;
   strokeWidth?: number; // accepted for API compatibility; ignored (raster master)
   title?: string;
@@ -45,11 +45,11 @@ export function VaeroxLockup({
       <VaeroxMark size={markSize} aria-hidden="true" />
       <span
         aria-hidden="true"
-        className="inline-block bg-line-2"
+        className="inline-block bg-line-2 mt-[1px]"
         style={{ width: 1, height: markSize * 0.82 }}
       />
       <span
-        className="font-display text-[15px] md:text-[16px] font-medium tracking-[0.14em]"
+        className="font-display text-body-m md:text-heading-s font-medium tracking-[0.14em] mt-[1px]"
         aria-hidden="true"
       >
         VÆRØX

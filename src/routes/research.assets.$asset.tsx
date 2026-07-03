@@ -35,7 +35,7 @@ export const Route = createFileRoute("/research/assets/$asset")({
       />
       <Link
         to="/research/assets"
-        className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1"
+        className="text-label text-text-2 uppercase tracking-[0.14em] hover:text-text-1"
       >
         ← Back to research assets
       </Link>
@@ -76,7 +76,7 @@ function AssetDetail() {
       <DocShell rail={<RelatedRail kind="dataset" id={d.slug} />}>
         <article className="max-w-[760px]">
           <DocBlock heading="Overview">
-            <p className="text-[15px] text-text-2 leading-[1.75]">{d.overview}</p>
+            <p className="text-body-m text-text-2">{d.overview}</p>
           </DocBlock>
 
           <DocBlock heading="Engineering metadata">
@@ -96,7 +96,7 @@ function AssetDetail() {
           </DocBlock>
 
           <DocBlock heading="Purpose">
-            <p className="text-[15px] text-text-2 leading-[1.75]">{d.purpose}</p>
+            <p className="text-body-m text-text-2">{d.purpose}</p>
           </DocBlock>
 
           <DocBlock heading="Tasks">
@@ -116,10 +116,10 @@ function AssetDetail() {
                     i < d.workPerformed.length - 1 ? "hairline-b" : ""
                   }`}
                 >
-                  <span className="font-mono text-[10px] text-text-3 tabular">
+                  <span className="text-metadata text-text-3">
                     {(i + 1).toString().padStart(2, "0")}
                   </span>
-                  <span className="text-[13.5px] text-text-2 leading-[1.6]">{w}</span>
+                  <span className="text-body-s text-text-2">{w}</span>
                 </li>
               ))}
             </ol>
@@ -130,7 +130,7 @@ function AssetDetail() {
           </DocBlock>
 
           <DocBlock heading="Engineering notes">
-            <p className="text-[15px] text-text-2 leading-[1.75]">{d.engineeringNotes}</p>
+            <p className="text-body-m text-text-2">{d.engineeringNotes}</p>
           </DocBlock>
 
           <DocBlock heading="Research notes">
@@ -163,10 +163,10 @@ function AssetDetail() {
                       i < d.futureWork.length - 1 ? "hairline-b" : ""
                     }`}
                   >
-                    <span className="font-mono text-[10px] text-text-3 tabular">
+                    <span className="text-metadata text-text-3">
                       →{(i + 1).toString().padStart(2, "0")}
                     </span>
-                    <span className="text-[13.5px] text-text-2 leading-[1.6]">{w}</span>
+                    <span className="text-body-s text-text-2">{w}</span>
                   </li>
                 ))}
               </ol>
@@ -199,7 +199,7 @@ function KVList({ items }: { items: string[] }) {
       {items.map((v, i) => (
         <li
           key={v + i}
-          className={`px-4 py-2.5 font-mono text-[12.5px] text-text-2 tabular ${
+          className={`px-4 py-2.5 font-mono text-caption text-text-2 tabular-nums ${
             i < items.length - 1 ? "hairline-b" : ""
           }`}
         >
@@ -214,10 +214,7 @@ function ChipList({ items }: { items: string[] }) {
   return (
     <ul className="flex items-center gap-2 flex-wrap">
       {items.map((s) => (
-        <li
-          key={s}
-          className="hairline px-2 py-[2px] font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]"
-        >
+        <li key={s} className="hairline px-2 py-[2px] text-overline text-text-3">
           {s}
         </li>
       ))}
@@ -235,10 +232,8 @@ function MetaGrid({ items }: { items: { label: string; value: string }[] }) {
             i < items.length - 1 ? "hairline-b" : ""
           }`}
         >
-          <dt className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70 self-center">
-            {it.label}
-          </dt>
-          <dd className="font-mono text-[12.5px] text-text-2 tabular">{it.value}</dd>
+          <dt className="text-overline text-text-3 opacity-70 self-center">{it.label}</dt>
+          <dd className="font-mono text-caption text-text-2 tabular-nums">{it.value}</dd>
         </div>
       ))}
     </dl>
@@ -246,5 +241,5 @@ function MetaGrid({ items }: { items: { label: string; value: string }[] }) {
 }
 
 function NotDocumented() {
-  return <p className="font-mono text-[11px] text-text-3 uppercase tracking-[0.14em]">{NYD}</p>;
+  return <p className="text-label text-text-3 uppercase tracking-[0.14em]">{NYD}</p>;
 }

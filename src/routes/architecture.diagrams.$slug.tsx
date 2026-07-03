@@ -16,9 +16,9 @@ export const Route = createFileRoute("/architecture/diagrams/$slug")({
     const d = loaderData?.d;
     return {
       meta: [
-        { title: d ? `${d.title} — Diagram — Vareox` : "Diagram — Vareox" },
+        { title: d ? `${d.title} — Diagram — Vaerox` : "Diagram — Vaerox" },
         { name: "description", content: (d?.summary ?? "").slice(0, 160) },
-        { property: "og:title", content: d?.title ?? "Diagram — Vareox" },
+        { property: "og:title", content: d?.title ?? "Diagram — Vaerox" },
         { property: "og:description", content: (d?.summary ?? "").slice(0, 160) },
       ],
     };
@@ -33,7 +33,7 @@ export const Route = createFileRoute("/architecture/diagrams/$slug")({
       />
       <Link
         to="/architecture"
-        className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1"
+        className="text-label text-text-2 uppercase tracking-[0.14em] hover:text-text-1"
       >
         ← Back to architecture
       </Link>
@@ -79,16 +79,11 @@ function DiagramDetail() {
         rail={
           <aside className="hairline bg-canvas h-fit sticky top-24">
             <div className="px-4 py-3 hairline-b">
-              <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-                Systems in scope
-              </span>
+              <span className="text-overline text-text-3 opacity-70">Systems in scope</span>
             </div>
             <ul>
               {d.systems.map((s: string) => (
-                <li
-                  key={s}
-                  className="px-4 py-3 hairline-b last:border-b-0 font-mono text-[12px] text-text-2"
-                >
+                <li key={s} className="px-4 py-3 hairline-b last:border-b-0 text-label text-text-2">
                   {s}
                 </li>
               ))}
@@ -99,13 +94,13 @@ function DiagramDetail() {
         <article className="max-w-[820px]">
           <DocBlock heading="Diagram">
             <DiagramCanvas nodes={d.nodes} />
-            <p className="mt-3 font-mono text-[11px] text-text-3 tracking-[0.06em]">
+            <p className="mt-3 text-label text-text-3 tracking-[0.06em]">
               Interactive viewer with pan/zoom, dependency highlighting, and component drill-down
               ships in the next architecture release. This is the canonical structural render.
             </p>
           </DocBlock>
           <DocBlock heading="Structure">
-            <p className="text-[15px] text-text-2 leading-[1.7]">{d.summary}</p>
+            <p className="text-body-m text-text-2 leading-[1.7]">{d.summary}</p>
           </DocBlock>
         </article>
       </DocShell>
@@ -138,7 +133,7 @@ function DiagramCanvas({ nodes }: { nodes: number }) {
         {Array.from({ length: cols * rows }).map((_, i) => (
           <div
             key={i}
-            className={`hairline aspect-[3/2] flex items-center justify-center font-mono text-[10px] text-text-3 tabular ${i < nodes ? "" : "opacity-30"}`}
+            className={`hairline aspect-[3/2] flex items-center justify-center text-metadata text-text-3 ${i < nodes ? "" : "opacity-30"}`}
           >
             {i < nodes ? `n${(i + 1).toString().padStart(2, "0")}` : ""}
           </div>

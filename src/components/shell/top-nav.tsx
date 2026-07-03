@@ -18,7 +18,7 @@ export function TopNav() {
 
   return (
     <header className="hairline-b bg-canvas">
-      <div className="w-shell mx-auto px-6 md:px-10 lg:px-16 h-14 flex items-center justify-between gap-8">
+      <div className="w-shell mx-auto h-16 flex items-center justify-between gap-8">
         {/* Left — lockup */}
         <Link
           to="/"
@@ -35,13 +35,14 @@ export function TopNav() {
               <li key={item.to} className="h-full relative">
                 <Link
                   to={item.to}
-                  className="relative h-full px-4 flex items-center font-mono text-[11px] text-text-3 uppercase tracking-[0.14em] transition-colors duration-200 hover:text-text-1 group"
+                  className="relative h-full px-4 flex items-center text-nav text-text-3 transition-micro transition-ui hover:text-text-1 group"
                   activeProps={{
-                    className: "relative h-full px-4 flex items-center font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] transition-colors duration-200",
+                    className:
+                      "relative h-full px-4 flex items-center text-nav text-text-1 transition-colors duration-200",
                   }}
                 >
                   {item.label}
-                  <span className="absolute bottom-3 left-4 right-4 h-px bg-text-3 transition-all duration-300 ease-out scale-x-0 origin-left group-hover:scale-x-100 group-hover:bg-text-1" />
+                  <span className="absolute bottom-3 left-4 right-4 h-px bg-text-3 transition-ui duration-300 scale-x-0 origin-left group-hover:scale-x-100 group-hover:bg-text-1" />
                 </Link>
               </li>
             ))}
@@ -54,10 +55,10 @@ export function TopNav() {
             type="button"
             onClick={open}
             aria-label="Open command palette"
-            className="inline-flex items-center gap-3 font-mono text-[11px] text-text-3 uppercase tracking-[0.14em] transition-colors duration-200 hover:text-text-1 active:opacity-50"
+            className="inline-flex items-center gap-3 text-nav text-text-3 transition-micro transition-ui hover:text-text-1 active:opacity-50"
           >
             <span>Search</span>
-            <kbd className="hidden sm:inline font-mono text-[10px] text-text-3 tracking-[0.14em] hairline px-1.5 py-[1px] rounded-[2px] transition-colors duration-200 group-hover:text-text-1">
+            <kbd className="hidden sm:inline text-metadata text-text-3 hairline px-1.5 py-[1px] rounded-[2px] transition-micro transition-ui group-hover:text-text-1">
               ⌘K
             </kbd>
           </button>
@@ -66,14 +67,14 @@ export function TopNav() {
             type="button"
             onClick={toggle}
             aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
-            className="font-mono text-[11px] text-text-3 uppercase tracking-[0.14em] transition-colors duration-200 hover:text-text-1 active:opacity-50 tabular"
+            className="text-nav text-text-3 transition-micro transition-ui hover:text-text-1 active:opacity-50 tabular"
           >
             {theme === "dark" ? "Dark" : "Light"}
           </button>
 
           <span
             aria-label="System status: nominal"
-            className="hidden md:inline-flex items-center gap-2 font-mono text-[11px] text-text-3 uppercase tracking-[0.14em]"
+            className="hidden md:inline-flex items-center gap-2 text-nav text-text-3"
           >
             <span className="dot text-success" aria-hidden="true" />
             Nominal

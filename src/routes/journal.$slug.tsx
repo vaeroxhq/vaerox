@@ -17,9 +17,9 @@ export const Route = createFileRoute("/journal/$slug")({
     const e = loaderData?.entry;
     return {
       meta: [
-        { title: e ? `${e.title} — Vareox Journal` : "Journal — Vareox" },
+        { title: e ? `${e.title} — Vaerox Journal` : "Journal — Vaerox" },
         { name: "description", content: (e?.summary ?? "").slice(0, 160) },
-        { property: "og:title", content: e?.title ?? "Journal — Vareox" },
+        { property: "og:title", content: e?.title ?? "Journal — Vaerox" },
         { property: "og:description", content: (e?.summary ?? "").slice(0, 160) },
       ],
     };
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/journal/$slug")({
       />
       <Link
         to="/journal"
-        className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1"
+        className="text-label text-text-2 uppercase tracking-[0.14em] hover:text-text-1"
       >
         ← Back to journal
       </Link>
@@ -74,9 +74,9 @@ function EntryPage() {
       <div className="mb-8 flex flex-wrap items-center gap-x-4 gap-y-2">
         <OpsTag label={entry.status === "Published" ? "PUBLIC" : "DRAFT"} />
         <OpsTag label="VERSIONED" />
-        <span className="font-mono text-[10px] text-text-3 opacity-60">·</span>
+        <span className="text-metadata text-text-3 opacity-60">·</span>
         {entry.tags.map((t) => (
-          <span key={t} className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
+          <span key={t} className="text-overline text-text-3">
             · {t}
           </span>
         ))}
@@ -87,7 +87,7 @@ function EntryPage() {
           <DocBlock heading="Entry">
             <div className="space-y-5">
               {entry.body.map((p, i) => (
-                <p key={i} className="text-[16px] text-text-2 leading-[1.75]">
+                <p key={i} className="text-heading-s text-text-2 leading-[1.75]">
                   {p}
                 </p>
               ))}

@@ -15,16 +15,16 @@ export const Route = createFileRoute("/services/$slug")({
   head: ({ loaderData }) => ({
     meta: loaderData
       ? [
-          { title: `${loaderData.name} — Services — Vareox` },
+          { title: `${loaderData.name} — Services — Vaerox` },
           { name: "description", content: loaderData.overview },
-          { property: "og:title", content: `${loaderData.name} — Vareox` },
+          { property: "og:title", content: `${loaderData.name} — Vaerox` },
           { property: "og:description", content: loaderData.tagline },
         ]
       : [],
   }),
   notFoundComponent: () => (
     <SectionShell>
-      <div className="pt-24 font-mono text-[12px] text-text-3">Service not found.</div>
+      <div className="pt-24 text-label text-text-3">Service not found.</div>
     </SectionShell>
   ),
   component: ServiceDetail,
@@ -33,9 +33,7 @@ export const Route = createFileRoute("/services/$slug")({
 function Block({ heading, children }: { heading: string; children: React.ReactNode }) {
   return (
     <section>
-      <h2 className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] mb-3">
-        {heading}
-      </h2>
+      <h2 className="text-overline text-text-3 mb-3">{heading}</h2>
       {children}
     </section>
   );
@@ -49,10 +47,10 @@ function Bulleted({ items, prefix }: { items: string[]; prefix: string }) {
           key={i}
           className={`px-4 py-3 grid grid-cols-[28px_1fr] gap-3 items-start ${i < arr.length - 1 ? "hairline-b" : ""}`}
         >
-          <span className="font-mono text-[10px] text-text-3 tabular pt-0.5">
+          <span className="text-metadata text-text-3 pt-0.5">
             {prefix}-{String(i + 1).padStart(2, "0")}
           </span>
-          <span className="text-[13.5px] text-text-2 leading-[1.55]">{it}</span>
+          <span className="text-body-s text-text-2">{it}</span>
         </li>
       ))}
     </ul>
@@ -87,10 +85,13 @@ function ServiceDetail() {
         ]}
       />
 
-      <div ref={sectionRef} className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-px bg-line-1 hairline">
+      <div
+        ref={sectionRef}
+        className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-px bg-line-1 hairline"
+      >
         <div className="bg-canvas p-6 space-y-8">
           <Block heading="Approach">
-            <p className="text-[14.5px] text-text-2 leading-[1.75] max-w-[640px]">{s.approach}</p>
+            <p className="text-body-m text-text-2 max-w-[640px]">{s.approach}</p>
           </Block>
 
           <Block heading="Problems solved">
@@ -110,7 +111,7 @@ function ServiceDetail() {
               {s.examples.map((exi, i, arr) => (
                 <li
                   key={exi}
-                  className={`px-4 py-3 text-[13.5px] text-text-2 ${i < arr.length - 1 ? "hairline-b" : ""}`}
+                  className={`px-4 py-3 text-body-s text-text-2 ${i < arr.length - 1 ? "hairline-b" : ""}`}
                 >
                   {exi}
                 </li>
@@ -129,12 +130,10 @@ function ServiceDetail() {
                       className="group card-hover hover:card-hover-on grid grid-cols-[1fr_120px] gap-4 px-4 py-3 items-baseline"
                     >
                       <div>
-                        <div className="font-display text-[14.5px] text-text-1 tracking-[-0.008em]">
-                          {p.name}
-                        </div>
-                        <div className="mt-1 text-[12.5px] text-text-3">{p.description}</div>
+                        <div className="font-display text-body-m text-text-1">{p.name}</div>
+                        <div className="mt-1 text-caption text-text-3">{p.description}</div>
                       </div>
-                      <span className="text-right font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] group-hover:text-text-1 transition-micro">
+                      <span className="text-right text-overline text-text-3 group-hover:text-text-1 transition-micro">
                         {p.stage} →
                       </span>
                     </Link>
@@ -151,10 +150,10 @@ function ServiceDetail() {
                   key={f.q}
                   className={`grid grid-cols-1 md:grid-cols-[240px_1fr] gap-4 px-4 py-4 ${i < arr.length - 1 ? "hairline-b" : ""}`}
                 >
-                  <dt className="font-display text-[13.5px] text-text-1 tracking-[-0.005em]">
+                  <dt className="font-display text-body-s text-text-1 tracking-[-0.005em]">
                     {f.q}
                   </dt>
-                  <dd className="text-[13px] text-text-2 leading-[1.65]">{f.a}</dd>
+                  <dd className="text-body-s text-text-2">{f.a}</dd>
                 </div>
               ))}
             </dl>
@@ -163,36 +162,30 @@ function ServiceDetail() {
 
         <aside className="bg-canvas p-6 space-y-6">
           <div>
-            <div className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-              Typical timeline
-            </div>
-            <p className="mt-2 text-[12.5px] text-text-2 leading-[1.6]">{ex.typicalTimeline}</p>
+            <div className="text-overline text-text-3 opacity-70">Typical timeline</div>
+            <p className="mt-2 text-caption text-text-2">{ex.typicalTimeline}</p>
           </div>
           <div className="hairline-t pt-6">
-            <div className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-              Technologies
-            </div>
+            <div className="text-overline text-text-3 opacity-70">Technologies</div>
             <div className="mt-3 flex flex-col gap-1.5">
               {s.technologies.map((t) => (
-                <span key={t} className="font-mono text-[12px] text-text-1 tabular">
+                <span key={t} className="text-label text-text-1 tabular">
                   {t}
                 </span>
               ))}
             </div>
           </div>
           <div className="hairline-t pt-6">
-            <div className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-              Talk to VÆRØX
-            </div>
+            <div className="text-overline text-text-3 opacity-70">Talk to VÆRØX</div>
             <a
               href="/contact"
-              className="mt-3 block font-mono text-[13px] text-text-1 underline decoration-line-3 underline-offset-4 hover:decoration-text-2"
+              className="mt-3 block text-code text-text-1 underline decoration-line-3 underline-offset-4 hover:decoration-text-2"
             >
               Start a conversation →
             </a>
             <a
               href="/work"
-              className="mt-2 block font-mono text-[12px] text-text-2 hover:text-text-1 transition-micro"
+              className="mt-2 block text-label text-text-2 hover:text-text-1 transition-micro"
             >
               See what we build →
             </a>
@@ -203,11 +196,11 @@ function ServiceDetail() {
       <div className="hairline-t mt-16 pt-8 flex items-center justify-between">
         <Link
           to="/services"
-          className="font-mono text-[11px] text-text-3 uppercase tracking-[0.14em] hover:text-text-1 transition-micro"
+          className="text-label text-text-3 uppercase tracking-[0.14em] hover:text-text-1 transition-micro"
         >
           ← All services
         </Link>
-        <span className="font-mono text-[10px] text-text-3 tabular">
+        <span className="text-metadata text-text-3">
           {SERVICES.findIndex((x) => x.slug === s.slug) + 1} / {SERVICES.length}
         </span>
       </div>

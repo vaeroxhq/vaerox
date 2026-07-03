@@ -9,7 +9,7 @@ import { PrevNext } from "@/components/doc/prev-next";
 export const Route = createFileRoute("/research/$slug")({
   head: ({ params }) => {
     const r = RESEARCH.find((x) => x.slug === params.slug);
-    const title = r ? `${r.title} — Research — Vareox` : "Research — Vareox";
+    const title = r ? `${r.title} — Research — Vaerox` : "Research — Vaerox";
     const description = r?.abstract ?? "Research publication.";
     return {
       meta: [
@@ -35,7 +35,7 @@ export const Route = createFileRoute("/research/$slug")({
       />
       <Link
         to="/research"
-        className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1"
+        className="text-label text-text-2 uppercase tracking-[0.14em] hover:text-text-1"
       >
         ← Back to archive
       </Link>
@@ -44,7 +44,9 @@ export const Route = createFileRoute("/research/$slug")({
 });
 
 function ResearchDetail() {
-  const { entry: r } = Route.useLoaderData();
+  const data = Route.useLoaderData() as any;
+  if (!data?.entry) return null;
+  const { entry: r } = data;
   const sorted = [...RESEARCH].sort((a, b) => b.published.localeCompare(a.published));
   const idx = sorted.findIndex((x) => x.slug === r.slug);
   const prev = sorted[idx + 1];
@@ -54,7 +56,7 @@ function ResearchDetail() {
     <SectionShell>
       <Breadcrumbs
         items={[
-          { label: "Vareox", to: "/" },
+          { label: "Vaerox", to: "/" },
           { label: "Research", to: "/research" },
           { label: r.category },
         ]}
@@ -75,15 +77,12 @@ function ResearchDetail() {
       <DocShell rail={<RelatedRail kind="research" id={r.slug} />}>
         <article className="max-w-[760px]">
           <DocBlock heading="Abstract">
-            <p className="text-[15px] text-text-2 leading-[1.75]">{r.abstract}</p>
+            <p className="text-body-m text-text-2">{r.abstract}</p>
           </DocBlock>
           <DocBlock heading="Tags">
             <ul className="flex items-center gap-2 flex-wrap">
               {r.tags.map((t: string) => (
-                <li
-                  key={t}
-                  className="hairline px-2 py-[2px] font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]"
-                >
+                <li key={t} className="hairline px-2 py-[2px] text-overline text-text-3">
                   {t}
                 </li>
               ))}

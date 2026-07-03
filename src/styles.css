@@ -11,38 +11,8 @@
  * Dark is canonical. Light is exact parity.
  * ───────────────────────────────────────────────────────────── */
 
-/* ── PRIMITIVE ────────────────────────────────────────────── */
+/* ── PRIMITIVE (Removed in Phase 1 for semantic OKLCH migration) ── */
 :root {
-  /* Neutrals — dark palette (canonical) */
-  --vx-black-0: #000000;
-  --vx-black-1: #0b0b0b;
-  --vx-black-2: #121212;
-  --vx-black-3: #1a1a1a;
-  --vx-gray-1: #232323;
-  --vx-gray-2: #2e2e2e;
-  --vx-gray-3: #3a3a3a;
-  --vx-gray-4: #7a7a7a;
-  --vx-gray-5: #b0b0b0;
-  --vx-white-0: #ffffff;
-
-  /* Neutrals — light palette (parity) */
-  --vx-paper-0: #ffffff;
-  --vx-paper-1: #fafafa;
-  --vx-paper-2: #f2f2f2;
-  --vx-paper-3: #e8e8e8;
-  --vx-line-l1: #e5e5e5;
-  --vx-line-l2: #d9d9d9;
-  --vx-ink-l1: #000000;
-  --vx-ink-l2: #4a4a4a;
-  --vx-ink-l3: #7a7a7a;
-
-  /* States — muted, engineering-appropriate; never bright */
-  --vx-state-success: #3fa66a; /* muted green   — production, live */
-  --vx-state-warning: #b7873a; /* muted amber   — prototype, degraded */
-  --vx-state-danger: #c2504b; /* muted red     — incident */
-  --vx-state-info: #3b82f6; /* brand blue    — research, info */
-  --vx-state-neutral: #6e6e6e; /* muted gray    — archived */
-
   /* Space (4px baseline) */
   --vx-space-0: 0;
   --vx-space-1: 2px;
@@ -110,7 +80,7 @@
   --vx-width-docs: 960px;
   --vx-width-shell: 1280px;
   --vx-width-adaptive: clamp(1024px, 90vw, 1280px);
-  
+
   /* Typography scaling — MINIMAL, INTENTIONAL
    * STRATEGY: Typography should scale very subtly across desktop (1366–3440px).
    * Screenshot A (2560px) must look nearly identical at 1366px and 1920px.
@@ -136,64 +106,42 @@
    * BREAKPOINT TOKENS — Centralized responsive system
    * These are used in all media queries for consistency
    * ─────────────────────────────────────────────────────────── */
-  --vx-bp-mobile: 767px;           /* max-width: 767px */
-  --vx-bp-tablet: 768px;           /* min-width: 768px */
-  --vx-bp-tablet-max: 1279px;      /* max-width: 1279px */
-  --vx-bp-desktop: 1280px;         /* min-width: 1280px */
-  --vx-bp-desktop-lg: 1600px;      /* min-width: 1600px (container hits max) */
-  --vx-bp-desktop-xl: 1920px;      /* min-width: 1920px */
-  --vx-bp-desktop-2k: 2560px;      /* min-width: 2560px (4K) */
-  --vx-bp-desktop-ultra: 3440px;   /* min-width: 3440px (ultra-wide) */
+  --vx-bp-mobile: 767px; /* max-width: 767px */
+  --vx-bp-tablet: 768px; /* min-width: 768px */
+  --vx-bp-tablet-max: 1279px; /* max-width: 1279px */
+  --vx-bp-desktop: 1280px; /* min-width: 1280px */
+  --vx-bp-desktop-lg: 1600px; /* min-width: 1600px (container hits max) */
+  --vx-bp-desktop-xl: 1920px; /* min-width: 1920px */
+  --vx-bp-desktop-2k: 2560px; /* min-width: 2560px (4K) */
+  --vx-bp-desktop-ultra: 3440px; /* min-width: 3440px (ultra-wide) */
 
   /* ───────────────────────────────────────────────────────────
    * CONTAINER BREAKPOINTS — Define container width at each breakpoint
    * Used by w-adaptive, w-shell, w-prose, etc.
    * ─────────────────────────────────────────────────────────── */
-  --vx-container-mobile: calc(100% - 2rem);     /* <768px: 100% - gutters */
-  --vx-container-tablet: calc(100% - 2rem);     /* 768–1279px: 100% - gutters */
-  --vx-container-desktop: clamp(1024px, 90vw, 1280px);  /* 1280px+: adaptive, max 1280px */
+  --vx-container-mobile: calc(100% - 2rem); /* <768px: 100% - gutters */
+  --vx-container-tablet: calc(100% - 2rem); /* 768–1279px: 100% - gutters */
+  --vx-container-desktop: clamp(1024px, 90vw, 1280px); /* 1280px+: adaptive, max 1280px */
 
   /* ───────────────────────────────────────────────────────────
-   * ANIMATION TIMING MATRIX — Semantic naming for all durations
-   * Approach: Use duration + easing combo for specific patterns
+   * ANIMATION TIMING MATRIX (Phase 5 Motion Design System)
+   * Semantic naming for all durations to ensure consistency
    * ─────────────────────────────────────────────────────────── */
 
-  /* Micro interactions (80ms) — Quick feedback, hover states */
-  --vx-motion-entrance-micro: 80ms;
-  --vx-motion-hover-micro: 80ms;
+  --vx-motion-instant: 0ms;
+  --vx-motion-fast: 80ms; /* For micro-interactions (hover, focus, active) */
+  --vx-motion-normal: 160ms; /* For state changes (dropdowns, colors) */
+  --vx-motion-slow: 320ms; /* For layout shifts, dialogs, page transitions */
 
-  /* Standard UI transitions (160ms) — Navigation, color changes */
-  --vx-motion-entrance-quick: 160ms;
-  --vx-motion-hover-quick: 160ms;
-  --vx-motion-transition-quick: 160ms;
+  /* Standard durations mapped to the above */
+  --vx-dur-micro: var(--vx-motion-fast);
+  --vx-dur-ui: var(--vx-motion-normal);
+  --vx-dur-layout: var(--vx-motion-slow);
 
-  /* Interactive elements (200ms) — Button press, card interactions */
-  --vx-motion-button-press: 200ms;
-  --vx-motion-link-hover: 200ms;
-  --vx-motion-glow-pulse: 200ms;
-
-  /* Standard animation duration (240ms) — Card elevation, menu slide */
-  --vx-motion-entrance-standard: 240ms;
-  --vx-motion-card-hover: 240ms;
-  --vx-motion-menu-slide: 240ms;
-  --vx-motion-underline-grow: 240ms;
-
-  /* Logo and complex animations (300ms) — Rotation, scale combos */
-  --vx-motion-logo-hover: 300ms;
-  --vx-motion-complex: 300ms;
-
-  /* Scroll reveals and sections (400ms) — Staggered child reveals */
-  --vx-motion-scroll-reveal: 400ms;
-  --vx-motion-reveal-child: 400ms;
-  --vx-motion-modal-entrance: 220ms;
-
-  /* Long sequences (600ms) — Hero entrance cascade */
+  /* Special sequences */
   --vx-motion-hero-entrance: 600ms;
-  --vx-motion-entrance-long: 600ms;
-
-  /* Infinite animations (6s, 8s) — Background floating, subtle loops */
   --vx-motion-float-subtle: 6s;
-  --vx-motion-skeleton: 1s;
+  --vx-motion-skeleton: 1.5s;
 
   /* ───────────────────────────────────────────────────────────
    * ANIMATION DELAY MATRIX — Stagger patterns for entrance sequences
@@ -207,13 +155,12 @@
   --vx-delay-stagger-6: 300ms;
 
   /* ───────────────────────────────────────────────────────────
-   * EASING FUNCTIONS — Standard motion curves across the app
-   * Following Material Design 3 motion guidelines
+   * EASING FUNCTIONS — Modern cubic-bezier curves (Phase 5)
    * ─────────────────────────────────────────────────────────── */
-  --vx-ease-standard: cubic-bezier(0.2, 0, 0.38, 0.9);
-  --vx-ease-emphasized: cubic-bezier(0.3, 0, 0.8, 0.15);
-  --vx-ease-decelerated: cubic-bezier(0, 0, 0.2, 1);
-  --vx-ease-accelerated: cubic-bezier(0.4, 0, 1, 1);
+  --vx-ease-standard: cubic-bezier(0.2, 0, 0, 1); /* Snappy, immediate response */
+  --vx-ease-emphasized: cubic-bezier(0.3, 0, 0.1, 1); /* Slightly more dramatic exit */
+  --vx-ease-decelerate: cubic-bezier(0, 0, 0.2, 1); /* For entering elements */
+  --vx-ease-accelerate: cubic-bezier(0.3, 0, 1, 1); /* For exiting elements */
 
   /* ───────────────────────────────────────────────────────────
    * COMPONENT SPACING MATRIX — Consistent padding/margin patterns
@@ -221,24 +168,24 @@
    * ─────────────────────────────────────────────────────────── */
 
   /* Card internal spacing */
-  --vx-card-padding-compact: var(--vx-space-4);     /* 8px for dense layouts */
-  --vx-card-padding-standard: var(--vx-space-6);    /* 16px for normal cards */
-  --vx-card-padding-spacious: var(--vx-space-8);    /* 32px for hero sections */
+  --vx-card-padding-compact: var(--vx-space-4); /* 8px for dense layouts */
+  --vx-card-padding-standard: var(--vx-space-6); /* 16px for normal cards */
+  --vx-card-padding-spacious: var(--vx-space-8); /* 32px for hero sections */
 
   /* Card gaps (between items in grid) */
-  --vx-card-gap-compact: var(--vx-space-2);         /* 4px for tight layouts */
-  --vx-card-gap-standard: var(--vx-space-4);        /* 8px for normal grids */
-  --vx-card-gap-spacious: var(--vx-space-6);        /* 16px for feature grids */
+  --vx-card-gap-compact: var(--vx-space-2); /* 4px for tight layouts */
+  --vx-card-gap-standard: var(--vx-space-4); /* 8px for normal grids */
+  --vx-card-gap-spacious: var(--vx-space-6); /* 16px for feature grids */
 
   /* Section spacing (vertical rhythm) */
-  --vx-section-margin-compact: var(--vx-space-8);   /* 32px between sections */
+  --vx-section-margin-compact: var(--vx-space-8); /* 32px between sections */
   --vx-section-margin-standard: var(--vx-space-10); /* 64px between sections */
   --vx-section-margin-spacious: var(--vx-space-11); /* 96px for hero sections */
 
   /* Container gutters (padding on sides) */
-  --vx-gutter-mobile: var(--vx-space-6);            /* 16px on mobile */
-  --vx-gutter-tablet: var(--vx-space-7);            /* 24px on tablet */
-  --vx-gutter-desktop: var(--vx-space-8);           /* 32px on desktop */
+  --vx-gutter-mobile: var(--vx-space-6); /* 16px on mobile */
+  --vx-gutter-tablet: var(--vx-space-7); /* 24px on tablet */
+  --vx-gutter-desktop: var(--vx-space-8); /* 32px on desktop */
 
   /* ───────────────────────────────────────────────────────────
    * FOCUS & INTERACTION STATES — Consistent across all components
@@ -249,8 +196,8 @@
   --vx-focus-ring-animate-duration: 160ms;
 
   /* Touch target minimums */
-  --vx-touch-target-min: 44px;      /* Minimum 44×44px for touch */
-  --vx-touch-target-default: 48px;  /* Default 48×48px for buttons */
+  --vx-touch-target-min: 44px; /* Minimum 44×44px for touch */
+  --vx-touch-target-default: 48px; /* Default 48×48px for buttons */
 
   /* Hover state properties */
   --vx-hover-opacity: 0.8;
@@ -262,7 +209,7 @@
    * BORDER & LINE SYSTEM — Hairline-based, no thick borders
    * ─────────────────────────────────────────────────────────── */
   --vx-border-hairline: 1px;
-  --vx-border-strong: 1px;  /* Uses line-2 instead of line-1 */
+  --vx-border-strong: 1px; /* Uses line-2 instead of line-1 */
 
   /* ───────────────────────────────────────────────────────────
    * Z-INDEX LAYERS — Consistent stacking context
@@ -298,52 +245,78 @@
     --vx-width-prose: 100%;
 
     /* Mobile spacing — More generous for touch */
-    --vx-gutter-mobile: var(--vx-space-6);  /* 16px */
-    --vx-section-margin-compact: var(--vx-space-7);  /* 24px */
-    --vx-card-padding-standard: var(--vx-space-4);   /* 8px for cards */
+    --vx-gutter-mobile: var(--vx-space-6); /* 16px */
+    --vx-section-margin-compact: var(--vx-space-7); /* 24px */
+    --vx-card-padding-standard: var(--vx-space-4); /* 8px for cards */
   }
 }
 
 /* ── SEMANTIC — DARK (canonical) ──────────────────────────── */
 :root,
 .dark {
-  --bg-canvas: var(--vx-black-0);
-  --bg-surface: var(--vx-black-1);
-  --bg-raised: var(--vx-black-2);
-  --bg-hover: var(--vx-black-3);
+  --bg-canvas: oklch(0.14 0 0);
+  --bg-surface: oklch(0.18 0 0);
+  --bg-raised: oklch(0.22 0 0);
+  --bg-hover: oklch(0.25 0 0);
 
-  --line-1: var(--vx-gray-1);
-  --line-2: var(--vx-gray-2);
-  --line-3: var(--vx-gray-3);
+  --line-1: oklch(0.3 0 0);
+  --line-2: oklch(0.38 0 0);
+  --line-3: oklch(0.45 0 0);
 
-  --text-1: var(--vx-white-0);
-  --text-2: var(--vx-gray-5);
-  --text-3: var(--vx-gray-4);
+  --text-1: oklch(0.95 0 0);
+  --text-2: oklch(0.75 0 0);
+  --text-3: oklch(0.6 0 0);
 
-  --state-success: var(--vx-state-success);
-  --state-warning: var(--vx-state-warning);
-  --state-danger: var(--vx-state-danger);
-  --state-info: var(--vx-state-info);
+  --state-success: oklch(0.63 0.11 145);
+  --state-warning: oklch(0.65 0.12 75);
+  --state-danger: oklch(0.55 0.15 25);
+  --state-info: oklch(0.6 0.15 260);
 
-  --focus-ring: var(--vx-white-0);
+  --focus-ring: oklch(0.95 0 0);
+
+  /* Decorative Graphics System (Phase 2.5 + Phase 6 Calibration) */
+  --bg-grid-color: oklch(0.35 0 0);
+  --bg-grid-opacity: 0.16;
+
+  --bg-circle-color: oklch(0.4 0 0);
+  --bg-circle-opacity: 0.15;
+
+  --bg-watermark-color: oklch(0.45 0 0);
+  --bg-watermark-opacity: 0.14;
+
+  --bg-coords-color: oklch(0.45 0 0);
+  --bg-coords-opacity: 0.25;
 }
 
 /* ── SEMANTIC — LIGHT (parity) ────────────────────────────── */
 .light {
-  --bg-canvas: var(--vx-paper-0);
-  --bg-surface: var(--vx-paper-1);
-  --bg-raised: var(--vx-paper-2);
-  --bg-hover: var(--vx-paper-3);
+  --bg-canvas: oklch(0.99 0 0);
+  --bg-surface: oklch(0.97 0 0);
+  --bg-raised: oklch(0.94 0 0);
+  --bg-hover: oklch(0.91 0 0);
 
-  --line-1: var(--vx-line-l1);
-  --line-2: var(--vx-line-l2);
-  --line-3: var(--vx-ink-l3);
+  --line-1: oklch(0.9 0 0);
+  --line-2: oklch(0.85 0 0);
+  --line-3: oklch(0.6 0 0);
 
-  --text-1: var(--vx-ink-l1);
-  --text-2: var(--vx-ink-l2);
-  --text-3: var(--vx-ink-l3);
+  --text-1: oklch(0.14 0 0);
+  --text-2: oklch(0.4 0 0);
+  --text-3: oklch(0.6 0 0);
 
-  --focus-ring: var(--vx-ink-l1);
+  --focus-ring: oklch(0.14 0 0);
+
+  /* Decorative Graphics System */
+  --bg-grid-color: oklch(0.85 0 0);
+  --bg-grid-opacity: 0.16;
+
+  --bg-circle-color: oklch(0.8 0 0);
+  --bg-circle-opacity: 0.15;
+
+  --bg-watermark-color: oklch(0.75 0 0);
+  --bg-watermark-opacity: 0.14;
+
+  --bg-coords-color: oklch(0.7 0 0);
+  --bg-coords-opacity: 0.25;
 }
 
 /* ── @theme inline — exposes semantic tokens as Tailwind utilities ── */
@@ -439,17 +412,19 @@
   input,
   textarea,
   select {
-    transition: background-color 200ms var(--vx-ease-standard),
-                border-color 200ms var(--vx-ease-standard),
-                box-shadow 200ms var(--vx-ease-standard);
+    transition:
+      background-color 200ms var(--vx-ease-standard),
+      border-color 200ms var(--vx-ease-standard),
+      box-shadow 200ms var(--vx-ease-standard);
   }
 
   input:focus,
   textarea:focus,
   select:focus {
     outline: none;
-    box-shadow: 0 0 0 2px var(--bg-canvas), 
-                0 0 0 4px var(--text-1);
+    box-shadow:
+      0 0 0 2px var(--bg-canvas),
+      0 0 0 4px var(--text-1);
   }
 
   code,
@@ -462,9 +437,22 @@
 
   /* Global link transitions */
   a {
-    transition: color 200ms var(--vx-ease-standard),
-                opacity 200ms var(--vx-ease-standard),
-                text-decoration 200ms var(--vx-ease-standard);
+    transition:
+      color var(--vx-motion-fast) var(--vx-ease-standard),
+      opacity var(--vx-motion-fast) var(--vx-ease-standard),
+      text-decoration var(--vx-motion-fast) var(--vx-ease-standard);
+  }
+
+  /* Accessibility: Prefers Reduced Motion Global Enforcement */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
@@ -488,33 +476,124 @@
 /* Adaptive Typography — scales smoothly across desktop resolutions
  * These use clamp(min, preferred, max) to ensure smooth scaling
  * Desktop 1366–3440px maintains visual consistency */
-@utility text-display-adaptive {
+@utility text-display-xl {
+  font-family: var(--vx-font-sans);
   font-size: var(--vx-text-display-adaptive);
   line-height: var(--vx-leading-tight);
   letter-spacing: var(--vx-tracking-display);
   font-weight: 500;
 }
-@utility text-3xl-adaptive {
+@utility text-display-l {
+  font-family: var(--vx-font-sans);
+  font-size: var(--vx-text-4xl-adaptive);
+  line-height: var(--vx-leading-tight);
+  letter-spacing: var(--vx-tracking-display);
+  font-weight: 500;
+}
+@utility text-heading-xl {
+  font-family: var(--vx-font-sans);
   font-size: var(--vx-text-3xl-adaptive);
   line-height: var(--vx-leading-tight);
-  letter-spacing: var(--vx-tracking-display);
+  letter-spacing: var(--vx-tracking-tight);
+  font-weight: 500;
 }
-@utility text-2xl-adaptive {
+@utility text-heading-l {
+  font-family: var(--vx-font-sans);
   font-size: var(--vx-text-2xl-adaptive);
   line-height: var(--vx-leading-tight);
-  letter-spacing: var(--vx-tracking-display);
+  letter-spacing: var(--vx-tracking-tight);
+  font-weight: 500;
 }
-@utility text-xl-adaptive {
+@utility text-heading-m {
+  font-family: var(--vx-font-sans);
   font-size: var(--vx-text-xl-adaptive);
-  line-height: var(--vx-leading-ui);
+  line-height: var(--vx-leading-tight);
+  letter-spacing: var(--vx-tracking-tight);
+  font-weight: 500;
 }
-@utility text-lg-adaptive {
+@utility text-heading-s {
+  font-family: var(--vx-font-sans);
   font-size: var(--vx-text-lg-adaptive);
-  line-height: var(--vx-leading-ui);
+  line-height: var(--vx-leading-tight);
+  letter-spacing: var(--vx-tracking-tight);
+  font-weight: 500;
 }
-@utility text-md-adaptive {
+
+/* Body / Prose Typography */
+@utility text-body-l {
+  font-family: var(--vx-font-sans);
+  font-size: var(--vx-text-lg-adaptive);
+  line-height: var(--vx-leading-prose);
+  font-weight: 400;
+}
+@utility text-body-m {
+  font-family: var(--vx-font-sans);
   font-size: var(--vx-text-md-adaptive);
+  line-height: var(--vx-leading-prose);
+  font-weight: 400;
+}
+@utility text-body-s {
+  font-family: var(--vx-font-sans);
+  font-size: var(--vx-text-sm-adaptive);
+  line-height: var(--vx-leading-prose);
+  font-weight: 400;
+}
+
+/* Metadata & UI Typography */
+@utility text-overline {
+  font-family: var(--vx-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+@utility text-metadata {
+  font-family: var(--vx-font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  font-weight: 400;
+}
+@utility text-label {
+  font-family: var(--vx-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+@utility text-nav {
+  font-family: var(--vx-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+@utility text-button {
+  font-family: var(--vx-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+@utility text-caption {
+  font-family: var(--vx-font-sans);
+  font-size: 11px;
   line-height: var(--vx-leading-ui);
+  font-weight: 400;
+}
+@utility text-code {
+  font-family: var(--vx-font-mono);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 400;
+}
+@utility text-stat {
+  font-family: var(--vx-font-mono);
+  font-size: var(--vx-text-3xl-adaptive);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  font-weight: 400;
 }
 
 /* Prose width */
@@ -622,8 +701,8 @@
   background-color: var(--bg-surface);
   box-shadow:
     inset 0 0 0 1px var(--line-2),
-    0 1px 0 0 rgba(255, 255, 255, 0.02),
-    0 12px 32px -20px rgba(0, 0, 0, 0.6);
+    0 1px 0 0 oklch(1 0 0 / 0.02),
+    0 12px 32px -20px oklch(0 0 0 / 0.4);
 }
 
 /* Reveal — brief mount fade; respects prefers-reduced-motion below */
@@ -641,19 +720,34 @@
   }
 }
 
-/* Skeleton — 1px hairline block, subtle pulse */
+/* Skeleton — 1px hairline block, subtle soft pulse */
 @utility skeleton {
   background: var(--bg-surface);
   border: 1px solid var(--line-1);
-  animation: vx-skeleton 1000ms ease-in-out infinite;
+  animation: vx-skeleton var(--vx-motion-skeleton) ease-in-out infinite;
 }
 @keyframes vx-skeleton {
   0%,
   100% {
-    opacity: 0.55;
+    opacity: 0.85;
   }
   50% {
-    opacity: 0.85;
+    opacity: 1;
+  }
+}
+
+/* Page Transition — Subtle fade and 2px up on route change */
+@utility animate-page-in {
+  animation: vx-page-in var(--vx-motion-slow) var(--vx-ease-decelerate) forwards;
+}
+@keyframes vx-page-in {
+  0% {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -745,7 +839,8 @@
 /* Subtle floating motion for background artwork — barely perceptible
    Used on blueprint circles and decorative elements to create depth */
 @keyframes vx-float-subtle {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px);
   }
   50% {
@@ -757,24 +852,26 @@
 @keyframes vx-card-hover-in {
   from {
     transform: translateY(0) scale(1);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px oklch(0 0 0 / 0.1);
   }
   to {
     transform: translateY(-4px) scale(1.01);
-    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.05), 0 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow:
+      0 8px 24px oklch(1 0 0 / 0.05),
+      0 1px 3px oklch(0 0 0 / 0.3);
   }
 }
 
 /* Focus ring animation — subtle pulse on focus */
 @keyframes vx-focus-pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 0 0 oklch(1 0 0 / 0.4);
   }
   70% {
-    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0);
+    box-shadow: 0 0 0 6px oklch(1 0 0 / 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    box-shadow: 0 0 0 0 oklch(1 0 0 / 0);
   }
 }
 
@@ -814,7 +911,8 @@
 
 /* Cursor glow effect — very subtle halo for premium feel */
 @keyframes vx-glow-pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.5;
     filter: blur(2px);
   }
@@ -831,23 +929,28 @@
 
 /* Hero entrance — applied with staggered delays per element */
 @utility animate-hero-logo {
-  animation: vx-hero-entrance var(--vx-motion-hero-entrance) var(--vx-ease-standard) var(--vx-delay-stagger-1) both;
+  animation: vx-hero-entrance var(--vx-motion-hero-entrance) var(--vx-ease-standard)
+    var(--vx-delay-stagger-1) both;
 }
 
 @utility animate-hero-metadata {
-  animation: vx-hero-entrance var(--vx-motion-hero-entrance) var(--vx-ease-standard) var(--vx-delay-stagger-2) both;
+  animation: vx-hero-entrance var(--vx-motion-hero-entrance) var(--vx-ease-standard)
+    var(--vx-delay-stagger-2) both;
 }
 
 @utility animate-hero-heading {
-  animation: vx-hero-entrance var(--vx-motion-hero-entrance) var(--vx-ease-standard) var(--vx-delay-stagger-3) both;
+  animation: vx-hero-entrance var(--vx-motion-hero-entrance) var(--vx-ease-standard)
+    var(--vx-delay-stagger-3) both;
 }
 
 @utility animate-hero-description {
-  animation: vx-hero-entrance var(--vx-motion-hero-entrance) var(--vx-ease-standard) var(--vx-delay-stagger-4) both;
+  animation: vx-hero-entrance var(--vx-motion-hero-entrance) var(--vx-ease-standard)
+    var(--vx-delay-stagger-4) both;
 }
 
 @utility animate-hero-buttons {
-  animation: vx-hero-entrance var(--vx-motion-hero-entrance) var(--vx-ease-standard) var(--vx-delay-stagger-5) both;
+  animation: vx-hero-entrance var(--vx-motion-hero-entrance) var(--vx-ease-standard)
+    var(--vx-delay-stagger-5) both;
 }
 
 /* Scroll reveal — triggered by JS when scrolled into view */
@@ -882,10 +985,11 @@
 
 /* Card hover elevation — used on services, projects, standard cards */
 @utility animate-card-hover-elevation {
-  transition: transform var(--vx-motion-card-hover) var(--vx-ease-standard), 
-              box-shadow var(--vx-motion-card-hover) var(--vx-ease-standard),
-              background-color var(--vx-dur-ui) var(--vx-ease-standard),
-              border-color var(--vx-dur-ui) var(--vx-ease-standard);
+  transition:
+    transform var(--vx-motion-card-hover) var(--vx-ease-standard),
+    box-shadow var(--vx-motion-card-hover) var(--vx-ease-standard),
+    background-color var(--vx-dur-ui) var(--vx-ease-standard),
+    border-color var(--vx-dur-ui) var(--vx-ease-standard);
   will-change: transform, box-shadow;
 }
 
@@ -893,24 +997,26 @@
 @layer base {
   .card-hover-elevation:hover {
     transform: translateY(var(--vx-hover-elevation)) scale(var(--vx-hover-scale));
-    box-shadow: 0 8px 24px rgba(255, 255, 255, var(--vx-hover-shadow-intensity)), 
-                0 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow:
+      0 8px 24px oklch(1 0 0 / var(--vx-hover-shadow-intensity)),
+      0 1px 3px oklch(0 0 0 / 0.3);
   }
 
   /* Optimize for mobile: no elevation on touch */
   @media (hover: none) and (pointer: coarse) {
     .card-hover-elevation:active {
       transform: translateY(-2px) scale(1.005);
-      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.03);
+      box-shadow: 0 4px 12px oklch(1 0 0 / 0.03);
     }
   }
 }
 
 /* Button CTA premium hover — snappy, responsive feedback */
 @utility animate-button-cta-hover {
-  transition: transform var(--vx-motion-button-press) var(--vx-ease-standard),
-              opacity var(--vx-motion-button-press) var(--vx-ease-standard),
-              box-shadow var(--vx-motion-button-press) var(--vx-ease-standard);
+  transition:
+    transform var(--vx-motion-button-press) var(--vx-ease-standard),
+    opacity var(--vx-motion-button-press) var(--vx-ease-standard),
+    box-shadow var(--vx-motion-button-press) var(--vx-ease-standard);
   will-change: transform;
 }
 
@@ -956,20 +1062,23 @@
 @layer base {
   .focus-ring-animation:focus-visible {
     outline: none;
-    box-shadow: 0 0 0 var(--vx-focus-ring-width) var(--bg-canvas), 
-                0 0 0 calc(var(--vx-focus-ring-width) + var(--vx-focus-ring-offset)) var(--vx-focus-ring-color);
+    box-shadow:
+      0 0 0 var(--vx-focus-ring-width) var(--bg-canvas),
+      0 0 0 calc(var(--vx-focus-ring-width) + var(--vx-focus-ring-offset))
+        var(--vx-focus-ring-color);
   }
 }
 
 /* Link hover glow — subtle brightening */
 @utility hover-text-glow {
-  transition: color var(--vx-motion-link-hover) var(--vx-ease-standard), 
-              text-shadow var(--vx-motion-link-hover) var(--vx-ease-standard);
+  transition:
+    color var(--vx-motion-link-hover) var(--vx-ease-standard),
+    text-shadow var(--vx-motion-link-hover) var(--vx-ease-standard);
 }
 
 @layer base {
   .hover-text-glow:hover {
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+    text-shadow: 0 0 8px oklch(1 0 0 / 0.3);
   }
 }
 
@@ -1109,8 +1218,9 @@
 /* Focus and interaction states */
 @utility focus-ring {
   outline: none;
-  box-shadow: 0 0 0 var(--vx-focus-ring-width) var(--bg-canvas), 
-              0 0 0 calc(var(--vx-focus-ring-width) + var(--vx-focus-ring-offset)) var(--vx-focus-ring-color);
+  box-shadow:
+    0 0 0 var(--vx-focus-ring-width) var(--bg-canvas),
+    0 0 0 calc(var(--vx-focus-ring-width) + var(--vx-focus-ring-offset)) var(--vx-focus-ring-color);
 }
 
 @utility interactive {
@@ -1176,27 +1286,36 @@
 
 @media (max-width: 767px) {
   /* Safe area support for notched devices */
-  html, body {
+  html,
+  body {
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
   }
 
   /* Container gutters on mobile */
-  .w-adaptive, .w-shell {
+  .w-adaptive,
+  .w-shell {
     max-width: 100%;
     padding-left: var(--vx-gutter-mobile);
     padding-right: var(--vx-gutter-mobile);
   }
 
   /* Touch targets: minimum 44px × 44px for finger size */
-  button, a[role="button"], [role="button"], input[type="checkbox"], input[type="radio"] {
+  button,
+  a[role="button"],
+  [role="button"],
+  input[type="checkbox"],
+  input[type="radio"] {
     min-height: var(--vx-touch-target-min);
     min-width: var(--vx-touch-target-min);
     padding: 0.75rem 1rem;
   }
 
   /* Stack all grid layouts vertically on mobile */
-  .grid-cols-2, .grid-cols-3, .grid-cols-4, .grid-cols-6 {
+  .grid-cols-2,
+  .grid-cols-3,
+  .grid-cols-4,
+  .grid-cols-6 {
     grid-template-columns: 1fr !important;
   }
 
@@ -1262,8 +1381,8 @@
   }
 
   /* Form controls: full width, larger for touch, font 16px prevents zoom */
-  input, 
-  textarea, 
+  input,
+  textarea,
   select {
     width: 100%;
     padding: var(--vx-space-4);
@@ -1278,7 +1397,7 @@
       margin-top: var(--vx-section-margin-compact);
       margin-bottom: var(--vx-section-margin-compact);
     }
-    
+
     .text-display-adaptive {
       margin-bottom: 1rem;
     }
@@ -1292,14 +1411,17 @@
 
 @media (min-width: 768px) and (max-width: 1279px) {
   /* Tablet container: wider than mobile but not full desktop */
-  .w-adaptive, .w-shell {
+  .w-adaptive,
+  .w-shell {
     max-width: 100%;
     padding-left: var(--vx-gutter-tablet);
     padding-right: var(--vx-gutter-tablet);
   }
 
   /* Grid layouts on tablet: 2 columns */
-  .grid-cols-3, .grid-cols-4, .grid-cols-6 {
+  .grid-cols-3,
+  .grid-cols-4,
+  .grid-cols-6 {
     grid-template-columns: repeat(2, 1fr) !important;
   }
 
@@ -1322,7 +1444,8 @@
 
 @media (min-width: 1280px) {
   /* Desktop container: adaptive width with max-width */
-  .w-adaptive, .w-shell {
+  .w-adaptive,
+  .w-shell {
     max-width: var(--vx-width-shell);
     padding-left: var(--vx-gutter-desktop);
     padding-right: var(--vx-gutter-desktop);

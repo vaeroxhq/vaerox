@@ -6,15 +6,15 @@ import { Breadcrumbs } from "@/components/doc/breadcrumbs";
 export const Route = createFileRoute("/api/")({
   head: () => ({
     meta: [
-      { title: "API — Vareox" },
+      { title: "API — Vaerox" },
       {
         name: "description",
-        content: "Public and internal API surfaces across the Vareox platform.",
+        content: "Public and internal API surfaces across the Vaerox platform.",
       },
-      { property: "og:title", content: "API — Vareox" },
+      { property: "og:title", content: "API — Vaerox" },
       {
         property: "og:description",
-        content: "Public and internal API surfaces across the Vareox platform.",
+        content: "Public and internal API surfaces across the Vaerox platform.",
       },
     ],
   }),
@@ -25,7 +25,7 @@ function ApiIndex() {
   const stable = APIS.filter((a) => a.stability === "Stable").length;
   return (
     <SectionShell>
-      <Breadcrumbs items={[{ label: "Vareox", to: "/" }, { label: "API" }]} />
+      <Breadcrumbs items={[{ label: "Vaerox", to: "/" }, { label: "API" }]} />
       <PageHeader
         section="§ · API"
         title="Public interfaces."
@@ -53,20 +53,20 @@ function ApiIndex() {
               className="group card-hover hover:card-hover-on bg-canvas p-5 flex flex-col h-full"
             >
               <header className="flex items-baseline justify-between">
-                <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
+                <span className="text-overline text-text-3">
                   {a.code} · {a.version}
                 </span>
-                <span className="font-mono text-[10px] text-text-3 tabular">{a.stability}</span>
+                <span className="text-metadata text-text-3">{a.stability}</span>
               </header>
-              <h3 className="mt-3 font-display text-[20px] text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.018em]">
+              <h3 className="mt-3 font-display text-heading-m text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.018em]">
                 {a.name}
               </h3>
-              <p className="mt-2 text-[13.5px] text-text-2 leading-[1.6]">{a.summary}</p>
+              <p className="mt-2 text-body-s text-text-2">{a.summary}</p>
               <div className="mt-4 pt-4 hairline-t flex items-center justify-between">
-                <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
+                <span className="text-overline text-text-3">
                   {a.owner} · {a.system}
                 </span>
-                <span className="font-mono text-[10px] text-text-3 tabular">
+                <span className="text-metadata text-text-3">
                   {a.endpoints.length.toString().padStart(2, "0")} endpoints →
                 </span>
               </div>

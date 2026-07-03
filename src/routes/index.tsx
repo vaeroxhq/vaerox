@@ -11,14 +11,14 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       {
-        title: "Vareox — AI & Software Engineering Studio | Production AI Agents & Custom Software",
+        title: "Vaerox — AI & Software Engineering Studio | Production AI Agents & Custom Software",
       },
       {
         name: "description",
         content:
-          "Vareox is an independent AI & software engineering studio building production-grade AI agents, SaaS products, internal tools, backend platforms, and workflow automation for startups, SMBs, and enterprises. Based in IST timezone, remote worldwide, typical response within 24 hours.",
+          "Vaerox is an independent AI & software engineering studio building production-grade AI agents, SaaS products, internal tools, backend platforms, and workflow automation for startups, SMBs, and enterprises. Based in IST timezone, remote worldwide, typical response within 24 hours.",
       },
-      { property: "og:title", content: "Vareox — AI & Software Engineering Studio" },
+      { property: "og:title", content: "Vaerox — AI & Software Engineering Studio" },
       {
         property: "og:description",
         content:
@@ -26,7 +26,7 @@ export const Route = createFileRoute("/")({
       },
       { name: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: "Vareox — AI & Software Engineering Studio" },
+      { name: "twitter:title", content: "Vaerox — AI & Software Engineering Studio" },
       {
         name: "keywords",
         content:
@@ -43,11 +43,11 @@ export const Route = createFileRoute("/")({
  * → Why (standards) → Contact (start).
  * Industries, engagements, principles, graph, and notes previews
  * were removed because they duplicate their own pages.
- * 
+ *
  * Layout: Adaptive container scales 90vw (clamped 1024–1280px) for
  * visual consistency across all desktop resolutions (1366–3440px).
  * Padding is fixed at px-8 for all desktops, only adjusts on tablet/mobile.
- * 
+ *
  * Strategy: Not a fluid layout. Each resolution should look like a perfectly
  * scaled version of Screenshot A (2560×1600). Typography uses reduced vw% to
  * minimize scaling differences across desktop resolutions.

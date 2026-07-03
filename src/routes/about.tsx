@@ -6,13 +6,13 @@ import { DocShell, DocBlock } from "@/components/doc/doc-shell";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Vareox" },
+      { title: "About — Vaerox" },
       {
         name: "description",
         content:
-          "Vareox is an independent AI & software engineering studio. What it is, how it works, and how to read the rest of the site.",
+          "Vaerox is an independent AI & software engineering studio. What it is, how it works, and how to read the rest of the site.",
       },
-      { property: "og:title", content: "About — Vareox" },
+      { property: "og:title", content: "About — Vaerox" },
       {
         property: "og:description",
         content:
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/about")({
 function AboutPage() {
   return (
     <SectionShell>
-      <Breadcrumbs items={[{ label: "Vareox", to: "/" }, { label: "About" }]} />
+      <Breadcrumbs items={[{ label: "Vaerox", to: "/" }, { label: "About" }]} />
 
       <PageHeader
         section="§ · About"
@@ -48,7 +48,7 @@ function AboutPage() {
       <DocShell>
         <article className="max-w-[720px]">
           <DocBlock heading="What we do">
-            <p className="text-[14.5px] text-text-2 leading-[1.75]">
+            <p className="text-body-m text-text-2">
               We build AI agents, SaaS products, internal tools, backend platforms, and workflow
               automation. Discovery, architecture, implementation, deployment, and maintenance —
               end-to-end, in one team.
@@ -56,7 +56,7 @@ function AboutPage() {
           </DocBlock>
 
           <DocBlock heading="How we work">
-            <p className="text-[14.5px] text-text-2 leading-[1.75] mb-6">
+            <p className="text-body-m text-text-2 mb-6">
               Fixed-scope MVPs, capped-cost builds, and long-form retainers. Written proposal inside
               a week, weekly demo cadence, and a hand-off package on delivery. No open-ended
               time-and-materials contracts.
@@ -88,12 +88,12 @@ function AboutPage() {
                   key={num}
                   className={`grid grid-cols-[56px_1fr] gap-4 px-4 py-4 ${i < arr.length - 1 ? "hairline-b" : ""}`}
                 >
-                  <span className="font-mono text-[11px] text-text-3 tabular pt-0.5">{num}</span>
+                  <span className="text-metadata text-text-3 pt-0.5">{num}</span>
                   <div>
-                    <div className="font-display text-[14px] text-text-1 tracking-[-0.005em] mb-1">
+                    <div className="text-heading-s text-text-1 tracking-[-0.005em] mb-1">
                       {title}
                     </div>
-                    <p className="text-[12px] text-text-2 leading-[1.55]">{desc}</p>
+                    <p className="text-caption text-text-2 leading-[1.55]">{desc}</p>
                   </div>
                 </li>
               ))}
@@ -116,10 +116,10 @@ function AboutPage() {
                   key={path}
                   className={`grid grid-cols-[160px_1fr] gap-4 px-4 py-3 items-baseline ${i < arr.length - 1 ? "hairline-b" : ""}`}
                 >
-                  <a href={path} className="font-mono text-[12px] text-text-1 hover:text-text-2">
+                  <a href={path} className="text-label text-text-1 hover:text-text-2">
                     {path}
                   </a>
-                  <span className="text-[13px] text-text-2">{body}</span>
+                  <span className="text-body-s text-text-2">{body}</span>
                 </li>
               ))}
             </ul>

@@ -23,7 +23,7 @@ export function ProjectGrid() {
   const ref = useScrollReveal();
 
   return (
-    <section ref={ref} className="mt-10 mb-24">
+    <section ref={ref} className="relative">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-line-1 hairline">
         {PROJECTS.map((p) => (
           <ProjectCard key={p.slug} project={p} />
@@ -62,18 +62,16 @@ function ProjectCard({ project }: { project: Project }) {
       />
 
       <header className="flex items-baseline justify-between">
-        <span className="font-mono text-[11px] text-text-3 uppercase tracking-[0.14em] tabular">
-          {index}
-        </span>
+        <span className="text-label text-text-3 tabular">{index}</span>
         <StatusPill status={status} />
       </header>
 
       <div className="hairline-t mt-4" />
 
-      <h3 className="font-display font-medium text-[17px] mt-4 tracking-[-0.022em] text-text-2 transition-micro group-hover:text-text-1">
+      <h3 className="text-heading-s mt-4 text-text-2 transition-micro group-hover:text-text-1">
         {name}
       </h3>
-      <p className="mt-2 text-[13px] text-text-2 leading-[1.55]">{description}</p>
+      <p className="mt-2 text-body-s text-text-2">{description}</p>
 
       {/* Engineering metadata rail */}
       <dl className="mt-6 pt-4 hairline-t grid grid-cols-2 gap-y-2 gap-x-4">
@@ -100,14 +98,12 @@ function ProjectCard({ project }: { project: Project }) {
       )}
 
       <div className="mt-6 pt-4 hairline-t flex items-center justify-between">
-        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-          Case study
-        </span>
+        <span className="text-overline text-text-3">Case study</span>
         <a
           href={`/projects/${project.slug}`}
-          className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] transition-micro group-hover:text-text-1 active:opacity-50"
+          className="text-button text-text-2 transition-micro group-hover:text-text-1 active:opacity-50"
         >
-          <span className="inline-block transition-transform duration-200 ease-out group-hover:translate-x-[3px]">
+          <span className="inline-block transition-transform transition-ui group-hover:translate-x-[3px]">
             View →
           </span>
         </a>
@@ -126,7 +122,7 @@ function StatusPill({ status }: { status: ProjectStatus }) {
           ? "text-info"
           : "text-text-3";
   return (
-    <span className="inline-flex items-center gap-2 font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
+    <span className="inline-flex items-center gap-2 text-overline text-text-3">
       <span className={`dot ${tone}`} aria-hidden="true" />
       {status}
     </span>
@@ -144,8 +140,8 @@ function Meta({
 }) {
   return (
     <div className={`flex items-baseline justify-between gap-3 ${className}`}>
-      <dt className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">{label}</dt>
-      <dd className="font-mono text-[11px] text-text-2 tabular truncate">{value}</dd>
+      <dt className="text-overline text-text-3">{label}</dt>
+      <dd className="text-label text-text-2 tabular truncate">{value}</dd>
     </div>
   );
 }

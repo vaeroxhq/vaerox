@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -28,7 +29,7 @@ function NotFoundComponent() {
         <div className="mt-6">
           <Link
             to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-micro hover:bg-primary/90"
           >
             Go home
           </Link>
@@ -60,13 +61,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-micro hover:bg-primary/90"
           >
             Try again
           </button>
           <a
             href="/"
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
+            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-micro hover:bg-accent"
           >
             Go home
           </a>
@@ -82,13 +83,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "color-scheme", content: "dark light" },
-      { title: "Vareox — AI & Software Engineering Studio" },
+      { title: "Vaerox — AI & Software Engineering Studio" },
       {
         name: "description",
         content:
-          "Vareox is an independent AI & software engineering studio. We design, build, deploy and maintain modern software systems — AI agents, SaaS products, internal tools, dashboards, backend platforms, and workflow automation — for startups, growing businesses and enterprise teams.",
+          "Vaerox is an independent AI & software engineering studio. We design, build, deploy and maintain modern software systems — AI agents, SaaS products, internal tools, dashboards, backend platforms, and workflow automation — for startups, growing businesses and enterprise teams.",
       },
-      { property: "og:title", content: "Vareox — AI & Software Engineering Studio" },
+      { property: "og:title", content: "Vaerox — AI & Software Engineering Studio" },
       {
         property: "og:description",
         content:
@@ -102,7 +103,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:image:type", content: "image/png" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: "/vaerox-mark.png" },
-      { name: "theme-color", content: "#000000" },
+      { name: "theme-color", content: "#161616" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
       { name: "apple-mobile-web-app-status-bar-style", content: "black-translucent" },
     ],
@@ -142,6 +143,7 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const routerState = useRouterState();
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -151,7 +153,7 @@ function RootComponent() {
             <div className="sticky top-0 z-40">
               <TopNav />
             </div>
-            <main className="flex-1">
+            <main key={routerState.location.pathname} className="flex-1 animate-page-in">
               {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
               <Outlet />
             </main>

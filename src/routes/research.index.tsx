@@ -19,12 +19,12 @@ const FILTERS: (ResearchCategory | "All")[] = [
 export const Route = createFileRoute("/research/")({
   head: () => ({
     meta: [
-      { title: "Research — Vareox" },
+      { title: "Research — Vaerox" },
       {
         name: "description",
         content: "Publication archive — papers, preprints, working drafts, and dataset assets.",
       },
-      { property: "og:title", content: "Research — Vareox" },
+      { property: "og:title", content: "Research — Vaerox" },
       {
         property: "og:description",
         content: "Publication archive — papers, preprints, working drafts, and dataset assets.",
@@ -81,19 +81,15 @@ function ResearchIndex() {
       >
         <div className="flex items-baseline justify-between gap-6 flex-wrap">
           <div className="min-w-0">
-            <div className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-              § · Research / Assets
-            </div>
-            <div className="mt-2 font-display text-[20px] text-text-1 tracking-[-0.015em]">
-              Research Assets
-            </div>
-            <p className="mt-2 text-[13.5px] text-text-2 leading-[1.65] max-w-[68ch]">
+            <div className="text-overline text-text-3 opacity-70">§ · Research / Assets</div>
+            <div className="mt-2 text-heading-m">Research Assets</div>
+            <p className="mt-2 text-body-s text-text-2 max-w-[68ch]">
               Canonical registry of datasets, evaluation corpora, annotation pipelines, and
               benchmark resources across medical imaging, agriculture, industrial vision, remote
               sensing, and general computer vision.
             </p>
           </div>
-          <div className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] group-hover:text-text-1">
+          <div className="text-label text-text-2 uppercase tracking-[0.14em] group-hover:text-text-1">
             Browse {DATASETS.length.toString().padStart(2, "0")} →
           </div>
         </div>
@@ -116,7 +112,7 @@ function ResearchIndex() {
           </li>
         ))}
         {items.length === 0 && (
-          <li className="bg-canvas px-4 py-10 text-center font-mono text-[11px] text-text-3 uppercase tracking-[0.14em]">
+          <li className="bg-canvas px-4 py-10 text-center text-label text-text-3 uppercase tracking-[0.14em]">
             No publications match the current filter.
           </li>
         )}
@@ -135,25 +131,16 @@ function PublicationRow({ entry: r }: { entry: ResearchEntry }) {
       <div className="grid grid-cols-1 md:grid-cols-[1fr_220px] gap-6">
         <div>
           <div className="flex items-center gap-3 flex-wrap">
-            <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-              {r.category}
-            </span>
-            <span className="font-mono text-[10px] text-text-3 opacity-60">·</span>
-            <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-              {r.status}
-            </span>
+            <span className="text-overline text-text-3">{r.category}</span>
+            <span className="text-metadata text-text-3 opacity-60">·</span>
+            <span className="text-overline text-text-3">{r.status}</span>
           </div>
-          <h2 className="font-display text-[22px] mt-3 tracking-[-0.02em] transition-ui group-hover:-translate-y-[1px]">
-            {r.title}
-          </h2>
-          <p className="mt-3 text-[14px] text-text-2 leading-[1.65] max-w-[68ch]">{r.abstract}</p>
+          <h2 className="text-heading-l transition-ui group-hover:-translate-y-[1px]">{r.title}</h2>
+          <p className="mt-3 text-body-m text-text-2 max-w-[68ch]">{r.abstract}</p>
 
           <ul className="mt-4 flex items-center gap-2 flex-wrap">
             {r.tags.map((t) => (
-              <li
-                key={t}
-                className="hairline px-2 py-[2px] font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]"
-              >
+              <li key={t} className="hairline px-2 py-[2px] text-overline text-text-3">
                 {t}
               </li>
             ))}
@@ -166,7 +153,7 @@ function PublicationRow({ entry: r }: { entry: ResearchEntry }) {
             <Field label="Reading" value={`${r.readingMinutes}m`} />
             <Field label="Authors" value={r.authors.join(", ")} />
           </dl>
-          <div className="mt-4 font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] group-hover:text-text-1">
+          <div className="mt-4 text-label text-text-2 uppercase tracking-[0.14em] group-hover:text-text-1">
             Read →
           </div>
         </aside>
@@ -178,10 +165,8 @@ function PublicationRow({ entry: r }: { entry: ResearchEntry }) {
 function Field({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <dt className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-        {label}
-      </dt>
-      <dd className="mt-1 font-mono text-[12px] text-text-2 tabular">{value}</dd>
+      <dt className="text-overline text-text-3 opacity-70">{label}</dt>
+      <dd className="mt-1 text-label text-text-2 tabular">{value}</dd>
     </div>
   );
 }

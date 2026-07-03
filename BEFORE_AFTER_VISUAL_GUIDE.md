@@ -3,6 +3,7 @@
 ## Responsive Design: Typography Scaling
 
 ### BEFORE: Too Aggressive Scaling
+
 ```
 Display Heading at Different Viewports:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -25,6 +26,7 @@ Display Heading at Different Viewports:
 ```
 
 ### AFTER: Subtle, Controlled Scaling
+
 ```
 Display Heading at Different Viewports:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -51,16 +53,17 @@ Display Heading at Different Viewports:
 ## Responsive Design: Container Width
 
 ### BEFORE: Unlimited Growth
+
 ```
 Container Width at Different Viewports:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 1366px:  [═════════════════════════════════════════════]
          1256px container width
-         
+
 1920px:  [════════════════════════════════════════════════════════════════════════]
          1766px container width
-         
+
 2560px:  [═══════════════════════════════════════════════════════════════════════════════════════════════════════════════]
          2355px container width
 
@@ -73,16 +76,17 @@ Container Width at Different Viewports:
 ```
 
 ### AFTER: Locked Maximum Width
+
 ```
 Container Width at Different Viewports:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 1366px:  [═════════════════════════════════════════]
          1229px container width
-         
+
 1920px:  [═════════════════════════════════════════════]
          1280px (hits max)
-         
+
 2560px:  [═════════════════════════════════════════════]
          1280px (max maintained)
 
@@ -99,6 +103,7 @@ Container Width at Different Viewports:
 ## Blueprint Overlay: Decorative Elements
 
 ### BEFORE: Too Much Movement
+
 ```
 Blueprint Circle Size at Different Viewports:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -120,6 +125,7 @@ Blueprint Circle Size at Different Viewports:
 ```
 
 ### AFTER: Subtle, Anchored Positioning
+
 ```
 Blueprint Circle Size at Different Viewports:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -145,6 +151,7 @@ Blueprint Circle Size at Different Viewports:
 ## Premium Motion: 7 Key Interactions
 
 ### 1. Blueprint Circles — Floating Motion
+
 ```
 Before hover (idle):
   ◎◎◎◎◎◎◎◎◎◎◎◎  (circles sit still)
@@ -159,6 +166,7 @@ Timing: ease-in-out
 ```
 
 ### 2. Service Cards — Hover Elevation
+
 ```
 Before (no hover):
   ┌─────────────────┐
@@ -178,6 +186,7 @@ Easing: cubic-bezier (smooth)
 ```
 
 ### 3. Logo — Rotation on Hover
+
 ```
 Before hover (normal):
   ◆─ (logo at 0°, 1x scale)
@@ -192,6 +201,7 @@ Scale: 1.02x
 ```
 
 ### 4. CTA Buttons — Responsive Scale
+
 ```
 Before hover (idle):
   [BOOK A CALL →]  (normal state)
@@ -209,6 +219,7 @@ Active Duration: instant
 ```
 
 ### 5. Navigation Links — Underline Growth
+
 ```
 Before hover:
   SERVICES (no underline)
@@ -224,6 +235,7 @@ Scale: 0 → 1
 ```
 
 ### 6. Scroll Reveals — Fade + Slide
+
 ```
 Before scroll (off-screen):
   [Content below fold...]
@@ -239,6 +251,7 @@ Stagger: Children offset by 60ms each
 ```
 
 ### 7. Focus Rings — Keyboard Navigation
+
 ```
 Before focus (mouse only):
   [INPUT FIELD]  (no indication)
@@ -258,23 +271,24 @@ Animation: Smooth appearance
 
 ## Interaction Before & After Summary
 
-| Interaction | Before | After | Improvement |
-|-------------|--------|-------|------------|
-| Service Cards | Static hover | Elevation + shadow | Premium feel |
-| Project Cards | Static hover | Elevation + shadow | Premium feel |
-| Logo | Static opacity | Rotation + scale | Playful brand |
-| CTA Buttons | Text only | Scale + opacity | Responsive feedback |
-| Navigation | Basic underline | Smooth growth | Directional indication |
-| Blueprint | Static | Floating motion | Depth and life |
-| Focus Rings | Subtle outline | Animated double outline | Accessibility |
-| Global Links | No transition | Smooth color transition | Polished feel |
-| Scroll Reveal | No animation | Fade + slide | Living page |
+| Interaction   | Before          | After                   | Improvement            |
+| ------------- | --------------- | ----------------------- | ---------------------- |
+| Service Cards | Static hover    | Elevation + shadow      | Premium feel           |
+| Project Cards | Static hover    | Elevation + shadow      | Premium feel           |
+| Logo          | Static opacity  | Rotation + scale        | Playful brand          |
+| CTA Buttons   | Text only       | Scale + opacity         | Responsive feedback    |
+| Navigation    | Basic underline | Smooth growth           | Directional indication |
+| Blueprint     | Static          | Floating motion         | Depth and life         |
+| Focus Rings   | Subtle outline  | Animated double outline | Accessibility          |
+| Global Links  | No transition   | Smooth color transition | Polished feel          |
+| Scroll Reveal | No animation    | Fade + slide            | Living page            |
 
 ---
 
 ## User Experience Improvements
 
 ### Desktop 1366px User Before Refactoring
+
 ```
 1. Opens website at 1366×768
 2. Reads hero text (68px, seems small)
@@ -292,6 +306,7 @@ Experience: CONFUSING, INCONSISTENT
 ```
 
 ### Desktop 1366px User After Refactoring
+
 ```
 1. Opens website at 1366×768
 2. Reads hero text (61px, perfect)
@@ -313,6 +328,7 @@ Experience: CONSISTENT, PREMIUM, ALIVE
 ## Motion: Quantity vs Quality
 
 ### Before: Minimal Motion
+
 ```
 Animations used: 3 (basic entrance, hover, scroll reveal)
 Motion level: 2/10 (feels static)
@@ -321,6 +337,7 @@ User engagement: Basic
 ```
 
 ### After: Premium Motion
+
 ```
 Animations used: 7 (core interactions)
 Motion level: 5/10 (refined, alive)
@@ -334,6 +351,7 @@ Motion philosophy: Apple/Stripe-like restraint
 ## Accessibility Improvements
 
 ### Before
+
 ```
 Keyboard navigation:
   ❌ Focus rings barely visible
@@ -351,6 +369,7 @@ Motion preference:
 ```
 
 ### After
+
 ```
 Keyboard navigation:
   ✅ Focus rings bright and animated
@@ -373,6 +392,7 @@ Motion preference:
 ## Performance Impact
 
 ### Before
+
 ```
 CLS (Cumulative Layout Shift): 0.05 (from responsive changes)
 FCP (First Contentful Paint): 1.2s
@@ -382,6 +402,7 @@ Main thread blocking: Occasional
 ```
 
 ### After
+
 ```
 CLS (Cumulative Layout Shift): 0 (animations don't trigger shift)
 FCP (First Contentful Paint): 1.2s (unchanged)
@@ -395,6 +416,7 @@ Main thread blocking: None (GPU-accelerated)
 ## Browser Support
 
 ### Before
+
 ```
 Chrome 80+: ✅ Works
 Firefox 76+: ✅ Works
@@ -404,6 +426,7 @@ Edge: ✅ Works
 ```
 
 ### After
+
 ```
 Chrome 90+: ✅ Full support + animations
 Firefox 88+: ✅ Full support + animations
@@ -417,6 +440,7 @@ Edge 90+: ✅ Full support + animations
 ## Code Quality Improvements
 
 ### CSS Organization Before
+
 ```
 styles.css: 600 lines
 Animations: Mixed throughout
@@ -426,6 +450,7 @@ Documentation: Minimal
 ```
 
 ### CSS Organization After
+
 ```
 styles.css: 800+ lines (documented)
 Animations: Organized section
@@ -435,6 +460,7 @@ Documentation: Comprehensive inline comments
 ```
 
 ### Utility Classes Before
+
 ```
 animate-hero-entrance: 1
 animate-scroll-reveal: 1
@@ -443,6 +469,7 @@ Reusability: Limited
 ```
 
 ### Utility Classes After
+
 ```
 animate-card-hover-elevation: Available
 animate-button-cta-hover: Available
@@ -458,6 +485,7 @@ Reusability: High (can be applied to any component)
 ## Visual Hierarchy Preservation
 
 ### Before: Inconsistent Hierarchy
+
 ```
 1366px: Hero headline 68px (hierarchy feels light)
 1920px: Hero headline 96px (hierarchy feels heavy)
@@ -467,6 +495,7 @@ Result: Visual hierarchy changes across resolutions
 ```
 
 ### After: Consistent Hierarchy
+
 ```
 1366px: Hero headline 61px (intentional, balanced)
 1920px: Hero headline 76px (proportionally scaled)
@@ -480,6 +509,7 @@ Result: Visual hierarchy maintained across all resolutions
 ## Future-Proofing
 
 ### Extensibility Before
+
 ```
 Adding new animation: Find similar code, copy-paste
 Timing consistency: Varies across animations
@@ -488,6 +518,7 @@ Maintenance: Difficult, easy to break
 ```
 
 ### Extensibility After
+
 ```
 Adding new animation: Use CSS custom properties
 Timing consistency: Centralized in :root variables

@@ -15,17 +15,17 @@ const FILTERS: (DatasetCategory | "All")[] = ["All", ...DATASET_CATEGORIES];
 export const Route = createFileRoute("/research/assets/")({
   head: () => ({
     meta: [
-      { title: "Research Assets — Vareox" },
+      { title: "Research Assets — Vaerox" },
       {
         name: "description",
         content:
           "Canonical registry of research assets — datasets, evaluation corpora, annotation pipelines, and benchmark resources across medical, agricultural, industrial, remote sensing, and computer vision domains.",
       },
-      { property: "og:title", content: "Research Assets — Vareox" },
+      { property: "og:title", content: "Research Assets — Vaerox" },
       {
         property: "og:description",
         content:
-          "Datasets, evaluation corpora, annotation pipelines, and benchmark resources maintained by the Vareox Engineering Lab.",
+          "Datasets, evaluation corpora, annotation pipelines, and benchmark resources maintained by the Vaerox Engineering Lab.",
       },
     ],
   }),
@@ -94,18 +94,16 @@ function AssetsIndex() {
           </li>
         ))}
         {items.length === 0 && (
-          <li className="bg-canvas px-4 py-10 text-center font-mono text-[11px] text-text-3 uppercase tracking-[0.14em]">
+          <li className="bg-canvas px-4 py-10 text-center text-label text-text-3 uppercase tracking-[0.14em]">
             No assets match the current filter.
           </li>
         )}
       </ul>
 
       <section className="mt-16">
-        <div className="font-mono text-[10px] text-text-3 uppercase tracking-[0.18em] mb-3">
-          § · Planned research areas
-        </div>
+        <div className="text-overline text-text-3 mb-3">§ · Planned research areas</div>
         <div className="hairline bg-canvas p-5">
-          <p className="text-[13.5px] text-text-2 leading-[1.7] max-w-[68ch]">
+          <p className="text-body-s text-text-2 leading-[1.7] max-w-[68ch]">
             Categories reserved for future expansion. Nothing lives under them yet — content is
             added only when real assets exist.
           </p>
@@ -117,14 +115,12 @@ function AssetsIndex() {
                   i < PLANNED_CATEGORIES.length - 1 ? "hairline-b" : ""
                 }`}
               >
-                <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-                  Planned
-                </span>
+                <span className="text-overline text-text-3 opacity-70">Planned</span>
                 <span>
-                  <span className="font-display text-[14px] text-text-1 tracking-[-0.01em] block">
+                  <span className="text-heading-s text-text-1 tracking-[-0.01em] block">
                     {p.name}
                   </span>
-                  <span className="mt-1 block text-[13px] text-text-2 leading-[1.55]">
+                  <span className="mt-1 block text-body-s text-text-2 leading-[1.55]">
                     {p.rationale}
                   </span>
                 </span>
@@ -147,29 +143,18 @@ function AssetRow({ entry: d }: { entry: Dataset }) {
       <div className="grid grid-cols-1 md:grid-cols-[1fr_220px] gap-6">
         <div>
           <div className="flex items-center gap-3 flex-wrap">
-            <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-              {d.category}
-            </span>
-            <span className="font-mono text-[10px] text-text-3 opacity-60">·</span>
-            <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-              {d.status}
-            </span>
-            <span className="font-mono text-[10px] text-text-3 opacity-60">·</span>
-            <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-              {d.difficulty}
-            </span>
+            <span className="text-overline text-text-3">{d.category}</span>
+            <span className="text-metadata text-text-3 opacity-60">·</span>
+            <span className="text-overline text-text-3">{d.status}</span>
+            <span className="text-metadata text-text-3 opacity-60">·</span>
+            <span className="text-overline text-text-3">{d.difficulty}</span>
           </div>
-          <h2 className="font-display text-[22px] mt-3 tracking-[-0.02em] transition-ui group-hover:-translate-y-[1px]">
-            {d.name}
-          </h2>
-          <p className="mt-3 text-[14px] text-text-2 leading-[1.65] max-w-[68ch]">{d.overview}</p>
+          <h2 className="text-heading-l transition-ui group-hover:-translate-y-[1px]">{d.name}</h2>
+          <p className="mt-3 text-body-m text-text-2 max-w-[68ch]">{d.overview}</p>
 
           <ul className="mt-4 flex items-center gap-2 flex-wrap">
             {d.tags.map((t) => (
-              <li
-                key={t}
-                className="hairline px-2 py-[2px] font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]"
-              >
+              <li key={t} className="hairline px-2 py-[2px] text-overline text-text-3">
                 {t}
               </li>
             ))}
@@ -183,7 +168,7 @@ function AssetRow({ entry: d }: { entry: Dataset }) {
             <Field label="Size" value={d.size ?? "—"} />
             <Field label="Updated" value={d.updated} />
           </dl>
-          <div className="mt-4 font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] group-hover:text-text-1">
+          <div className="mt-4 text-label text-text-2 uppercase tracking-[0.14em] group-hover:text-text-1">
             Open →
           </div>
         </aside>
@@ -195,10 +180,8 @@ function AssetRow({ entry: d }: { entry: Dataset }) {
 function Field({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <dt className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-        {label}
-      </dt>
-      <dd className="mt-1 font-mono text-[12px] text-text-2 tabular">{value}</dd>
+      <dt className="text-overline text-text-3 opacity-70">{label}</dt>
+      <dd className="mt-1 text-label text-text-2 tabular">{value}</dd>
     </div>
   );
 }

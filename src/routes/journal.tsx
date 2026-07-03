@@ -17,17 +17,17 @@ const FILTERS: (JournalCategory | "All")[] = [
 export const Route = createFileRoute("/journal")({
   head: () => ({
     meta: [
-      { title: "Journal — Vareox" },
+      { title: "Journal — Vaerox" },
       {
         name: "description",
         content:
-          "Chronological engineering feed — architecture notes, design decisions, evaluations, and development logs from Vareox.",
+          "Chronological engineering feed — architecture notes, design decisions, evaluations, and development logs from Vaerox.",
       },
-      { property: "og:title", content: "Journal — Vareox" },
+      { property: "og:title", content: "Journal — Vaerox" },
       {
         property: "og:description",
         content:
-          "Chronological engineering feed — architecture notes, design decisions, evaluations, and development logs from Vareox.",
+          "Chronological engineering feed — architecture notes, design decisions, evaluations, and development logs from Vaerox.",
       },
     ],
   }),
@@ -88,45 +88,43 @@ function JournalPage() {
               params={{ slug: e.slug }}
               className="group card-hover hover:card-hover-on bg-canvas grid grid-cols-12 gap-4 px-5 py-5 items-baseline"
             >
-              <span className="col-span-3 md:col-span-2 font-mono text-[11px] text-text-3 tabular tracking-[0.02em]">
+              <span className="col-span-3 md:col-span-2 text-metadata text-text-3 tracking-[0.02em]">
                 {e.date}
               </span>
 
               <div className="col-span-9 md:col-span-7">
                 <div className="flex items-baseline gap-3 mb-1">
-                  <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-                    {e.category}
-                  </span>
-                  <span className="font-mono text-[10px] text-text-3 opacity-50">·</span>
-                  <span className="font-mono text-[10px] text-text-3 tabular">{e.revision}</span>
+                  <span className="text-overline text-text-3">{e.category}</span>
+                  <span className="font-mono text-overline text-text-3 opacity-50">·</span>
+                  <span className="text-metadata text-text-3">{e.revision}</span>
                   {e.status !== "Published" && (
                     <>
-                      <span className="font-mono text-[10px] text-text-3 opacity-50">·</span>
-                      <span className="font-mono text-[10px] text-warning uppercase tracking-[0.14em]">
+                      <span className="font-mono text-overline text-text-3 opacity-50">·</span>
+                      <span className="font-mono text-overline text-warning uppercase tracking-[0.14em]">
                         {e.status}
                       </span>
                     </>
                   )}
                 </div>
-                <h3 className="font-display text-[18px] text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.014em]">
+                <h3 className="font-display text-heading-m text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.014em]">
                   {e.title}
                 </h3>
-                <p className="mt-2 text-[13px] text-text-2 leading-[1.55] max-w-[720px]">
+                <p className="mt-2 text-body-s text-text-2 leading-[1.55] max-w-[720px]">
                   {e.summary}
                 </p>
-                <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
+                <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-overline text-text-3">
                   {e.tags.map((t) => (
                     <span key={t}>· {t}</span>
                   ))}
                 </div>
               </div>
 
-              <div className="col-span-6 md:col-span-2 font-mono text-[11px] text-text-2 tabular">
+              <div className="col-span-6 md:col-span-2 text-label text-text-2 tabular">
                 {e.author}
               </div>
-              <div className="col-span-6 md:col-span-1 text-right font-mono text-[11px] text-text-3 tabular">
+              <div className="col-span-6 md:col-span-1 text-right text-metadata text-text-3">
                 {e.readingMinutes}m
-                <span className="ml-3 inline-block transition-transform duration-200 ease-out group-hover:translate-x-[4px]">
+                <span className="ml-3 inline-block transition-transform transition-ui group-hover:translate-x-[4px]">
                   →
                 </span>
               </div>

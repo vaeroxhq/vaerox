@@ -15,7 +15,7 @@ export const Route = createFileRoute("/architecture/$adr")({
   },
   head: ({ loaderData }) => {
     const a = loaderData?.adr;
-    const title = a ? `ADR·${a.number} · ${a.title} — Vareox` : "ADR — Vareox";
+    const title = a ? `ADR·${a.number} · ${a.title} — Vaerox` : "ADR — Vaerox";
     const desc = a?.context ?? "Architecture Decision Record.";
     return {
       meta: [
@@ -36,7 +36,7 @@ export const Route = createFileRoute("/architecture/$adr")({
       />
       <Link
         to="/architecture"
-        className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1"
+        className="text-label text-text-2 uppercase tracking-[0.14em] hover:text-text-1"
       >
         ← Back to architecture
       </Link>
@@ -84,26 +84,20 @@ function AdrPage() {
 
       <div className="mb-6 flex items-center flex-wrap gap-3">
         <StageDot tone={tone as "success" | "warning" | "info" | "muted"} />
-        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-          {adr.status}
-        </span>
-        <span className="font-mono text-[10px] text-text-3 opacity-60">·</span>
+        <span className="text-overline text-text-3">{adr.status}</span>
+        <span className="text-metadata text-text-3 opacity-60">·</span>
         <OpsTag label="SIGNED" />
         <OpsTag label="VERSIONED" />
         {adr.supersedes && (
           <>
-            <span className="font-mono text-[10px] text-text-3 opacity-60">·</span>
-            <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-              Supersedes ADR·{adr.supersedes}
-            </span>
+            <span className="text-metadata text-text-3 opacity-60">·</span>
+            <span className="text-overline text-text-3">Supersedes ADR·{adr.supersedes}</span>
           </>
         )}
         {adr.supersededBy && (
           <>
-            <span className="font-mono text-[10px] text-text-3 opacity-60">·</span>
-            <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-              Superseded by ADR·{adr.supersededBy}
-            </span>
+            <span className="text-metadata text-text-3 opacity-60">·</span>
+            <span className="text-overline text-text-3">Superseded by ADR·{adr.supersededBy}</span>
           </>
         )}
       </div>
@@ -111,15 +105,15 @@ function AdrPage() {
       <DocShell rail={<RelatedRail kind="adr" id={adr.slug} />}>
         <article className="max-w-[760px]">
           <DocBlock heading="Context">
-            <p className="text-[15px] text-text-2 leading-[1.7]">{adr.context}</p>
+            <p className="text-body-m text-text-2 leading-[1.7]">{adr.context}</p>
           </DocBlock>
           <DocBlock heading="Decision">
-            <p className="text-[15px] text-text-2 leading-[1.7]">{adr.decision}</p>
+            <p className="text-body-m text-text-2 leading-[1.7]">{adr.decision}</p>
           </DocBlock>
           <DocBlock heading="Consequences">
             <ul className="space-y-2">
               {adr.consequences.map((c, i) => (
-                <li key={i} className="flex gap-3 text-[14px] text-text-2 leading-[1.65]">
+                <li key={i} className="flex gap-3 text-body-m text-text-2">
                   <span className="mt-[9px] inline-block h-px w-3 bg-line-3 shrink-0" />
                   <span>{c}</span>
                 </li>
@@ -134,10 +128,8 @@ function AdrPage() {
                     key={i}
                     className={`px-4 py-3 ${i < adr.alternatives.length - 1 ? "hairline-b" : ""}`}
                   >
-                    <div className="font-display text-[14px] text-text-1 tracking-[-0.005em]">
-                      {alt.name}
-                    </div>
-                    <div className="mt-1 font-mono text-[11px] text-text-3">
+                    <div className="text-heading-s text-text-1 tracking-[-0.005em]">{alt.name}</div>
+                    <div className="mt-1 text-label text-text-3">
                       Rejected — {alt.rejectedBecause}
                     </div>
                   </li>
@@ -193,9 +185,9 @@ function RevRow({
     <li
       className={`grid grid-cols-[110px_1fr_140px] gap-4 items-baseline px-4 py-3 ${last ? "" : "hairline-b"}`}
     >
-      <span className="font-mono text-[11px] text-text-2 tabular">{at}</span>
-      <span className="text-[14px] text-text-2">{note}</span>
-      <span className="font-mono text-[11px] text-text-3 tabular text-right">{who}</span>
+      <span className="text-label text-text-2 tabular">{at}</span>
+      <span className="text-body-m text-text-2">{note}</span>
+      <span className="text-metadata text-text-3 text-right">{who}</span>
     </li>
   );
 }

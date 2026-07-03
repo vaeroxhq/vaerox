@@ -6,13 +6,13 @@ import { Breadcrumbs } from "@/components/doc/breadcrumbs";
 export const Route = createFileRoute("/services/")({
   head: () => ({
     meta: [
-      { title: "Services — Vareox" },
+      { title: "Services — Vaerox" },
       {
         name: "description",
         content:
-          "What Vareox builds: AI agents, LLM applications, RAG systems, MCP servers, workflow automation, backend platforms, internal tools, computer vision, and data engineering.",
+          "What Vaerox builds: AI agents, LLM applications, RAG systems, MCP servers, workflow automation, backend platforms, internal tools, computer vision, and data engineering.",
       },
-      { property: "og:title", content: "Services — Vareox" },
+      { property: "og:title", content: "Services — Vaerox" },
       {
         property: "og:description",
         content:
@@ -26,7 +26,7 @@ export const Route = createFileRoute("/services/")({
 function ServicesIndex() {
   return (
     <SectionShell>
-      <Breadcrumbs items={[{ label: "Vareox", to: "/" }, { label: "Services" }]} />
+      <Breadcrumbs items={[{ label: "Vaerox", to: "/" }, { label: "Services" }]} />
       <PageHeader
         section="§ · Services"
         title="What VÆRØX builds."
@@ -48,23 +48,19 @@ function ServicesIndex() {
             className="group animate-card-hover-elevation card-hover hover:card-hover-on bg-canvas p-5 flex flex-col cursor-pointer"
           >
             <header className="flex items-baseline justify-between">
-              <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-                {s.code}
+              <span className="text-overline text-text-3">{s.code}</span>
+              <span className="text-metadata text-text-3 transition-transform transition-ui group-hover:translate-x-[3px]">
+                →
               </span>
-              <span className="font-mono text-[10px] text-text-3 tabular transition-transform duration-200 ease-out group-hover:translate-x-[3px]">→</span>
             </header>
-            <h3 className="mt-3 font-display text-[19px] text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.015em]">
-              {s.name}
-            </h3>
-            <p className="mt-2 text-[13px] text-text-3">{s.tagline}</p>
+            <h3 className="mt-3 text-heading-m">{s.name}</h3>
+            <p className="mt-2 text-body-s text-text-3">{s.tagline}</p>
 
             <div className="mt-5 hairline-t pt-4">
-              <div className="font-mono text-[9.5px] text-text-3 uppercase tracking-[0.18em] opacity-70">
-                Stack
-              </div>
+              <div className="text-metadata text-text-3 opacity-70">Stack</div>
               <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
                 {s.technologies.slice(0, 6).map((t) => (
-                  <span key={t} className="font-mono text-[11px] text-text-2 tabular">
+                  <span key={t} className="text-label text-text-2 tabular">
                     {t}
                   </span>
                 ))}

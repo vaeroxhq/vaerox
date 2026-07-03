@@ -11,9 +11,11 @@ Use Chrome DevTools to test at each resolution. Compare visual composition with 
 All should look like perfectly scaled versions of Screenshot A. ✅ = Verified
 
 ### 1. **Laptop: 1366×768** ✅
+
 **Command**: `Ctrl+Shift+I` → Device Dimensions 1366×768
 
 **Hero Section**:
+
 - [ ] Headline: "Modern software," / "engineered end-to-end." — 2 lines
 - [ ] Headline font size: ~61px (not 68px, not too large)
 - [ ] Paragraph width: ~650px (comfortable reading)
@@ -22,16 +24,19 @@ All should look like perfectly scaled versions of Screenshot A. ✅ = Verified
 - [ ] Blueprint circle: Subtle, ~573px size
 
 **Services Grid**:
+
 - [ ] 4 columns (lg:grid-cols-4 active)
 - [ ] Card height: Consistent
 - [ ] Text wrapping: None of the service names should wrap
 
 **Typography**:
+
 - [ ] Meta text (font-mono): 10px
 - [ ] Body text: 13-14px
 - [ ] No squished or cramped text
 
 **Navigation**:
+
 - [ ] Logo: Normal size, not scaled
 - [ ] Menu items: SERVICES, PROJECTS, ARCHITECTURE, etc. — all visible
 - [ ] Search button: Visible and accessible
@@ -40,11 +45,13 @@ All should look like perfectly scaled versions of Screenshot A. ✅ = Verified
 ---
 
 ### 2. **Laptop HD: 1440×900** ✅
+
 **Command**: `Ctrl+Shift+I` → Device Dimensions 1440×900
 
 **Expected**: Nearly identical to 1366×768
 
 **Verify**:
+
 - [ ] Hero headline font size: ~63px (slight increase from 1366)
 - [ ] Container width: ~1290px (90vw, still under 1280px max)
 - [ ] Visual composition: **IDENTICAL** to 1366px
@@ -54,11 +61,13 @@ All should look like perfectly scaled versions of Screenshot A. ✅ = Verified
 ---
 
 ### 3. **Desktop: 1600×900** ✅
+
 **Command**: `Ctrl+Shift+I` → Device Dimensions 1600×900
 
 **Expected**: Stable, reaches container max-width
 
 **Verify**:
+
 - [ ] Hero headline font size: ~71px
 - [ ] Container width: **1280px max** (hits ceiling at this width)
 - [ ] Visual composition: Same as 1366–1440px (no major changes)
@@ -68,11 +77,13 @@ All should look like perfectly scaled versions of Screenshot A. ✅ = Verified
 ---
 
 ### 4. **Desktop: 1680×1050** ✅
+
 **Command**: `Ctrl+Shift+I` → Device Dimensions 1680×1050
 
 **Expected**: Identical to 1600px (already at max-width)
 
 **Verify**:
+
 - [ ] Hero headline font size: ~74px
 - [ ] Container width: **1280px max** (stable)
 - [ ] Visual composition: **NO CHANGE** from 1600px
@@ -81,11 +92,13 @@ All should look like perfectly scaled versions of Screenshot A. ✅ = Verified
 ---
 
 ### 5. **Desktop: 1920×1080** ✅
+
 **Command**: `Ctrl+Shift+I` → Device Dimensions 1920×1080
 
 **Expected**: Stable composition, centered content
 
 **Verify**:
+
 - [ ] Hero headline font size: ~75px (approaching max)
 - [ ] Container width: **1280px max** (centered with white space on sides)
 - [ ] White space on left/right: Equal (centered perfectly)
@@ -93,6 +106,7 @@ All should look like perfectly scaled versions of Screenshot A. ✅ = Verified
 - [ ] No stretching or distortion
 
 **Important**: At 1920px, you should see:
+
 ```
 [White space] ← 320px approx
 [1280px content]
@@ -102,11 +116,13 @@ All should look like perfectly scaled versions of Screenshot A. ✅ = Verified
 ---
 
 ### 6. **Desktop: 1920×1200** ✅
+
 **Command**: `Ctrl+Shift+I` → Device Dimensions 1920×1200
 
 **Expected**: Identical to 1920×1080 (width unchanged)
 
 **Verify**:
+
 - [ ] Hero headline font size: ~75px (max already reached)
 - [ ] Container width: **1280px max** (no change)
 - [ ] Vertical scrolling: More content fits on screen now
@@ -115,11 +131,13 @@ All should look like perfectly scaled versions of Screenshot A. ✅ = Verified
 ---
 
 ### 7. **Desktop 4K: 2560×1440** ✅
+
 **Command**: `Ctrl+Shift+I` → Device Dimensions 2560×1440
 
 **Expected**: Identical to 1920×1080 (max-width already locked)
 
 **Verify**:
+
 - [ ] Hero headline font size: **76px** (at max)
 - [ ] Container width: **1280px max** (stable)
 - [ ] Blueprint circle: ~700px (at max size)
@@ -131,9 +149,11 @@ All should look like perfectly scaled versions of Screenshot A. ✅ = Verified
 ---
 
 ### 8. **Screenshot A: 2560×1600** ✅ MASTER REFERENCE
+
 **Command**: If you have a 2560×1600 display, this is the source truth
 
 **Verify**:
+
 - [ ] Hero headline: "Modern software, / engineered end-to-end."
 - [ ] Headline font size: ~76px
 - [ ] Container width: 1280px max
@@ -148,11 +168,13 @@ All should look like perfectly scaled versions of Screenshot A. ✅ = Verified
 ---
 
 ### 9. **Ultra-wide: 3440×1440** ✅
+
 **Command**: `Ctrl+Shift+I` → Device Dimensions 3440×1440
 
 **Expected**: Stable, centered content with massive white space
 
 **Verify**:
+
 - [ ] Hero headline font size: **76px** (at max, no further scaling)
 - [ ] Container width: **1280px max** (stable)
 - [ ] Blueprint circle: ~700px (at max, no further scaling)
@@ -167,11 +189,13 @@ All should look like perfectly scaled versions of Screenshot A. ✅ = Verified
 Create entirely different layouts for mobile.
 
 ### Mobile: 375×667 (iPhone SE/8)
+
 **Command**: `Ctrl+Shift+I` → Device Dimensions 375×667
 
 **Expected**: Stacked, mobile-optimized layout
 
 **Verify**:
+
 - [ ] Hero headline: Stacks to 3 lines (or readable 2 lines)
 - [ ] Font size: ~36px (responsive scaling, larger on mobile)
 - [ ] Services grid: **1 column** (vertical stack)
@@ -184,11 +208,13 @@ Create entirely different layouts for mobile.
 ---
 
 ### Mobile: 390×844 (iPhone 12/13)
+
 **Command**: `Ctrl+Shift+I` → Device Dimensions 390×844
 
 **Expected**: Similar to 375×667, more vertical space
 
 **Verify**:
+
 - [ ] Layout: **Stacked** (same as 375px)
 - [ ] Readability: Excellent
 - [ ] Typography: Scaled appropriately
@@ -198,11 +224,13 @@ Create entirely different layouts for mobile.
 ---
 
 ### Tablet: 768×1024 (iPad)
+
 **Command**: `Ctrl+Shift+I` → Device Dimensions 768×1024
 
 **Expected**: Transitional layout between mobile and desktop
 
 **Verify**:
+
 - [ ] Services grid: 2 columns (md:grid-cols-2)
 - [ ] Metadata table: 2 columns
 - [ ] Hero headline: Readable, well-spaced
@@ -214,6 +242,7 @@ Create entirely different layouts for mobile.
 ## Testing Procedure
 
 ### Step 1: Open DevTools
+
 ```
 1. Open https://vaerox.dev (or local dev server)
 2. Press Ctrl+Shift+I (or Cmd+Option+I on Mac)
@@ -222,6 +251,7 @@ Create entirely different layouts for mobile.
 ```
 
 ### Step 2: Compare Visually
+
 ```
 1. Take screenshot of target resolution
 2. Compare with Screenshot A (2560×1600)
@@ -235,6 +265,7 @@ Create entirely different layouts for mobile.
 ```
 
 ### Step 3: Verify Typography
+
 ```
 Chrome DevTools → Inspect element → Computed
 1. Click on hero headline
@@ -244,6 +275,7 @@ Chrome DevTools → Inspect element → Computed
 ```
 
 ### Step 4: Check Container Width
+
 ```
 Chrome DevTools → Inspect element
 1. Click on main container
@@ -253,6 +285,7 @@ Chrome DevTools → Inspect element
 ```
 
 ### Step 5: Animation Testing
+
 ```
 1. Hover over service cards → should lift -4px
 2. Hover over logo → should rotate -2°
@@ -262,6 +295,7 @@ Chrome DevTools → Inspect element
 ```
 
 ### Step 6: Performance Check
+
 ```
 Chrome DevTools → Performance tab
 1. Click record
@@ -277,28 +311,36 @@ Chrome DevTools → Performance tab
 ## Common Issues & Fixes
 
 ### Issue: Typography too large at 1920px
+
 **Fix**: Reduce vw% in clamp() function
+
 ```css
 /* Before: clamp(56px, 1.8vw, 76px) */
 /* After: clamp(56px, 1.5vw, 72px) */
 ```
 
 ### Issue: Container too wide at 1920px
+
 **Fix**: Reduce max-width
+
 ```css
 /* Before: clamp(1024px, 90vw, 1280px) */
 /* After: clamp(1024px, 90vw, 1200px) */
 ```
 
 ### Issue: Different line breaks at 1600px vs 1366px
+
 **Fix**: Check headline max-width
+
 ```jsx
 /* Ensure max-width is fixed, not percentage */
 <h1 className="max-w-[1040px]">...</h1>
 ```
 
 ### Issue: Animations feel laggy
+
 **Fix**: Verify GPU acceleration
+
 ```css
 /* Only animate transform and opacity */
 /* Avoid: width, height, top, left, margin */
@@ -311,6 +353,7 @@ opacity: 0.9;
 ## Validation Checklist (Full)
 
 ### Desktop 1366–3440px
+
 - [ ] All resolutions maintain identical composition
 - [ ] Typography scales subtly (not dramatically)
 - [ ] Container width locked at 1280px max
@@ -322,6 +365,7 @@ opacity: 0.9;
 - [ ] No horizontal scrolling
 
 ### Mobile <768px
+
 - [ ] Services: 1 column (stacked)
 - [ ] Metadata: 2 columns max
 - [ ] Touch targets: 44px × 44px minimum
@@ -331,6 +375,7 @@ opacity: 0.9;
 - [ ] No horizontal scrolling
 
 ### Animations
+
 - [ ] Card hover: Lifts -4px, scales 1.01x
 - [ ] Logo hover: Rotates -2°, scales 1.02x
 - [ ] Button hover: Scales 1.02x
@@ -340,6 +385,7 @@ opacity: 0.9;
 - [ ] All 60 FPS (no jank)
 
 ### Accessibility
+
 - [ ] prefers-reduced-motion: Animations disabled
 - [ ] Focus rings: Visible and animated
 - [ ] Keyboard navigation: Full support
@@ -347,6 +393,7 @@ opacity: 0.9;
 - [ ] Color contrast: WCAG AA passed
 
 ### Performance
+
 - [ ] CLS (Cumulative Layout Shift): 0
 - [ ] FCP (First Contentful Paint): <2s
 - [ ] LCP (Largest Contentful Paint): <3s

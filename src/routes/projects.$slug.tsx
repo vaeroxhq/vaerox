@@ -59,7 +59,7 @@ export const Route = createFileRoute("/projects/$slug")({
       />
       <Link
         to="/projects"
-        className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1"
+        className="text-label text-text-2 uppercase tracking-[0.14em] hover:text-text-1"
       >
         ← Back to projects
       </Link>
@@ -68,7 +68,9 @@ export const Route = createFileRoute("/projects/$slug")({
 });
 
 function ProjectDetail() {
-  const { project: p } = Route.useLoaderData();
+  const data = Route.useLoaderData() as any;
+  if (!data?.project) return null;
+  const { project: p } = data;
   const dossier = getDossier(p.slug);
   const extras = getDossierExtras(p.slug);
 
@@ -121,7 +123,7 @@ function ProjectDetail() {
     <SectionShell>
       <Breadcrumbs
         items={[
-          { label: "Vareox", to: "/" },
+          { label: "Vaerox", to: "/" },
           { label: "Projects", to: "/projects" },
           { label: p.name },
         ]}
@@ -141,7 +143,7 @@ function ProjectDetail() {
 
       <div className="mb-6 flex items-center gap-3">
         <StageDot tone={tone} />
-        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
+        <span className="text-overline text-text-3">
           {dossier?.timeline.currentPhase ?? p.stage}
         </span>
       </div>
@@ -170,7 +172,7 @@ function ProjectDetail() {
               <ChallengesLessons extras={extras} />
             </>
           ) : (
-            <p className="text-text-2 text-[14px]">
+            <p className="text-text-2 text-body-m">
               Engineering dossier is being drafted for this project.
             </p>
           )}

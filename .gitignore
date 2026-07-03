@@ -11,6 +11,11 @@ node_modules
 dist
 dist-ssr
 .output
+.cache
+.vite
+.env
+.env.*
+coverage
 .vinxi
 .tanstack/**
 .nitro

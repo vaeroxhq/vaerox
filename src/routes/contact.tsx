@@ -6,16 +6,16 @@ import { DocShell, DocBlock } from "@/components/doc/doc-shell";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact Vareox — AI & Software Engineering Studio" },
+      { title: "Contact Vaerox — AI & Software Engineering Studio" },
       {
         name: "description",
         content:
-          "Reach the Vareox engineering studio. Book a discovery call, brief your project, or request a written proposal. Typical response within 24 hours.",
+          "Reach the Vaerox engineering studio. Book a discovery call, brief your project, or request a written proposal. Typical response within 24 hours.",
       },
-      { property: "og:title", content: "Contact — Vareox" },
+      { property: "og:title", content: "Contact — Vaerox" },
       {
         property: "og:description",
-        content: "Start a project with Vareox. Fast response, transparent process, fixed scope.",
+        content: "Start a project with Vaerox. Fast response, transparent process, fixed scope.",
       },
     ],
   }),
@@ -52,7 +52,7 @@ const CTAS: [string, string][] = [
 function ContactPage() {
   return (
     <SectionShell>
-      <Breadcrumbs items={[{ label: "Vareox", to: "/" }, { label: "Contact" }]} />
+      <Breadcrumbs items={[{ label: "Vaerox", to: "/" }, { label: "Contact" }]} />
 
       <PageHeader
         section="§ · Contact"
@@ -77,11 +77,11 @@ function ContactPage() {
                 >
                   <a
                     href={`mailto:vaeroxhq@gmail.com?subject=${encodeURIComponent(t)}`}
-                    className="font-mono text-[11.5px] text-text-1 uppercase tracking-[0.12em] hover:opacity-70 transition-micro"
+                    className="font-mono text-label text-text-1 uppercase tracking-[0.12em] hover:opacity-70 transition-micro"
                   >
                     {t} →
                   </a>
-                  <span className="text-[13px] text-text-2 leading-[1.6]">{b}</span>
+                  <span className="text-body-s text-text-2">{b}</span>
                 </li>
               ))}
             </ul>
@@ -90,62 +90,52 @@ function ContactPage() {
           <DocBlock heading="Direct channels">
             <ul className="hairline bg-canvas">
               <li className="grid grid-cols-[140px_1fr] gap-4 px-4 py-4 items-baseline hairline-b">
-                <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-                  Email
-                </span>
+                <span className="text-overline text-text-3">Email</span>
                 <a
                   href="mailto:vaeroxhq@gmail.com"
-                  className="font-mono text-[13px] text-text-1 hover:text-text-2"
+                  className="font-mono text-body-s text-text-1 hover:text-text-2"
                 >
                   vaeroxhq@gmail.com
                 </a>
               </li>
               <li className="grid grid-cols-[140px_1fr] gap-4 px-4 py-4 items-baseline hairline-b">
-                <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-                  LinkedIn
-                </span>
+                <span className="text-overline text-text-3">LinkedIn</span>
                 <a
                   href="https://www.linkedin.com/company/vaerox"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-[13px] text-text-1 hover:text-text-2"
+                  className="font-mono text-body-s text-text-1 hover:text-text-2"
                 >
                   /company/vaerox
                 </a>
               </li>
               <li className="grid grid-cols-[140px_1fr] gap-4 px-4 py-4 items-baseline hairline-b">
-                <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-                  WhatsApp
-                </span>
+                <span className="text-overline text-text-3">WhatsApp</span>
                 <a
                   href="https://wa.me/918130650944"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-[13px] text-text-1 hover:text-text-2"
+                  className="font-mono text-body-s text-text-1 hover:text-text-2"
                 >
                   +91 8130650944
                 </a>
               </li>
               <li className="grid grid-cols-[140px_1fr] gap-4 px-4 py-4 items-baseline hairline-b">
-                <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-                  Instagram
-                </span>
+                <span className="text-overline text-text-3">Instagram</span>
                 <a
                   href="https://instagram.com/vaeroxlabs"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-mono text-[13px] text-text-1 hover:text-text-2"
+                  className="font-mono text-body-s text-text-1 hover:text-text-2"
                 >
                   @vaeroxlabs
                 </a>
               </li>
               <li className="grid grid-cols-[140px_1fr] gap-4 px-4 py-4 items-baseline">
-                <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-                  Security
-                </span>
+                <span className="text-overline text-text-3">Security</span>
                 <a
                   href="mailto:vaeroxhq@gmail.com"
-                  className="font-mono text-[13px] text-text-1 hover:text-text-2"
+                  className="font-mono text-body-s text-text-1 hover:text-text-2"
                 >
                   vaeroxhq@gmail.com
                 </a>
@@ -181,14 +171,10 @@ function ContactPage() {
                   key={n}
                   className={`grid grid-cols-[64px_1fr] gap-6 px-5 py-5 ${i < arr.length - 1 ? "hairline-b" : ""}`}
                 >
-                  <span className="font-mono text-[12px] text-text-3 tabular tracking-[0.06em]">
-                    {n}
-                  </span>
+                  <span className="text-label text-text-3 tabular tracking-[0.06em]">{n}</span>
                   <div>
-                    <div className="font-display text-[16px] text-text-1 tracking-[-0.012em]">
-                      {t}
-                    </div>
-                    <p className="mt-1.5 text-[13px] text-text-2 leading-[1.6]">{b}</p>
+                    <div className="text-heading-s text-text-1 tracking-[-0.012em]">{t}</div>
+                    <p className="mt-1.5 text-body-s text-text-2">{b}</p>
                   </div>
                 </li>
               ))}

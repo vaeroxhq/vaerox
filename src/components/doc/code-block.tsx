@@ -17,15 +17,11 @@ export function CodeBlock({
     <figure className="hairline bg-canvas mt-4">
       {(filename || language) && (
         <figcaption className="px-3 py-2 hairline-b flex items-baseline justify-between">
-          <span className="font-mono text-[10px] text-text-2 tabular truncate">{filename}</span>
-          {language && (
-            <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-              {language}
-            </span>
-          )}
+          <span className="font-mono text-overline text-text-2 tabular truncate">{filename}</span>
+          {language && <span className="text-overline text-text-3 opacity-70">{language}</span>}
         </figcaption>
       )}
-      <pre className="font-mono text-[12.5px] text-text-2 leading-[1.6] px-4 py-3 overflow-x-auto tabular">
+      <pre className="font-mono text-caption text-text-2 px-4 py-3 overflow-x-auto tabular">
         <code>{children}</code>
       </pre>
     </figure>

@@ -48,9 +48,7 @@ export function SectionRule({ label }: { label: string }) {
           aria-hidden="true"
           className="inline-block h-[9px] w-[9px] rotate-45 bg-canvas border border-line-2"
         />
-        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] bg-canvas pr-3">
-          {label}
-        </span>
+        <span className="text-overline text-text-3 bg-canvas pr-3">{label}</span>
       </div>
     </div>
   );
@@ -59,10 +57,8 @@ export function SectionRule({ label }: { label: string }) {
 export function MetaCell({ label, value }: { label: string; value: string }) {
   return (
     <div className="bg-canvas px-4 pt-3 pb-4">
-      <dt className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-        {label}
-      </dt>
-      <dd className="font-mono text-[17px] text-text-1 mt-2 tabular tracking-[-0.005em]">
+      <dt className="text-overline text-text-3 opacity-70">{label}</dt>
+      <dd className="text-heading-s font-mono text-text-1 mt-2 tabular tracking-[-0.005em]">
         {value}
       </dd>
     </div>

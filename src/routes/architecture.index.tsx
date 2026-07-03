@@ -9,12 +9,12 @@ const FILTERS = ["All", "Accepted", "Proposed", "Superseded", "Deprecated", "Dra
 export const Route = createFileRoute("/architecture/")({
   head: () => ({
     meta: [
-      { title: "Architecture — Vareox" },
+      { title: "Architecture — Vaerox" },
       {
         name: "description",
         content: "Architecture Decision Records, system diagrams, sequence and dependency graphs.",
       },
-      { property: "og:title", content: "Architecture — Vareox" },
+      { property: "og:title", content: "Architecture — Vaerox" },
       {
         property: "og:description",
         content: "Architecture Decision Records, system diagrams, sequence and dependency graphs.",
@@ -80,10 +80,7 @@ function ArchitecturePage() {
       <div className="hairline border-t-0 bg-canvas">
         <div className="hidden md:grid grid-cols-[80px_1fr_140px_140px_180px_180px_100px] gap-4 px-4 py-3 hairline-b">
           {["ADR", "Title", "Status", "Decision", "Owner", "Systems", "Review"].map((h) => (
-            <span
-              key={h}
-              className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70"
-            >
+            <span key={h} className="text-overline text-text-3 opacity-70">
               {h}
             </span>
           ))}
@@ -96,21 +93,17 @@ function ArchitecturePage() {
                 params={{ adr: a.slug }}
                 className="group card-hover hover:card-hover-on bg-canvas grid grid-cols-2 md:grid-cols-[80px_1fr_140px_140px_180px_180px_100px] gap-4 px-4 py-4 items-baseline"
               >
-                <span className="font-mono text-[11px] text-text-2 tabular">ADR·{a.number}</span>
-                <span className="col-span-2 md:col-span-1 font-display text-[15px] text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.01em]">
+                <span className="text-label text-text-2 tabular">ADR·{a.number}</span>
+                <span className="col-span-2 md:col-span-1 font-display text-body-m text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.01em]">
                   {a.title}
                 </span>
                 <AdrStatusPill status={a.status} />
-                <span className="font-mono text-[11px] text-text-3 tabular">{a.decisionDate}</span>
-                <span className="font-mono text-[11px] text-text-2">
+                <span className="text-metadata text-text-3">{a.decisionDate}</span>
+                <span className="text-label text-text-2">
                   {a.owner} · <span className="text-text-3">{a.team}</span>
                 </span>
-                <span className="font-mono text-[11px] text-text-3 truncate">
-                  {a.systems.join(" · ")}
-                </span>
-                <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-                  {a.review}
-                </span>
+                <span className="text-label text-text-3 truncate">{a.systems.join(" · ")}</span>
+                <span className="text-overline text-text-3">{a.review}</span>
               </Link>
             </li>
           ))}
@@ -136,16 +129,14 @@ function ArchitecturePage() {
             className="group card-hover hover:card-hover-on bg-canvas px-5 pt-5 pb-4 flex flex-col"
           >
             <header className="flex items-baseline justify-between">
-              <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-                {d.kind}
-              </span>
-              <span className="font-mono text-[10px] text-text-3 tabular">{d.updated}</span>
+              <span className="text-overline text-text-3 opacity-70">{d.kind}</span>
+              <span className="text-metadata text-text-3">{d.updated}</span>
             </header>
             <div className="hairline-t mt-4" />
-            <h3 className="font-display text-[17px] mt-5 text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.015em]">
+            <h3 className="font-display text-heading-s mt-5 text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.015em]">
               {d.title}
             </h3>
-            <p className="mt-2 text-[13px] text-text-2 leading-[1.55]">{d.summary}</p>
+            <p className="mt-2 text-body-s text-text-2 leading-[1.55]">{d.summary}</p>
 
             {/* mini blueprint — hairline glyph, not decoration */}
             <DiagramGlyph nodes={d.nodes} />
@@ -157,7 +148,7 @@ function ArchitecturePage() {
             </dl>
             <div className="mt-4 pt-4 hairline-t flex items-center justify-between">
               <OpsTag label="VERSIONED" />
-              <span className="font-mono text-[11px] text-text-3">Open →</span>
+              <span className="text-label text-text-3">Open →</span>
             </div>
           </Link>
         ))}
@@ -176,7 +167,7 @@ function AdrStatusPill({ status }: { status: AdrStatus }) {
           ? "warning"
           : "muted";
   return (
-    <span className="inline-flex items-center gap-2 font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
+    <span className="inline-flex items-center gap-2 text-overline text-text-3">
       <StageDot tone={tone as "success" | "warning" | "info" | "muted"} />
       {status}
     </span>
@@ -195,14 +186,10 @@ function SectionHeading({
   return (
     <div className="mt-16 mb-6 flex items-baseline justify-between gap-4">
       <div className="flex items-baseline gap-4">
-        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-          {kicker}
-        </span>
-        <h2 className="font-display text-[22px] text-text-1 tracking-[-0.018em]">{title}</h2>
+        <span className="text-overline text-text-3">{kicker}</span>
+        <h2 className="font-display text-heading-l text-text-1 tracking-[-0.018em]">{title}</h2>
       </div>
-      <span className="hidden md:inline font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-        {caption}
-      </span>
+      <span className="hidden md:inline text-overline text-text-3 opacity-70">{caption}</span>
     </div>
   );
 }
@@ -218,10 +205,8 @@ function Meta({
 }) {
   return (
     <div className={`flex items-baseline justify-between gap-3 ${className}`}>
-      <dt className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-        {label}
-      </dt>
-      <dd className="font-mono text-[11px] text-text-2 tabular truncate">{value}</dd>
+      <dt className="text-overline text-text-3 opacity-70">{label}</dt>
+      <dd className="text-label text-text-2 tabular truncate">{value}</dd>
     </div>
   );
 }
@@ -258,12 +243,12 @@ function AdrTimeline() {
             i < sorted.length - 1 ? "hairline-b" : ""
           }`}
         >
-          <span className="font-mono text-[11px] text-text-3 tabular">{a.decisionDate}</span>
-          <span className="font-mono text-[11px] text-text-2 tabular">ADR·{a.number}</span>
+          <span className="text-metadata text-text-3">{a.decisionDate}</span>
+          <span className="text-label text-text-2 tabular">ADR·{a.number}</span>
           <Link
             to="/architecture/$adr"
             params={{ adr: a.slug }}
-            className="font-display text-[14px] text-text-2 hover:text-text-1 transition-micro tracking-[-0.005em] truncate"
+            className="text-heading-s text-text-2 hover:text-text-1 transition-micro tracking-[-0.005em] truncate"
           >
             {a.title}
           </Link>

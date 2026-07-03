@@ -8,7 +8,7 @@
 
 ## 📋 Executive Summary
 
-A comprehensive premium animation system has been implemented across the VÆRØX website. All animations respect the creative direction: *"The user should notice the craftsmanship, not the animation."* No decorative motion, only purposeful interactions that improve hierarchy, orientation, and perceived quality.
+A comprehensive premium animation system has been implemented across the VÆRØX website. All animations respect the creative direction: _"The user should notice the craftsmanship, not the animation."_ No decorative motion, only purposeful interactions that improve hierarchy, orientation, and perceived quality.
 
 **Build Status:** ✅ Success (no errors)  
 **Linting Status:** ✅ Pass (7 warnings, 0 errors)  
@@ -18,10 +18,12 @@ A comprehensive premium animation system has been implemented across the VÆRØX
 
 ## 🎬 Animations Implemented
 
-### 1. **Hero Entrance** ⭐⭐⭐⭐⭐ 
+### 1. **Hero Entrance** ⭐⭐⭐⭐⭐
+
 **File:** `src/components/home/hero.tsx`
 
 Staggered fade-up sequence on first load:
+
 - Logo fades in (0ms delay)
 - Metadata fades in (60ms delay)
 - Heading fades up + translateY (120ms delay)
@@ -31,6 +33,7 @@ Staggered fade-up sequence on first load:
 **Duration:** 600ms  
 **Easing:** cubic-bezier(0.2, 0.6, 0.2, 1) (standard)  
 **Classes Applied:**
+
 - `animate-hero-logo`
 - `animate-hero-metadata`
 - `animate-hero-heading`
@@ -40,12 +43,15 @@ Staggered fade-up sequence on first load:
 ---
 
 ### 2. **Card Hover Animations** ⭐⭐⭐⭐⭐
-**Files:** 
+
+**Files:**
+
 - `src/components/home/project-grid.tsx`
 - `src/components/home/services-preview.tsx`
 - `src/components/home/why-vaerox.tsx`
 
 On hover effect:
+
 - **Lift:** translateY(0) → translateY(-2px)
 - **Border:** Opacity/color transition
 - **Background:** Subtle color change
@@ -54,15 +60,18 @@ On hover effect:
 **Duration:** 200ms  
 **Easing:** ease-out  
 **Classes Applied:**
+
 - `transition-all duration-200 ease-out hover:translate-y-[-2px]`
 - `group-hover:translate-x-[3px]` (arrows)
 
 ---
 
 ### 3. **Navigation Link Underline** ⭐⭐⭐⭐⭐
+
 **File:** `src/components/shell/top-nav.tsx`
 
 Underline grows from LEFT to RIGHT on hover:
+
 - Uses CSS `scaleX` transform
 - Origin set to left (grow rightward)
 - Smooth reveal without fade
@@ -74,7 +83,9 @@ Underline grows from LEFT to RIGHT on hover:
 ---
 
 ### 4. **Scroll-In Sections** ⭐⭐⭐⭐⭐
+
 **Files:**
+
 - `src/components/home/project-grid.tsx`
 - `src/components/home/services-preview.tsx`
 - `src/components/home/why-vaerox.tsx`
@@ -82,6 +93,7 @@ Underline grows from LEFT to RIGHT on hover:
 **Hook:** `src/hooks/use-scroll-reveal.ts`
 
 When sections scroll into view (triggers once only):
+
 - opacity: 0 → 1
 - translateY: 12px → 0
 - Respects `prefers-reduced-motion`
@@ -93,17 +105,21 @@ When sections scroll into view (triggers once only):
 ---
 
 ### 5. **Command Palette Modal** ⭐⭐⭐⭐⭐
+
 **Files:**
+
 - `src/components/ui/command.tsx`
 - `src/components/ui/dialog.tsx`
 
 Modal entrance animation:
+
 - **Backdrop:** Fades in (opacity 0 → 1)
 - **Modal:** Scales in (0.98 → 1) with fade
 - **Duration:** 220ms
 - **Easing:** ease-out
 
 **Classes Applied:**
+
 - `animate-backdrop-entrance` (backdrop)
 - `animate-modal-entrance` (modal)
 
@@ -112,9 +128,11 @@ On close: Reverse animation applied
 ---
 
 ### 6. **Button Hover Scale** ⭐⭐⭐⭐⭐
+
 **Implementation:** CSS layer utilities
 
 Subtle interaction feedback:
+
 - Scale: 1.0 → 1.01 (1% increase)
 - Color transitions
 - No shadow changes (minimal approach)
@@ -125,9 +143,11 @@ Subtle interaction feedback:
 ---
 
 ### 7. **Search & Theme Buttons** ⭐⭐⭐⭐
+
 **File:** `src/components/shell/top-nav.tsx`
 
 Color transition on hover:
+
 - text-text-3 → text-text-1
 - Smooth, unified with other nav transitions
 
@@ -139,10 +159,12 @@ Color transition on hover:
 ## 📁 Files Created & Modified
 
 ### New Files Created:
+
 1. **`src/lib/animations.ts`** — Animation configuration and constants
 2. **`src/hooks/use-scroll-reveal.ts`** — Intersection Observer hook for scroll animations
 
 ### Files Modified:
+
 1. **`src/styles.css`** — Added 8 animation keyframes + CSS layer rules
 2. **`src/components/home/hero.tsx`** — Hero entrance animations
 3. **`src/components/home/project-grid.tsx`** — Card hover + scroll reveal
@@ -158,25 +180,39 @@ Color transition on hover:
 
 ```css
 /* Hero entrance — staggered fade + slide up */
-@keyframes vx-hero-entrance { /* 0px → 12px vertical */ }
+@keyframes vx-hero-entrance {
+  /* 0px → 12px vertical */
+}
 
 /* Scroll reveal — fade + slide up for sections */
-@keyframes vx-scroll-reveal { /* 0px → 12px vertical */ }
+@keyframes vx-scroll-reveal {
+  /* 0px → 12px vertical */
+}
 
 /* Command palette modal entrance — scale + fade */
-@keyframes vx-modal-entrance { /* 0.98 → 1 scale */ }
+@keyframes vx-modal-entrance {
+  /* 0.98 → 1 scale */
+}
 
 /* Backdrop entrance */
-@keyframes vx-backdrop-entrance { /* 0 → 1 opacity */ }
+@keyframes vx-backdrop-entrance {
+  /* 0 → 1 opacity */
+}
 
 /* Mobile menu entrance — slide + fade */
-@keyframes vx-menu-entrance { /* -20px → 0px translateY */ }
+@keyframes vx-menu-entrance {
+  /* -20px → 0px translateY */
+}
 
 /* Navigation underline growth — left to right */
-@keyframes vx-underline-grow { /* scaleX(0) → scaleX(1) */ }
+@keyframes vx-underline-grow {
+  /* scaleX(0) → scaleX(1) */
+}
 
 /* Arrow nudge right on hover */
-@keyframes vx-arrow-nudge { /* 0px → 3px translateX */ }
+@keyframes vx-arrow-nudge {
+  /* 0px → 3px translateX */
+}
 ```
 
 ---
@@ -207,17 +243,20 @@ Color transition on hover:
 **Motion Level Calibration:** 3/10 — Premium refinement, not flashy
 
 **Performance:**
+
 - All animations use CSS (GPU-accelerated)
 - No JavaScript animation loops
 - Smooth 60fps on desktop & mobile
 - Minimal layout thrashing
 
 **Accessibility:**
+
 - Full `prefers-reduced-motion` support (media query applied globally)
 - Animations disable automatically for users who prefer reduced motion
 - No animation jank or blocking
 
 **Consistency:**
+
 - All durations: 180–300ms
 - All easing: ease-out or ease-in-out
 - All transforms use `transform` property (GPU-accelerated)
@@ -227,27 +266,29 @@ Color transition on hover:
 
 ## 📊 Animation Summary by Component
 
-| Component | Animation | Duration | Easing | Trigger |
-|-----------|-----------|----------|--------|---------|
-| Hero | Entrance (stagger) | 600ms total | ease-standard | Load |
-| Cards | Hover (lift + arrow) | 200ms | ease-out | Hover |
-| Nav Links | Underline expand | 200ms | ease-out | Hover |
-| Sections | Scroll reveal | 300ms | ease-out | Scroll |
-| Modal | Scale + fade | 220ms | ease-out | Open |
-| Buttons | Scale hover | 180ms | ease-out | Hover |
-| Search/Theme | Color change | 200ms | ease-out | Hover |
+| Component    | Animation            | Duration    | Easing        | Trigger |
+| ------------ | -------------------- | ----------- | ------------- | ------- |
+| Hero         | Entrance (stagger)   | 600ms total | ease-standard | Load    |
+| Cards        | Hover (lift + arrow) | 200ms       | ease-out      | Hover   |
+| Nav Links    | Underline expand     | 200ms       | ease-out      | Hover   |
+| Sections     | Scroll reveal        | 300ms       | ease-out      | Scroll  |
+| Modal        | Scale + fade         | 220ms       | ease-out      | Open    |
+| Buttons      | Scale hover          | 180ms       | ease-out      | Hover   |
+| Search/Theme | Color change         | 200ms       | ease-out      | Hover   |
 
 ---
 
 ## 🎯 Design Philosophy Applied
 
 ✅ **Animations serve a purpose:**
+
 - Improve orientation (hero entrance sets context)
 - Improve hierarchy (card hover indicates interactivity)
 - Improve interaction feedback (button scale, underline)
 - Improve perceived quality (refined, snappy)
 
 ✅ **No decorative motion:**
+
 - ❌ No floating logos
 - ❌ No particle effects
 - ❌ No animated gradients
@@ -257,6 +298,7 @@ Color transition on hover:
 - ❌ No glassmorphism animations
 
 ✅ **Premium over flashy:**
+
 - Subtle lift (2px, not 8px)
 - Minimal scale (1.01, not 1.1)
 - Short durations (180–300ms, not 600ms+)
@@ -267,6 +309,7 @@ Color transition on hover:
 ## 📝 Code Examples
 
 ### Hero Entrance
+
 ```tsx
 <div className="flex items-center gap-3 mb-14 animate-hero-logo">
   <DiamondGlyph />
@@ -277,6 +320,7 @@ Color transition on hover:
 ```
 
 ### Card Hover with Lift
+
 ```tsx
 <article className="... transition-all duration-200 ease-out hover:translate-y-[-2px]">
   <span className="... group-hover:translate-x-[3px]">View →</span>
@@ -284,6 +328,7 @@ Color transition on hover:
 ```
 
 ### Scroll Reveal Hook
+
 ```tsx
 const ref = useScrollReveal();
 
@@ -295,6 +340,7 @@ return (
 ```
 
 ### Navigation Underline
+
 ```tsx
 <Link
   to={item.to}
@@ -320,6 +366,7 @@ All CSS transforms and transitions are widely supported. No experimental feature
 ## 📈 Next Steps (Optional Enhancements)
 
 If further refinement is needed:
+
 1. A/B test hero stagger delays (current: 60–80ms)
 2. Monitor scroll reveal threshold (currently 10%)
 3. Consider mobile-specific animation durations
@@ -338,4 +385,3 @@ The VÆRØX website now feels **polished, crafted, and trustworthy**. Animations
 **Implementation completed:** July 3, 2026  
 **Total duration:** All animations integrate seamlessly with existing design system  
 **Zero breaking changes:** All new animations are additive, respecting existing component API
-

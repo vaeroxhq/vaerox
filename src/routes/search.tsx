@@ -7,8 +7,8 @@ import { allEntities, KIND_LABEL, type Entity, type EntityKind } from "@/lib/gra
 export const Route = createFileRoute("/search")({
   head: () => ({
     meta: [
-      { title: "Search — Vareox" },
-      { name: "description", content: "Universal search across every documented Vareox entity." },
+      { title: "Search — Vaerox" },
+      { name: "description", content: "Universal search across every documented Vaerox entity." },
     ],
   }),
   component: SearchPage,
@@ -128,7 +128,7 @@ function SearchPage() {
 
   return (
     <SectionShell>
-      <Breadcrumbs items={[{ label: "Vareox", to: "/" }, { label: "Search" }]} />
+      <Breadcrumbs items={[{ label: "Vaerox", to: "/" }, { label: "Search" }]} />
       <PageHeader
         section="§ · Search"
         title="Universal search."
@@ -144,18 +144,16 @@ function SearchPage() {
       {/* Search input */}
       <div className="hairline bg-canvas">
         <label className="flex items-center gap-3 px-4 py-4">
-          <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-            Query
-          </span>
+          <span className="text-overline text-text-3 opacity-70">Query</span>
           <input
             autoFocus
             type="search"
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search systems, ADRs, validation, APIs, datasets, people…"
-            className="flex-1 bg-transparent border-0 outline-none font-mono text-[14px] text-text-1 placeholder:text-text-3 tabular"
+            className="flex-1 bg-transparent border-0 outline-none text-code text-text-1 placeholder:text-text-3"
           />
-          <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] tabular">
+          <span className="text-metadata text-text-3">
             {results.length.toString().padStart(3, "0")}
           </span>
         </label>
@@ -168,7 +166,7 @@ function SearchPage() {
                 key={k}
                 type="button"
                 onClick={() => toggleKind(k)}
-                className={`px-3 py-2 font-mono text-[10px] uppercase tracking-[0.14em] transition-micro border-r border-line-1 ${
+                className={`px-3 py-2 font-mono text-overline uppercase tracking-[0.14em] transition-micro border-r border-line-1 ${
                   active ? "text-text-1 bg-surface-2" : "text-text-3 hover:text-text-1"
                 }`}
               >
@@ -180,7 +178,7 @@ function SearchPage() {
             <button
               type="button"
               onClick={() => setActiveKinds(new Set())}
-              className="ml-auto px-3 py-2 font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] hover:text-text-1"
+              className="ml-auto px-3 py-2 text-overline text-text-3 hover:text-text-1"
             >
               Clear filters
             </button>
@@ -192,15 +190,13 @@ function SearchPage() {
       {!q && (
         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-px bg-line-1 hairline">
           <div className="bg-canvas p-4">
-            <div className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70 mb-3">
-              Suggested
-            </div>
+            <div className="text-overline text-text-3 opacity-70 mb-3">Suggested</div>
             <div className="flex flex-wrap gap-2">
               {suggestions.map((s) => (
                 <button
                   key={s}
                   onClick={() => setQ(s)}
-                  className="hairline px-2.5 py-1 font-mono text-[11px] text-text-2 hover:text-text-1"
+                  className="hairline px-2.5 py-1 text-label text-text-2 hover:text-text-1"
                 >
                   {s}
                 </button>
@@ -208,18 +204,16 @@ function SearchPage() {
             </div>
           </div>
           <div className="bg-canvas p-4">
-            <div className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70 mb-3">
-              Recent
-            </div>
+            <div className="text-overline text-text-3 opacity-70 mb-3">Recent</div>
             {recent.length === 0 ? (
-              <div className="font-mono text-[11px] text-text-3">No recent searches.</div>
+              <div className="text-label text-text-3">No recent searches.</div>
             ) : (
               <div className="flex flex-wrap gap-2">
                 {recent.map((s) => (
                   <button
                     key={s}
                     onClick={() => setQ(s)}
-                    className="hairline px-2.5 py-1 font-mono text-[11px] text-text-2 hover:text-text-1"
+                    className="hairline px-2.5 py-1 text-label text-text-2 hover:text-text-1"
                   >
                     {s}
                   </button>
@@ -234,7 +228,7 @@ function SearchPage() {
       {q && (
         <div className="mt-10 space-y-8">
           {results.length === 0 && (
-            <div className="hairline bg-canvas p-8 font-mono text-[12px] text-text-3 uppercase tracking-[0.14em]">
+            <div className="hairline bg-canvas p-8 text-label text-text-3 uppercase tracking-[0.14em]">
               No matches for "{q}"
             </div>
           )}
@@ -243,10 +237,10 @@ function SearchPage() {
             return (
               <section key={k}>
                 <header className="mb-3 flex items-baseline justify-between hairline-b pb-2">
-                  <h2 className="font-mono text-[11px] text-text-1 uppercase tracking-[0.18em]">
+                  <h2 className="text-label text-text-1 uppercase tracking-[0.18em]">
                     {KIND_LABEL[k]}
                   </h2>
-                  <span className="font-mono text-[10px] text-text-3 tabular">
+                  <span className="text-metadata text-text-3">
                     {rows.length.toString().padStart(2, "0")}
                   </span>
                 </header>
@@ -258,20 +252,14 @@ function SearchPage() {
                         className="block px-4 py-3 hover:bg-surface-2 transition-micro"
                       >
                         <div className="grid grid-cols-[90px_1fr_auto] gap-4 items-baseline">
-                          <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.16em] tabular">
-                            {e.kicker}
-                          </span>
+                          <span className="text-metadata text-text-3">{e.kicker}</span>
                           <div className="min-w-0">
-                            <div className="font-display text-[14px] text-text-1 tracking-[-0.01em] truncate">
+                            <div className="text-heading-s text-text-1 tracking-[-0.01em] truncate">
                               {e.title}
                             </div>
-                            <div className="font-mono text-[11px] text-text-3 mt-1 truncate">
-                              {e.summary}
-                            </div>
+                            <div className="text-label text-text-3 mt-1 truncate">{e.summary}</div>
                           </div>
-                          <span className="font-mono text-[10px] text-text-3 tabular">
-                            {e.updated ?? ""}
-                          </span>
+                          <span className="text-metadata text-text-3">{e.updated ?? ""}</span>
                         </div>
                       </Link>
                     </li>

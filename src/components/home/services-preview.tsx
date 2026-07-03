@@ -41,7 +41,7 @@ export function ServicesPreview() {
   ) as typeof SERVICES;
 
   return (
-    <section ref={ref} className="mt-10 mb-24">
+    <section ref={ref} className="relative">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-line-1 hairline">
         {items.map((s) => (
           <a
@@ -50,28 +50,26 @@ export function ServicesPreview() {
             className="bg-canvas px-4 py-4 group block animate-card-hover-elevation hover:bg-surface hover:text-text-1 cursor-pointer relative"
           >
             <header className="flex items-baseline justify-between">
-              <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-                {s.code}
-              </span>
-              <span className="font-mono text-[10px] text-text-3 transition-transform duration-200 ease-out group-hover:translate-x-[3px]">
+              <span className="text-overline text-text-3">{s.code}</span>
+              <span className="font-mono text-metadata text-text-3 transition-transform transition-ui group-hover:translate-x-[3px]">
                 →
               </span>
             </header>
-            <h3 className="mt-3 font-display font-medium text-[17px] text-text-2 group-hover:text-text-1 tracking-[-0.012em] transition-micro">
+            <h3 className="mt-3 text-heading-s text-text-2 group-hover:text-text-1 transition-micro">
               {s.name}
             </h3>
-            <p className="mt-2 text-[11.5px] text-text-3 leading-[1.5]">{s.tagline}</p>
+            <p className="mt-2 text-caption text-text-3">{s.tagline}</p>
           </a>
         ))}
       </div>
 
       <div className="mt-6 flex items-center justify-between">
-        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
+        <span className="text-overline text-text-3">
           {SERVICES.length.toString().padStart(2, "0")} services in total
         </span>
         <Link
           to="/services"
-          className="font-mono text-[11px] text-text-1 uppercase tracking-[0.14em] hover:opacity-70 active:opacity-50 transition-micro"
+          className="text-button text-text-1 hover:opacity-70 active:opacity-50 transition-micro"
         >
           All services →
         </Link>

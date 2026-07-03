@@ -17,9 +17,9 @@ export const Route = createFileRoute("/api/$slug")({
     const a = loaderData?.a;
     return {
       meta: [
-        { title: a ? `${a.name} — Vareox` : "API — Vareox" },
+        { title: a ? `${a.name} — Vaerox` : "API — Vaerox" },
         { name: "description", content: (a?.summary ?? "").slice(0, 160) },
-        { property: "og:title", content: a?.name ?? "API — Vareox" },
+        { property: "og:title", content: a?.name ?? "API — Vaerox" },
         { property: "og:description", content: (a?.summary ?? "").slice(0, 160) },
       ],
     };
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/api/$slug")({
       />
       <Link
         to="/api"
-        className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1"
+        className="text-label text-text-2 uppercase tracking-[0.14em] hover:text-text-1"
       >
         ← All APIs
       </Link>
@@ -67,16 +67,14 @@ function ApiDetail() {
       />
 
       <div className="mb-6 hairline bg-canvas px-4 py-3 flex items-baseline justify-between gap-4">
-        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-          Base URL
-        </span>
-        <code className="font-mono text-[12px] text-text-1 tabular truncate">{a.baseUrl}</code>
+        <span className="text-overline text-text-3 opacity-70">Base URL</span>
+        <code className="text-label text-text-1 tabular truncate">{a.baseUrl}</code>
       </div>
 
       <DocShell rail={<RelatedRail kind="api" id={a.slug} />}>
         <article className="max-w-[820px]">
           <DocBlock heading="Authentication">
-            <p className="text-[15px] text-text-2 leading-[1.7]">{a.authNote}</p>
+            <p className="text-body-m text-text-2 leading-[1.7]">{a.authNote}</p>
           </DocBlock>
 
           <DocBlock heading={`Endpoints · ${a.endpoints.length}`}>
@@ -104,21 +102,17 @@ function EndpointBlock({ e }: { e: ApiEndpoint }) {
     <div className="hairline bg-canvas">
       <div className="px-4 py-3 hairline-b flex items-baseline justify-between gap-4">
         <div className="flex items-baseline gap-3 min-w-0">
-          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-text-1 tabular">
+          <span className="font-mono text-overline uppercase tracking-[0.14em] text-text-1 tabular">
             {e.method}
           </span>
-          <code className="font-mono text-[13px] text-text-2 tabular truncate">{e.path}</code>
+          <code className="font-mono text-body-s text-text-2 tabular truncate">{e.path}</code>
         </div>
-        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-          {e.auth}
-        </span>
+        <span className="text-overline text-text-3 opacity-70">{e.auth}</span>
       </div>
-      <div className="px-4 py-3 text-[14px] text-text-2 leading-[1.6]">{e.summary}</div>
+      <div className="px-4 py-3 text-body-m text-text-2">{e.summary}</div>
       <div className="px-4 pb-3 flex items-baseline justify-between gap-4">
-        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-          Rate
-        </span>
-        <span className="font-mono text-[11px] text-text-2 tabular truncate">{e.rateLimit}</span>
+        <span className="text-overline text-text-3 opacity-70">Rate</span>
+        <span className="text-label text-text-2 tabular truncate">{e.rateLimit}</span>
       </div>
       {(e.request || e.response) && (
         <div className="hairline-t p-4 space-y-4">

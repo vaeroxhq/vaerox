@@ -6,17 +6,17 @@ import { OpsTag } from "@/components/ops/ops-tag";
 export const Route = createFileRoute("/engineering")({
   head: () => ({
     meta: [
-      { title: "Engineering Handbook — Vareox" },
+      { title: "Engineering Handbook — Vaerox" },
       {
         name: "description",
         content:
-          "How Vareox writes, reviews, ships, and operates software. Canonical engineering standards.",
+          "How Vaerox writes, reviews, ships, and operates software. Canonical engineering standards.",
       },
-      { property: "og:title", content: "Engineering Handbook — Vareox" },
+      { property: "og:title", content: "Engineering Handbook — Vaerox" },
       {
         property: "og:description",
         content:
-          "How Vareox writes, reviews, ships, and operates software. Canonical engineering standards.",
+          "How Vaerox writes, reviews, ships, and operates software. Canonical engineering standards.",
       },
     ],
   }),
@@ -48,10 +48,8 @@ function EngineeringPage() {
       {/* Table of contents */}
       <nav className="hairline bg-canvas mb-10">
         <div className="px-4 py-3 hairline-b flex items-baseline justify-between">
-          <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-            Contents
-          </span>
-          <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
+          <span className="text-overline text-text-3 opacity-70">Contents</span>
+          <span className="text-overline text-text-3 opacity-70">
             {HANDBOOK.length.toString().padStart(2, "0")} sections
           </span>
         </div>
@@ -62,13 +60,11 @@ function EngineeringPage() {
                 href={`#${h.slug}`}
                 className="group card-hover hover:card-hover-on flex items-baseline gap-3 px-4 py-3"
               >
-                <span className="font-mono text-[11px] text-text-3 tabular w-6">{h.index}</span>
-                <span className="font-display text-[14px] text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.005em]">
+                <span className="text-metadata text-text-3 w-6">{h.index}</span>
+                <span className="text-heading-s text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.005em]">
                   {h.title}
                 </span>
-                <span className="ml-auto font-mono text-[10px] text-text-3 tabular">
-                  {h.revision}
-                </span>
+                <span className="ml-auto text-metadata text-text-3">{h.revision}</span>
               </a>
             </li>
           ))}
@@ -93,10 +89,10 @@ function HandbookArticle({ section }: { section: HandbookSection }) {
     >
       <aside className="hairline bg-canvas h-fit">
         <div className="px-4 py-3 hairline-b flex items-baseline justify-between">
-          <span className="font-mono text-[11px] text-text-2 tabular">§ {section.index}</span>
-          <span className="font-mono text-[10px] text-text-3 tabular">{section.revision}</span>
+          <span className="text-label text-text-2 tabular">§ {section.index}</span>
+          <span className="text-metadata text-text-3">{section.revision}</span>
         </div>
-        <dl className="text-[11px]">
+        <dl className="text-label">
           <SideRow k="Owner" v={section.owner} />
           <SideRow k="Updated" v={section.updated} />
           <SideRow k="Status" v={section.status} />
@@ -108,10 +104,10 @@ function HandbookArticle({ section }: { section: HandbookSection }) {
       </aside>
 
       <div className="max-w-[720px]">
-        <h2 className="font-display text-[28px] md:text-[32px] text-text-1 tracking-[-0.022em]">
+        <h2 className="font-display text-heading-xl md:text-heading-xl text-text-1 tracking-[-0.022em]">
           {section.title}
         </h2>
-        <p className="mt-3 text-[15px] text-text-2 leading-[1.65]">{section.summary}</p>
+        <p className="mt-3 text-body-m text-text-2 leading-[1.65]">{section.summary}</p>
 
         <div className="mt-6 hairline-t pt-6 space-y-5">
           {section.body.map((b, i) => (
@@ -126,23 +122,21 @@ function HandbookArticle({ section }: { section: HandbookSection }) {
 function SideRow({ k, v }: { k: string; v: string }) {
   return (
     <div className="grid grid-cols-[70px_1fr] items-baseline gap-3 px-4 py-2 hairline-b last:border-b-0">
-      <dt className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-        {k}
-      </dt>
-      <dd className="font-mono text-[11px] text-text-2 tabular">{v}</dd>
+      <dt className="text-overline text-text-3 opacity-70">{k}</dt>
+      <dd className="text-label text-text-2 tabular">{v}</dd>
     </div>
   );
 }
 
 function Block({ block }: { block: HandbookSection["body"][number] }) {
   if (block.kind === "p") {
-    return <p className="text-[15px] text-text-2 leading-[1.7]">{block.text}</p>;
+    return <p className="text-body-m text-text-2 leading-[1.7]">{block.text}</p>;
   }
   if (block.kind === "list") {
     return (
       <ul className="space-y-2">
         {block.items.map((it, i) => (
-          <li key={i} className="flex gap-3 text-[14px] text-text-2 leading-[1.65]">
+          <li key={i} className="flex gap-3 text-body-m text-text-2">
             <span className="mt-[9px] inline-block h-px w-3 bg-line-3 shrink-0" />
             <span>{it}</span>
           </li>
@@ -158,8 +152,8 @@ function Block({ block }: { block: HandbookSection["body"][number] }) {
             key={i}
             className={`grid grid-cols-[1fr_auto] items-baseline gap-6 px-4 py-3 ${i < block.rows.length - 1 ? "hairline-b" : ""}`}
           >
-            <dt className="font-mono text-[11px] text-text-3 uppercase tracking-[0.12em]">{r.k}</dt>
-            <dd className="font-mono text-[13px] text-text-1 tabular">{r.v}</dd>
+            <dt className="text-label text-text-3 uppercase tracking-[0.12em]">{r.k}</dt>
+            <dd className="text-code text-text-1">{r.v}</dd>
           </div>
         ))}
       </dl>
@@ -167,11 +161,11 @@ function Block({ block }: { block: HandbookSection["body"][number] }) {
   }
   return (
     <blockquote className="hairline-l pl-4 border-l-line-3">
-      <p className="font-display text-[16px] text-text-1 italic leading-[1.55] tracking-[-0.005em]">
+      <p className="text-heading-s text-text-1 italic leading-[1.55] tracking-[-0.005em]">
         "{block.text}"
       </p>
       {block.source && (
-        <cite className="mt-2 block font-mono text-[10px] text-text-3 not-italic uppercase tracking-[0.14em]">
+        <cite className="mt-2 block font-mono text-overline text-text-3 not-italic uppercase tracking-[0.14em]">
           {block.source}
         </cite>
       )}

@@ -14,7 +14,7 @@ export const Route = createFileRoute("/benchmarks/$slug")({
   },
   head: ({ loaderData }) => {
     const b = loaderData?.b;
-    const title = b ? `${b.code} · ${b.title} — Vareox` : "Engineering validation — Vareox";
+    const title = b ? `${b.code} · ${b.title} — Vaerox` : "Engineering validation — Vaerox";
     return {
       meta: [
         { title },
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/benchmarks/$slug")({
       />
       <Link
         to="/benchmarks"
-        className="font-mono text-[11px] text-text-2 uppercase tracking-[0.14em] hover:text-text-1"
+        className="text-label text-text-2 uppercase tracking-[0.14em] hover:text-text-1"
       >
         ← All validation records
       </Link>
@@ -80,21 +80,19 @@ function ValidationDetail() {
 
       <div className="mb-6 flex flex-wrap items-center gap-x-3 gap-y-2">
         <StageDot tone={tone} />
-        <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
-          {b.status}
-        </span>
+        <span className="text-overline text-text-3">{b.status}</span>
       </div>
 
       <DocShell rail={<RelatedRail kind="benchmark" id={b.slug} />}>
         <article className="max-w-[760px]">
           <DocBlock heading="Design goal">
-            <p className="text-[15px] text-text-2 leading-[1.7]">{b.goal}</p>
+            <p className="text-body-m text-text-2 leading-[1.7]">{b.goal}</p>
           </DocBlock>
 
           <DocBlock heading="Methodology">
             <ul className="space-y-3">
               {b.methodology.map((p, i) => (
-                <li key={i} className="text-[15px] text-text-2 leading-[1.7]">
+                <li key={i} className="text-body-m text-text-2 leading-[1.7]">
                   {p}
                 </li>
               ))}
@@ -104,7 +102,7 @@ function ValidationDetail() {
           <DocBlock heading="Findings">
             <ul className="space-y-3">
               {b.findings.map((p, i) => (
-                <li key={i} className="text-[15px] text-text-2 leading-[1.7]">
+                <li key={i} className="text-body-m text-text-2 leading-[1.7]">
                   {p}
                 </li>
               ))}
@@ -113,7 +111,7 @@ function ValidationDetail() {
 
           <DocBlock heading="Prototype checkpoints">
             {b.runs.length === 0 ? (
-              <p className="text-[15px] text-text-3 leading-[1.7] italic">
+              <p className="text-body-m text-text-3 leading-[1.7] italic">
                 Not yet measured. The harness for this record is still being built — this section
                 will populate as prototype checkpoints are recorded.
               </p>
@@ -121,10 +119,7 @@ function ValidationDetail() {
               <div className="hairline bg-canvas">
                 <div className="hidden md:grid grid-cols-[110px_1fr_180px_120px] gap-4 px-4 py-2 hairline-b">
                   {["Date", "Build", "Note", "Value"].map((h) => (
-                    <span
-                      key={h}
-                      className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70"
-                    >
+                    <span key={h} className="text-overline text-text-3 opacity-70">
                       {h}
                     </span>
                   ))}
@@ -134,17 +129,15 @@ function ValidationDetail() {
                     key={i}
                     className={`grid grid-cols-2 md:grid-cols-[110px_1fr_180px_120px] gap-4 px-4 py-2 items-baseline ${i < arr.length - 1 ? "hairline-b" : ""}`}
                   >
-                    <span className="font-mono text-[11px] text-text-3 tabular">{r.date}</span>
-                    <span className="font-mono text-[11px] text-text-2 tabular">{r.build}</span>
-                    <span className="font-mono text-[11px] text-text-3 truncate">
-                      {r.note ?? "—"}
-                    </span>
-                    <span className="font-mono text-[13px] text-text-1 tabular text-right">
+                    <span className="text-metadata text-text-3">{r.date}</span>
+                    <span className="text-label text-text-2 tabular">{r.build}</span>
+                    <span className="text-label text-text-3 truncate">{r.note ?? "—"}</span>
+                    <span className="text-code text-text-1 text-right">
                       {benchmarkFormatValue(b, r.value)}
                     </span>
                   </div>
                 ))}
-                <div className="hairline-t px-4 py-2 font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
+                <div className="hairline-t px-4 py-2 text-overline text-text-3 opacity-70">
                   Checkpoints reflect prototype hardware, not production infrastructure.
                 </div>
               </div>

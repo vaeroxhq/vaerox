@@ -29,13 +29,11 @@ export function EvolutionBlock({ items }: { items: EvidenceVersion[] }) {
               i < items.length - 1 ? "hairline-b" : ""
             }`}
           >
-            <span className="font-mono text-[11px] text-text-1 tabular">{v.tag}</span>
-            <span className="font-mono text-[11px] text-text-3 tabular">{v.at}</span>
+            <span className="text-metadata text-text-1">{v.tag}</span>
+            <span className="text-metadata text-text-3">{v.at}</span>
             <div>
-              <div className="font-display text-[14px] text-text-1 tracking-[-0.005em]">
-                {v.headline}
-              </div>
-              <div className="mt-1 text-[13px] text-text-2 leading-[1.6]">{v.detail}</div>
+              <div className="text-heading-s text-text-1 tracking-[-0.005em]">{v.headline}</div>
+              <div className="mt-1 text-body-s text-text-2">{v.detail}</div>
             </div>
           </li>
         ))}
@@ -51,10 +49,10 @@ export function TradeoffsBlock({ items }: { items: EvidenceTradeoff[] }) {
       <ul className="hairline bg-canvas">
         {items.map((t, i) => (
           <li key={i} className={`px-4 py-3 ${i < items.length - 1 ? "hairline-b" : ""}`}>
-            <div className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
+            <div className="text-overline text-text-3 opacity-70">
               Chose {t.choice} over {t.over}
             </div>
-            <div className="mt-1 text-[14px] text-text-2 leading-[1.65]">{t.because}</div>
+            <div className="mt-1 text-body-m text-text-2">{t.because}</div>
           </li>
         ))}
       </ul>
@@ -82,14 +80,10 @@ export function LimitationsBlock({ items }: { items: EvidenceLimitation[] }) {
               i < items.length - 1 ? "hairline-b" : ""
             }`}
           >
-            <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-              {LIMIT_LABEL[l.kind]}
-            </span>
+            <span className="text-overline text-text-3 opacity-70">{LIMIT_LABEL[l.kind]}</span>
             <div>
-              <div className="font-display text-[14px] text-text-1 tracking-[-0.005em]">
-                {l.title}
-              </div>
-              <div className="mt-1 text-[13px] text-text-2 leading-[1.6]">{l.detail}</div>
+              <div className="text-heading-s text-text-1 tracking-[-0.005em]">{l.title}</div>
+              <div className="mt-1 text-body-s text-text-2">{l.detail}</div>
             </div>
           </li>
         ))}
@@ -106,13 +100,11 @@ export function FailuresBlock({ items }: { items: EvidenceFailure[] }) {
         {items.map((f, i) => (
           <li key={i} className={`px-4 py-3 ${i < items.length - 1 ? "hairline-b" : ""}`}>
             <div className="flex items-baseline gap-3">
-              <span className="font-mono text-[11px] text-text-3 tabular">{f.at}</span>
-              <span className="font-display text-[14px] text-text-1 tracking-[-0.005em]">
-                {f.title}
-              </span>
+              <span className="text-metadata text-text-3">{f.at}</span>
+              <span className="text-heading-s text-text-1 tracking-[-0.005em]">{f.title}</span>
             </div>
-            <p className="mt-2 text-[13px] text-text-2 leading-[1.6]">{f.detail}</p>
-            <p className="mt-1 font-mono text-[11px] text-text-3">Lesson — {f.lesson}</p>
+            <p className="mt-2 text-body-s text-text-2">{f.detail}</p>
+            <p className="mt-1 text-label text-text-3">Lesson — {f.lesson}</p>
           </li>
         ))}
       </ul>
@@ -133,14 +125,12 @@ export function AdrRefsBlock({ slugs }: { slugs: string[] }) {
               params={{ adr: a.slug }}
               className="group flex items-baseline gap-4"
             >
-              <span className="font-mono text-[11px] text-text-3 tabular w-16 shrink-0">
-                ADR·{a.number}
-              </span>
+              <span className="text-metadata text-text-3 w-16 shrink-0">ADR·{a.number}</span>
               <span className="flex-1 min-w-0">
-                <span className="font-display text-[14px] text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.005em]">
+                <span className="text-heading-s text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.005em]">
                   {a.title}
                 </span>
-                <span className="block mt-0.5 font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
+                <span className="block mt-0.5 text-overline text-text-3 opacity-70">
                   {a.status} · {a.decisionDate}
                 </span>
               </span>
@@ -167,18 +157,14 @@ export function BenchmarkRefsBlock({ slugs }: { slugs: string[] }) {
               params={{ slug: b.slug }}
               className="group grid grid-cols-[64px_1fr_auto] items-baseline gap-4"
             >
-              <span className="font-mono text-[11px] text-text-3 tabular">{b.code}</span>
+              <span className="text-metadata text-text-3">{b.code}</span>
               <span className="min-w-0">
-                <span className="font-display text-[14px] text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.005em]">
+                <span className="text-heading-s text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.005em]">
                   {b.title}
                 </span>
-                <span className="block mt-0.5 font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-                  {b.focus}
-                </span>
+                <span className="block mt-0.5 text-overline text-text-3 opacity-70">{b.focus}</span>
               </span>
-              <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] tabular text-right">
-                {b.status}
-              </span>
+              <span className="text-metadata text-text-3 text-right">{b.status}</span>
             </Link>
           </li>
         ))}
@@ -198,18 +184,16 @@ export function IncidentRefsBlock({ slugs }: { slugs: string[] }) {
         {incs.map((i, idx) => (
           <li key={i.slug} className={`px-4 py-3 ${idx < incs.length - 1 ? "hairline-b" : ""}`}>
             <div className="group grid grid-cols-[110px_1fr_80px] items-baseline gap-4">
-              <span className="font-mono text-[11px] text-text-3 tabular">{i.id}</span>
+              <span className="text-metadata text-text-3">{i.id}</span>
               <span className="min-w-0">
-                <span className="font-display text-[14px] text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.005em]">
+                <span className="text-heading-s text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.005em]">
                   {i.title}
                 </span>
-                <span className="block mt-0.5 font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
+                <span className="block mt-0.5 text-overline text-text-3 opacity-70">
                   {i.openedAt.slice(0, 10)} · {i.status}
                 </span>
               </span>
-              <span className="font-mono text-[11px] text-text-1 tabular text-right">
-                {i.severity}
-              </span>
+              <span className="text-metadata text-text-1 text-right">{i.severity}</span>
             </div>
           </li>
         ))}
@@ -232,10 +216,8 @@ export function MetricsGrid({
       <dl className="grid grid-cols-2 md:grid-cols-3 gap-px bg-line-1 hairline">
         {all.map((m) => (
           <div key={m.label} className="bg-canvas px-4 pt-3 pb-4">
-            <dt className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-              {m.label}
-            </dt>
-            <dd className="font-mono text-[15px] text-text-1 mt-2 tabular tracking-[-0.005em]">
+            <dt className="text-overline text-text-3 opacity-70">{m.label}</dt>
+            <dd className="font-mono text-body-m text-text-1 mt-2 tabular tracking-[-0.005em]">
               {m.value}
             </dd>
           </div>
@@ -257,7 +239,7 @@ export function LanguageBreakdown({ langs }: { langs: { name: string; share: num
               i < langs.length - 1 ? "hairline-b" : ""
             }`}
           >
-            <span className="font-mono text-[12px] text-text-1 tabular">{l.name}</span>
+            <span className="text-label text-text-1 tabular">{l.name}</span>
             <span
               aria-hidden="true"
               className="relative h-[6px] hairline bg-canvas overflow-hidden"
@@ -267,7 +249,7 @@ export function LanguageBreakdown({ langs }: { langs: { name: string; share: num
                 style={{ width: `${Math.round(l.share * 100)}%` }}
               />
             </span>
-            <span className="font-mono text-[11px] text-text-3 tabular text-right">
+            <span className="text-metadata text-text-3 text-right">
               {Math.round(l.share * 100)}%
             </span>
           </li>

@@ -29,11 +29,11 @@ function Side({ entry, align }: { entry: Entry | undefined | null; align: "left"
       to={entry.href}
       className={`group card-hover hover:card-hover-on bg-canvas px-5 py-6 ${alignCls}`}
     >
-      <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em]">
+      <span className="text-overline text-text-3">
         {label}
         {entry.kicker && <span className="ml-3 opacity-60">{entry.kicker}</span>}
       </span>
-      <div className="mt-2 font-display text-[16px] text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.015em]">
+      <div className="mt-2 text-heading-s text-text-2 group-hover:text-text-1 transition-micro tracking-[-0.015em]">
         {entry.title}
       </div>
     </Link>

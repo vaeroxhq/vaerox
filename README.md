@@ -21,6 +21,7 @@ This repository contains the studio's public website—a technical portfolio tha
 We believe software should earn trust through engineering, not marketing. Our work is guided by a simple principle: build systems that survive production, not presentations.
 
 This means:
+
 - Prioritizing clarity over complexity
 - Writing code that is both functional and readable
 - Designing for long-term maintainability
@@ -190,6 +191,6 @@ This repository contains proprietary code. Unless otherwise stated, the contents
 
 <div align="center">
 
-*Built with precision. Engineered for production.*
+_Built with precision. Engineered for production._
 
 </div>

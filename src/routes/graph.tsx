@@ -7,10 +7,10 @@ import { allEntities, allEdges, KIND_LABEL, type Entity, type EntityKind } from 
 export const Route = createFileRoute("/graph")({
   head: () => ({
     meta: [
-      { title: "Knowledge Graph — Vareox" },
+      { title: "Knowledge Graph — Vaerox" },
       {
         name: "description",
-        content: "The complete Vareox engineering graph. Every entity, every edge.",
+        content: "The complete Vaerox engineering graph. Every entity, every edge.",
       },
     ],
   }),
@@ -223,7 +223,7 @@ function GraphPage() {
 
   return (
     <SectionShell>
-      <Breadcrumbs items={[{ label: "Vareox", to: "/" }, { label: "Graph" }]} />
+      <Breadcrumbs items={[{ label: "Vaerox", to: "/" }, { label: "Graph" }]} />
       <PageHeader
         section="§ · Graph"
         title="Knowledge graph."
@@ -243,16 +243,14 @@ function GraphPage() {
       <div className="hairline bg-canvas mb-4">
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-px bg-line-1">
           <label className="bg-canvas flex items-center gap-3 px-4 py-3">
-            <span className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
-              Find
-            </span>
+            <span className="text-overline text-text-3 opacity-70">Find</span>
             <input
               value={q}
               onChange={(e) => setQ(e.target.value)}
               placeholder="Find node…"
-              className="flex-1 bg-transparent border-0 outline-none font-mono text-[12px] text-text-1 placeholder:text-text-3 tabular"
+              className="flex-1 bg-transparent border-0 outline-none text-label text-text-1 placeholder:text-text-3 tabular"
             />
-            <span className="font-mono text-[10px] text-text-3 tabular">
+            <span className="text-metadata text-text-3">
               {searchHit ? searchHit.size.toString().padStart(2, "0") + " hit" : ""}
             </span>
           </label>
@@ -263,14 +261,14 @@ function GraphPage() {
                 setPan({ x: 0, y: 0 });
                 setFocus(null);
               }}
-              className="px-4 py-3 font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] hover:text-text-1 border-l border-line-1"
+              className="px-4 py-3 text-overline text-text-3 hover:text-text-1 border-l border-line-1"
             >
               Reset view
             </button>
           </div>
         </div>
         <div className="hairline-t flex flex-wrap items-stretch">
-          <div className="px-3 py-2 font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] border-r border-line-1 flex items-center gap-2">
+          <div className="px-3 py-2 text-overline text-text-3 border-r border-line-1 flex items-center gap-2">
             <span className="inline-block w-2.5 h-2.5 border border-text-1" /> Current
             <span className="mx-1 text-text-3">·</span>
             <span
@@ -285,7 +283,7 @@ function GraphPage() {
               <button
                 key={k}
                 onClick={() => toggle(k)}
-                className={`px-3 py-2 font-mono text-[10px] uppercase tracking-[0.14em] border-r border-line-1 transition-micro ${
+                className={`px-3 py-2 font-mono text-overline uppercase tracking-[0.14em] border-r border-line-1 transition-micro ${
                   on ? "text-text-1 bg-surface-2" : "text-text-3 hover:text-text-1"
                 }`}
               >
@@ -476,38 +474,36 @@ function GraphPage() {
         {/* Side panel */}
         <aside className="hairline bg-canvas">
           <div className="hairline-b px-4 py-3">
-            <div className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
+            <div className="text-overline text-text-3 opacity-70">
               {focus ? "Focused" : "Inspector"}
             </div>
           </div>
           {focusedEntity ? (
             <div className="p-4">
-              <div className="font-mono text-[10px] text-text-3 uppercase tracking-[0.18em] tabular">
+              <div className="font-mono text-overline text-text-3 uppercase tracking-[0.18em] tabular">
                 {focusedEntity.kicker} · {KIND_LABEL[focusedEntity.kind]}
               </div>
-              <h3 className="mt-1 font-display text-[18px] text-text-1 tracking-[-0.01em] leading-[1.2]">
+              <h3 className="mt-1 font-display text-heading-m text-text-1 tracking-[-0.01em] leading-[1.2]">
                 {focusedEntity.title}
               </h3>
-              <p className="mt-2 font-mono text-[11px] text-text-2 leading-[1.55]">
-                {focusedEntity.summary}
-              </p>
+              <p className="mt-2 text-label text-text-2 leading-[1.55]">{focusedEntity.summary}</p>
               <div className="mt-4 flex flex-wrap gap-3 items-center">
                 <Link
                   to={focusedEntity.href}
-                  className="hairline px-3 py-1.5 font-mono text-[10px] text-text-1 uppercase tracking-[0.14em] hover:bg-surface-2"
+                  className="hairline px-3 py-1.5 font-mono text-overline text-text-1 uppercase tracking-[0.14em] hover:bg-surface-2"
                 >
                   Open →
                 </Link>
                 <button
                   onClick={() => setFocus(null)}
-                  className="font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] hover:text-text-1"
+                  className="text-overline text-text-3 hover:text-text-1"
                 >
                   Clear
                 </button>
               </div>
               {neighbors && neighbors.size > 1 && (
                 <>
-                  <div className="mt-6 font-mono text-[10px] text-text-3 uppercase tracking-[0.14em] opacity-70">
+                  <div className="mt-6 text-overline text-text-3 opacity-70">
                     Neighbors · {(neighbors.size - 1).toString().padStart(2, "0")}
                   </div>
                   <ul className="mt-2 divide-y divide-line-1 hairline">
@@ -525,10 +521,10 @@ function GraphPage() {
                               onMouseEnter={() => setHover(k)}
                               onMouseLeave={() => setHover(null)}
                             >
-                              <div className="font-mono text-[10px] text-text-3 uppercase tracking-[0.16em]">
+                              <div className="font-mono text-overline text-text-3 uppercase tracking-[0.16em]">
                                 {n.kicker}
                               </div>
-                              <div className="font-display text-[12px] text-text-1 truncate">
+                              <div className="font-display text-caption text-text-1 truncate">
                                 {n.title}
                               </div>
                             </Link>
@@ -540,7 +536,7 @@ function GraphPage() {
               )}
             </div>
           ) : (
-            <div className="p-4 font-mono text-[11px] text-text-3 leading-[1.6] space-y-3">
+            <div className="p-4 text-label text-text-3 leading-[1.6] space-y-3">
               <p>Hover any node to highlight its neighborhood.</p>
               <p>
                 Click to focus and inspect. <kbd className="hairline px-1">Esc</kbd> to clear.
