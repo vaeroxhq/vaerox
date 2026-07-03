@@ -56,14 +56,80 @@ export function BlueprintOverlay() {
         xmlns="http://www.w3.org/2000/svg"
       >
         <g fill="none" stroke="currentColor" strokeWidth="1">
+          {/* Base structural circles */}
           <circle cx="440" cy="440" r="200" />
           <circle cx="440" cy="440" r="320" />
           <circle cx="440" cy="440" r="420" strokeDasharray="2 6" />
+
+          {/* Main axes */}
           <line x1="0" y1="440" x2="880" y2="440" strokeDasharray="1 8" />
           <line x1="440" y1="0" x2="440" y2="880" strokeDasharray="1 8" />
+
+          {/* 45-degree cross lines */}
           <line x1="140" y1="140" x2="740" y2="740" strokeDasharray="1 8" />
           <line x1="740" y1="140" x2="140" y2="740" strokeDasharray="1 8" />
+
+          {/* Node graph representation (neural / orchestration pathway) */}
+          <g strokeWidth="0.5">
+            <line x1="440" y1="240" x2="580" y2="300" />
+            <line x1="580" y1="300" x2="680" y2="440" />
+            <line x1="680" y1="440" x2="580" y2="580" />
+            <line x1="580" y1="580" x2="440" y2="640" />
+            <line x1="440" y1="640" x2="300" y2="580" />
+            <line x1="300" y1="580" x2="200" y2="440" />
+            <line x1="200" y1="440" x2="300" y2="300" />
+            <line x1="300" y1="300" x2="440" y2="240" />
+
+            {/* Inner connections */}
+            <line x1="440" y1="440" x2="580" y2="300" />
+            <line x1="440" y1="440" x2="300" y2="580" />
+            <line x1="440" y1="440" x2="200" y2="440" />
+            <line x1="440" y1="440" x2="580" y2="580" />
+          </g>
+
+          {/* Nodes */}
+          <g fill="currentColor">
+            <circle cx="440" cy="240" r="3" />
+            <circle cx="580" cy="300" r="2.5" />
+            <circle cx="680" cy="440" r="3" />
+            <circle cx="580" cy="580" r="2.5" />
+            <circle cx="440" cy="640" r="3" />
+            <circle cx="300" cy="580" r="2.5" />
+            <circle cx="200" cy="440" r="3" />
+            <circle cx="300" cy="300" r="2.5" />
+            <circle cx="440" cy="440" r="4" />
+          </g>
+
+          {/* Hash ticks on main circle */}
+          <g strokeWidth="2">
+            <line x1="440" y1="115" x2="440" y2="125" />
+            <line x1="440" y1="755" x2="440" y2="765" />
+            <line x1="115" y1="440" x2="125" y2="440" />
+            <line x1="755" y1="440" x2="765" y2="440" />
+          </g>
         </g>
+        <text
+          x="450"
+          y="110"
+          fill="currentColor"
+          fontSize="14"
+          fontFamily="monospace"
+          letterSpacing="0.1em"
+          opacity="0.5"
+        >
+          X:0.00 Y:1.00
+        </text>
+        <text
+          x="770"
+          y="430"
+          fill="currentColor"
+          fontSize="14"
+          fontFamily="monospace"
+          letterSpacing="0.1em"
+          opacity="0.5"
+        >
+          X:1.00 Y:0.00
+        </text>
       </svg>
 
       {/* Right side balance anchor */}
@@ -107,7 +173,9 @@ export function BlueprintOverlay() {
       >
         {["y·000", "y·080", "y·160", "y·240", "y·320", "y·400", "y·480"].map((t) => (
           <span key={t} className="flex items-center gap-2">
-            <span className="inline-block h-px w-2 bg-line-2" />
+            <span className="inline-block h-px w-2 bg-line-2 relative">
+              <span className="absolute right-full mr-1 -top-[3px] text-[8px] opacity-40">+</span>
+            </span>
             {t}
           </span>
         ))}
@@ -117,9 +185,9 @@ export function BlueprintOverlay() {
         className="absolute right-6 bottom-40 flex flex-col items-end gap-1 text-metadata tabular"
         style={{ color: "var(--bg-coords-color)", opacity: "var(--bg-coords-opacity)" }}
       >
-        <span>rev · 001</span>
-        <span>sheet · 01/01</span>
-        <span>scale · 1:1</span>
+        <span>core · online</span>
+        <span>threads · 1024</span>
+        <span>θ = 45°</span>
       </div>
     </div>
   );

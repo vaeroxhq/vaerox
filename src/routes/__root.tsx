@@ -16,6 +16,7 @@ import { ThemeProvider } from "@/lib/theme";
 import { CommandPaletteProvider } from "@/components/shell/command-palette";
 import { TopNav } from "@/components/shell/top-nav";
 import { SiteFooter } from "@/components/shell/site-footer";
+import { TelemetryStream } from "@/components/ui/telemetry-stream";
 
 function NotFoundComponent() {
   return (
@@ -150,6 +151,7 @@ function RootComponent() {
       <ThemeProvider>
         <CommandPaletteProvider>
           <div className="min-h-dvh bg-canvas text-text-1 flex flex-col">
+            <TelemetryStream />
             <div className="sticky top-0 z-40">
               <TopNav />
             </div>

@@ -27,6 +27,12 @@ export function PageHeader({
 
       <h1 className="text-display-xl max-w-[820px] text-balance">{title}</h1>
 
+      <div className="mt-4 flex items-center gap-4 text-overline text-text-3 tabular opacity-60">
+        <span>MEM.ALLOC · 0x00A1</span>
+        <span className="inline-block w-px h-3 bg-line-2" />
+        <span>SYS.STATE · ONLINE</span>
+      </div>
+
       <p className="mt-6 max-w-[620px] text-text-2 text-body-m">{summary}</p>
 
       {meta && meta.length > 0 && (

@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { DiamondGlyph, CornerFramed, MetaCell } from "./primitives";
+import { SystemStatus } from "./system-status";
+import { AgentNetwork } from "./agent-network";
 
 /**
  * Hero — studio positioning. Three destinations, not seven.
@@ -11,48 +13,44 @@ import { DiamondGlyph, CornerFramed, MetaCell } from "./primitives";
  */
 export function Hero() {
   return (
-    <section className="relative py-16 md:py-24 lg:py-32">
+    <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
+      <AgentNetwork />
+
+      {/* Corner calibration marks */}
+      <div className="absolute top-8 left-0 w-4 h-4 border-t border-l border-line-2 opacity-50 hidden lg:block" />
+      <div className="absolute top-8 right-0 w-4 h-4 border-t border-r border-line-2 opacity-50 hidden lg:block" />
+
       <div className="flex items-center gap-3 mb-14 animate-hero-logo">
         <DiamondGlyph />
-        <span className="text-label text-text-3">§01 · AI &amp; Software Engineering Studio</span>
+        <span className="text-label text-text-3">§01 · AI Systems Engineering</span>
       </div>
 
       <h1 className="text-display-xl max-w-[1040px] animate-hero-heading text-balance">
-        Modern software,
+        Autonomous intelligence,
         <br />
         <span className="text-text-2">engineered end-to-end.</span>
       </h1>
 
       <p className="mt-12 max-w-[720px] text-text-2 text-body-m animate-hero-description">
-        VÆRØX is an independent AI &amp; software engineering studio. We design, build and maintain
-        modern software systems — AI agents, SaaS products, internal tools, backend platforms, and
-        workflow automation — for startups, growing businesses and enterprise teams.
+        VÆRØX is an AI systems engineering company. We build autonomous agents, neural reasoning
+        pipelines, and scalable execution environments for enterprise infrastructure.
       </p>
 
-      <div className="mt-8 flex flex-col gap-4 animate-hero-description">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
-          <span className="text-body-s text-text-3">AI Agents</span>
-          <span className="text-body-s text-text-3">Custom Software</span>
-          <span className="text-body-s text-text-3">Internal Platforms</span>
-          <span className="text-body-s text-text-3">SaaS Products</span>
-          <span className="text-body-s text-text-3">Automation</span>
-          <span className="text-body-s text-text-3">Infrastructure</span>
-        </div>
-      </div>
+      <SystemStatus />
 
-      <div className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-3 animate-hero-buttons">
+      <div className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-3 animate-hero-buttons relative z-10">
         <Button
           asChild
           variant="ghost"
           className="text-text-1 animate-button-cta-hover active:opacity-50 hover:opacity-70"
         >
-          <Link to="/contact">Discuss your project →</Link>
+          <Link to="/contact">Initialize Session [Terminal] →</Link>
         </Button>
         <Button asChild variant="ghost" className="animate-button-cta-hover">
-          <Link to="/services">View services →</Link>
+          <Link to="/services">System Capabilities [Docs] →</Link>
         </Button>
         <Button asChild variant="ghost" className="animate-button-cta-hover">
-          <Link to="/projects">Case studies →</Link>
+          <Link to="/projects">Execution Logs [Data] →</Link>
         </Button>
       </div>
 
@@ -63,10 +61,10 @@ export function Hero() {
 
       <CornerFramed className="mt-8">
         <dl className="grid grid-cols-2 md:grid-cols-4 gap-px bg-line-1">
-          <MetaCell label="Studio" value="Vaerox" />
-          <MetaCell label="Model" value="Independent" />
-          <MetaCell label="Clients" value="Startup → Enterprise" />
-          <MetaCell label="Contact" value="vaeroxhq@gmail.com" />
+          <MetaCell label="System" value="Vaerox Kernel" />
+          <MetaCell label="Type" value="Autonomous OS" />
+          <MetaCell label="Status" value="Active / Routing" />
+          <MetaCell label="Uptime" value="99.999%" />
         </dl>
       </CornerFramed>
     </section>

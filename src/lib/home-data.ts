@@ -158,33 +158,33 @@ export type Principle = { index: string; title: string; body: string };
 export const PRINCIPLES: Principle[] = [
   {
     index: "01",
-    title: "Engineering over Marketing",
-    body: "Artifacts are chosen for technical accuracy first. No hero copy stands in for a benchmark.",
+    title: "Deterministic State",
+    body: "Artifacts are chosen for technical accuracy. All workflows yield predictable execution paths. No ambiguous heuristics.",
   },
   {
     index: "02",
-    title: "Systems Thinking",
-    body: "Every module is documented in the context of the system it belongs to, not in isolation.",
+    title: "System Telemetry",
+    body: "Every module is instrumented and logged in the context of the global system it belongs to.",
   },
   {
     index: "03",
-    title: "Measured Performance",
-    body: "Numbers are cited with methodology, hardware, and workload. Absent methodology, absent claim.",
+    title: "Measured Compute",
+    body: "Performance metrics are cited with methodology, hardware specs, and workload parameters.",
   },
   {
     index: "04",
-    title: "Public Documentation",
-    body: "Architecture decisions, tradeoffs, and development logs are written to be re-read.",
+    title: "Immutable Records",
+    body: "Architecture decisions, infrastructure tradeoffs, and agent reasoning logs are written to be permanent.",
   },
   {
     index: "05",
-    title: "Architecture First",
-    body: "Design records precede implementation. Trade-offs are named before code is written.",
+    title: "Topology First",
+    body: "Design records and node graphs precede implementation. System state is mapped before code is initialized.",
   },
   {
     index: "06",
-    title: "Long-term Maintainability",
-    body: "Interfaces, taxonomies, and URLs are chosen to remain stable for years, not quarters.",
+    title: "Long-term Durability",
+    body: "Interfaces, API layers, and schemas are chosen to remain stable across major version updates.",
   },
 ];
 
